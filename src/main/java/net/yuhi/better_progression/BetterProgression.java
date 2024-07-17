@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.item.ModCreativeModTabs;
 import net.yuhi.better_progression.item.ModItems;
 import org.slf4j.Logger;
@@ -30,6 +31,7 @@ public class BetterProgression
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(ModCreativeModTabs::registerCreativeTab);
         
@@ -51,6 +53,20 @@ public class BetterProgression
         if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.RAW_TIN);
             event.accept(ModItems.TIN_INGOT);
+            event.accept(ModItems.BRONZE_INGOT);
+            event.accept(ModItems.STEEL_INGOT);
+        }
+
+        if (event.getTab() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(ModItems.COPPER_PICKAXE);
+            event.accept(ModItems.COPPER_AXE);
+            event.accept(ModItems.COPPER_SHOVEL);
+            event.accept(ModItems.COPPER_HOE);
+            event.accept(ModItems.WOODEN_CLUB);
+        }
+
+        if (event.getTab() == CreativeModeTabs.COMBAT) {
+            event.accept(ModItems.COPPER_SWORD);
         }
     }
 

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "*": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    "** ",
+    " # ",
+    " # "
+  ],
+  "result": {
+    "item": "better_progression:copper_hoe"
+  },
+  "show_notification": true
+}

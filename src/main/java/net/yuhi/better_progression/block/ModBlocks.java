@@ -1,0 +1,75 @@
+package net.yuhi.better_progression.block;
+
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.item.ModItems;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Supplier;
+
+public class ModBlocks {
+    public static final DeferredRegister<Block> BLOCKS = 
+            DeferredRegister.create(ForgeRegistries.BLOCKS, BetterProgression.MOD_ID);
+    
+    public static final List<BlockRegistryPair<Block>> BLOCKS_DATA = new ArrayList<>();
+    
+    public static final RegistryObject<Block> TIN_BLOCK = registerBlock("tin_block", 
+            () -> new Block(
+                    BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+                            .strength(4.0F, 5.0F)));
+
+    public static final RegistryObject<Block> RAW_TIN_BLOCK = registerBlock("raw_tin_block",
+            () -> new Block(
+                    BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)
+                            .strength(4.0F, 5.0F)));
+    
+    public static final RegistryObject<Block> TIN_ORE = registerBlock("tin_ore",
+            () -> new DropExperienceBlock(
+                    BlockBehaviour.Properties.copy(Blocks.STONE)
+                            .requiresCorrectToolForDrops()
+                            .strength(3.0F, 3.0F), 
+                    UniformInt.of(0, 2)));
+    
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, boolean basicBlock) {
+        RegistryObject<T> blockObj = BLOCKS.register(name, block);
+        BLOCKS_DATA.add(new BlockRegistryPair(blockObj, basicBlock));
+        registerBlockItem(name, blockObj);
+        return blockObj;
+    }
+
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
+        RegistryObject<T> blockObj = BLOCKS.register(name, block);
+        registerBlockItem(name, blockObj);
+        BLOCKS_DATA.add(new BlockRegistryPair(blockObj, true));
+        return blockObj;
+    }
+    
+    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
+        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+    
+    public static void register(IEventBus eventBus) {
+        BLOCKS.register(eventBus);
+    }
+
+    public static class BlockRegistryPair<T> {
+        public final RegistryObject<T> block;
+        public final boolean basicBlock;
+
+        public BlockRegistryPair(RegistryObject<T> block, boolean basicBlock) {
+            this.block = block;
+            this.basicBlock = basicBlock;
+        }
+    }
+}

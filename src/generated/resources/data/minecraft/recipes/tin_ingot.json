@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "better_progression:tin_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "better_progression:tin_ingot"
+  }
+}

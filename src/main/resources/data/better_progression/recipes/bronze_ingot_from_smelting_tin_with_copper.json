@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "steel_ingot",
+  "ingredient": {
+    "item": "minecraft:raw_copper"
+  },
+  "secondIngredient": {
+    "item": "better_progression:raw_tin"
+  },
+  "result": "better_progression:bronze_ingot"
+}

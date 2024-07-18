@@ -98,6 +98,10 @@ public class ModRecipeProvider extends RecipeProvider {
         oreGeneric(pWriter, TIN_SMELTABLES, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.25f, 200, "tin_ingot_smeltable");
     }
 
+    private static void steelRecipes(Consumer<FinishedRecipe> pWriter) {
+
+    }
+
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
         copperRecipes(pWriter);

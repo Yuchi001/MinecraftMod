@@ -17,7 +17,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.player.Player;
@@ -28,10 +27,7 @@ import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.AbstractCookingRecipe;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
@@ -42,16 +38,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
-import net.yuhi.better_progression.recipe.BetterFurnaceRecipe;
+import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.recipe.BetterSmeltingRecipe;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible {
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    
     protected static final int SLOT_INPUT_1 = 0;
     protected static final int SLOT_INPUT_2 = 1;
     protected static final int SLOT_FUEL = 2;
@@ -66,17 +61,19 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
     public static final int NUM_DATA_VALUES = 4;
     public static final int BURN_TIME_STANDARD = 200;
     public static final int BURN_COOL_SPEED = 2;
-    private final RecipeType<? extends AbstractCookingRecipe> recipeType;
+    private final RecipeType<? extends BetterSmeltingRecipe> recipeType;
+    private final RecipeManager.CachedCheck<Container, ? extends BetterSmeltingRecipe> customRecipeCheck;
     protected NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
     int litTime;
     int litDuration;
     int cookingProgress;
     int cookingTotalTime;
 
-    protected AbstractBetterFurnaceBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState, RecipeType<? extends AbstractCookingRecipe> pRecipeType) {
+    protected AbstractBetterFurnaceBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState, RecipeType<? extends BetterSmeltingRecipe> pRecipeType) {
         super(pType, pPos, pBlockState);
-        this.quickCheck = RecipeManager.createCheck((RecipeType)pRecipeType);
+        //this.vanillaRecipeCheck = RecipeManager.createCheck((RecipeType)pRecipeType);
         this.recipeType = pRecipeType;
+        this.customRecipeCheck = RecipeManager.createCheck((RecipeType)pRecipeType);
     }
     
     protected final ContainerData dataAccess = new ContainerData() {
@@ -117,13 +114,6 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
         }
     };
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
-    private final RecipeManager.CachedCheck<Container, ? extends AbstractCookingRecipe> quickCheck;
-
-    protected AbstractBetterFurnaceBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState, RecipeType<? extends AbstractCookingRecipe> recipeType, RecipeManager.CachedCheck<Container, ? extends AbstractCookingRecipe> quickCheck) {
-        super(pType, pPos, pBlockState);
-        this.recipeType = recipeType;
-        this.quickCheck = quickCheck;
-    }
 
     /**@deprecated Forge: get burn times by calling ForgeHooks#getBurnTime(ItemStack)*/ @Deprecated
     public static Map<Item, Integer> getFuel() {
@@ -165,6 +155,7 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
         add(map, Items.WOODEN_HOE, 200);
         add(map, Items.WOODEN_AXE, 200);
         add(map, Items.WOODEN_PICKAXE, 200);
+        add(map, ModItems.WOODEN_CLUB.get(), 200);
         add(map, ItemTags.WOODEN_DOORS, 200);
         add(map, ItemTags.BOATS, 1200);
         add(map, ItemTags.WOOL, 100);
@@ -250,22 +241,20 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
     public static void serverTick(Level pLevel, BlockPos pPos, BlockState pState, AbstractBetterFurnaceBlockEntity pBlockEntity) {
         boolean flag = pBlockEntity.isLit();
         boolean flag1 = false;
-        if (pBlockEntity.isLit()) {
-            
-            
-            --pBlockEntity.litTime;
-        }
+        if (pBlockEntity.isLit()) --pBlockEntity.litTime;
 
         ItemStack itemstack = pBlockEntity.items.get(SLOT_FUEL);
-        boolean flag2 = !pBlockEntity.items.get(SLOT_INPUT_1).isEmpty();
+
+        boolean isNotEmpty = !pBlockEntity.items.get(SLOT_INPUT_2).isEmpty();
+        if(isNotEmpty) isNotEmpty = pBlockEntity.items.get(SLOT_INPUT_2).isEmpty();
+        isNotEmpty = !isNotEmpty;
+
+        //boolean hasTwoSlotsTaken = !pBlockEntity.items.get(SLOT_INPUT_1).isEmpty() && !pBlockEntity.items.get(SLOT_INPUT_2).isEmpty();
+
         boolean flag3 = !itemstack.isEmpty();
-        if (pBlockEntity.isLit() || flag3 && flag2) {
+        if (pBlockEntity.isLit() || flag3 && isNotEmpty) {
             Recipe<?> recipe;
-            if (flag2) {
-                recipe = pBlockEntity.quickCheck.getRecipeFor(pBlockEntity, pLevel).orElse(null);
-            } else {
-                recipe = null;
-            }
+            recipe = isNotEmpty ? pBlockEntity.customRecipeCheck.getRecipeFor(pBlockEntity, pLevel).orElse(null) : null;
 
             int i = pBlockEntity.getMaxStackSize();
             if (!pBlockEntity.isLit() && pBlockEntity.canBurn(pLevel.registryAccess(), recipe, pBlockEntity.items, i)) {
@@ -275,8 +264,7 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
                     flag1 = true;
                     if (itemstack.hasCraftingRemainingItem())
                         pBlockEntity.items.set(SLOT_FUEL, itemstack.getCraftingRemainingItem());
-                    else
-                    if (flag3) {
+                    else if (flag3) {
                         Item item = itemstack.getItem();
                         itemstack.shrink(1);
                         if (itemstack.isEmpty()) {
@@ -313,28 +301,11 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
         if (flag1) {
             setChanged(pLevel, pPos, pState);
         }
-
-    }
-
-    public static AlloyRecipeType getRecipeType(Container pContainer) {
-        var firstEmpty = pContainer.getItem(0).isEmpty();
-        var secondEmpty = pContainer.getItem(1).isEmpty();
-
-        if(firstEmpty == secondEmpty) return firstEmpty ? AlloyRecipeType.Empty : AlloyRecipeType.Alloy;
-
-        return AlloyRecipeType.Simple;
-    }
-
-    public enum AlloyRecipeType {
-        Simple,
-        Alloy,
-        Empty,
     }
 
     private boolean canBurn(RegistryAccess pRegistryAccess, @Nullable Recipe<?> pRecipe, NonNullList<ItemStack> pInventory, int pMaxStackSize) {
-        if((pInventory.get(SLOT_INPUT_1).isEmpty() && 
-                pInventory.get(SLOT_INPUT_2).isEmpty()) || 
-                pRecipe == null)
+        if((pInventory.get(SLOT_INPUT_1).isEmpty() && pInventory.get(SLOT_INPUT_2).isEmpty())
+                || pRecipe == null)
             return false;
 
         var itemstack = ((Recipe<WorldlyContainer>) pRecipe).assemble(this, pRegistryAccess);
@@ -349,23 +320,26 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
     }
 
     private boolean burn(RegistryAccess pRegistryAccess, @Nullable Recipe<?> pRecipe, NonNullList<ItemStack> pInventory, int pMaxStackSize) {
-        if(pRecipe == null || this.canBurn(pRegistryAccess, pRecipe, pInventory, pMaxStackSize)) 
+        if(pRecipe == null || !this.canBurn(pRegistryAccess, pRecipe, pInventory, pMaxStackSize))
             return false;
 
-        var input1ItemStack = pInventory.get(SLOT_INPUT_1);
+        boolean hasTwoSlotsTaken = !pInventory.get(SLOT_INPUT_1).isEmpty() && !pInventory.get(SLOT_INPUT_2).isEmpty();
+
+        var notEmptyInputItemStack = pInventory.get(SLOT_INPUT_1).isEmpty() ? pInventory.get(SLOT_INPUT_2) : pInventory.get(SLOT_INPUT_1);
+        var secondInputItemStack = pInventory.get(SLOT_INPUT_2);
+
         var itemstack1 = ((Recipe<WorldlyContainer>) pRecipe).assemble(this, pRegistryAccess);
         var resultItemStack = pInventory.get(SLOT_RESULT);
-        if (resultItemStack.isEmpty()) {
-            pInventory.set(SLOT_RESULT, itemstack1.copy());
-        } else if (resultItemStack.is(itemstack1.getItem())) {
-            resultItemStack.grow(itemstack1.getCount());
-        }
 
-        if (input1ItemStack.is(Blocks.WET_SPONGE.asItem()) && !pInventory.get(SLOT_FUEL).isEmpty() && pInventory.get(SLOT_FUEL).is(Items.BUCKET)) {
+        if (resultItemStack.isEmpty()) pInventory.set(SLOT_RESULT, itemstack1.copy());
+        else if (resultItemStack.is(itemstack1.getItem())) resultItemStack.grow(itemstack1.getCount());
+
+        if (notEmptyInputItemStack.is(Blocks.WET_SPONGE.asItem()) && !pInventory.get(SLOT_FUEL).isEmpty() && pInventory.get(SLOT_FUEL).is(Items.BUCKET)) {
             pInventory.set(SLOT_FUEL, new ItemStack(Items.WATER_BUCKET));
         }
 
-        input1ItemStack.shrink(SLOT_FUEL);
+        notEmptyInputItemStack.shrink(1);
+        if (hasTwoSlotsTaken && pRecipe.isSpecial()) secondInputItemStack.shrink(1);
         return true;
     }
 
@@ -377,7 +351,7 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
     }
 
     private static int getTotalCookTime(Level pLevel, AbstractBetterFurnaceBlockEntity pBlockEntity) {
-        return pBlockEntity.quickCheck.getRecipeFor(pBlockEntity, pLevel).map(AbstractCookingRecipe::getCookingTime).orElse(200);
+        return pBlockEntity.customRecipeCheck.getRecipeFor(pBlockEntity, pLevel).map(BetterSmeltingRecipe::getCookingTime).orElse(200);
     }
 
     public static boolean isFuel(ItemStack pStack) {

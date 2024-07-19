@@ -16,6 +16,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.yuhi.better_progression.menu.BetterFurnaceMenu.AbstractBetterFurnaceMenu;
+import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class AbstractBetterFurnaceScreen<T extends AbstractBetterFurnaceMenu> extends AbstractContainerScreen<T> implements RecipeUpdateListener {
@@ -110,7 +111,7 @@ public abstract class AbstractBetterFurnaceScreen<T extends AbstractBetterFurnac
         this.recipeBookComponent.recipesUpdated();
     }
 
-    public RecipeBookComponent getRecipeBookComponent() {
+    public @NotNull RecipeBookComponent getRecipeBookComponent() {
         return this.recipeBookComponent;
     }
 }

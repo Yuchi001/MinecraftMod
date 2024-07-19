@@ -32,6 +32,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FurnaceBlock;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -39,7 +40,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.recipe.AbstractBetterCookingRecipe;
 import net.yuhi.better_progression.recipe.BetterSmeltingRecipe;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -358,7 +361,7 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
         return net.minecraftforge.common.ForgeHooks.getBurnTime(pStack, null) > 0;
     }
 
-    public int[] getSlotsForFace(Direction pSide) {
+    public int @NotNull [] getSlotsForFace(Direction pSide) {
         if (pSide == Direction.DOWN) {
             return SLOTS_FOR_DOWN;
         } else {
@@ -369,14 +372,14 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
     /**
      * Returns {@code true} if automation can insert the given item in the given slot from the given side.
      */
-    public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
+    public boolean canPlaceItemThroughFace(int pIndex, @NotNull ItemStack pItemStack, @Nullable Direction pDirection) {
         return this.canPlaceItem(pIndex, pItemStack);
     }
 
     /**
      * Returns {@code true} if automation can extract the given item in the given slot from the given side.
      */
-    public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
+    public boolean canTakeItemThroughFace(int pIndex, @NotNull ItemStack pStack, @NotNull Direction pDirection) {
         if (pDirection == Direction.DOWN && pIndex == SLOT_FUEL) {
             return pStack.is(Items.WATER_BUCKET) || pStack.is(Items.BUCKET);
         } else {
@@ -404,21 +407,21 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
     /**
      * Returns the stack in the given slot.
      */
-    public ItemStack getItem(int pIndex) {
+    public @NotNull ItemStack getItem(int pIndex) {
         return this.items.get(pIndex);
     }
 
     /**
      * Removes up to a specified number of items from an inventory slot and returns them in a new stack.
      */
-    public ItemStack removeItem(int pIndex, int pCount) {
+    public @NotNull ItemStack removeItem(int pIndex, int pCount) {
         return ContainerHelper.removeItem(this.items, pIndex, pCount);
     }
 
     /**
      * Removes a stack from the given slot and returns it.
      */
-    public ItemStack removeItemNoUpdate(int pIndex) {
+    public @NotNull ItemStack removeItemNoUpdate(int pIndex) {
         return ContainerHelper.takeItem(this.items, pIndex);
     }
 
@@ -433,7 +436,7 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
             pStack.setCount(this.getMaxStackSize());
         }
 
-        if (pIndex == 0 && !flag) {
+        if ((pIndex == SLOT_INPUT_1 || pIndex == SLOT_INPUT_2) && !flag) {
             this.cookingTotalTime = getTotalCookTime(this.level, this);
             this.cookingProgress = 0;
             this.setChanged();
@@ -494,7 +497,7 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
         for(Object2IntMap.Entry<ResourceLocation> entry : this.recipesUsed.object2IntEntrySet()) {
             pLevel.getRecipeManager().byKey(entry.getKey()).ifPresent((p_155023_) -> {
                 list.add(p_155023_);
-                createExperience(pLevel, pPopVec, entry.getIntValue(), ((AbstractCookingRecipe)p_155023_).getExperience());
+                createExperience(pLevel, pPopVec, entry.getIntValue(), ((AbstractBetterCookingRecipe)p_155023_).getExperience());
             });
         }
 

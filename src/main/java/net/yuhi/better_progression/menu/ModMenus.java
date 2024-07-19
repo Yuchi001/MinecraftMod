@@ -1,5 +1,6 @@
 package net.yuhi.better_progression.menu;
 
+import net.minecraft.world.inventory.FurnaceMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -12,12 +13,14 @@ import net.yuhi.better_progression.menu.BetterFurnaceMenu.BetterFurnaceMenu;
 public class ModMenus {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES =
             DeferredRegister.create(ForgeRegistries.MENU_TYPES, BetterProgression.MOD_ID);
-    
+    public static final DeferredRegister<MenuType<?>> VANILLA_MENU_TYPES =
+            DeferredRegister.create(ForgeRegistries.MENU_TYPES, "minecraft");
     public static final RegistryObject<MenuType<BetterFurnaceMenu>> FURNACE =
-            MENU_TYPES.register("furnace_menu", () ->
+            VANILLA_MENU_TYPES.register("furnace", () ->
                     IForgeMenuType.create(BetterFurnaceMenu::new));
     
     public static void register(IEventBus bus) {
         MENU_TYPES.register(bus);
+        VANILLA_MENU_TYPES.register(bus);
     }
 }

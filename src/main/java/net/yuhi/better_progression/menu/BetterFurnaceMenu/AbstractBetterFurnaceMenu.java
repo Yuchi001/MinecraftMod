@@ -11,6 +11,7 @@ import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class AbstractBetterFurnaceMenu extends RecipeBookMenu<Container> {
     public static final int INGREDIENT_SLOT_1 = 0;
@@ -45,7 +46,7 @@ public class AbstractBetterFurnaceMenu extends RecipeBookMenu<Container> {
         this.addSlot(new Slot(pContainer, INGREDIENT_SLOT_1, 44, 15));
         this.addSlot(new Slot(pContainer, INGREDIENT_SLOT_2, 68, 15));
         this.addSlot(new BetterFurnaceFuelSlot(this, pContainer, FUEL_SLOT, 56, 53));
-        this.addSlot(new FurnaceResultSlot(pPlayerInventory.player, pContainer, RESULT_SLOT, 116, 35));
+        this.addSlot(new BetterFurnaceResultSlot(pPlayerInventory.player, pContainer, RESULT_SLOT, 116, 35));
 
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
@@ -60,6 +61,7 @@ public class AbstractBetterFurnaceMenu extends RecipeBookMenu<Container> {
         this.addDataSlots(pData);
     }
 
+    @Override
     public void fillCraftSlotsStackedContents(StackedContents pItemHelper) {
         if (this.container instanceof StackedContentsCompatible) {
             ((StackedContentsCompatible)this.container).fillStackedContents(pItemHelper);
@@ -67,37 +69,50 @@ public class AbstractBetterFurnaceMenu extends RecipeBookMenu<Container> {
 
     }
 
+    @Override
     public void clearCraftingContent() {
         this.getSlot(INGREDIENT_SLOT_1).set(ItemStack.EMPTY);
         this.getSlot(INGREDIENT_SLOT_2).set(ItemStack.EMPTY);
         this.getSlot(RESULT_SLOT).set(ItemStack.EMPTY);
     }
 
+    @Override
     public boolean recipeMatches(Recipe<? super Container> pRecipe) {
         return pRecipe.matches(this.container, this.level);
     }
 
+    @Override
     public int getResultSlotIndex() {
         return RESULT_SLOT;
     }
 
+    @Override
     public int getGridWidth() {
         return 1;
     }
 
+    @Override
     public int getGridHeight() {
         return 1;
     }
 
+    @Override
     public int getSize() {
         return 3;
     }
-    
+
+    @Override
+    public @NotNull RecipeBookType getRecipeBookType() {
+        return this.recipeBookType;
+    }
+
+    @Override
     public boolean stillValid(Player pPlayer) {
         return this.container.stillValid(pPlayer);
     }
 
-    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
+    @Override
+    public @NotNull ItemStack quickMoveStack(Player pPlayer, int pIndex) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(pIndex);
         if (slot != null && slot.hasItem()) {
@@ -109,7 +124,7 @@ public class AbstractBetterFurnaceMenu extends RecipeBookMenu<Container> {
                 }
 
                 slot.onQuickCraft(itemstack1, itemstack);
-            } else if (pIndex != FUEL_SLOT && pIndex != INGREDIENT_SLOT_1) {
+            } else if (pIndex != FUEL_SLOT && pIndex != INGREDIENT_SLOT_1 && pIndex != INGREDIENT_SLOT_2) {
                 if (this.canSmelt(itemstack1)) {
                     if (!this.moveItemStackTo(itemstack1, INGREDIENT_SLOT_1, FUEL_SLOT, false)) {
                         return ItemStack.EMPTY;
@@ -172,10 +187,7 @@ public class AbstractBetterFurnaceMenu extends RecipeBookMenu<Container> {
         return this.data.get(0) > 0;
     }
 
-    public RecipeBookType getRecipeBookType() {
-        return this.recipeBookType;
-    }
-
+    @Override
     public boolean shouldMoveToInventory(int pSlotIndex) {
         return pSlotIndex != FUEL_SLOT;
     }

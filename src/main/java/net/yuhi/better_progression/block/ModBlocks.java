@@ -15,6 +15,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.block.BetterBlastFurnace.BetterBlastFurnaceBlock;
 import net.yuhi.better_progression.block.BetterFurnace.BetterFurnaceBlock;
 import net.yuhi.better_progression.item.ModItems;
 
@@ -54,6 +55,10 @@ public class ModBlocks {
     
     public static final RegistryObject<Block> BETTER_FURNACE = registerVanillaBlock("furnace",
             () -> new BetterFurnaceBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(litBlockEmission(13))),
+            EBlockType.Simple);
+
+    public static final RegistryObject<Block> BETTER_BLAST_FURNACE = registerVanillaBlock("blast_furnace",
+            () -> new BetterBlastFurnaceBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(litBlockEmission(13))),
             EBlockType.Simple);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, EBlockType blockType) {

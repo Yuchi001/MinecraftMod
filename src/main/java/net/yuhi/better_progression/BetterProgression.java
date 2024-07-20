@@ -17,6 +17,7 @@ import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.item.ModCreativeModTabs;
 import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.menu.ModMenus;
+import net.yuhi.better_progression.recipe.ModRecipeType;
 import net.yuhi.better_progression.recipe.ModRecipes;
 import org.slf4j.Logger;
 
@@ -38,6 +39,7 @@ public class BetterProgression
         ModBlockEntities.register(modEventBus);
         ModMenus.register(modEventBus);
         ModRecipes.register(modEventBus);
+        ModRecipeType.register(modEventBus);
 
         modEventBus.addListener(ModCreativeModTabs::registerCreativeTab);
         

@@ -64,15 +64,15 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
     public static final int NUM_DATA_VALUES = 4;
     public static final int BURN_TIME_STANDARD = 200;
     public static final int BURN_COOL_SPEED = 2;
-    private final RecipeType<? extends BetterSmeltingRecipe> recipeType;
-    private final RecipeManager.CachedCheck<Container, ? extends BetterSmeltingRecipe> customRecipeCheck;
+    private final RecipeType<? extends AbstractBetterCookingRecipe> recipeType;
+    private final RecipeManager.CachedCheck<Container, ? extends AbstractBetterCookingRecipe> customRecipeCheck;
     protected NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
     int litTime;
     int litDuration;
     int cookingProgress;
     int cookingTotalTime;
 
-    protected AbstractBetterFurnaceBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState, RecipeType<? extends BetterSmeltingRecipe> pRecipeType) {
+    protected AbstractBetterFurnaceBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState, RecipeType<? extends AbstractBetterCookingRecipe> pRecipeType) {
         super(pType, pPos, pBlockState);
         //this.vanillaRecipeCheck = RecipeManager.createCheck((RecipeType)pRecipeType);
         this.recipeType = pRecipeType;
@@ -354,7 +354,7 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
     }
 
     private static int getTotalCookTime(Level pLevel, AbstractBetterFurnaceBlockEntity pBlockEntity) {
-        return pBlockEntity.customRecipeCheck.getRecipeFor(pBlockEntity, pLevel).map(BetterSmeltingRecipe::getCookingTime).orElse(200);
+        return pBlockEntity.customRecipeCheck.getRecipeFor(pBlockEntity, pLevel).map(AbstractBetterCookingRecipe::getCookingTime).orElse(200);
     }
 
     public static boolean isFuel(ItemStack pStack) {

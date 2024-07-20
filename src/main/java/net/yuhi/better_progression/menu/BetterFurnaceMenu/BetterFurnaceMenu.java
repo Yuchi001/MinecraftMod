@@ -7,6 +7,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.FurnaceMenu;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.entity.BlastFurnaceBlockEntity;
 import net.yuhi.better_progression.menu.ModMenus;
 import net.yuhi.better_progression.recipe.ModRecipeType;
 

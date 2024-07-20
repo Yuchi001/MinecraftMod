@@ -7,6 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.BetterFurnace.BetterFurnaceBlockEntity;
+import net.yuhi.better_progression.block.BetterBlastFurnace.BetterBlastFurnaceBlockEntity;
 
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = 
@@ -19,6 +20,11 @@ public class ModBlockEntities {
             VANILLA_BLOCK_ENTITIES.register("furnace", () ->
                     BlockEntityType.Builder.of(BetterFurnaceBlockEntity::new,
                             ModBlocks.BETTER_FURNACE.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<BetterBlastFurnaceBlockEntity>> BETTER_BLAST_FURNACE =
+            VANILLA_BLOCK_ENTITIES.register("blast_furnace", () ->
+                    BlockEntityType.Builder.of(BetterBlastFurnaceBlockEntity::new,
+                            ModBlocks.BETTER_BLAST_FURNACE.get()).build(null));
     
     public static void register(IEventBus bus) {
         BLOCK_ENTITIES.register(bus);

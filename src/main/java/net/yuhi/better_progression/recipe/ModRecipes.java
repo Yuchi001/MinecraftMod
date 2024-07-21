@@ -12,7 +12,6 @@ import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 
 public class ModRecipes {
-    public static final BetterSimpleCookingSerializer SMELTING_SERIALIZER = new BetterSimpleCookingSerializer(BetterSmeltingRecipe::new, 200);
     public static final BetterSimpleCookingSerializer BLASTING_SERIALIZER = new BetterSimpleCookingSerializer(BetterBlastingRecipe::new, 100);
 
     public static final DeferredRegister<RecipeSerializer<?>> RECIPES = 
@@ -20,9 +19,6 @@ public class ModRecipes {
 
     public static final DeferredRegister<RecipeSerializer<?>> VANILLA_RECIPES =
             DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, "minecraft");
-    
-    public static final RegistryObject<RecipeSerializer<BetterSmeltingRecipe>> BETTER_FURNACE =
-            VANILLA_RECIPES.register("smelting", () -> SMELTING_SERIALIZER);
 
     public static final RegistryObject<RecipeSerializer<BetterBlastingRecipe>> BETTER_BLAST_FURNACE =
             VANILLA_RECIPES.register("blasting", () -> BLASTING_SERIALIZER);

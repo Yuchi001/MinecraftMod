@@ -10,16 +10,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.menu.BetterBlastFurnaceMenu.BetterBlastFurnaceMenu;
-import net.yuhi.better_progression.menu.BetterFurnaceMenu.BetterFurnaceMenu;
 
 public class ModMenus {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES =
             DeferredRegister.create(ForgeRegistries.MENU_TYPES, BetterProgression.MOD_ID);
     public static final DeferredRegister<MenuType<?>> VANILLA_MENU_TYPES =
             DeferredRegister.create(ForgeRegistries.MENU_TYPES, "minecraft");
-    public static final RegistryObject<MenuType<BetterFurnaceMenu>> FURNACE =
-            VANILLA_MENU_TYPES.register("furnace", () ->
-                    IForgeMenuType.create(BetterFurnaceMenu::new));
 
     public static final RegistryObject<MenuType<BetterBlastFurnaceMenu>> BLAST_FURNACE =
             VANILLA_MENU_TYPES.register("blast_furnace", () ->

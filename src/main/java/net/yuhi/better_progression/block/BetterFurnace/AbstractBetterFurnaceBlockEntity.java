@@ -41,7 +41,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.recipe.AbstractBetterCookingRecipe;
-import net.yuhi.better_progression.recipe.BetterSmeltingRecipe;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -158,7 +157,6 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
         add(map, Items.WOODEN_HOE, 200);
         add(map, Items.WOODEN_AXE, 200);
         add(map, Items.WOODEN_PICKAXE, 200);
-        add(map, ModItems.WOODEN_CLUB.get(), 200);
         add(map, ItemTags.WOODEN_DOORS, 200);
         add(map, ItemTags.BOATS, 1200);
         add(map, ItemTags.WOOL, 100);

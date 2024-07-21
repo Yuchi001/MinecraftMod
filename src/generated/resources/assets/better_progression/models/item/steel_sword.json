@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "better_progression:item/wooden_club"
+    "layer0": "better_progression:item/steel_sword"
   }
 }

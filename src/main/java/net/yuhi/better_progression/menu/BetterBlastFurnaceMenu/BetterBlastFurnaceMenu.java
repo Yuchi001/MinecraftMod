@@ -11,7 +11,7 @@ import net.yuhi.better_progression.recipe.ModRecipeType;
 
 public class BetterBlastFurnaceMenu extends AbstractBetterFurnaceMenu {
     public BetterBlastFurnaceMenu(int pContainerId, Inventory pPlayerInventory, FriendlyByteBuf pBuffer) {
-        super(ModMenus.BLAST_FURNACE.get(), ModRecipeType.BetterSmeltingRecipeType.BETTER_SMELTING, RecipeBookType.BLAST_FURNACE, pContainerId, pPlayerInventory);
+        super(ModMenus.BLAST_FURNACE.get(), ModRecipeType.BetterBlastingRecipeType.BETTER_BLASTING, RecipeBookType.BLAST_FURNACE, pContainerId, pPlayerInventory);
     }
 
     public BetterBlastFurnaceMenu(int pContainerId, Inventory pPlayerInventory, Container pFurnaceContainer, ContainerData pFurnaceData) {

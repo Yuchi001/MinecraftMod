@@ -14,7 +14,6 @@ public class ClientModHandler {
     @SubscribeEvent
     public static void onClientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            MenuScreens.register(ModMenus.FURNACE.get(), BetterFurnaceMenuScreen::new);
             MenuScreens.register(ModMenus.BLAST_FURNACE.get(), BetterFurnaceMenuScreen::new);
         });
     }

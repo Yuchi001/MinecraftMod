@@ -14,6 +14,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.yuhi.better_progression.block.ModBlockEntities;
 import net.yuhi.better_progression.block.ModBlocks;
+import net.yuhi.better_progression.events.HeavyItemEventHandler;
 import net.yuhi.better_progression.item.ModCreativeModTabs;
 import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.menu.ModMenus;
@@ -41,6 +42,7 @@ public class BetterProgression
         ModRecipes.register(modEventBus);
         ModRecipeType.register(modEventBus);
 
+
         modEventBus.addListener(ModCreativeModTabs::registerCreativeTab);
         
         modEventBus.addListener(ModCreativeModTabs::onBuildContents);
@@ -48,6 +50,8 @@ public class BetterProgression
         modEventBus.addListener(this::commonSetup);
         
         MinecraftForge.EVENT_BUS.register(this);
+
+        MinecraftForge.EVENT_BUS.register(HeavyItemEventHandler.class);
 
         modEventBus.addListener(this::addCreative);
     }
@@ -58,24 +62,7 @@ public class BetterProgression
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
-        if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItems.RAW_TIN);
-            event.accept(ModItems.TIN_INGOT);
-            event.accept(ModItems.BRONZE_INGOT);
-            event.accept(ModItems.STEEL_INGOT);
-        }
 
-        if (event.getTab() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            event.accept(ModItems.COPPER_PICKAXE);
-            event.accept(ModItems.COPPER_AXE);
-            event.accept(ModItems.COPPER_SHOVEL);
-            event.accept(ModItems.COPPER_HOE);
-            event.accept(ModItems.WOODEN_CLUB);
-        }
-
-        if (event.getTab() == CreativeModeTabs.COMBAT) {
-            event.accept(ModItems.COPPER_SWORD);
-        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

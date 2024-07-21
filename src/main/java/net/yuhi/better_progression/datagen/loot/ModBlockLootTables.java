@@ -27,7 +27,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.RAW_TIN_BLOCK.get());
         
         this.add(ModBlocks.TIN_ORE.get(),
-                block -> createOreDrops(ModBlocks.TIN_ORE.get(), ModItems.RAW_TIN.get(), 1, 3));
+                block -> createOreDrops(ModBlocks.TIN_ORE.get(), ModItems.getItem(ModItems.EItemCategory.RawMaterial, ModItems.EMaterialType.TIN), 1, 3));
     }
 
     protected LootTable.Builder createOreDrops(Block pBlock, Item item, int min, int max) {

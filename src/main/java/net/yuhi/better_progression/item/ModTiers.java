@@ -34,7 +34,7 @@ public class ModTiers {
                     4.0f,
                     22,
                     BlockTags.NEEDS_DIAMOND_TOOL,
-                    () -> Ingredient.of(ModItems.BRONZE_INGOT.get()));
+                    () -> Ingredient.of(ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.BRONZE)));
 
     public static final ForgeTier STEEL =
             new ForgeTier(
@@ -44,7 +44,7 @@ public class ModTiers {
                     1.5f,
                     1,
                     BlockTags.NEEDS_DIAMOND_TOOL,
-                    () -> Ingredient.of(ModItems.STEEL_INGOT.get()));
+                    () -> Ingredient.of(ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.STEEL)));
 
     public static final ForgeTier BETTER_DIAMOND =
             new ForgeTier(

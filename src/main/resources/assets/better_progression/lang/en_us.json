@@ -7,6 +7,7 @@
   
   "item.better_progression.steel_ingot": "Steel Ingot",
   "block.better_progression.steel_block": "Steel Block",
+  "item.better_progression.steel_sword": "Steel Sword",
 
   "item.better_progression.bronze_ingot": "Bronze Ingot",
   "block.better_progression.bronze_block": "Bronze Block",
@@ -16,7 +17,8 @@
   "item.better_progression.copper_axe": "Copper Axe",
   "item.better_progression.copper_shovel": "Copper Shovel",
   "item.better_progression.copper_hoe": "Copper Hoe",
-  
+  "item.better_progression.copper_knife": "Copper Knife",
+
   "item.better_progression.wooden_club": "Wooden Club",
   
   "creativetab.better_progression.title": "Better Progression"

@@ -20,7 +20,7 @@ public class ModRecipeProvider extends RecipeProvider {
         super(pOutput);
     }
     
-    private static final List<ItemLike> TIN_SMELTABLES = List.of(
+    /*private static final List<ItemLike> TIN_SMELTABLES = List.of(
             ModItems.RAW_TIN.get()
     );
     
@@ -79,6 +79,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('*', Items.COPPER_INGOT)
                 .unlockedBy(getHasName(ModItems.TIN_INGOT.get()), has(ModItems.TIN_INGOT.get()))
                 .save(pWriter, "copper_shovel");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_KNIFE.get())
+                .pattern(" * ")
+                .pattern(" # ")
+                .define('#', Items.STICK)
+                .define('*', Items.COPPER_INGOT)
+                .unlockedBy(getHasName(ModItems.TIN_INGOT.get()), has(ModItems.TIN_INGOT.get()))
+                .save(pWriter, "copper_knife");
     }
     
     private static void tinRecipes(Consumer<FinishedRecipe> pWriter) {
@@ -96,7 +104,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(pWriter, "tin_ingot");
 
         oreGeneric(pWriter, TIN_SMELTABLES, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.25f, 200, "tin_ingot_smeltable");
-    }
+    }*/
 
     private static void steelRecipes(Consumer<FinishedRecipe> pWriter) {
 
@@ -104,14 +112,14 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
-        copperRecipes(pWriter);
+        /*copperRecipes(pWriter);
         tinRecipes(pWriter);
-        woodenRecipes(pWriter);
+        woodenRecipes(pWriter);*/
     }
     
     protected static void oreGeneric(Consumer<FinishedRecipe> pWriter, List<ItemLike> items, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme, String pGroup) {
         oreSmelting(pWriter, items, pCategory, pResult, pExperience, pCookingTIme, pGroup);
-        oreBlasting(pWriter, items, pCategory, pResult, pExperience, pCookingTIme, pGroup);
+        oreBlasting(pWriter, items, pCategory, pResult, pExperience * 2, pCookingTIme / 2, pGroup);
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme, String pGroup) {

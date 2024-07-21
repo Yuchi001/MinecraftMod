@@ -17,8 +17,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        for (var item : ModItems.ITEM_TUPLES) {
-            switch (item.itemType) {
+        for (var item : ModItems.REGISTERED_ITEMS) {
+            switch (item.type) {
                 case Simple -> simpleItem(item.item);
                 case HandHeld -> handHeldItem(item.item);
             }

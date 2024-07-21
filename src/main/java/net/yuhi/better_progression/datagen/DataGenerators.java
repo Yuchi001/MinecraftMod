@@ -8,6 +8,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.item.ModItems;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -28,8 +29,8 @@ public class DataGenerators {
         
         ModBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
                 new ModBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
-        
-        generator.addProvider(event.includeServer(), 
+
+        generator.addProvider(event.includeServer(),
                 new ModItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
     }
 }

@@ -13,6 +13,7 @@ import net.yuhi.better_progression.item.custom.LongSwordItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = 
@@ -98,6 +99,14 @@ public class ModItems {
     public static Item getItem(EItemCategory itemCategory, EMaterialType materialType) {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && i.material_type == materialType).findFirst().get().item.get();
     }
+    
+    public static List<Item> getItems(EItemCategory itemCategory) {
+        return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory).map(i -> i.item.get()).collect(Collectors.toList());
+    }
+
+    public static List<Item> getItems(EMaterialType materialType) {
+        return REGISTERED_ITEMS.stream().filter(i -> i.material_type == materialType).map(i -> i.item.get()).collect(Collectors.toList());
+    }
 
     public static void createItems() {
         var copperSupplier = new TierItemsCreator("copper_ingot", EMaterialType.COPPER, ModTiers.COPPER);
@@ -106,8 +115,8 @@ public class ModItems {
         copperSupplier.createToolItem(EItemCategory.Sword, 3, -2.4F);
         copperSupplier.createToolItem(EItemCategory.Shovel, 1.5F, -3.0F);
         copperSupplier.createToolItem(EItemCategory.Hoe, -1, -2.0F);
-        copperSupplier.createToolItem(EItemCategory.Knife, 1, -1.4F);
-        copperSupplier.createToolItem(EItemCategory.BattleAxe, 11, -2.4F);
+        copperSupplier.createToolItem(EItemCategory.Knife, 0.5F, -1.4F);
+        copperSupplier.createToolItem(EItemCategory.BattleAxe, 11, -3.4F);
         copperSupplier.createToolItem(EItemCategory.LongSword, 6, -3F);
 
         var steelSupplier = new TierItemsCreator("steel_ingot", EMaterialType.STEEL, ModTiers.STEEL);

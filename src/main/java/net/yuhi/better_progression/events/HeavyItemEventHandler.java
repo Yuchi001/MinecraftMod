@@ -1,5 +1,6 @@
 package net.yuhi.better_progression.events;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -29,8 +30,12 @@ public class HeavyItemEventHandler {
     @SubscribeEvent
     public static void onRenderHand(RenderHandEvent event) {
         if (event.getItemStack().getItem() instanceof TwoHandedItem) {
+            System.out.println("dupa1");
+
             if (event.getHand() == InteractionHand.OFF_HAND) {
-                event.setCanceled(true); // Ukryj model tarczy w ręce gracza
+                event.setCanceled(true);
+                System.out.println("dupa2");
+
             }
         }
     }

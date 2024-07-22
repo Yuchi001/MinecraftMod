@@ -6,11 +6,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraftforge.client.event.RenderItemInFrameEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.item.custom.TwoHandedItem;
+
+import java.util.Arrays;
 
 @Mod.EventBusSubscriber(modid = BetterProgression.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class HeavyItemEventHandler {
@@ -26,17 +31,22 @@ public class HeavyItemEventHandler {
             player.getAbilities().mayBuild = true;
         }
     }
+    
+    private static boolean hasHeavyWeapon = false;
 
     @SubscribeEvent
     public static void onRenderHand(RenderHandEvent event) {
-        if (event.getItemStack().getItem() instanceof TwoHandedItem) {
-            System.out.println("dupa1");
-
-            if (event.getHand() == InteractionHand.OFF_HAND) {
-                event.setCanceled(true);
-                System.out.println("dupa2");
-
-            }
+        event.getPoseStack().scale(1.5f, 1.5f, 1.5f);
+        if (event.getHand() == InteractionHand.OFF_HAND) {
+            if (hasHeavyWeapon) event.setCanceled(true);
+            return;
         }
+        hasHeavyWeapon = event.getItemStack().getItem() instanceof TwoHandedItem;
+    }
+    
+    @SubscribeEvent
+    public static void onLivingEntityUseItem(LivingEntityUseItemEvent event) {
+        if(!(event.getEntity().getMainHandItem().getItem() instanceof  TwoHandedItem)) return;
+        event.setCanceled(true);
     }
 }

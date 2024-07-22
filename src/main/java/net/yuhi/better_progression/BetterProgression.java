@@ -22,6 +22,7 @@ import net.yuhi.better_progression.menu.ModMenus;
 import net.yuhi.better_progression.recipe.ModRecipeType;
 import net.yuhi.better_progression.recipe.ModRecipes;
 import org.slf4j.Logger;
+import org.spongepowered.asm.mixin.Mixins;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(BetterProgression.MOD_ID)
@@ -50,6 +51,8 @@ public class BetterProgression
         
         modEventBus.addListener(this::commonSetup);
         
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+        
         MinecraftForge.EVENT_BUS.register(this);
 
         MinecraftForge.EVENT_BUS.register(HeavyItemEventHandler.class);
@@ -59,7 +62,7 @@ public class BetterProgression
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        
+        Mixins.addConfiguration("mixin/better_progression.mixins.json");
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {

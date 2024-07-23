@@ -1,4 +1,4 @@
-// 1.19.4	2024-07-23T23:24:45.9008566	Item Models: better_progression
+// 1.19.4	2024-07-24T00:39:02.011508	Item Models: better_progression
 070e97230f9570aed29526e5fe4de47f33a09376 assets/better_progression/models/item/bronze_axe.json
 5aa5efae16597ef25060b00e9260202b09223e83 assets/better_progression/models/item/bronze_battleaxe.json
 0b466e7f5b0f99d843404f9d9f4efb6c20b0901d assets/better_progression/models/item/bronze_hoe.json
@@ -18,6 +18,7 @@ a224f78e0d646c093974ab188fcc2dbd9e269aac assets/better_progression/models/item/c
 c0c5addb7f29ff26c733a4bdc3dc1bca79afbcf3 assets/better_progression/models/item/copper_sword.json
 c786b14fe517913d5bec9b130c425bd1aa28455e assets/better_progression/models/item/diamond_club.json
 55d65db43b81f49feb2c62182d37d096aa444190 assets/better_progression/models/item/diamond_dagger.json
+abe15169a3245ee9b46d6c460c37b49b84baa97c assets/better_progression/models/item/hilt.json
 5e4c683ba5497f235bfb93bb7771e6cca563798a assets/better_progression/models/item/raw_tin.json
 3d13c12369935a1abdf3090a72e0366261343933 assets/better_progression/models/item/steel_axe.json
 5c8a1bab8b48b6a95c717f9f554ab5da42eda1cf assets/better_progression/models/item/steel_battleaxe.json

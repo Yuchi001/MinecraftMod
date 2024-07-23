@@ -27,6 +27,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        simpleItem(ModItems.HILT);
+        
         for (var item : ModItems.REGISTERED_ITEMS) {
             switch (item.type) {
                 case Simple -> simpleItem(item.item);

@@ -3,7 +3,6 @@ package net.yuhi.better_progression.datagen;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
@@ -12,7 +11,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.item.ModItems;
 
 import java.util.List;
@@ -23,103 +21,12 @@ public class ModRecipeProvider extends RecipeProvider {
         super(pOutput);
     }
     
-    /*private static final List<ItemLike> TIN_SMELTABLES = List.of(
-            ModItems.RAW_TIN.get()
-    );
-    
-    private static void woodenRecipes(Consumer<FinishedRecipe> pWriter) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.WOODEN_CLUB.get())
-                .pattern(" * ")
-                .pattern(" * ")
-                .pattern(" * ")
-                .define('*', ItemTags.PLANKS)
-                .unlockedBy("has_item", has(ItemTags.PLANKS))
-                .save(pWriter, "wooden_club");
-    }
-    
-    private static void copperRecipes(Consumer<FinishedRecipe> pWriter) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_PICKAXE.get())
-                .pattern("***")
-                .pattern(" # ")
-                .pattern(" # ")
-                .define('#', Items.STICK)
-                .define('*', Items.COPPER_INGOT)
-                .unlockedBy(getHasName(ModItems.TIN_INGOT.get()), has(ModItems.TIN_INGOT.get()))
-                .save(pWriter, "copper_pickaxe");
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_HOE.get())
-                .pattern("** ")
-                .pattern(" # ")
-                .pattern(" # ")
-                .define('#', Items.STICK)
-                .define('*', Items.COPPER_INGOT)
-                .unlockedBy(getHasName(ModItems.TIN_INGOT.get()), has(ModItems.TIN_INGOT.get()))
-                .save(pWriter, "copper_hoe");
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_AXE.get())
-                .pattern("** ")
-                .pattern("*# ")
-                .pattern(" # ")
-                .define('#', Items.STICK)
-                .define('*', Items.COPPER_INGOT)
-                .unlockedBy(getHasName(ModItems.TIN_INGOT.get()), has(ModItems.TIN_INGOT.get()))
-                .save(pWriter, "copper_axe");
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_SWORD.get())
-                .pattern(" * ")
-                .pattern(" * ")
-                .pattern(" # ")
-                .define('#', Items.STICK)
-                .define('*', Items.COPPER_INGOT)
-                .unlockedBy(getHasName(ModItems.TIN_INGOT.get()), has(ModItems.TIN_INGOT.get()))
-                .save(pWriter, "copper_sword");
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_SHOVEL.get())
-                .pattern(" * ")
-                .pattern(" # ")
-                .pattern(" # ")
-                .define('#', Items.STICK)
-                .define('*', Items.COPPER_INGOT)
-                .unlockedBy(getHasName(ModItems.TIN_INGOT.get()), has(ModItems.TIN_INGOT.get()))
-                .save(pWriter, "copper_shovel");
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.COPPER_KNIFE.get())
-                .pattern(" * ")
-                .pattern(" # ")
-                .define('#', Items.STICK)
-                .define('*', Items.COPPER_INGOT)
-                .unlockedBy(getHasName(ModItems.TIN_INGOT.get()), has(ModItems.TIN_INGOT.get()))
-                .save(pWriter, "copper_knife");
-    }
-    
-    private static void tinRecipes(Consumer<FinishedRecipe> pWriter) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.TIN_BLOCK.get())
-                .pattern("###")
-                .pattern("###")
-                .pattern("###")
-                .define('#', ModItems.TIN_INGOT.get())
-                .unlockedBy(getHasName(ModItems.TIN_INGOT.get()), has(ModItems.TIN_INGOT.get()))
-                .save(pWriter, "tin_block");
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 9)
-                .requires(ModBlocks.TIN_BLOCK.get())
-                .unlockedBy(getHasName(ModBlocks.TIN_BLOCK.get()), has(ModItems.TIN_INGOT.get()))
-                .save(pWriter, "tin_ingot");
-
-        oreGeneric(pWriter, TIN_SMELTABLES, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.25f, 200, "tin_ingot_smeltable");
-    }*/
-
-    private static void steelRecipes(Consumer<FinishedRecipe> pWriter) {
-
-    }
-
-    @Override
-    protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
+    private void PickAxeRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         for (var pickaxe : ModItems.getItemInfos(ModItems.EItemCategory.PickAxe)) {
             var mod_id = pickaxe.has_default_basis ? "minecraft" : pickaxe.mod_id;
             var registryKey = new ResourceLocation(mod_id, pickaxe.basis);
             System.out.println(registryKey);
-            
+
             var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
             if (basisItem == null) continue;
 
@@ -135,82 +42,20 @@ public class ModRecipeProvider extends RecipeProvider {
                     .unlockedBy(getHasName(basisItem), has(basisItem))
                     .save(pWriter, recipeId);
         }
-
-        for (var pickaxe : ModItems.getItemInfos(ModItems.EItemCategory.Shovel)) {
-            var mod_id = pickaxe.has_default_basis ? "minecraft" : pickaxe.mod_id;
-            var registryKey = new ResourceLocation(mod_id, pickaxe.basis);
+    }
+    private void AxeRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        for (var axe : ModItems.getItemInfos(ModItems.EItemCategory.Axe)) {
+            var mod_id = axe.has_default_basis ? "minecraft" : axe.mod_id;
+            var registryKey = new ResourceLocation(mod_id, axe.basis);
             System.out.println(registryKey);
 
             var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
             if (basisItem == null) continue;
 
-            var tier_name = pickaxe.basis;
+            var tier_name = axe.basis;
             if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
-            var recipeId = tier_name + "_" + pickaxe.category.getName().toLowerCase();
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)pickaxe.item.get())
-                    .pattern(" * ")
-                    .pattern(" # ")
-                    .pattern(" # ")
-                    .define('#', ModItems.HILT.get())
-                    .define('*', basisItem)
-                    .unlockedBy(getHasName(basisItem), has(basisItem))
-                    .save(pWriter, recipeId);
-        }
-
-        for (var pickaxe : ModItems.getItemInfos(ModItems.EItemCategory.Hoe)) {
-            var mod_id = pickaxe.has_default_basis ? "minecraft" : pickaxe.mod_id;
-            var registryKey = new ResourceLocation(mod_id, pickaxe.basis);
-            System.out.println(registryKey);
-
-            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
-            if (basisItem == null) continue;
-
-            var tier_name = pickaxe.basis;
-            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
-            var recipeId = tier_name + "_" + pickaxe.category.getName().toLowerCase();
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)pickaxe.item.get())
-                    .pattern("** ")
-                    .pattern(" # ")
-                    .pattern(" # ")
-                    .define('#', ModItems.HILT.get())
-                    .define('*', basisItem)
-                    .unlockedBy(getHasName(basisItem), has(basisItem))
-                    .save(pWriter, recipeId);
-        }
-
-        for (var pickaxe : ModItems.getItemInfos(ModItems.EItemCategory.Sword)) {
-            var mod_id = pickaxe.has_default_basis ? "minecraft" : pickaxe.mod_id;
-            var registryKey = new ResourceLocation(mod_id, pickaxe.basis);
-            System.out.println(registryKey);
-
-            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
-            if (basisItem == null) continue;
-
-            var tier_name = pickaxe.basis;
-            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
-            var recipeId = tier_name + "_" + pickaxe.category.getName().toLowerCase();
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)pickaxe.item.get())
-                    .pattern(" * ")
-                    .pattern(" * ")
-                    .pattern(" # ")
-                    .define('#', ModItems.HILT.get())
-                    .define('*', basisItem)
-                    .unlockedBy(getHasName(basisItem), has(basisItem))
-                    .save(pWriter, recipeId);
-        }
-
-        for (var pickaxe : ModItems.getItemInfos(ModItems.EItemCategory.Axe)) {
-            var mod_id = pickaxe.has_default_basis ? "minecraft" : pickaxe.mod_id;
-            var registryKey = new ResourceLocation(mod_id, pickaxe.basis);
-            System.out.println(registryKey);
-
-            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
-            if (basisItem == null) continue;
-
-            var tier_name = pickaxe.basis;
-            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
-            var recipeId = tier_name + "_" + pickaxe.category.getName().toLowerCase();
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)pickaxe.item.get())
+            var recipeId = tier_name + "_" + axe.category.getName().toLowerCase();
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)axe.item.get())
                     .pattern("** ")
                     .pattern("*# ")
                     .pattern(" # ")
@@ -219,6 +64,149 @@ public class ModRecipeProvider extends RecipeProvider {
                     .unlockedBy(getHasName(basisItem), has(basisItem))
                     .save(pWriter, recipeId);
         }
+    }
+    private void SwordRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        for (var sword : ModItems.getItemInfos(ModItems.EItemCategory.Sword)) {
+            var mod_id = sword.has_default_basis ? "minecraft" : sword.mod_id;
+            var registryKey = new ResourceLocation(mod_id, sword.basis);
+            System.out.println(registryKey);
+
+            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
+            if (basisItem == null) continue;
+
+            var tier_name = sword.basis;
+            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
+            var recipeId = tier_name + "_" + sword.category.getName().toLowerCase();
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)sword.item.get())
+                    .pattern(" * ")
+                    .pattern(" * ")
+                    .pattern(" # ")
+                    .define('#', ModItems.HILT.get())
+                    .define('*', basisItem)
+                    .unlockedBy(getHasName(basisItem), has(basisItem))
+                    .save(pWriter, recipeId);
+        }
+    }
+    private void ShovelRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        for (var shovel : ModItems.getItemInfos(ModItems.EItemCategory.Shovel)) {
+            var mod_id = shovel.has_default_basis ? "minecraft" : shovel.mod_id;
+            var registryKey = new ResourceLocation(mod_id, shovel.basis);
+            System.out.println(registryKey);
+
+            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
+            if (basisItem == null) continue;
+
+            var tier_name = shovel.basis;
+            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
+            var recipeId = tier_name + "_" + shovel.category.getName().toLowerCase();
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)shovel.item.get())
+                    .pattern(" * ")
+                    .pattern(" # ")
+                    .pattern(" # ")
+                    .define('#', ModItems.HILT.get())
+                    .define('*', basisItem)
+                    .unlockedBy(getHasName(basisItem), has(basisItem))
+                    .save(pWriter, recipeId);
+        }
+    }
+    private void HoeRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        for (var hoe : ModItems.getItemInfos(ModItems.EItemCategory.Hoe)) {
+            var mod_id = hoe.has_default_basis ? "minecraft" : hoe.mod_id;
+            var registryKey = new ResourceLocation(mod_id, hoe.basis);
+            System.out.println(registryKey);
+
+            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
+            if (basisItem == null) continue;
+
+            var tier_name = hoe.basis;
+            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
+            var recipeId = tier_name + "_" + hoe.category.getName().toLowerCase();
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)hoe.item.get())
+                    .pattern("** ")
+                    .pattern(" # ")
+                    .pattern(" # ")
+                    .define('#', ModItems.HILT.get())
+                    .define('*', basisItem)
+                    .unlockedBy(getHasName(basisItem), has(basisItem))
+                    .save(pWriter, recipeId);
+        }
+    }
+    private void KnifeRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        for (var knife : ModItems.getItemInfos(ModItems.EItemCategory.Knife)) {
+            var mod_id = knife.has_default_basis ? "minecraft" : knife.mod_id;
+            var registryKey = new ResourceLocation(mod_id, knife.basis);
+            System.out.println(registryKey);
+
+            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
+            if (basisItem == null) continue;
+
+            var tier_name = knife.basis;
+            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
+            var recipeId = tier_name + "_" + knife.category.getName().toLowerCase();
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)knife.item.get())
+                    .pattern("   ")
+                    .pattern(" * ")
+                    .pattern(" # ")
+                    .define('#', ModItems.HILT.get())
+                    .define('*', basisItem)
+                    .unlockedBy(getHasName(basisItem), has(basisItem))
+                    .save(pWriter, recipeId);
+        }
+    }
+    private void LongSwordRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        for (var longsword : ModItems.getItemInfos(ModItems.EItemCategory.LongSword)) {
+            var mod_id = longsword.has_default_basis ? "minecraft" : longsword.mod_id;
+            var longswordResourceLocation = new ResourceLocation(mod_id, longsword.basis);
+            System.out.println(longswordResourceLocation);
+
+            var basisItem = ForgeRegistries.ITEMS.getValue(longswordResourceLocation);
+            if (basisItem == null) continue;
+
+            var tier_name = longsword.basis;
+            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
+            var recipeId = tier_name + "_" + longsword.category.getName().toLowerCase();
+            
+            var swordResourceLocation = new ResourceLocation(mod_id, tier_name + "_" + "sword");
+            var swordItem = ForgeRegistries.ITEMS.getValue(swordResourceLocation);
+            if (swordItem == null) continue;
+            
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)longsword.item.get())
+                    .pattern("  *")
+                    .pattern("*S ")
+                    .pattern("#* ")
+                    .define('#', ModItems.HILT.get())
+                    .define('*', basisItem)
+                    .define('S', swordItem)
+                    .unlockedBy(getHasName(swordItem), has(swordItem))
+                    .save(pWriter, recipeId);
+        }
+    }
+
+    private void SmeltingRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        /*for (var item : ModItems.getSmeltableItems()) {
+            oreGeneric(pWriter, List.of(item), RecipeCategory.MISC, item, );
+        }*/
+    }
+
+
+    @Override
+    protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.HILT.get())
+                .pattern("   ")
+                .pattern("*# ")
+                .pattern("#* ")
+                .define('#', Items.STICK)
+                .define('*', Items.LEATHER)
+                .unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER))
+                .save(pWriter, "hilt");
+        
+        PickAxeRecipeCreator(pWriter);
+        AxeRecipeCreator(pWriter);
+        SwordRecipeCreator(pWriter);
+        ShovelRecipeCreator(pWriter);
+        HoeRecipeCreator(pWriter);
+        KnifeRecipeCreator(pWriter);
+        LongSwordRecipeCreator(pWriter);
     }
     
     protected static void oreGeneric(Consumer<FinishedRecipe> pWriter, List<ItemLike> items, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme, String pGroup) {

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "better_progression:hilt"
+    },
+    "*": {
+      "item": "better_progression:bronze_ingot"
+    }
+  },
+  "pattern": [
+    "   ",
+    " * ",
+    " # "
+  ],
+  "result": {
+    "item": "better_progression:bronze_knife"
+  },
+  "show_notification": true
+}

@@ -56,6 +56,13 @@ public class ModItems {
         ));
         return REGISTERED_ITEMS.stream().filter(i -> toolCategoryList.contains(i.category)).map(i -> i.item.get()).collect(Collectors.toList());
     }
+    
+    public static List<Item> getSmeltableItems() {
+        var smeltableMaterials = new ArrayList<EMaterialType>(List.of(
+                EMaterialType.TIN
+        ));
+        return REGISTERED_ITEMS.stream().filter(itemItemInfo -> smeltableMaterials.contains(itemItemInfo.material_type)).map(i -> i.item.get()).collect(Collectors.toList());
+    }
 
     public static void createItems() {
         var woodenSupplier = new TierItemsCreator(Tags.Items.RODS_WOODEN, EMaterialType.WOOD, Tiers.WOOD);

@@ -115,6 +115,16 @@ public class ModRecipeProvider extends RecipeProvider {
         /*copperRecipes(pWriter);
         tinRecipes(pWriter);
         woodenRecipes(pWriter);*/
+        for (var pickaxe : ModItems.getItems(ModItems.EItemCategory.PickAxe)) {
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, pickaxe)
+                    .pattern("***")
+                    .pattern(" # ")
+                    .pattern(" # ")
+                    .define('#', Items.STICK)
+                    .define('*', Items.COPPER_INGOT)
+                    .unlockedBy(getHasName(ModItems.TIN_INGOT.get()), has(ModItems.TIN_INGOT.get()))
+                    .save(pWriter, "copper_pickaxe");
+        }
     }
     
     protected static void oreGeneric(Consumer<FinishedRecipe> pWriter, List<ItemLike> items, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme, String pGroup) {

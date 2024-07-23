@@ -6,6 +6,8 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.tag.ModTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -17,6 +19,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        
+        for (var tool : ModItems.getTinnableTools()) {
+            tag(ModTags.Items.TINNABLE_TAG).add(tool);
+        }
     }
 }

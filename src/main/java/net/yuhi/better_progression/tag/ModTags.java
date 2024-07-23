@@ -18,6 +18,7 @@ public class ModTags {
     }
     
     public static class Items {
+        public static TagKey<Item> TINNABLE_TAG = tag("tinnable");
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(BetterProgression.MOD_ID, name));
         }

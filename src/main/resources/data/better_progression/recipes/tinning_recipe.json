@@ -1,0 +1,16 @@
+{
+  "type": "better_progression:tinning",
+  "group": "",
+  "ingredients": [
+    {
+      "tag": "better_progression:tinnable"
+    },
+    {
+      "item": "better_progression:tin_ingot"
+    }
+  ],
+  "result": {
+    "item": "better_progression:copper_knife",
+    "count": 1
+  }
+}

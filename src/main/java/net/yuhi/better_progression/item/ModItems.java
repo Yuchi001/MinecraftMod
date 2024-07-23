@@ -6,9 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.item.custom.BattleAxeItem;
-import net.yuhi.better_progression.item.custom.KnifeItem;
-import net.yuhi.better_progression.item.custom.LongSwordItem;
+import net.yuhi.better_progression.item.custom.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,82 +17,17 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = 
             DeferredRegister.create(ForgeRegistries.ITEMS, BetterProgression.MOD_ID);
     public static final List<ItemInfo<Item>>  REGISTERED_ITEMS = new ArrayList<>();
+
+    public static final RegistryObject<Item> HILT = ITEMS.register("hilt", () -> new Item.Properties());
     
-   /* // WOOD
+    // WOOD
     
-    public static final RegistryObject<Item> WOODEN_CLUB = registerItem(
+    /*public static final RegistryObject<Item> WOODEN_CLUB = registerItem(
             ITEMS.register("wooden_club",
                     () -> new ClubItem(Tiers.WOOD, 3.0F, -3.2F, new Item.Properties())),
             EItemType.HandHeld
-    );
-    
-    // TIN
-    
-    public static final RegistryObject<Item> RAW_TIN = registerItem(
-            ITEMS.register("raw_tin",
-                    () -> new Item(new Item.Properties())),
-            EItemType.Simple
-    );
-    
-    public static final RegistryObject<Item> TIN_INGOT = registerItem(
-            ITEMS.register("tin_ingot",
-                    () -> new Item(new Item.Properties())),
-            EItemType.Simple
-    );
-
-    // STEEL
-    
-    public static final RegistryObject<Item> STEEL_INGOT = registerItem(
-            ITEMS.register("steel_ingot",
-                    () -> new Item(new Item.Properties())),
-            EItemType.Simple
-    );
-    
-    // BRONZE
-
-    public static final RegistryObject<Item> BRONZE_INGOT = registerItem(
-            ITEMS.register("bronze_ingot",
-                    () -> new Item(new Item.Properties())),
-            EItemType.Simple
-    );
-
-    // COPPER
-    
-    public static final RegistryObject<Item> COPPER_PICKAXE = registerItem(
-            ITEMS.register("copper_pickaxe",
-                    () -> new PickaxeItem(ModTiers.COPPER, 1, -2.8f, new Item.Properties())),
-            EItemType.HandHeld
-    );
-
-    public static final RegistryObject<Item> COPPER_SWORD = registerItem(
-            ITEMS.register("copper_sword",
-                    () -> new SwordItem(ModTiers.COPPER, 3, -2.4F, new Item.Properties())),
-            EItemType.HandHeld
-    );
-
-    public static final RegistryObject<Item> COPPER_AXE = registerItem(
-            ITEMS.register("copper_axe",
-                    () -> new AxeItem(ModTiers.COPPER, 5.5F, -3.2F, new Item.Properties())),
-            EItemType.HandHeld
-    );
-
-    public static final RegistryObject<Item> COPPER_SHOVEL = registerItem(
-            ITEMS.register("copper_shovel",
-                    () -> new ShovelItem(ModTiers.COPPER, 1.5F, -3.0F, new Item.Properties())),
-            EItemType.HandHeld
-    );
-
-    public static final RegistryObject<Item> COPPER_HOE = registerItem(
-            ITEMS.register("copper_hoe",
-                    () -> new HoeItem(ModTiers.COPPER, -1, -2.0F, new Item.Properties())),
-            EItemType.HandHeld
-    );
-
-    public static final RegistryObject<Item> COPPER_KNIFE = registerItem(
-            ITEMS.register("copper_knife",
-                    () -> new KnifeItem(ModTiers.COPPER, 1, -1.4F, new Item.Properties())),
-            EItemType.HandHeld
     );*/
+
 
     public static Item getItem(EItemCategory itemCategory, EMaterialType materialType) {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && i.material_type == materialType).findFirst().get().item.get();
@@ -108,6 +41,21 @@ public class ModItems {
         return REGISTERED_ITEMS.stream().filter(i -> i.material_type == materialType).map(i -> i.item.get()).collect(Collectors.toList());
     }
 
+    public static List<Item> getTinnableTools() {
+        var toolCategoryList = new ArrayList<>(List.of(
+                EItemCategory.Hoe,
+                EItemCategory.Sword,
+                EItemCategory.Axe,
+                EItemCategory.PickAxe,
+                EItemCategory.Shovel,
+                EItemCategory.Knife,
+                EItemCategory.LongSword,
+                EItemCategory.Machete,
+                EItemCategory.BattleAxe
+        ));
+        return REGISTERED_ITEMS.stream().filter(i -> toolCategoryList.contains(i.category)).map(i -> i.item.get()).collect(Collectors.toList());
+    }
+
     public static void createItems() {
         var copperSupplier = new TierItemsCreator("copper_ingot", EMaterialType.COPPER, ModTiers.COPPER);
         copperSupplier.createToolItem(EItemCategory.Axe, 5.5F, -3.2F);
@@ -116,8 +64,8 @@ public class ModItems {
         copperSupplier.createToolItem(EItemCategory.Shovel, 1.5F, -3.0F);
         copperSupplier.createToolItem(EItemCategory.Hoe, -1, -2.0F);
         copperSupplier.createToolItem(EItemCategory.Knife, 0.5F, -1.4F);
-        copperSupplier.createToolItem(EItemCategory.BattleAxe, 11, -3.4F);
-        copperSupplier.createToolItem(EItemCategory.LongSword, 6, -3F);
+        copperSupplier.createBigToolItem(EItemCategory.BattleAxe, 11, -3.4F);
+        copperSupplier.createBigToolItem(EItemCategory.LongSword, 6, -3F);
 
         var steelSupplier = new TierItemsCreator("steel_ingot", EMaterialType.STEEL, ModTiers.STEEL);
         //steelSupplier.createToolItem(EItemCategory.Axe, 5.5F, -3.2F);
@@ -193,14 +141,38 @@ public class ModItems {
 
         public void createToolItem(EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
             Supplier<Item> itemSupplier = () -> switch (itemCategory) {
-                case Axe -> new AxeItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-                case Sword -> new SwordItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                case PickAxe -> new PickaxeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                case Hoe -> new HoeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                case Shovel -> new ShovelItem(tier, damageMod, attackSpeedMod, new Item.Properties());
+                case Axe -> new TinedAxeItem(tier, damageMod, attackSpeedMod, new Item.Properties());
+                case Sword -> new TinedSwordItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+                case PickAxe -> new TinedPickaxeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+                case Hoe -> new TinedHoeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+                case Shovel -> new TinedShovelItem(tier, damageMod, attackSpeedMod, new Item.Properties());
+                case Knife -> new KnifeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+                case Dagger -> new DaggerItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+                case Machete -> new MacheteItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+                default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
+            };
+
+            RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
+            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, modId, basis, material_type, tier);
+            REGISTERED_ITEMS.add(itemInfo);
+        }
+
+        public void createBigToolItem(EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
+            Supplier<Item> itemSupplier = () -> switch (itemCategory) {
                 case LongSword -> new LongSwordItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
                 case BattleAxe -> new BattleAxeItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-                case Knife -> new KnifeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+                default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
+            };
+
+            RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
+            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeldBig, modId, basis, material_type, tier);
+            REGISTERED_ITEMS.add(itemInfo);
+        }
+
+        public void createSimpleToolItem(EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
+            Supplier<Item> itemSupplier = () -> switch (itemCategory) {
+                case Club -> new ClubItem(tier, damageMod, attackSpeedMod, new Item.Properties());
+                case Dagger -> new DaggerItem(tier, (int)damageMod, attackSpeedMod, new Item.Properties());
                 default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
             };
 
@@ -296,5 +268,6 @@ public class ModItems {
     public enum EItemType {
         Simple,
         HandHeld,
+        HandHeldBig,
     }
 }

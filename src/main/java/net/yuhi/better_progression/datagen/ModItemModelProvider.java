@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.client.model.generators.CustomLoaderBuilder;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -30,50 +31,76 @@ public class ModItemModelProvider extends ItemModelProvider {
             switch (item.type) {
                 case Simple -> simpleItem(item.item);
                 case HandHeld -> handHeldItem(item.item);
+                case HandHeldBig -> bigHandHeldItem(item.item);
             }
         }
     }
 
-    private final Gson gson = new Gson();
-    private ItemModelBuilder handHeldItem(RegistryObject<Item> item) {
-        ResourceLocation modelLocation = new ResourceLocation(BetterProgression.MOD_ID, "item/" + item.getId().getPath());
-        var path = Paths.get("generated/assets/" + modelLocation.getNamespace() + "/models/" + modelLocation.getPath() + ".json");
-        var model = withExistingParent(item.getId().getPath(),
+    private ItemModelBuilder bigHandHeldItem(RegistryObject<Item> item) {
+        var builder = withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/handheld")).texture("layer0",
                 new ResourceLocation(BetterProgression.MOD_ID, "item/" + item.getId().getPath()));
+        JsonObject display = new JsonObject();
 
+        // thirdperson_righthand
+        JsonObject thirdPersonRightHand = new JsonObject();
+        thirdPersonRightHand.add("scale", createJsonArray(1.25, 1.25, 1));
+        thirdPersonRightHand.add("translation", createJsonArray(0, 6, 0.5));
+        thirdPersonRightHand.add("rotation", createJsonArray(0, -90, 55));
+
+        // thirdperson_lefthand
+        JsonObject thirdPersonLeftHand = new JsonObject();
+        thirdPersonLeftHand.add("scale", createJsonArray(1.25, 1.25, 1));
+        thirdPersonLeftHand.add("translation", createJsonArray(0, 6, 0.5));
+        thirdPersonLeftHand.add("rotation", createJsonArray(0, 90, -55));
+
+        // firstperson_righthand
+        JsonObject firstPersonRightHand = new JsonObject();
+        firstPersonRightHand.add("scale", createJsonArray(0.935, 0.935, 0.68));
+        firstPersonRightHand.add("rotation", createJsonArray(0, 90, 65));
+        firstPersonRightHand.add("translation", createJsonArray(1.13, 3.2, 1.13));
+
+        // firstperson_lefthand
+        JsonObject firstPersonLeftHand = new JsonObject();
+        firstPersonLeftHand.add("scale", createJsonArray(0.935, 0.935, 0.68));
+        firstPersonLeftHand.add("rotation", createJsonArray(0, -90, -65));
+        firstPersonLeftHand.add("translation", createJsonArray(1.13, 3.2, 1.13));
+
+        // Adding all parts to display
+        display.add("thirdperson_righthand", thirdPersonRightHand);
+        display.add("thirdperson_lefthand", thirdPersonLeftHand);
+        display.add("firstperson_righthand", firstPersonRightHand);
+        display.add("firstperson_lefthand", firstPersonLeftHand);
+
+        // Adding display to the builder
+        var builderJson = builder.toJson();
+        builderJson.add("display", display);
+        //builder.customLoader(item.getId().getPath(), existingFileHelper, display);
+
+        var loc = item.getId().getPath();
         try {
-            JsonObject json = gson.fromJson(Files.newBufferedReader(path), JsonObject.class);
-
-            JsonObject displayObject = new JsonObject();
-
-            JsonObject thirdPersonRightHand = new JsonObject();
-            thirdPersonRightHand.add("scale", createVector(1.5f, 1.5f, 1.5f));
-            displayObject.add("thirdperson_righthand", thirdPersonRightHand);
-
-            JsonObject firstPersonRightHand = new JsonObject();
-            firstPersonRightHand.add("scale", createVector(1.5f, 1.5f, 1.5f));
-            displayObject.add("firstperson_righthand", firstPersonRightHand);
-
-            json.add("display", displayObject);
-
-            try (FileWriter writer = new FileWriter(path.toFile())) {
-                gson.toJson(json, writer);
-            }
+            FileWriter f = new FileWriter(loc);
+            f.write(builderJson.toString());
+            f.close();
         }
         catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
-        
-        return model;
+
+        return builder;
+    }
+    private JsonArray createJsonArray(double... values) {
+        JsonArray array = new JsonArray();
+        for (double value : values) {
+            array.add(value);
+        }
+        return array;
     }
 
-    private JsonArray createVector(float x, float y, float z) {
-        JsonArray array = new JsonArray();
-        array.add(x);
-        array.add(y);
-        array.add(z);
-        return array;
+    private ItemModelBuilder handHeldItem(RegistryObject<Item> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/handheld")).texture("layer0",
+                new ResourceLocation(BetterProgression.MOD_ID, "item/" + item.getId().getPath()));
     }
     
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

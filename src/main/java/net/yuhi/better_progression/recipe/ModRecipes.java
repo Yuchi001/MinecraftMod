@@ -13,6 +13,7 @@ import net.yuhi.better_progression.BetterProgression;
 
 public class ModRecipes {
     public static final BetterSimpleCookingSerializer BLASTING_SERIALIZER = new BetterSimpleCookingSerializer(BetterBlastingRecipe::new, 100);
+    public static final TinedItemRecipe.TinnedItemRecipeSerializer TINED_ITEM_RECIPE_SERIALIZER = new TinedItemRecipe.TinnedItemRecipeSerializer();
 
     public static final DeferredRegister<RecipeSerializer<?>> RECIPES = 
             DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, BetterProgression.MOD_ID);
@@ -22,6 +23,8 @@ public class ModRecipes {
 
     public static final RegistryObject<RecipeSerializer<BetterBlastingRecipe>> BETTER_BLAST_FURNACE =
             VANILLA_RECIPES.register("blasting", () -> BLASTING_SERIALIZER);
+    public static RegistryObject<RecipeSerializer<TinedItemRecipe>> TINED_ITEM_RECIPE =
+            RECIPES.register("tinning", () -> TINED_ITEM_RECIPE_SERIALIZER);
 
     public static void register(IEventBus bus) {
         RECIPES.register(bus);

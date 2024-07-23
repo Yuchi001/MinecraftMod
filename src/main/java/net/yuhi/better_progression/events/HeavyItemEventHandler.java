@@ -10,9 +10,11 @@ import net.minecraftforge.client.event.RenderItemInFrameEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.item.custom.TwoHandedItem;
 
 import java.util.Arrays;
@@ -43,6 +45,8 @@ public class HeavyItemEventHandler {
         }
         hasHeavyWeapon = event.getItemStack().getItem() instanceof TwoHandedItem;
     }
+
+
     
     @SubscribeEvent
     public static void onLivingEntityUseItem(LivingEntityUseItemEvent event) {

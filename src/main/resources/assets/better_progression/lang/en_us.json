@@ -21,5 +21,8 @@
 
   "item.better_progression.wooden_club": "Wooden Club",
   
-  "creativetab.better_progression.title": "Better Progression"
+  "creativetab.better_progression.title": "Better Progression",
+
+  "tooltip.better_progression.tined_item.tooltip_general": "This item has <v1> tin layer<v2>",
+  "tooltip.better_progression.tined_item.tooltip_additional": "Durability enhanced by <v1>"
 }

@@ -1,6 +1,8 @@
 package net.yuhi.better_progression.item;
 
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -16,18 +18,13 @@ import java.util.stream.Collectors;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = 
             DeferredRegister.create(ForgeRegistries.ITEMS, BetterProgression.MOD_ID);
+
+    public static final DeferredRegister<Item> VANILLA_ITEMS =
+            DeferredRegister.create(ForgeRegistries.ITEMS, "minecraft");
+    
     public static final List<ItemInfo<Item>>  REGISTERED_ITEMS = new ArrayList<>();
 
-    public static final RegistryObject<Item> HILT = ITEMS.register("hilt", () -> new Item.Properties());
-    
-    // WOOD
-    
-    /*public static final RegistryObject<Item> WOODEN_CLUB = registerItem(
-            ITEMS.register("wooden_club",
-                    () -> new ClubItem(Tiers.WOOD, 3.0F, -3.2F, new Item.Properties())),
-            EItemType.HandHeld
-    );*/
-
+    public static final RegistryObject<Item> HILT = ITEMS.register("hilt", () -> new Item(new Item.Properties()));
 
     public static Item getItem(EItemCategory itemCategory, EMaterialType materialType) {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && i.material_type == materialType).findFirst().get().item.get();
@@ -35,6 +32,10 @@ public class ModItems {
     
     public static List<Item> getItems(EItemCategory itemCategory) {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory).map(i -> i.item.get()).collect(Collectors.toList());
+    }
+
+    public static List<ItemInfo> getItemInfos(EItemCategory itemCategory) {
+        return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory).collect(Collectors.toList());
     }
 
     public static List<Item> getItems(EMaterialType materialType) {
@@ -57,7 +58,18 @@ public class ModItems {
     }
 
     public static void createItems() {
-        var copperSupplier = new TierItemsCreator("copper_ingot", EMaterialType.COPPER, ModTiers.COPPER);
+        var woodenSupplier = new TierItemsCreator(Tags.Items.RODS_WOODEN, EMaterialType.WOOD, Tiers.WOOD);
+        woodenSupplier.createSimpleToolItem(EItemCategory.Club, 3.0F, -3.2F);
+
+        var stoneSupplier = new TierItemsCreator(Tags.Items.COBBLESTONE, EMaterialType.STONE, Tiers.STONE);
+        stoneSupplier.createSimpleToolItem(EItemCategory.Club, 3.5F, -3.2F);
+        stoneSupplier.createSimpleToolItem(EItemCategory.Dagger, 0.5F, -1.4F);
+
+        var diamondSupplier = new TierItemsCreator("diamond", EMaterialType.DIAMOND, ModTiers.BETTER_DIAMOND);
+        diamondSupplier.createSimpleToolItem(EItemCategory.Club, 5.0F, -2.8F);
+        diamondSupplier.createSimpleToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
+        
+        var copperSupplier = new TierItemsCreator("!copper_ingot", EMaterialType.COPPER, ModTiers.COPPER, true);
         copperSupplier.createToolItem(EItemCategory.Axe, 5.5F, -3.2F);
         copperSupplier.createToolItem(EItemCategory.PickAxe, 1, -2.8f);
         copperSupplier.createToolItem(EItemCategory.Sword, 3, -2.4F);
@@ -68,58 +80,56 @@ public class ModItems {
         copperSupplier.createBigToolItem(EItemCategory.LongSword, 6, -3F);
 
         var steelSupplier = new TierItemsCreator("steel_ingot", EMaterialType.STEEL, ModTiers.STEEL);
-        //steelSupplier.createToolItem(EItemCategory.Axe, 5.5F, -3.2F);
-        //steelSupplier.createToolItem(EItemCategory.PickAxe, 1, -2.8f);
-        steelSupplier.createToolItem(EItemCategory.Sword, 3, -2.4F);
-        //steelSupplier.createToolItem(EItemCategory.Shovel, 1.5F, -3.0F);
-        //steelSupplier.createToolItem(EItemCategory.Hoe, -1, -2.0F);
-        //steelSupplier.createToolItem(EItemCategory.Knife, 1, -1.4F);
+        steelSupplier.createToolItem(EItemCategory.Axe, 6.5f, -3.4F);
+        steelSupplier.createToolItem(EItemCategory.PickAxe, 2.0f, -3.0f);
+        steelSupplier.createToolItem(EItemCategory.Sword, 4.0f, -2.6F);
+        steelSupplier.createToolItem(EItemCategory.Shovel, 2.5F, -3.2F);
+        steelSupplier.createToolItem(EItemCategory.Hoe, 1.0f, -2.2F);
+        steelSupplier.createToolItem(EItemCategory.Knife, 2.0f, -1.6F);
+        steelSupplier.createBigToolItem(EItemCategory.BattleAxe, 12, -3.4F);
+        steelSupplier.createBigToolItem(EItemCategory.LongSword, 7, -3F);
         steelSupplier.createBasicItem(EItemCategory.Ingot);
 
         var bronzeSupplier = new TierItemsCreator("bronze_ingot", EMaterialType.BRONZE, ModTiers.BRONZE);
-        /*steelSupplier.createToolItem(EItemCategory.Axe, 5.5F, -3.2F);
-        steelSupplier.createToolItem(EItemCategory.PickAxe, 1, -2.8f);
-        steelSupplier.createToolItem(EItemCategory.Sword, 3, -2.4F);
-        steelSupplier.createToolItem(EItemCategory.Shovel, 1.5F, -3.0F);
-        steelSupplier.createToolItem(EItemCategory.Hoe, -1, -2.0F);
-        steelSupplier.createToolItem(EItemCategory.Knife, 1, -1.4F);*/
+        bronzeSupplier.createToolItem(EItemCategory.Axe, 7.5F, -3.0F);
+        bronzeSupplier.createToolItem(EItemCategory.PickAxe, 3, -2.8f);
+        bronzeSupplier.createToolItem(EItemCategory.Sword, 5, -2.2F);
+        bronzeSupplier.createToolItem(EItemCategory.Shovel, 3.5F, -2.8F);
+        bronzeSupplier.createToolItem(EItemCategory.Hoe, 1, -1.8F);
+        bronzeSupplier.createToolItem(EItemCategory.Knife, 3, -1.2F);
+        bronzeSupplier.createBigToolItem(EItemCategory.BattleAxe, 13, -3.4F);
+        bronzeSupplier.createBigToolItem(EItemCategory.LongSword, 8, -3F);
         bronzeSupplier.createBasicItem(EItemCategory.Ingot);
+        
 
         var tinSupplier = new TierItemsCreator(EMaterialType.TIN);
-        /*steelSupplier.createToolItem(EItemCategory.Axe, 5.5F, -3.2F);
-        steelSupplier.createToolItem(EItemCategory.PickAxe, 1, -2.8f);
-        steelSupplier.createToolItem(EItemCategory.Sword, 3, -2.4F);
-        steelSupplier.createToolItem(EItemCategory.Shovel, 1.5F, -3.0F);
-        steelSupplier.createToolItem(EItemCategory.Hoe, -1, -2.0F);
-        steelSupplier.createToolItem(EItemCategory.Knife, 1, -1.4F);*/
         tinSupplier.createBasicItem(EItemCategory.Ingot);
         tinSupplier.createBasicItem(EItemCategory.RawMaterial);
     }
 
     public static void register(IEventBus bus) {
         createItems();
-
+        
         ITEMS.register(bus);
+        VANILLA_ITEMS.register(bus);
     }
 
     public static class TierItemsCreator {
-        private final String modId;
-        private final EMaterialType material_type;
-        private final Tier tier;
-        private final String basis;
-
+        private String modId = BetterProgression.MOD_ID;
+        private EMaterialType material_type;
+        private Tier tier = null;
+        private String basis = "";
+        private TagKey<Item> tag = null;
+        private boolean has_default_basis = false;
+        
         // region constructors
         public TierItemsCreator(EMaterialType material_type) {
             this.modId = BetterProgression.MOD_ID;
-            this.basis = "";
-            this.tier = null;
             this.material_type = material_type;
         }
 
         public TierItemsCreator(String mod_id, EMaterialType material_type) {
             this.modId = mod_id;
-            this.basis = "";
-            this.tier = null;
             this.material_type = material_type;
         }
 
@@ -131,8 +141,21 @@ public class ModItems {
         }
 
         public TierItemsCreator(String basis, EMaterialType material_type, Tier tier) {
-            this.modId = BetterProgression.MOD_ID;
+            this.tier = tier;
             this.basis = basis;
+            this.material_type = material_type;
+        }
+
+        public TierItemsCreator(String basis, EMaterialType material_type, Tier tier, boolean has_default_basis) {
+            this.tier = tier;
+            this.has_default_basis = has_default_basis;
+            this.basis = basis;
+            this.material_type = material_type;
+        }
+
+        public TierItemsCreator(TagKey<Item> tag, EMaterialType material_type, Tier tier) {
+            this.tag = tag;
+            this.basis = "";
             this.tier = tier;
             this.material_type = material_type;
         }
@@ -208,6 +231,16 @@ public class ModItems {
             this.basis = basis;
             this.tier = tier;
             this.material_type = material_type;
+        }
+
+        public ItemInfo(RegistryObject<T> item) {
+            this.item = item;
+            this.category = EItemCategory.Ingot;
+            this.type = EItemType.Simple;
+            mod_id = BetterProgression.MOD_ID;
+            this.basis = "";
+            this.tier = null;
+            this.material_type = null;
         }
     }
 

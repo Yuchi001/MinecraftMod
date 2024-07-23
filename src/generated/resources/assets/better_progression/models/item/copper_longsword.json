@@ -2,27 +2,5 @@
   "parent": "minecraft:item/handheld",
   "textures": {
     "layer0": "better_progression:item/copper_longsword"
-  },
-  "display": {
-    "thirdperson_righthand": {
-      "scale": [1.25, 1.25, 1],
-      "translation": [0, 6, 0.5],
-      "rotation": [0, -90, 55]
-    },
-    "thirdperson_lefthand": {
-      "scale": [1.25, 1.25, 1],
-      "translation": [0, 6, 0.5],
-      "rotation": [0, 90, -55]
-    },
-    "firstperson_righthand": {
-      "scale": [0.935, 0.935, 0.68],
-      "rotation": [0, 90, 65],
-      "translation": [1.13, 3.2, 1.13]
-    },
-    "firstperson_lefthand": {
-      "scale": [0.935, 0.935, 0.68],
-      "rotation": [0, -90, -65],
-      "translation": [1.13, 3.2, 1.13]
-    }
   }
 }

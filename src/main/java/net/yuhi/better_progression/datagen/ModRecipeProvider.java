@@ -2,12 +2,15 @@ package net.yuhi.better_progression.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.item.ModItems;
@@ -112,18 +115,22 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
-        /*copperRecipes(pWriter);
-        tinRecipes(pWriter);
-        woodenRecipes(pWriter);*/
-        for (var pickaxe : ModItems.getItems(ModItems.EItemCategory.PickAxe)) {
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, pickaxe)
+        for (var pickaxe : ModItems.getItemInfos(ModItems.EItemCategory.PickAxe)) {
+            var mod_id = pickaxe.basis.startsWith("!") ? "minecraft" : pickaxe.mod_id;
+            var registryKey = new ResourceLocation(mod_id, pickaxe.basis);
+            System.out.println(registryKey);
+            
+            /*var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
+            if (basisItem == null) continue;
+            
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)pickaxe.item.get())
                     .pattern("***")
                     .pattern(" # ")
                     .pattern(" # ")
-                    .define('#', Items.STICK)
-                    .define('*', Items.COPPER_INGOT)
-                    .unlockedBy(getHasName(ModItems.TIN_INGOT.get()), has(ModItems.TIN_INGOT.get()))
-                    .save(pWriter, "copper_pickaxe");
+                    .define('#', ModItems.HILT.get())
+                    .define('*', basisItem)
+                    .unlockedBy(getHasName(basisItem), has(basisItem))
+                    .save(pWriter, pickaxe.tier + "_" + pickaxe.category);*/
         }
     }
     

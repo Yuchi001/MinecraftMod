@@ -14,11 +14,4 @@ public class LongSwordItem extends TinedSwordItem implements TwoHandedItem {
     public LongSwordItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
         super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
     }
-
-    @Override
-    public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pToolTipComponents, @NotNull TooltipFlag pIsAdvanced) {
-        var components = TinedItem.getTinedDescription(pStack);
-        if (components != null) pToolTipComponents.addAll(components);
-        super.appendHoverText(pStack, pLevel, pToolTipComponents, pIsAdvanced);
-    }
 }

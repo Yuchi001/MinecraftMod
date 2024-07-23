@@ -116,13 +116,16 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
         for (var pickaxe : ModItems.getItemInfos(ModItems.EItemCategory.PickAxe)) {
-            var mod_id = pickaxe.basis.startsWith("!") ? "minecraft" : pickaxe.mod_id;
+            var mod_id = pickaxe.has_default_basis ? "minecraft" : pickaxe.mod_id;
             var registryKey = new ResourceLocation(mod_id, pickaxe.basis);
             System.out.println(registryKey);
             
-            /*var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
+            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
             if (basisItem == null) continue;
-            
+
+            var tier_name = pickaxe.basis;
+            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
+            var recipeId = tier_name + "_" + pickaxe.category.getName().toLowerCase();
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)pickaxe.item.get())
                     .pattern("***")
                     .pattern(" # ")
@@ -130,7 +133,91 @@ public class ModRecipeProvider extends RecipeProvider {
                     .define('#', ModItems.HILT.get())
                     .define('*', basisItem)
                     .unlockedBy(getHasName(basisItem), has(basisItem))
-                    .save(pWriter, pickaxe.tier + "_" + pickaxe.category);*/
+                    .save(pWriter, recipeId);
+        }
+
+        for (var pickaxe : ModItems.getItemInfos(ModItems.EItemCategory.Shovel)) {
+            var mod_id = pickaxe.has_default_basis ? "minecraft" : pickaxe.mod_id;
+            var registryKey = new ResourceLocation(mod_id, pickaxe.basis);
+            System.out.println(registryKey);
+
+            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
+            if (basisItem == null) continue;
+
+            var tier_name = pickaxe.basis;
+            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
+            var recipeId = tier_name + "_" + pickaxe.category.getName().toLowerCase();
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)pickaxe.item.get())
+                    .pattern(" * ")
+                    .pattern(" # ")
+                    .pattern(" # ")
+                    .define('#', ModItems.HILT.get())
+                    .define('*', basisItem)
+                    .unlockedBy(getHasName(basisItem), has(basisItem))
+                    .save(pWriter, recipeId);
+        }
+
+        for (var pickaxe : ModItems.getItemInfos(ModItems.EItemCategory.Hoe)) {
+            var mod_id = pickaxe.has_default_basis ? "minecraft" : pickaxe.mod_id;
+            var registryKey = new ResourceLocation(mod_id, pickaxe.basis);
+            System.out.println(registryKey);
+
+            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
+            if (basisItem == null) continue;
+
+            var tier_name = pickaxe.basis;
+            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
+            var recipeId = tier_name + "_" + pickaxe.category.getName().toLowerCase();
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)pickaxe.item.get())
+                    .pattern("** ")
+                    .pattern(" # ")
+                    .pattern(" # ")
+                    .define('#', ModItems.HILT.get())
+                    .define('*', basisItem)
+                    .unlockedBy(getHasName(basisItem), has(basisItem))
+                    .save(pWriter, recipeId);
+        }
+
+        for (var pickaxe : ModItems.getItemInfos(ModItems.EItemCategory.Sword)) {
+            var mod_id = pickaxe.has_default_basis ? "minecraft" : pickaxe.mod_id;
+            var registryKey = new ResourceLocation(mod_id, pickaxe.basis);
+            System.out.println(registryKey);
+
+            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
+            if (basisItem == null) continue;
+
+            var tier_name = pickaxe.basis;
+            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
+            var recipeId = tier_name + "_" + pickaxe.category.getName().toLowerCase();
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)pickaxe.item.get())
+                    .pattern(" * ")
+                    .pattern(" * ")
+                    .pattern(" # ")
+                    .define('#', ModItems.HILT.get())
+                    .define('*', basisItem)
+                    .unlockedBy(getHasName(basisItem), has(basisItem))
+                    .save(pWriter, recipeId);
+        }
+
+        for (var pickaxe : ModItems.getItemInfos(ModItems.EItemCategory.Axe)) {
+            var mod_id = pickaxe.has_default_basis ? "minecraft" : pickaxe.mod_id;
+            var registryKey = new ResourceLocation(mod_id, pickaxe.basis);
+            System.out.println(registryKey);
+
+            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
+            if (basisItem == null) continue;
+
+            var tier_name = pickaxe.basis;
+            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
+            var recipeId = tier_name + "_" + pickaxe.category.getName().toLowerCase();
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)pickaxe.item.get())
+                    .pattern("** ")
+                    .pattern("*# ")
+                    .pattern(" # ")
+                    .define('#', ModItems.HILT.get())
+                    .define('*', basisItem)
+                    .unlockedBy(getHasName(basisItem), has(basisItem))
+                    .save(pWriter, recipeId);
         }
     }
     

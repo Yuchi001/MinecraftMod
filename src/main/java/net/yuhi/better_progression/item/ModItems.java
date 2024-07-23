@@ -69,7 +69,7 @@ public class ModItems {
         diamondSupplier.createSimpleToolItem(EItemCategory.Club, 5.0F, -2.8F);
         diamondSupplier.createSimpleToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
         
-        var copperSupplier = new TierItemsCreator("!copper_ingot", EMaterialType.COPPER, ModTiers.COPPER, true);
+        var copperSupplier = new TierItemsCreator("copper_ingot", EMaterialType.COPPER, ModTiers.COPPER, true);
         copperSupplier.createToolItem(EItemCategory.Axe, 5.5F, -3.2F);
         copperSupplier.createToolItem(EItemCategory.PickAxe, 1, -2.8f);
         copperSupplier.createToolItem(EItemCategory.Sword, 3, -2.4F);
@@ -176,7 +176,7 @@ public class ModItems {
             };
 
             RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, modId, basis, material_type, tier);
+            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, modId, basis, material_type, tier, has_default_basis);
             REGISTERED_ITEMS.add(itemInfo);
         }
 
@@ -188,7 +188,7 @@ public class ModItems {
             };
 
             RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeldBig, modId, basis, material_type, tier);
+            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeldBig, modId, basis, material_type, tier, has_default_basis);
             REGISTERED_ITEMS.add(itemInfo);
         }
 
@@ -200,7 +200,7 @@ public class ModItems {
             };
 
             RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, modId, basis, material_type, tier);
+            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, modId, basis, material_type, tier, has_default_basis);
             REGISTERED_ITEMS.add(itemInfo);
         }
 
@@ -210,7 +210,7 @@ public class ModItems {
             };
 
             RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.Simple, modId, basis, material_type, tier);
+            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.Simple, modId, basis, material_type, tier, has_default_basis);
             REGISTERED_ITEMS.add(itemInfo);
         }
     }
@@ -222,25 +222,28 @@ public class ModItems {
         public final String basis;
         public final EMaterialType material_type;
         public final Tier tier;
+        public final boolean has_default_basis;
 
-        public ItemInfo(RegistryObject<T> item, EItemCategory category, EItemType type, String modId, String basis, EMaterialType material_type, Tier tier) {
+        public ItemInfo(RegistryObject<T> item, EItemCategory category, EItemType type, String modId, String basis, EMaterialType material_type, Tier tier, boolean has_default_basis) {
             this.item = item;
             this.category = category;
             this.type = type;
-            mod_id = modId;
+            this.mod_id = modId;
             this.basis = basis;
             this.tier = tier;
             this.material_type = material_type;
+            this.has_default_basis = has_default_basis;
         }
 
         public ItemInfo(RegistryObject<T> item) {
             this.item = item;
             this.category = EItemCategory.Ingot;
             this.type = EItemType.Simple;
-            mod_id = BetterProgression.MOD_ID;
+            this.mod_id = BetterProgression.MOD_ID;
             this.basis = "";
             this.tier = null;
             this.material_type = null;
+            this.has_default_basis = false;
         }
     }
 
@@ -276,6 +279,10 @@ public class ModItems {
         public String getFullName(String tierName) {
             if(name.isEmpty()) return tierName;
             return nameFirst ? name + "_" + tierName : tierName + "_" + name;
+        }
+
+        public String getName() {
+            return name;
         }
     }
 

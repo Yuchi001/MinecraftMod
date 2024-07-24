@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "*": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    " * ",
+    " * ",
+    " # "
+  ],
+  "result": {
+    "item": "better_progression:wooden_club"
+  },
+  "show_notification": true
+}

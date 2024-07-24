@@ -1,5 +1,6 @@
 package net.yuhi.better_progression.item;
 
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.Tags;
@@ -65,14 +66,14 @@ public class ModItems {
     }
 
     public static void createItems() {
-        var woodenSupplier = new TierItemsCreator(Tags.Items.RODS_WOODEN, EMaterialType.WOOD, Tiers.WOOD);
+        var woodenSupplier = new TierItemsCreator(ItemTags.PLANKS, EMaterialType.WOOD, Tiers.WOOD);
         woodenSupplier.createSimpleToolItem(EItemCategory.Club, 3.0F, -3.2F);
 
         var stoneSupplier = new TierItemsCreator(Tags.Items.COBBLESTONE, EMaterialType.STONE, Tiers.STONE);
         stoneSupplier.createSimpleToolItem(EItemCategory.Club, 3.5F, -3.2F);
         stoneSupplier.createSimpleToolItem(EItemCategory.Dagger, 0.5F, -1.4F);
 
-        var diamondSupplier = new TierItemsCreator("diamond", EMaterialType.DIAMOND, ModTiers.BETTER_DIAMOND);
+        var diamondSupplier = new TierItemsCreator("diamond", EMaterialType.DIAMOND, ModTiers.BETTER_DIAMOND, true);
         diamondSupplier.createSimpleToolItem(EItemCategory.Club, 5.0F, -2.8F);
         diamondSupplier.createSimpleToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
         
@@ -125,8 +126,8 @@ public class ModItems {
         private String modId = BetterProgression.MOD_ID;
         private EMaterialType material_type;
         private Tier tier = null;
-        private String basis = "";
         private TagKey<Item> tag = null;
+        private String basis = "";
         private boolean has_default_basis = false;
         
         // region constructors
@@ -153,17 +154,17 @@ public class ModItems {
             this.material_type = material_type;
         }
 
+        public TierItemsCreator(TagKey<Item> tag, EMaterialType material_type, Tier tier) {
+            this.tier = tier;
+            this.basis = tag.location().getPath().toLowerCase();
+            this.tag = tag;
+            this.material_type = material_type;
+        }
+
         public TierItemsCreator(String basis, EMaterialType material_type, Tier tier, boolean has_default_basis) {
             this.tier = tier;
             this.has_default_basis = has_default_basis;
             this.basis = basis;
-            this.material_type = material_type;
-        }
-
-        public TierItemsCreator(TagKey<Item> tag, EMaterialType material_type, Tier tier) {
-            this.tag = tag;
-            this.basis = "";
-            this.tier = tier;
             this.material_type = material_type;
         }
 
@@ -183,7 +184,7 @@ public class ModItems {
             };
 
             RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, modId, basis, material_type, tier, has_default_basis);
+            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, modId, basis, tag, material_type, tier, has_default_basis);
             REGISTERED_ITEMS.add(itemInfo);
         }
 
@@ -195,7 +196,7 @@ public class ModItems {
             };
 
             RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeldBig, modId, basis, material_type, tier, has_default_basis);
+            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeldBig, modId, basis, tag, material_type, tier, has_default_basis);
             REGISTERED_ITEMS.add(itemInfo);
         }
 
@@ -207,7 +208,7 @@ public class ModItems {
             };
 
             RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, modId, basis, material_type, tier, has_default_basis);
+            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, modId, basis, tag, material_type, tier, has_default_basis);
             REGISTERED_ITEMS.add(itemInfo);
         }
 
@@ -217,7 +218,7 @@ public class ModItems {
             };
 
             RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.Simple, modId, basis, material_type, tier, has_default_basis);
+            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.Simple, modId, basis, tag, material_type, tier, has_default_basis);
             REGISTERED_ITEMS.add(itemInfo);
         }
     }
@@ -229,18 +230,21 @@ public class ModItems {
         public final String basis;
         public final EMaterialType material_type;
         public final Tier tier;
+        public final TagKey<Item> tag;
         public final boolean has_default_basis;
 
-        public ItemInfo(RegistryObject<T> item, EItemCategory category, EItemType type, String modId, String basis, EMaterialType material_type, Tier tier, boolean has_default_basis) {
+        public ItemInfo(RegistryObject<T> item, EItemCategory category, EItemType type, String modId, String basis, TagKey<Item> tag, EMaterialType material_type, Tier tier, boolean has_default_basis) {
             this.item = item;
             this.category = category;
             this.type = type;
             this.mod_id = modId;
             this.basis = basis;
             this.tier = tier;
+            this.tag = tag;
             this.material_type = material_type;
             this.has_default_basis = has_default_basis;
         }
+
 
         public ItemInfo(RegistryObject<T> item) {
             this.item = item;
@@ -249,6 +253,7 @@ public class ModItems {
             this.mod_id = BetterProgression.MOD_ID;
             this.basis = "";
             this.tier = null;
+            this.tag = null;
             this.material_type = null;
             this.has_default_basis = false;
         }

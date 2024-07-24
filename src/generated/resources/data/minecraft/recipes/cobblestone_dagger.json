@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "*": []
+  },
+  "pattern": [
+    "   ",
+    " * ",
+    " # "
+  ],
+  "result": {
+    "item": "better_progression:stone_dagger"
+  },
+  "show_notification": true
+}

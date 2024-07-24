@@ -1,16 +1,20 @@
 ﻿{
+  "item.better_progression.diamond_club": "Diamond Club",
+  "item.better_progression.diamond_dagger": "Diamond Dagger",
+
+  "item.better_progression.stone_club": "Stone Club",
+  "item.better_progression.stone_dagger": "Stone Dagger",
+
+  "item.better_progression.obsidian_club": "Obsidian Club",
+  "item.better_progression.obsidian_dagger": "Obsidian Dagger",
+
+  "item.better_progression.wooden_club": "Diamond Club",
+
   "item.better_progression.raw_tin": "Raw Tin",
   "item.better_progression.tin_ingot": "Tin Ingot",
   "block.better_progression.tin_ore": "Tin Ore",
   "block.better_progression.tin_block": "Tin Block",
   "block.better_progression.raw_tin_block": "Raw Tin Block",
-  
-  "item.better_progression.steel_ingot": "Steel Ingot",
-  "block.better_progression.steel_block": "Steel Block",
-  "item.better_progression.steel_sword": "Steel Sword",
-
-  "item.better_progression.bronze_ingot": "Bronze Ingot",
-  "block.better_progression.bronze_block": "Bronze Block",
   
   "item.better_progression.copper_sword": "Copper Sword",
   "item.better_progression.copper_pickaxe": "Copper Pickaxe",
@@ -18,9 +22,34 @@
   "item.better_progression.copper_shovel": "Copper Shovel",
   "item.better_progression.copper_hoe": "Copper Hoe",
   "item.better_progression.copper_knife": "Copper Knife",
+  "item.better_progression.copper_machete": "Copper Machete",
+  "item.better_progression.copper_longsword": "Copper Longsword",
+  "item.better_progression.copper_battleaxe": "Copper Battleaxe",
 
-  "item.better_progression.wooden_club": "Wooden Club",
-  
+  "item.better_progression.steel_ingot": "Steel Ingot",
+  "block.better_progression.steel_block": "Steel Block",
+  "item.better_progression.steel_sword": "Steel Sword",
+  "item.better_progression.steel_pickaxe": "Steel Pickaxe",
+  "item.better_progression.steel_axe": "Steel Axe",
+  "item.better_progression.steel_shovel": "Steel Shovel",
+  "item.better_progression.steel_hoe": "Steel Hoe",
+  "item.better_progression.steel_knife": "Steel Knife",
+  "item.better_progression.steel_machete": "Steel Machete",
+  "item.better_progression.steel_longsword": "SteelLongsword",
+  "item.better_progression.steel_battleaxe": "Steel Battleaxe",
+
+  "item.better_progression.bronze_ingot": "Bronze Ingot",
+  "block.better_progression.bronze_block": "Bronze Block",
+  "item.better_progression.bronze_sword": "Bronze Sword",
+  "item.better_progression.bronze_pickaxe": "Bronze Pickaxe",
+  "item.better_progression.bronze_axe": "Bronze Axe",
+  "item.better_progression.bronze_shovel": "Bronze Shovel",
+  "item.better_progression.bronze_hoe": "Bronze Hoe",
+  "item.better_progression.bronze_knife": "Bronze Knife",
+  "item.better_progression.bronze_machete": "Bronze Machete",
+  "item.better_progression.bronze_longsword": "BronzeLongsword",
+  "item.better_progression.bronze_battleaxe": "Bronze Battleaxe",
+
   "creativetab.better_progression.title": "Better Progression",
 
   "tooltip.better_progression.tined_item.tooltip_general": "This item has <v1> tin layer<v2>",

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "forge:rods/wooden"
+    },
+    "*": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    " * ",
+    " * ",
+    " # "
+  ],
+  "result": {
+    "item": "better_progression:diamond_club"
+  },
+  "show_notification": true
+}

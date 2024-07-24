@@ -2,9 +2,11 @@ package net.yuhi.better_progression.item.custom;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -32,6 +34,13 @@ public interface TinedItem {
         part1 = part1.replace("<v2>", count > 1 ? "s" : "");
         part2 = part2.replace("<v1>", String.valueOf(ADDITIONAL_DURABILITY_FOR_TIN_INGOT * count));
 
-        return new ArrayList<>(Arrays.asList(Component.literal(part1), Component.literal(part2)));
+        var comp1 = Component.literal(part1).setStyle(
+                Style.EMPTY.withColor(TextColor.parseColor("b9a59b"))
+                        .withBold(true)
+        );
+        var comp2 = Component.literal(part2).setStyle(
+                Style.EMPTY.withColor(TextColor.parseColor("b9a59b"))
+        );
+        return new ArrayList<>(Arrays.asList(comp1, comp2));
     }
 }

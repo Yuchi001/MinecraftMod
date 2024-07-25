@@ -14,6 +14,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.item.ModItems;
 
+import java.util.List;
 import java.util.Set;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
@@ -25,6 +26,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         this.dropSelf(ModBlocks.TIN_BLOCK.get());
         this.dropSelf(ModBlocks.RAW_TIN_BLOCK.get());
+        
+        this.dropSelf(ModBlocks.STANNIN_ORE.get());
         
         this.add(ModBlocks.TIN_ORE.get(),
                 block -> createOreDrops(ModBlocks.TIN_ORE.get(), ModItems.getItem(ModItems.EItemCategory.RawMaterial, ModItems.EMaterialType.TIN), 1, 3));

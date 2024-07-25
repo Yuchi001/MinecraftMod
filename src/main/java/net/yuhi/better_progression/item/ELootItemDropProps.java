@@ -3,7 +3,7 @@ package net.yuhi.better_progression.item;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 
-public enum TierKnifeMaxDrop {
+public enum ELootItemDropProps {
     STONE(Tiers.STONE, 1),
     IRON(Tiers.IRON, 2),
     DIAMOND(Tiers.DIAMOND, 5),
@@ -14,7 +14,7 @@ public enum TierKnifeMaxDrop {
     private final Tier tier;
     private final int level;
 
-    TierKnifeMaxDrop(Tier tier, int level) {
+    ELootItemDropProps(Tier tier, int level) {
         this.tier = tier;
         this.level = level;
     }
@@ -28,7 +28,7 @@ public enum TierKnifeMaxDrop {
     }
 
     public static int getTierDrop(Tier tier) {
-        for (TierKnifeMaxDrop tierLevel : values()) {
+        for (ELootItemDropProps tierLevel : values()) {
             if (tierLevel.getTier() == tier) {
                 return tierLevel.getDrop();
             }

@@ -1,4 +1,4 @@
-// 1.19.4	2024-07-25T01:27:57.5413086	Item Models: better_progression
+// 1.19.4	2024-07-26T00:09:59.9781494	Item Models: better_progression
 070e97230f9570aed29526e5fe4de47f33a09376 assets/better_progression/models/item/bronze_axe.json
 0b466e7f5b0f99d843404f9d9f4efb6c20b0901d assets/better_progression/models/item/bronze_hoe.json
 f71943125fb15142eb94fcbf6aa2cfe32f297f44 assets/better_progression/models/item/bronze_ingot.json
@@ -9,6 +9,7 @@ a93d5f6ee94e9def990d1fd031fb20109e9172e5 assets/better_progression/models/item/b
 8b445cc0ad08f8e5b747c2192afd1464eaf87b00 assets/better_progression/models/item/copper_axe.json
 c90a2da02ebc81ce159b7b07db2a686c2196ab2b assets/better_progression/models/item/copper_hoe.json
 bc3701930aadee5df640ec69e7d5c63c47101d0d assets/better_progression/models/item/copper_knife.json
+bbec77831d63c49a75b694fd6a98847f1ab77e2f assets/better_progression/models/item/copper_machete.json
 9c58d90f12643d24a12cde334fb0d23d65f8ca6d assets/better_progression/models/item/copper_pickaxe.json
 a224f78e0d646c093974ab188fcc2dbd9e269aac assets/better_progression/models/item/copper_shovel.json
 c0c5addb7f29ff26c733a4bdc3dc1bca79afbcf3 assets/better_progression/models/item/copper_sword.json

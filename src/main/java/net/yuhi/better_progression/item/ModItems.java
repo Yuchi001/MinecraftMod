@@ -2,6 +2,8 @@ package net.yuhi.better_progression.item;
 
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -83,7 +85,8 @@ public class ModItems {
         copperSupplier.createToolItem(EItemCategory.Sword, 3, -2.4F);
         copperSupplier.createToolItem(EItemCategory.Shovel, 1.5F, -3.0F);
         copperSupplier.createToolItem(EItemCategory.Hoe, -1, -2.0F);
-        copperSupplier.createToolItem(EItemCategory.Knife, 0.5F, -1.4F);
+        copperSupplier.createToolItem(EItemCategory.Knife, 1.5F, -2.8F);
+        copperSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
         copperSupplier.createBigToolItem(EItemCategory.BattleAxe, 11, -3.4F);
         copperSupplier.createBigToolItem(EItemCategory.LongSword, 6, -3F);
 
@@ -177,9 +180,9 @@ public class ModItems {
                 case PickAxe -> new TinedPickaxeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
                 case Hoe -> new TinedHoeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
                 case Shovel -> new TinedShovelItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-                case Knife -> new KnifeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+                case Knife -> new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Animal.class);
                 case Dagger -> new DaggerItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                case Machete -> new MacheteItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+                case Machete -> new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Monster.class);
                 default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
             };
 

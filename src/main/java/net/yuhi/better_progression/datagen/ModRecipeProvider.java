@@ -148,6 +148,27 @@ public class ModRecipeProvider extends RecipeProvider {
                     .save(pWriter, recipeId);
         }
     }
+    private void MacheteRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        for (var machete : ModItems.getItemInfos(ModItems.EItemCategory.Machete)) {
+            var mod_id = machete.has_default_basis ? "minecraft" : machete.mod_id;
+            var registryKey = new ResourceLocation(mod_id, machete.basis);
+
+            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
+            if (basisItem == null) continue;
+
+            var tier_name = machete.basis;
+            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
+            var recipeId = tier_name + "_" + machete.category.getName().toLowerCase();
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item)machete.item.get())
+                    .pattern("  *")
+                    .pattern(" * ")
+                    .pattern("#  ")
+                    .define('#', ModItems.HILT.get())
+                    .define('*', basisItem)
+                    .unlockedBy(getHasName(basisItem), has(basisItem))
+                    .save(pWriter, recipeId);
+        }
+    }
     private void LongSwordRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         for (var longsword : ModItems.getItemInfos(ModItems.EItemCategory.LongSword)) {
             var mod_id = longsword.has_default_basis ? "minecraft" : longsword.mod_id;
@@ -292,6 +313,7 @@ public class ModRecipeProvider extends RecipeProvider {
         ShovelRecipeCreator(pWriter);
         HoeRecipeCreator(pWriter);
         KnifeRecipeCreator(pWriter);
+        MacheteRecipeCreator(pWriter);
         LongSwordRecipeCreator(pWriter);
         BattleAxeRecipeCreator(pWriter);
         DaggerRecipeCreator(pWriter);

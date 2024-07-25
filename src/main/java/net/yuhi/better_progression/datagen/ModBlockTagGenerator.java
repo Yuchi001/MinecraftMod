@@ -21,13 +21,15 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
                 ModBlocks.TIN_BLOCK.get(),
                 ModBlocks.RAW_TIN_BLOCK.get(),
-                ModBlocks.TIN_ORE.get()
+                ModBlocks.TIN_ORE.get(),
+                ModBlocks.STANNIN_ORE.get()
                 );
         
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 ModBlocks.TIN_BLOCK.get(),
                 ModBlocks.RAW_TIN_BLOCK.get(),
-                ModBlocks.TIN_ORE.get()
+                ModBlocks.TIN_ORE.get(),
+                ModBlocks.STANNIN_ORE.get()
                 );
     }
 }

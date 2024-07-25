@@ -51,6 +51,9 @@ public class ModBlocks {
                             .strength(3.0F, 3.0F), 
                     UniformInt.of(0, 2)),
                     EBlockType.Simple);
+    
+    public static final RegistryObject<Block> STANNIN_ORE = registerBlock("stannin_ore",
+            () -> new StanninOreBlock(UniformInt.of(0, 2)), EBlockType.Simple);
 
     public static final RegistryObject<Block> BETTER_BLAST_FURNACE = registerVanillaBlock("blast_furnace",
             () -> new BetterBlastFurnaceBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(litBlockEmission(13))),

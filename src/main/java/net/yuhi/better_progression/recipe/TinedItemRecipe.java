@@ -5,24 +5,17 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.CraftingContainer;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.yuhi.better_progression.item.ModItems;
-import net.yuhi.better_progression.item.custom.KnifeItem;
 import net.yuhi.better_progression.item.custom.TinedItem;
 import net.yuhi.better_progression.tag.ModTags;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class TinedItemRecipe extends ShapelessRecipe {
     public TinedItemRecipe(ResourceLocation id, String group, ItemStack result, NonNullList<Ingredient> ingredients) {

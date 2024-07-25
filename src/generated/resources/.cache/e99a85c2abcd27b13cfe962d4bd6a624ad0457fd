@@ -1,10 +1,13 @@
-// 1.19.4	2024-07-17T02:14:36.4218231	Block States: better_progression
+// 1.19.4	2024-07-25T23:00:40.5112798	Block States: better_progression
 e83c005a26cb11e60688948fd3a97c750412797e assets/better_progression/blockstates/raw_tin_block.json
+d5be056ef5f54654d96785750b8a8f95c496fbc0 assets/better_progression/blockstates/stannin_ore.json
 1e88d96661e707b58887c686d7b907e572b4c6af assets/better_progression/blockstates/tin_block.json
 a8d929cef8a25bd27460fa595f0ba55d9803c0d4 assets/better_progression/blockstates/tin_ore.json
 27af3c64b6a53270c1f8c89a9dfc89a3387d0c8a assets/better_progression/models/block/raw_tin_block.json
+85c9c6f7e33e20468547af535816d9a408f07f56 assets/better_progression/models/block/stannin_ore.json
 79e82371cb4e965ca0c277e6e3b7a9c30978efdf assets/better_progression/models/block/tin_block.json
 be3208e8588018ac3532024250d09bf1c1f156ae assets/better_progression/models/block/tin_ore.json
 083932cfd8c589220bb5b778b962c5860e3007da assets/better_progression/models/item/raw_tin_block.json
+6dc90f87af2a0b9b3d29fa5bce11fcbef9e651f0 assets/better_progression/models/item/stannin_ore.json
 b538d6bbc5ffb32fc67febac140f91ff559c2b00 assets/better_progression/models/item/tin_block.json
 bf8d22d030a653d5895213c2816ac39a8072e099 assets/better_progression/models/item/tin_ore.json

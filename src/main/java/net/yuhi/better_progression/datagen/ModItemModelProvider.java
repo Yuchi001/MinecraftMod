@@ -6,10 +6,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.client.model.generators.CustomLoaderBuilder;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
@@ -38,10 +35,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         }
     }
 
-    private ItemModelBuilder bigHandHeldItem(RegistryObject<Item> item) {
-        var builder = withExistingParent(item.getId().getPath(),
-                new ResourceLocation("item/handheld")).texture("layer0",
-                new ResourceLocation(BetterProgression.MOD_ID, "item/" + item.getId().getPath()));
+    private void bigHandHeldItem(RegistryObject<Item> item) {
+        JsonObject layer = new JsonObject();
+        layer.addProperty("layer0", BetterProgression.MOD_ID + ":item/" + item.getId().getPath());
+        
         JsonObject display = new JsonObject();
 
         // thirdperson_righthand
@@ -73,23 +70,23 @@ public class ModItemModelProvider extends ItemModelProvider {
         display.add("thirdperson_lefthand", thirdPersonLeftHand);
         display.add("firstperson_righthand", firstPersonRightHand);
         display.add("firstperson_lefthand", firstPersonLeftHand);
+        
+        var result = new JsonObject();
+        
+        result.addProperty("parent", "minecraft:item/handheld");
+        result.add("textures", layer);
+        result.add("display", display);
 
-        // Adding display to the builder
-        var builderJson = builder.toJson();
-        builderJson.add("display", display);
-        //builder.customLoader(item.getId().getPath(), existingFileHelper, display);
-
-        var loc = item.getId().getPath();
+        var workingDir = System.getProperty("user.dir").substring(0, System.getProperty("user.dir").lastIndexOf("\\"));
+        var path = Paths.get(workingDir + "\\src\\main\\resources\\assets\\better_progression\\models\\item\\" + item.getId().getPath() + ".json");
         try {
-            FileWriter f = new FileWriter(loc);
-            f.write(builderJson.toString());
+            FileWriter f = new FileWriter(path.toFile());
+            f.write(result.toString());
             f.close();
         }
         catch (IOException e) {
             System.err.println(e.getMessage());
         }
-
-        return builder;
     }
     private JsonArray createJsonArray(double... values) {
         JsonArray array = new JsonArray();

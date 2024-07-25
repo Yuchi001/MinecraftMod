@@ -4,7 +4,8 @@
   "package": "net.yuhi.better_progression.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ItemInHandRendererMixin"
+    "ItemInHandRendererMixin",
+    "ItemStackMixin"
   ],
   "client": [],
   "server": [],

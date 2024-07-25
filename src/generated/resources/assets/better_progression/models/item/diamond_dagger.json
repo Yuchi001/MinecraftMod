@@ -1,4 +1,4 @@
-{
+ {
   "parent": "minecraft:item/handheld",
   "textures": {
     "layer0": "better_progression:item/diamond_dagger"

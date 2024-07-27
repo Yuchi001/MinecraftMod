@@ -2,17 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
+    "l": {
+      "item": "minecraft:leather"
+    },
+    "s": {
       "item": "minecraft:stick"
     },
-    "*": {
-      "item": "minecraft:leather"
+    "t": {
+      "item": "better_progression:tin_ingot"
     }
   },
   "pattern": [
-    "   ",
-    "*# ",
-    "#* "
+    " t ",
+    "lsl",
+    " t "
   ],
   "result": {
     "item": "better_progression:hilt"

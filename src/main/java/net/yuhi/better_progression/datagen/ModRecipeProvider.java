@@ -299,11 +299,12 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.HILT.get())
-                .pattern("   ")
-                .pattern("*# ")
-                .pattern("#* ")
-                .define('#', Items.STICK)
-                .define('*', Items.LEATHER)
+                .pattern(" t ")
+                .pattern("lsl")
+                .pattern(" t ")
+                .define('s', Items.STICK)
+                .define('l', Items.LEATHER)
+                .define('t', ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN))
                 .unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER))
                 .save(pWriter, "hilt");
         

@@ -1,8 +1,9 @@
-// 1.19.4	2024-07-26T00:09:59.9781494	Item Models: better_progression
+// 1.19.4	2024-07-27T15:33:52.0272058	Item Models: better_progression
 070e97230f9570aed29526e5fe4de47f33a09376 assets/better_progression/models/item/bronze_axe.json
 0b466e7f5b0f99d843404f9d9f4efb6c20b0901d assets/better_progression/models/item/bronze_hoe.json
 f71943125fb15142eb94fcbf6aa2cfe32f297f44 assets/better_progression/models/item/bronze_ingot.json
 f0506d90c5896f9727118b62d30f1411a384ae4e assets/better_progression/models/item/bronze_knife.json
+881c4ad3451cd4b1b94f17a2f39c0fcc28b964ab assets/better_progression/models/item/bronze_machete.json
 bc6a7cb2c404c99f3abb1b4da19cb8cc51f9b9c5 assets/better_progression/models/item/bronze_pickaxe.json
 1031d2aff334cc02a97f80c816975735db1a205e assets/better_progression/models/item/bronze_shovel.json
 a93d5f6ee94e9def990d1fd031fb20109e9172e5 assets/better_progression/models/item/bronze_sword.json
@@ -21,10 +22,12 @@ abe15169a3245ee9b46d6c460c37b49b84baa97c assets/better_progression/models/item/h
 025ab100cad75584587a945f1bfe7d2e39a257f1 assets/better_progression/models/item/steel_hoe.json
 4a9e60762fb07560f34863f8c53d8ed31ab732ed assets/better_progression/models/item/steel_ingot.json
 36682c9b92543f9b10950663ae5191d57fd19995 assets/better_progression/models/item/steel_knife.json
+37c623c762f9572cef1be00dff32efd248109d24 assets/better_progression/models/item/steel_machete.json
 9d2c775ddac25d38ce16b8962b6b8a80ec7c9b02 assets/better_progression/models/item/steel_pickaxe.json
 c76ad7c5c0470f50021acb381074e25bc053efb9 assets/better_progression/models/item/steel_shovel.json
 fd23a21305403ea2aa233e0e2e2427a723a7407a assets/better_progression/models/item/steel_sword.json
 747cdf0dd219ca63215803a7b232f7145dbd54d0 assets/better_progression/models/item/stone_club.json
 51cdc77cc4c2147c439d50b6a82090e2cd08f612 assets/better_progression/models/item/stone_dagger.json
 c9e657cd9c72be8ace230271fef10b81371d0d09 assets/better_progression/models/item/tin_ingot.json
+398df70ea8c9012eabae1bd943e98562eb8d6c41 assets/better_progression/models/item/tin_item_interface.json
 b616267654ce491d0ed8859fbf9c31dce8151c3c assets/better_progression/models/item/wooden_club.json

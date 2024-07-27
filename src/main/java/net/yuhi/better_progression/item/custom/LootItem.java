@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class LootItem<T extends LivingEntity> extends SwordItem {
+public class LootItem<T extends LivingEntity> extends TinedSwordItem {
     private final Class<T> entityClass;
 
     public LootItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties, Class<T> pEntityClass) {
@@ -91,12 +91,5 @@ public class LootItem<T extends LivingEntity> extends SwordItem {
         }
 
         return defaultCount;
-    }
-
-    @Override
-    public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pToolTipComponents, @NotNull TooltipFlag pIsAdvanced) {
-        var components = TinedItem.getTinedDescription(pStack);
-        if (components != null) pToolTipComponents.addAll(components);
-        super.appendHoverText(pStack, pLevel, pToolTipComponents, pIsAdvanced);
     }
 }

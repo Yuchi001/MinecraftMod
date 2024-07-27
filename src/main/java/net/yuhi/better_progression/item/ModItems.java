@@ -27,6 +27,7 @@ public class ModItems {
     
     public static final List<ItemInfo<Item>>  REGISTERED_ITEMS = new ArrayList<>();
 
+    public static final RegistryObject<Item> TIN_ITEM_INTERFACE = ITEMS.register("tin_item_interface", TinnedItemRecipeInterface::new);
     public static final RegistryObject<Item> HILT = ITEMS.register("hilt", () -> new Item(new Item.Properties()));
 
     public static Item getItem(EItemCategory itemCategory, EMaterialType materialType) {
@@ -109,6 +110,7 @@ public class ModItems {
         steelSupplier.createToolItem(EItemCategory.Knife, 2.0f, -1.6F);
         steelSupplier.createBigToolItem(EItemCategory.BattleAxe, 12, -3.4F);
         steelSupplier.createBigToolItem(EItemCategory.LongSword, 7, -3F);
+        steelSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
         steelSupplier.createBasicItem(EItemCategory.Ingot);
 
         var bronzeSupplier = new TierItemsCreator("bronze_ingot", EMaterialType.BRONZE, ModTiers.BRONZE);
@@ -120,6 +122,7 @@ public class ModItems {
         bronzeSupplier.createToolItem(EItemCategory.Knife, 3, -1.2F);
         bronzeSupplier.createBigToolItem(EItemCategory.BattleAxe, 13, -3.4F);
         bronzeSupplier.createBigToolItem(EItemCategory.LongSword, 8, -3F);
+        bronzeSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
         bronzeSupplier.createBasicItem(EItemCategory.Ingot);
         
 

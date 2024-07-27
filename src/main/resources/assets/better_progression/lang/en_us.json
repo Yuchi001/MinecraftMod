@@ -1,4 +1,7 @@
 ﻿{
+  "item.better_progression.hilt": "Hilt",
+  "item.better_progression.tin_item_interface": "Tinned Item",
+
   "item.better_progression.diamond_club": "Diamond Club",
   "item.better_progression.diamond_dagger": "Diamond Dagger",
 
@@ -53,5 +56,6 @@
   "creativetab.better_progression.title": "Better Progression",
 
   "tooltip.better_progression.tined_item.tooltip_general": "This item has <v1> tin layer<v2>",
-  "tooltip.better_progression.tined_item.tooltip_additional": "Durability enhanced by <v1>"
+  "tooltip.better_progression.tined_item.tooltip_additional": "Durability enhanced by <v1>",
+  "tooltip.better_progression.tined_item_interface_tooltip": "Enhances durability of an item"
 }

@@ -17,6 +17,7 @@
     "better_progression:steel_knife",
     "better_progression:steel_battleaxe",
     "better_progression:steel_longsword",
+    "better_progression:steel_machete",
     "better_progression:bronze_axe",
     "better_progression:bronze_pickaxe",
     "better_progression:bronze_sword",
@@ -24,6 +25,7 @@
     "better_progression:bronze_hoe",
     "better_progression:bronze_knife",
     "better_progression:bronze_battleaxe",
-    "better_progression:bronze_longsword"
+    "better_progression:bronze_longsword",
+    "better_progression:bronze_machete"
   ]
 }

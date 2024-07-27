@@ -26,6 +26,12 @@ public class TinedItemRecipe extends ShapelessRecipe {
     public boolean matches(CraftingContainer inv, @NotNull Level world) {
         boolean hasTinnableItem = false;
         boolean hasTinIngot = false;
+        int slotsTaken = 0;
+        for (var i = 0; i < inv.getContainerSize(); i++) {
+            if(!inv.getItem(i).isEmpty()) slotsTaken++;
+        }
+        if (slotsTaken != 2) return false;
+
         var tin_ingot = ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN);
 
         for (int i = 0; i < inv.getContainerSize(); i++) {

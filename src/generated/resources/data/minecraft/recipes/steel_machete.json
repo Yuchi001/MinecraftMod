@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "better_progression:hilt"
+    },
+    "*": {
+      "item": "better_progression:steel_ingot"
+    }
+  },
+  "pattern": [
+    "  *",
+    " * ",
+    "#  "
+  ],
+  "result": {
+    "item": "better_progression:steel_machete"
+  },
+  "show_notification": true
+}

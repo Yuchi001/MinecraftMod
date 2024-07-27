@@ -41,7 +41,6 @@ public class HeavyItemEventHandler {
 
     @SubscribeEvent
     public static void onRenderHand(RenderHandEvent event) {
-        event.getPoseStack().scale(1.5f, 1.5f, 1.5f);
         if (event.getHand() == InteractionHand.OFF_HAND) {
             if (hasHeavyWeapon) event.setCanceled(true);
             return;

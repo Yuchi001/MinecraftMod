@@ -40,6 +40,16 @@ public class ModItems {
     public static List<ItemInfo> getItemInfos(EItemCategory itemCategory) {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory).collect(Collectors.toList());
     }
+    
+    public static List<EItemCategory> getVanillaTools() {
+        return List.of(
+                EItemCategory.Axe,
+                EItemCategory.PickAxe,
+                EItemCategory.Shovel,
+                EItemCategory.Hoe,
+                EItemCategory.Sword
+        );
+    }
 
     public static List<Item> getItems(EMaterialType materialType) {
         return REGISTERED_ITEMS.stream().filter(i -> i.material_type == materialType).map(i -> i.item.get()).collect(Collectors.toList());

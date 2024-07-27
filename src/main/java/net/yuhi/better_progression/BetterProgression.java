@@ -21,6 +21,7 @@ import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.menu.ModMenus;
 import net.yuhi.better_progression.recipe.ModRecipeType;
 import net.yuhi.better_progression.recipe.ModRecipes;
+import net.yuhi.better_progression.recipe.RemoveRecipes;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Mixins;
 
@@ -32,10 +33,15 @@ public class BetterProgression
     public static final String MOD_ID = "better_progression";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
+    
 
     public BetterProgression()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        modEventBus.addListener(this::commonSetup);
+        
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
@@ -44,18 +50,14 @@ public class BetterProgression
         ModRecipes.register(modEventBus);
         ModRecipeType.register(modEventBus);
 
-
         modEventBus.addListener(ModCreativeModTabs::registerCreativeTab);
         
         modEventBus.addListener(ModCreativeModTabs::onBuildContents);
         
-        modEventBus.addListener(this::commonSetup);
-        
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
-        
         MinecraftForge.EVENT_BUS.register(this);
 
         MinecraftForge.EVENT_BUS.register(HeavyItemEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(RemoveRecipes.class);
 
         modEventBus.addListener(this::addCreative);
     }

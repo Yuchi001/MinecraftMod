@@ -1,5 +1,6 @@
 package net.yuhi.better_progression.item.custom;
 
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -7,13 +8,16 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -25,8 +29,10 @@ import net.yuhi.better_progression.entity.ModEntityTypes;
 import net.yuhi.better_progression.item.ModItems;
 
 import javax.annotation.Nullable;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
-public class ThrownDagger extends AbstractArrow {
+public class ThrownDagger extends ItemEntity {
     private static final EntityDataAccessor<Byte> ID_LOYALTY = SynchedEntityData.defineId(ThrownDagger.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ThrownDagger.class, EntityDataSerializers.BOOLEAN);
     private ItemStack daggerItem;
@@ -39,7 +45,7 @@ public class ThrownDagger extends AbstractArrow {
     }
 
     public ThrownDagger(Level pLevel, LivingEntity pShooter, ItemStack pStack, ModItems.EMaterialType pMaterialType) {
-        super(ModEntityTypes.DAGGER.get(), pShooter, pLevel);
+        super(pLevel, pShooter, pStack);
         this.daggerItem = pStack.copy();
         this.materialType = pMaterialType;
         this.daggerItem = new ItemStack(ModItems.getItem(ModItems.EItemCategory.Dagger, pMaterialType));
@@ -104,7 +110,7 @@ public class ThrownDagger extends AbstractArrow {
         }
     }
 
-    protected ItemStack getPickupItem() {
+    public ItemStack getPickupItem() {
         return this.daggerItem.copy();
     }
 

@@ -56,33 +56,13 @@ public class ModTiers {
                     BlockTags.NEEDS_DIAMOND_TOOL,
                     () -> Ingredient.of(Items.DIAMOND));
 
-    public static final ForgeTier NETHERBRONZE =
+    public static final ForgeTier OBSYDIAN = 
             new ForgeTier(
-                    4,
-                    375,
-                    8.0f,
-                    6f,
-                    25,
+                    3,
+                    51,
+                    7,
+                    2.5f,
+                    5,
                     BlockTags.NEEDS_DIAMOND_TOOL,
-                    () -> Ingredient.of(Items.NETHERITE_INGOT));
-
-    public static final ForgeTier NETHERSTEEL =
-            new ForgeTier(
-                    4,
-                    1125,
-                    8.0f,
-                    2f,
-                    20,
-                    BlockTags.NEEDS_DIAMOND_TOOL,
-                    () -> Ingredient.of(Items.NETHERITE_INGOT));
-
-    public static final ForgeTier DIAMONITE =
-            new ForgeTier(
-                    4,
-                    750,
-                    9.5f,
-                    4f,
-                    30,
-                    BlockTags.NEEDS_DIAMOND_TOOL,
-                    () -> Ingredient.of(Items.NETHERITE_INGOT));
+                    () -> Ingredient.of(Items.OBSIDIAN));
 }

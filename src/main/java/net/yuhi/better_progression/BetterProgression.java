@@ -1,8 +1,6 @@
 package net.yuhi.better_progression;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -15,6 +13,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.yuhi.better_progression.block.ModBlockEntities;
 import net.yuhi.better_progression.block.ModBlocks;
+import net.yuhi.better_progression.entity.ModEntityTypes;
 import net.yuhi.better_progression.events.HeavyItemEventHandler;
 import net.yuhi.better_progression.item.ModCreativeModTabs;
 import net.yuhi.better_progression.item.ModItems;
@@ -22,6 +21,7 @@ import net.yuhi.better_progression.menu.ModMenus;
 import net.yuhi.better_progression.recipe.ModRecipeType;
 import net.yuhi.better_progression.recipe.ModRecipes;
 import net.yuhi.better_progression.recipe.RemoveRecipes;
+import net.yuhi.better_progression.renderer.ModEntityRenders;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Mixins;
 
@@ -43,6 +43,7 @@ public class BetterProgression
         
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
 
+        ModEntityTypes.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
@@ -53,12 +54,12 @@ public class BetterProgression
         modEventBus.addListener(ModCreativeModTabs::registerCreativeTab);
         
         modEventBus.addListener(ModCreativeModTabs::onBuildContents);
-        
-        MinecraftForge.EVENT_BUS.register(this);
 
+        MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(HeavyItemEventHandler.class);
         MinecraftForge.EVENT_BUS.register(RemoveRecipes.class);
-
+        MinecraftForge.EVENT_BUS.register(ModEntityRenders.class);
+        
         modEventBus.addListener(this::addCreative);
     }
 

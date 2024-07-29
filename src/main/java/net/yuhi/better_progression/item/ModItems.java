@@ -1,5 +1,6 @@
 package net.yuhi.better_progression.item;
 
+import net.minecraft.core.Registry;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.animal.Animal;
@@ -330,6 +331,23 @@ public class ModItems {
 
         public String GetName() {
             return name;
+        }
+        
+        public static EMaterialType GetMaterialType(ItemStack stack) {
+            return GetMaterialType(stack.getItem());
+        }
+
+        public static EMaterialType GetMaterialType(Item item) {
+            var key = ForgeRegistries.ITEMS.getKey(item);
+            if(key == null) return null;
+            
+            var stringKey = key.toString();
+            var itemKey = stringKey.substring(stringKey.indexOf(":") + 1);
+            var materialName = itemKey.substring(0, itemKey.indexOf("_"));
+            for (var material : EMaterialType.values()) {
+                if (material.GetName().equals(materialName)) return material;
+            }
+            return null;
         }
     }
     

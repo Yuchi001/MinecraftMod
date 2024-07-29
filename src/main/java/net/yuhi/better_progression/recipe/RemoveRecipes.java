@@ -11,7 +11,6 @@ import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.item.ModItems;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 @Mod.EventBusSubscriber(modid = BetterProgression.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class RemoveRecipes {
@@ -37,7 +36,6 @@ public class RemoveRecipes {
                 var recipeName = tool.getFullName(material.GetName());
                 recipesToRemove.add(new ResourceLocation("minecraft", recipeName));
             }
-                
         }
 
         var recipes = recipeManager.getRecipes();

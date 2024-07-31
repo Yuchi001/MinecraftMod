@@ -18,7 +18,6 @@ import net.yuhi.better_progression.events.HeavyItemEventHandler;
 import net.yuhi.better_progression.item.ModCreativeModTabs;
 import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.menu.ModMenus;
-import net.yuhi.better_progression.model_layer.ModModelLayers;
 import net.yuhi.better_progression.recipe.ModRecipeType;
 import net.yuhi.better_progression.recipe.ModRecipes;
 import net.yuhi.better_progression.recipe.RemoveRecipes;
@@ -57,7 +56,6 @@ public class BetterProgression
         modEventBus.addListener(ModCreativeModTabs::onBuildContents);
 
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(ModModelLayers.class);
         MinecraftForge.EVENT_BUS.register(HeavyItemEventHandler.class);
         MinecraftForge.EVENT_BUS.register(RemoveRecipes.class);
         MinecraftForge.EVENT_BUS.register(ModEntityRenders.class);

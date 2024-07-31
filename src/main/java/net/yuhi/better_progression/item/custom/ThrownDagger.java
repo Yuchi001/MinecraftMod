@@ -1,6 +1,5 @@
 package net.yuhi.better_progression.item.custom;
 
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -8,16 +7,13 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -25,47 +21,60 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.yuhi.better_progression.entity.ModEntityTypes;
 import net.yuhi.better_progression.item.ModItems;
 
 import javax.annotation.Nullable;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
+import java.util.Random;
 
-public class ThrownDagger extends ItemEntity {
+public class ThrownDagger extends AbstractArrow {
     private static final EntityDataAccessor<Byte> ID_LOYALTY = SynchedEntityData.defineId(ThrownDagger.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ThrownDagger.class, EntityDataSerializers.BOOLEAN);
-    private ItemStack daggerItem;
+    private static final EntityDataAccessor<ItemStack> ID_DAGGER = SynchedEntityData.defineId(ThrownDagger.class, EntityDataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<Integer> ID_STARTING_ANGLE = SynchedEntityData.defineId(ThrownDagger.class, EntityDataSerializers.INT);
+    
+    private float clientSideRotation = 0;
+    private boolean counterClockwiseBounce = true;
+    public float prevRotationYaw;
+    public float rotationYaw;
     private boolean dealtDamage;
-    public int clientSideReturnTridentTickCount;
+    public int clientSideReturnDaggerTickCount;
     private ModItems.EMaterialType materialType;
+    private ItemStack daggerItem = new ItemStack(ModItems.getItem(ModItems.EItemCategory.Dagger, ModItems.EMaterialType.DIAMOND));
     
     public ThrownDagger(EntityType<? extends ThrownDagger> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
     public ThrownDagger(Level pLevel, LivingEntity pShooter, ItemStack pStack, ModItems.EMaterialType pMaterialType) {
-        super(pLevel, pShooter, pStack);
+        super(ModEntityTypes.DAGGER.get(), pShooter, pLevel);
         this.daggerItem = pStack.copy();
         this.materialType = pMaterialType;
-        this.daggerItem = new ItemStack(ModItems.getItem(ModItems.EItemCategory.Dagger, pMaterialType));
         this.entityData.set(ID_LOYALTY, (byte) EnchantmentHelper.getLoyalty(pStack));
         this.entityData.set(ID_FOIL, pStack.hasFoil());
+        this.entityData.set(ID_DAGGER, pStack.copy());
+        this.entityData.set(ID_STARTING_ANGLE, new Random(0).nextInt(100 - 1));
     }
     
     public ModItems.EMaterialType getMaterialType() {
         return materialType;
     }
 
+    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(ID_LOYALTY, (byte)0);
         this.entityData.define(ID_FOIL, false);
+        this.entityData.define(ID_DAGGER, ItemStack.EMPTY);
+        this.entityData.define(ID_STARTING_ANGLE, new Random(0).nextInt(100 - 1));
     }
 
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void tick() {
         if (this.inGroundTime > 4) {
             this.dealtDamage = true;
@@ -90,13 +99,22 @@ public class ThrownDagger extends ItemEntity {
 
                 double d0 = 0.05D * (double)i;
                 this.setDeltaMovement(this.getDeltaMovement().scale(0.95D).add(vec3.normalize().scale(d0)));
-                if (this.clientSideReturnTridentTickCount == 0) {
+                if (this.clientSideReturnDaggerTickCount == 0) {
                     this.playSound(SoundEvents.TRIDENT_RETURN, 10.0F, 1.0F);
                 }
 
-                ++this.clientSideReturnTridentTickCount;
+                ++this.clientSideReturnDaggerTickCount;
             }
         }
+
+        if (!this.inGround) {
+            this.rotationYaw += 50.0F;
+            if (this.rotationYaw >= 360.0F) {
+                this.rotationYaw -= 360.0F;
+            }
+        }
+
+        this.prevRotationYaw = this.rotationYaw;
 
         super.tick();
     }
@@ -110,8 +128,17 @@ public class ThrownDagger extends ItemEntity {
         }
     }
 
+    @Override
     public ItemStack getPickupItem() {
         return this.daggerItem.copy();
+    }
+    
+    public ItemStack getDagger() {
+        return this.entityData.get(ID_DAGGER);
+    }
+    
+    public int getStartingAngle() {
+        return this.entityData.get(ID_STARTING_ANGLE);
     }
 
     public boolean isFoil() {
@@ -122,6 +149,7 @@ public class ThrownDagger extends ItemEntity {
      * Gets the EntityHitResult representing the entity hit
      */
     @Nullable
+    @Override
     protected EntityHitResult findHitEntity(Vec3 pStartVec, Vec3 pEndVec) {
         return this.dealtDamage ? null : super.findHitEntity(pStartVec, pEndVec);
     }
@@ -129,13 +157,16 @@ public class ThrownDagger extends ItemEntity {
     /**
      * Called when the arrow hits an entity
      */
+    @Override
     protected void onHitEntity(EntityHitResult pResult) {
+        counterClockwiseBounce = !counterClockwiseBounce;
+        
         Entity entity = pResult.getEntity();
         float f = 8.0F;
         if (entity instanceof LivingEntity livingentity) {
             f += EnchantmentHelper.getDamageBonus(this.daggerItem, livingentity.getMobType());
         }
-
+        
         Entity entity1 = this.getOwner();
         DamageSource damagesource = this.damageSources().trident(this, (Entity)(entity1 == null ? this : entity1));
         this.dealtDamage = true;
@@ -179,6 +210,7 @@ public class ThrownDagger extends ItemEntity {
         return EnchantmentHelper.hasChanneling(this.daggerItem);
     }
 
+    @Override
     protected boolean tryPickup(Player pPlayer) {
         return super.tryPickup(pPlayer) || this.isNoPhysics() && this.ownedBy(pPlayer) && pPlayer.getInventory().add(this.getPickupItem());
     }
@@ -186,6 +218,7 @@ public class ThrownDagger extends ItemEntity {
     /**
      * The sound made when an entity is hit by this projectile
      */
+    @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {
         return SoundEvents.TRIDENT_HIT_GROUND;
     }
@@ -193,32 +226,36 @@ public class ThrownDagger extends ItemEntity {
     /**
      * Called by a player entity when they collide with an entity
      */
+    @Override
     public void playerTouch(Player pEntity) {
         if (this.ownedBy(pEntity) || this.getOwner() == null) {
             super.playerTouch(pEntity);
         }
-
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
-        if (pCompound.contains("Dagger", 10)) {
-            this.daggerItem = ItemStack.of(pCompound.getCompound("Dagger"));
-        }
-
         this.dealtDamage = pCompound.getBoolean("DealtDamage");
         this.entityData.set(ID_LOYALTY, (byte)EnchantmentHelper.getLoyalty(this.daggerItem));
+        if (pCompound.contains("DaggerItem", 10)) {
+            this.daggerItem = ItemStack.of(pCompound.getCompound("DaggerItem"));
+        }
     }
 
+    @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
-        pCompound.put("Dagger", this.daggerItem.save(new CompoundTag()));
         pCompound.putBoolean("DealtDamage", this.dealtDamage);
+        if (!this.daggerItem.isEmpty()) {
+            pCompound.put("DaggerItem", this.daggerItem.save(new CompoundTag()));
+        }
     }
 
+    @Override
     public void tickDespawn() {
         int i = this.entityData.get(ID_LOYALTY);
         if (this.pickup != AbstractArrow.Pickup.ALLOWED || i <= 0) {
@@ -227,11 +264,21 @@ public class ThrownDagger extends ItemEntity {
 
     }
 
+    @Override
     protected float getWaterInertia() {
         return 0.99F;
     }
 
+    @Override
     public boolean shouldRender(double pX, double pY, double pZ) {
         return true;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public float getRotationAnimation(float partialTicks) {
+        if(!this.inGround) {
+            clientSideRotation = (this.counterClockwiseBounce? 1:-1)*(this.tickCount + partialTicks)*50F;
+        }
+        return this.clientSideRotation;
     }
 }

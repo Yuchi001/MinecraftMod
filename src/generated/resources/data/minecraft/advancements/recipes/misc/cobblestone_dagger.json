@@ -1,13 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_air": {
+    "cobblestone": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:air"
-            ]
+            "tag": "forge:cobblestone"
           }
         ]
       },
@@ -22,7 +20,7 @@
   },
   "requirements": [
     [
-      "has_air",
+      "cobblestone",
       "has_the_recipe"
     ]
   ],

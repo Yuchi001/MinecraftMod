@@ -5,6 +5,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.common.Mod;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.ModBlocks;
 import org.jetbrains.annotations.Nullable;
@@ -29,6 +30,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 ModBlocks.TIN_BLOCK.get(),
                 ModBlocks.RAW_TIN_BLOCK.get(),
                 ModBlocks.TIN_ORE.get(),
+                ModBlocks.PINK_QUARTZ_ORE.get(),
                 ModBlocks.STANNIN_ORE.get()
                 );
     }

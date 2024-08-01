@@ -29,6 +29,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         
         this.dropSelf(ModBlocks.STANNIN_ORE.get());
         
+        this.add(ModBlocks.PINK_QUARTZ_ORE.get(),
+                block -> createOreDrops(ModBlocks.PINK_QUARTZ_ORE.get(), ModItems.PINK_QUARTZ.get(), 1, 1));
+        
         this.add(ModBlocks.TIN_ORE.get(),
                 block -> createOreDrops(ModBlocks.TIN_ORE.get(), ModItems.getItem(ModItems.EItemCategory.RawMaterial, ModItems.EMaterialType.TIN), 1, 3));
     }

@@ -5,7 +5,9 @@
     "#": {
       "tag": "forge:rods/wooden"
     },
-    "*": []
+    "*": {
+      "tag": "forge:cobblestone"
+    }
   },
   "pattern": [
     "   ",

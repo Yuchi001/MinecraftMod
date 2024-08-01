@@ -51,6 +51,14 @@ public class ModBlocks {
                             .strength(3.0F, 3.0F), 
                     UniformInt.of(0, 2)),
                     EBlockType.Simple);
+
+    public static final RegistryObject<Block> PINK_QUARTZ_ORE = registerBlock("pink_quartz_ore",
+            () -> new DropExperienceBlock(
+                    BlockBehaviour.Properties.copy(Blocks.STONE)
+                            .requiresCorrectToolForDrops()
+                            .strength(3.0F, 3.0F),
+                    UniformInt.of(0, 2)),
+            EBlockType.Simple);
     
     public static final RegistryObject<Block> STANNIN_ORE = registerBlock("stannin_ore",
             () -> new StanninOreBlock(UniformInt.of(0, 2)), EBlockType.Simple);

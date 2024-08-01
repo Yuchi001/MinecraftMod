@@ -5,6 +5,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.inventory.GrindstoneMenu;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -30,6 +31,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> TIN_ITEM_INTERFACE = ITEMS.register("tin_item_interface", TinnedItemRecipeInterface::new);
     public static final RegistryObject<Item> HILT = ITEMS.register("hilt", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PINK_QUARTZ = ITEMS.register("pink_quartz", () -> new Item(new Item.Properties()));
 
     public static Item getItem(EItemCategory itemCategory, EMaterialType materialType) {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && i.material_type == materialType).findFirst().get().item.get();
@@ -90,7 +92,7 @@ public class ModItems {
         var diamondSupplier = new TierItemsCreator("diamond", EMaterialType.DIAMOND, ModTiers.BETTER_DIAMOND, true);
         diamondSupplier.createSimpleToolItem(EItemCategory.Club, 5.0F, -2.8F);
         diamondSupplier.createSimpleToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
-        
+
         var copperSupplier = new TierItemsCreator("copper_ingot", EMaterialType.COPPER, ModTiers.COPPER, true);
         copperSupplier.createToolItem(EItemCategory.Axe, 5.5F, -3.2F);
         copperSupplier.createToolItem(EItemCategory.PickAxe, 1, -2.8f);
@@ -126,7 +128,6 @@ public class ModItems {
         bronzeSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
         bronzeSupplier.createBasicItem(EItemCategory.Ingot);
         
-
         var tinSupplier = new TierItemsCreator(EMaterialType.TIN);
         tinSupplier.createBasicItem(EItemCategory.Ingot);
         tinSupplier.createBasicItem(EItemCategory.RawMaterial);

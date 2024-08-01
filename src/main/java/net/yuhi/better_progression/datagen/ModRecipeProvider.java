@@ -12,6 +12,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.item.ModItems;
 
 import java.util.List;
@@ -225,23 +226,15 @@ public class ModRecipeProvider extends RecipeProvider {
     }
     private void DaggerRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         for (var dagger : ModItems.getItemInfos(ModItems.EItemCategory.Dagger)) {
-            var mod_id = dagger.has_default_basis ? "minecraft" : dagger.mod_id;
-            var registryKey = new ResourceLocation(mod_id, dagger.basis);
-
-            var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
-            if (basisItem == null) continue;
-
-            var tier_name = dagger.basis;
-            if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
-            var recipeId = tier_name + "_" + dagger.category.getName().toLowerCase();
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item) dagger.item.get())
+            var builder = ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item) dagger.item.get())
                     .pattern("   ")
                     .pattern(" * ")
                     .pattern(" # ")
-                    .define('#', Tags.Items.RODS_WOODEN)
-                    .define('*', basisItem)
-                    .unlockedBy(getHasName(basisItem), has(basisItem))
-                    .save(pWriter, recipeId);
+                    .define('#', Tags.Items.RODS_WOODEN);
+            var recipeId = dagger.tag == null ? defineBasisItemSchema(dagger, builder) : defineBasisTagSchema(dagger, builder);
+            if(recipeId.isEmpty()) continue;
+
+            builder.save(pWriter, recipeId);
         }
     }
     private void ClubRecipeCreator(Consumer<FinishedRecipe> pWriter) {
@@ -255,10 +248,13 @@ public class ModRecipeProvider extends RecipeProvider {
             if(recipeId.isEmpty()) continue;
 
             builder.save(pWriter, recipeId);
-         }
+        }
     }
     private void SmeltingRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         oreGeneric(pWriter, List.of(ModItems.getItem(ModItems.EItemCategory.RawMaterial, ModItems.EMaterialType.TIN)), RecipeCategory.MISC, ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN), 0.7f, 200, "better_progression");
+        oreGeneric(pWriter, List.of(ModBlocks.TIN_ORE.get()), RecipeCategory.MISC, ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN), 0.7f, 200, "better_progression");
+        oreGeneric(pWriter, List.of(ModBlocks.STANNIN_ORE.get()), RecipeCategory.MISC, ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN), 0.7f, 200, "better_progression");
+        oreGeneric(pWriter, List.of(ModBlocks.PINK_QUARTZ_ORE.get()), RecipeCategory.MISC, ModItems.PINK_QUARTZ.get(), 0.7f, 200, "better_progression");
     }
 
 

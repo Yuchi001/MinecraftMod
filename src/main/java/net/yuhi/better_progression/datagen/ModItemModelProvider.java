@@ -25,6 +25,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         simpleItem(ModItems.HILT);
+        simpleItem(ModItems.PINK_QUARTZ);
         simpleItem(ModItems.TIN_ITEM_INTERFACE);
         
         for (var item : ModItems.REGISTERED_ITEMS) {

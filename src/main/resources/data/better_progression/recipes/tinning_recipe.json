@@ -1,16 +1,12 @@
 {
   "type": "better_progression:tinning",
-  "group": "",
-  "ingredients": [
-    {
-      "tag": "better_progression:tinnable"
-    },
-    {
-      "item": "better_progression:tin_ingot"
-    }
-  ],
+  "addition": {
+    "item": "better_progression:tin_ingot"
+  },
+  "base": {
+    "tag": "better_progression:tinnable"
+  },
   "result": {
-    "item": "better_progression:tin_item_interface",
-    "count": 1
+    "item": "better_progression:tin_item_interface"
   }
 }

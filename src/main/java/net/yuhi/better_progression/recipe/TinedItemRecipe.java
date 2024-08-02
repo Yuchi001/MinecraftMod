@@ -5,108 +5,87 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapelessRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.item.custom.TinedItem;
 import net.yuhi.better_progression.tag.ModTags;
 import org.jetbrains.annotations.NotNull;
+import org.spongepowered.asm.mixin.Shadow;
 
-public class TinedItemRecipe extends ShapelessRecipe {
-    public TinedItemRecipe(ResourceLocation id, String group, ItemStack result, NonNullList<Ingredient> ingredients) {
-        super(id, group, CraftingBookCategory.EQUIPMENT, result, ingredients);
+@SuppressWarnings("removal")
+public class TinedItemRecipe extends LegacyUpgradeRecipe {
+    final Ingredient base;
+    final Ingredient addition;
+
+
+    public TinedItemRecipe(ResourceLocation pId, Ingredient pBase, Ingredient pAddition, ItemStack pResult) {
+        super(pId, pBase, pAddition, pResult);
+        addition = pAddition;
+        base = pBase;
+    }
+
+
+    @Override
+    public @NotNull NonNullList<Ingredient> getIngredients() {
+        return NonNullList.of(Ingredient.EMPTY, base, addition);
     }
 
     @Override
-    public boolean matches(CraftingContainer inv, @NotNull Level world) {
-        boolean hasTinnableItem = false;
-        boolean hasTinIngot = false;
-        int slotsTaken = 0;
-        for (var i = 0; i < inv.getContainerSize(); i++) {
-            if(!inv.getItem(i).isEmpty()) slotsTaken++;
-        }
-        if (slotsTaken != 2) return false;
-
-        var tin_ingot = ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN);
-
-        for (int i = 0; i < inv.getContainerSize(); i++) {
-            ItemStack itemStack = inv.getItem(i);
-            if (!itemStack.isEmpty()) {
-                if (itemStack.is(ModTags.Items.TINNABLE_TAG)) {
-                    hasTinnableItem = true;
-                } else if (itemStack.getItem() == tin_ingot) {
-                    hasTinIngot = true;
-                }
-            }
-        }
-        return hasTinnableItem && hasTinIngot;
+    public boolean matches(Container inv, @NotNull Level world) {
+        return addition.test(inv.getItem(1)) && inv.getItem(0).getTags().anyMatch(t -> t == ModTags.Items.TINNABLE_TAG);
     }
 
     @Override
-    public @NotNull ItemStack assemble(CraftingContainer inv, @NotNull RegistryAccess pRegistryAccess) {
-        ItemStack item = ItemStack.EMPTY;
-        int tinCount = 0;
+    public @NotNull ItemStack assemble(Container inv, @NotNull RegistryAccess pRegistryAccess) {
         var tin_ingot = ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN);
+        ItemStack item = inv.getItem(0);
+        int tinCount = inv.countItem(tin_ingot);
 
-        for (int i = 0; i < inv.getContainerSize(); i++) {
-            ItemStack itemStack = inv.getItem(i);
-            if (!itemStack.isEmpty()) {
-                if (itemStack.is(ModTags.Items.TINNABLE_TAG)) {
-                    item = itemStack.copy();
-                } else if (itemStack.getItem() == tin_ingot) {
-                    tinCount += itemStack.getCount();
-                }
-            }
-        }
-
-        if (!item.isEmpty()) {
-            TinedItem.addTinCount(item, tinCount);
-        }
+        TinedItem.addTinCount(item, tinCount);
 
         return item;
     }
 
     @Override
-    public NonNullList<ItemStack> getRemainingItems(CraftingContainer pContainer) {
+    public @NotNull NonNullList<ItemStack> getRemainingItems(Container pContainer) {
         var tin_ingot = ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN);
         for (var i = 0; i < pContainer.getContainerSize(); i++) {
-            if(!pContainer.getItem(i).is(tin_ingot)) continue;;
+            if(!pContainer.getItem(i).is(tin_ingot)) continue;
             pContainer.removeItem(i, pContainer.countItem(tin_ingot));
         }
         return NonNullList.withSize(pContainer.getContainerSize(), ItemStack.EMPTY);
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return width * height >= 2;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
+    public @NotNull RecipeSerializer<?> getSerializer() {
         return ModRecipes.TINED_ITEM_RECIPE_SERIALIZER;
     }
 
     public static class TinnedItemRecipeSerializer implements RecipeSerializer<TinedItemRecipe> {
         @Override
-        public TinedItemRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-            ShapelessRecipe recipe = RecipeSerializer.SHAPELESS_RECIPE.fromJson(recipeId, json);
-            return new TinedItemRecipe(recipe.getId(), recipe.getGroup(), recipe.getResultItem(RegistryAccess.EMPTY), recipe.getIngredients());
+        public TinedItemRecipe fromJson(ResourceLocation pRecipeId, JsonObject json) {
+            Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "base"));
+            Ingredient ingredient1 = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "addition"));
+            ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
+            return new TinedItemRecipe(pRecipeId, ingredient, ingredient1, result);
         }
 
         @Override
         public TinedItemRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-            ShapelessRecipe recipe = RecipeSerializer.SHAPELESS_RECIPE.fromNetwork(recipeId, buffer);
-            return new TinedItemRecipe(recipe.getId(), recipe.getGroup(), recipe.getResultItem(RegistryAccess.EMPTY), recipe.getIngredients());
+            Ingredient ingredient = Ingredient.fromNetwork(buffer);
+            Ingredient ingredient1 = Ingredient.fromNetwork(buffer);
+            ItemStack result = buffer.readItem();
+            return new TinedItemRecipe(recipeId, ingredient, ingredient1, result);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, TinedItemRecipe recipe) {
-            RecipeSerializer.SHAPELESS_RECIPE.toNetwork(buffer, recipe);
+            RecipeSerializer.SMITHING.toNetwork(buffer, recipe);
         }
     }
 }

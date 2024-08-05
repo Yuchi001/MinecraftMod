@@ -339,8 +339,23 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
             pInventory.set(SLOT_FUEL, new ItemStack(Items.WATER_BUCKET));
         }
 
-        notEmptyInputItemStack.shrink(1);
-        if (hasTwoSlotsTaken && pRecipe.isSpecial()) secondInputItemStack.shrink(1);
+        if (!pRecipe.isSpecial()) {
+            notEmptyInputItemStack.shrink(1);
+            return true;
+        }
+
+        var ingredients = ((Recipe<WorldlyContainer>) pRecipe).getIngredients();
+        var firstIngredient = ingredients.get(0);
+        var secondIngredient = ingredients.get(1);
+
+        notEmptyInputItemStack.shrink(firstIngredient.test(notEmptyInputItemStack) ?
+                firstIngredient.getItems()[0].getCount() :
+                secondIngredient.getItems()[0].getCount());
+
+        secondInputItemStack.shrink(firstIngredient.test(secondInputItemStack) ?
+                firstIngredient.getItems()[0].getCount() :
+                secondIngredient.getItems()[0].getCount());
+
         return true;
     }
 

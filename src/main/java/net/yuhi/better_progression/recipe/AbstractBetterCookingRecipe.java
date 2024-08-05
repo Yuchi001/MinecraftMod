@@ -26,23 +26,28 @@ public abstract class AbstractBetterCookingRecipe extends AbstractCookingRecipe 
         var ingredientFirstItemMatch = false;
         var secondIngredientFirstItemMatch = false;
         if (!firstSlotEmpty) {
-            ingredientFirstItemMatch = this.ingredient.test(pInv.getItem(0));
-            secondIngredientFirstItemMatch = this.secondIngredient.test(pInv.getItem(0));
+            ingredientFirstItemMatch = this.ingredient.test(pInv.getItem(0))
+                    && pInv.getItem(0).getCount() >= this.ingredient.getItems()[0].getCount();
+            secondIngredientFirstItemMatch = this.secondIngredient.test(pInv.getItem(0))
+                    && pInv.getItem(0).getCount() >= this.secondIngredient.getItems()[0].getCount();
         }
 
         var ingredientSecondItemMatch = false;
         var secondIngredientSecondItemMatch = false;
         if (!secondSlotEmpty) {
-            ingredientSecondItemMatch = this.ingredient.test(pInv.getItem(1));
-            secondIngredientSecondItemMatch = this.secondIngredient.test(pInv.getItem(1));
+            ingredientSecondItemMatch = this.ingredient.test(pInv.getItem(1))
+                    && pInv.getItem(1).getCount() >= this.ingredient.getItems()[0].getCount();
+            secondIngredientSecondItemMatch = this.secondIngredient.test(pInv.getItem(1))
+                    && pInv.getItem(1).getCount() >= this.secondIngredient.getItems()[0].getCount();
         }
 
         var isTheSameItem = pInv.getItem(0).sameItem(pInv.getItem(1));
         var hasEmptySlot = firstSlotEmpty || secondSlotEmpty;
 
-        return this.isSpecial() ?
-                (ingredientFirstItemMatch && secondIngredientSecondItemMatch) || (ingredientSecondItemMatch && secondIngredientFirstItemMatch)
-                : (ingredientFirstItemMatch || ingredientSecondItemMatch || secondIngredientFirstItemMatch || secondIngredientSecondItemMatch) && (isTheSameItem || hasEmptySlot);
+        var defaultMatch = (ingredientFirstItemMatch || ingredientSecondItemMatch || secondIngredientFirstItemMatch || secondIngredientSecondItemMatch) && (isTheSameItem || hasEmptySlot);
+        var specialMatch = (ingredientFirstItemMatch && secondIngredientSecondItemMatch) || (ingredientSecondItemMatch && secondIngredientFirstItemMatch);
+
+        return this.isSpecial() ? specialMatch : defaultMatch;
     }
 
     @Override

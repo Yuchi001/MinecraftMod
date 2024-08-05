@@ -1,26 +1,18 @@
 package net.yuhi.better_progression.events;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.client.event.RenderItemInFrameEvent;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.item.ModItems;
-import net.yuhi.better_progression.item.custom.TinedItem;
+import net.yuhi.better_progression.item.custom.LayerableItem;
 import net.yuhi.better_progression.item.custom.TwoHandedItem;
-
-import java.util.Arrays;
 
 @Mod.EventBusSubscriber(modid = BetterProgression.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class HeavyItemEventHandler {
@@ -53,9 +45,9 @@ public class HeavyItemEventHandler {
         LivingEntity entity = event.getEntity();
         ItemStack heldItem = entity.getMainHandItem();
 
-        if (heldItem.getItem() instanceof TinedItem) {
-            TinedItem.addTinCount(heldItem, -1);
-            if (TinedItem.getTinCount(heldItem) <= 0) return;
+        if (heldItem.getItem() instanceof LayerableItem) {
+            LayerableItem.addTinCount(heldItem, -1);
+            if (LayerableItem.getTinCount(heldItem) <= 0) return;
             event.setCanceled(true);
         }
     }

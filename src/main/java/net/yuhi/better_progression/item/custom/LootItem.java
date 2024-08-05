@@ -1,16 +1,11 @@
 package net.yuhi.better_progression.item.custom;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.EnchantmentTableBlock;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -18,12 +13,10 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.yuhi.better_progression.item.ELootItemDropProps;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class LootItem<T extends LivingEntity> extends TinedSwordItem {
+public class LootItem<T extends LivingEntity> extends LayerableSwordItem {
     private final Class<T> entityClass;
 
     public LootItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties, Class<T> pEntityClass) {

@@ -18,7 +18,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
@@ -27,7 +26,7 @@ import net.minecraft.world.phys.Vec3;
 import net.yuhi.better_progression.item.ModItems;
 
 
-public class DaggerItem extends SwordItem implements TinedItem, Vanishable {
+public class DaggerItem extends SwordItem implements LayerableItem, Vanishable {
     public static final int THROW_THRESHOLD_TIME = 10;
     public static final float BASE_DAMAGE = 8.0F;
     public static final float SHOOT_POWER = 2.5F;

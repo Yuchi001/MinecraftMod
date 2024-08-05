@@ -11,14 +11,14 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class TinedShovelItem extends ShovelItem implements TinedItem {
-    public TinedShovelItem(Tier pTier, float pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
+public class LayerableShovelItem extends ShovelItem implements LayerableItem {
+    public LayerableShovelItem(Tier pTier, float pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
         super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
     }
 
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pToolTipComponents, @NotNull TooltipFlag pIsAdvanced) {
-        var components = TinedItem.getTinedDescription(pStack);
+        var components = LayerableItem.getLayeredDescription(pStack);
         if (components != null) pToolTipComponents.addAll(components);
         super.appendHoverText(pStack, pLevel, pToolTipComponents, pIsAdvanced);
     }

@@ -5,8 +5,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.block.ModBlocks;
 
 public class ModCreativeModTabs {
     public static CreativeModeTab BETTER_PROGRESSION_TAB;
@@ -14,7 +14,7 @@ public class ModCreativeModTabs {
     @SubscribeEvent
     public static void registerCreativeTab(CreativeModeTabEvent.Register event) {
         BETTER_PROGRESSION_TAB = event.registerCreativeModeTab(new ResourceLocation(BetterProgression.MOD_ID, "my_tab"),
-                builder -> builder.icon(() -> new ItemStack(Items.DIAMOND))
+                builder -> builder.icon(() -> new ItemStack(ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN)))
                         .title(Component.translatable("creativetab.better_progression.title"))
                         .build());
     }
@@ -23,7 +23,10 @@ public class ModCreativeModTabs {
     public static void onBuildContents(CreativeModeTabEvent.BuildContents event)  {
         if (event.getTab() != BETTER_PROGRESSION_TAB) return;
 
-        for (RegistryObject<Item> item : ModItems.ITEMS.getEntries())
-            event.accept(item.get().getDefaultInstance());
+        for (var item : ModItems.REGISTERED_ITEMS)
+            event.accept(item.item.get().getDefaultInstance());
+
+        for (var block : ModBlocks.BLOCKS_DATA)
+            if (block.blockType != ModBlocks.EBlockType.Vanilla) event.accept(block.block.get().asItem().getDefaultInstance());
     }
 }

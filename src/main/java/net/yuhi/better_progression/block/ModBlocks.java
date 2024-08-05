@@ -65,7 +65,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> BETTER_BLAST_FURNACE = registerVanillaBlock("blast_furnace",
             () -> new BetterBlastFurnaceBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(litBlockEmission(13))),
-            EBlockType.Simple);
+            EBlockType.Vanilla);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, EBlockType blockType) {
         RegistryObject<T> blockObj = BLOCKS.register(name, block);
@@ -104,6 +104,7 @@ public class ModBlocks {
     }
     
     public enum EBlockType {
-        Simple
+        Simple,
+        Vanilla
     }
 }

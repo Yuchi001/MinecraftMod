@@ -43,7 +43,7 @@
   "item.better_progression.steel_hoe": "Steel Hoe",
   "item.better_progression.steel_knife": "Steel Knife",
   "item.better_progression.steel_machete": "Steel Machete",
-  "item.better_progression.steel_longsword": "SteelLongsword",
+  "item.better_progression.steel_longsword": "Steel Longsword",
   "item.better_progression.steel_battleaxe": "Steel Battleaxe",
 
   "item.better_progression.bronze_ingot": "Bronze Ingot",
@@ -55,12 +55,15 @@
   "item.better_progression.bronze_hoe": "Bronze Hoe",
   "item.better_progression.bronze_knife": "Bronze Knife",
   "item.better_progression.bronze_machete": "Bronze Machete",
-  "item.better_progression.bronze_longsword": "BronzeLongsword",
+  "item.better_progression.bronze_longsword": "Bronze Longsword",
   "item.better_progression.bronze_battleaxe": "Bronze Battleaxe",
 
   "creativetab.better_progression.title": "Better Progression",
 
   "tooltip.better_progression.tined_item.tooltip_general": "This item has <v1> tin layer<v2>",
   "tooltip.better_progression.tined_item.tooltip_additional": "Durability enhanced by <v1>",
-  "tooltip.better_progression.tined_item_interface_tooltip": "Enhances durability of an item"
+  "tooltip.better_progression.tined_item_interface_tooltip": "Enhances durability of an item",
+
+  "tooltip.better_progression.golded_item.tooltip_general": "This item has <v1> gold layer<v2>",
+  "tooltip.better_progression.golded_item.tooltip_additional": "Additional enchanting value: <v1>"
 }

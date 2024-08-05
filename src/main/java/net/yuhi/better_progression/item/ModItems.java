@@ -1,11 +1,9 @@
 package net.yuhi.better_progression.item;
 
-import net.minecraft.core.Registry;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.inventory.GrindstoneMenu;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -30,8 +28,9 @@ public class ModItems {
     public static final List<ItemInfo<Item>>  REGISTERED_ITEMS = new ArrayList<>();
 
     public static final RegistryObject<Item> TIN_ITEM_INTERFACE = ITEMS.register("tin_item_interface", TinnedItemRecipeInterface::new);
-    public static final RegistryObject<Item> HILT = ITEMS.register("hilt", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> PINK_QUARTZ = ITEMS.register("pink_quartz", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HILT = register("hilt", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PURE_DIAMOND = register("pure_diamond", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PINK_QUARTZ = register("pink_quartz", () -> new Item(new Item.Properties()));
 
     public static Item getItem(EItemCategory itemCategory, EMaterialType materialType) {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && i.material_type == materialType).findFirst().get().item.get();
@@ -43,6 +42,13 @@ public class ModItems {
 
     public static List<ItemInfo> getItemInfos(EItemCategory itemCategory) {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory).collect(Collectors.toList());
+    }
+    
+    private static RegistryObject<Item> register(String name, Supplier<Item> item) {
+        var toReturn = ITEMS.register(name, item);
+        var itemInfo = new ItemInfo<>(toReturn);
+        REGISTERED_ITEMS.add(itemInfo);
+        return itemInfo.item;
     }
     
     public static List<EItemCategory> getVanillaTools() {
@@ -59,7 +65,7 @@ public class ModItems {
         return REGISTERED_ITEMS.stream().filter(i -> i.material_type == materialType).map(i -> i.item.get()).collect(Collectors.toList());
     }
 
-    public static List<Item> getTinnableTools() {
+    public static List<Item> getLayerableTools() {
         var toolCategoryList = new ArrayList<>(List.of(
                 EItemCategory.Hoe,
                 EItemCategory.Sword,
@@ -190,11 +196,11 @@ public class ModItems {
 
         public void createToolItem(EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
             Supplier<Item> itemSupplier = () -> switch (itemCategory) {
-                case Axe -> new TinedAxeItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-                case Sword -> new TinedSwordItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                case PickAxe -> new TinedPickaxeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                case Hoe -> new TinedHoeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                case Shovel -> new TinedShovelItem(tier, damageMod, attackSpeedMod, new Item.Properties());
+                case Axe -> new LayerableAxeItem(tier, damageMod, attackSpeedMod, new Item.Properties());
+                case Sword -> new LayerableSwordItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+                case PickAxe -> new LayerablePickaxeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+                case Hoe -> new LayerableHoeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+                case Shovel -> new LayerableShovelItem(tier, damageMod, attackSpeedMod, new Item.Properties());
                 case Knife -> new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Animal.class);
                 case Dagger -> new DaggerItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
                 case Machete -> new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Monster.class);
@@ -355,6 +361,6 @@ public class ModItems {
     public enum EItemType {
         Simple,
         HandHeld,
-        HandHeldBig,
+        HandHeldBig
     }
 }

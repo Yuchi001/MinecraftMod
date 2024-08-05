@@ -303,6 +303,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('t', ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN))
                 .unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER))
                 .save(pWriter, "hilt");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PURE_DIAMOND.get())
+                .pattern("***")
+                .pattern("*d*")
+                .pattern("***")
+                .define('*', Items.LAPIS_LAZULI)
+                .define('d', Items.DIAMOND)
+                .unlockedBy(getHasName(Items.DIAMOND), has(Items.DIAMOND))
+                .save(pWriter, "pure_diamond");
         
         PickAxeRecipeCreator(pWriter);
         AxeRecipeCreator(pWriter);

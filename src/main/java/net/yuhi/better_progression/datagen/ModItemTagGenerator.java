@@ -19,8 +19,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        for (var tool : ModItems.getTinnableTools()) {
-            tag(ModTags.Items.TINNABLE_TAG).add(tool);
+        for (var tool : ModItems.getLayerableTools()) {
+            tag(ModTags.Items.LAYERABLE_TAG).add(tool);
         }
     }
 }

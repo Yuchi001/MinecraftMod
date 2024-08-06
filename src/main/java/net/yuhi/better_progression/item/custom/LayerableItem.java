@@ -4,12 +4,15 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.world.inventory.SmithingMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.yuhi.better_progression.item.ModItems;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public interface LayerableItem {
     public static final String TIN_COUNT_KEY = "TinCount";
@@ -104,5 +107,12 @@ public interface LayerableItem {
         components.addAll(goldComponents);
         
         return components;
+    }
+    
+    public static List<Item> getLayerItems(){
+        return List.of(
+                ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN),
+                Items.GOLD_INGOT
+        );
     }
 }

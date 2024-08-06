@@ -5,11 +5,11 @@
   "experience": 1.4,
   "group": "steel_ingot",
   "ingredient": {
-    "item": "minecraft:raw_iron",
-    "count": 9
+    "item": "minecraft:raw_iron"
   },
   "secondIngredient": {
     "item": "minecraft:coal"
   },
-  "result": "better_progression:steel_ingot"
+  "result": "better_progression:steel_ingot",
+  "ingredientcount": 9
 }

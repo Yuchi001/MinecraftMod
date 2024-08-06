@@ -328,8 +328,10 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
 
         var notEmptyInputItemStack = pInventory.get(SLOT_INPUT_1).isEmpty() ? pInventory.get(SLOT_INPUT_2) : pInventory.get(SLOT_INPUT_1);
         var secondInputItemStack = pInventory.get(SLOT_INPUT_2);
+        
+        var cookingRecipe = (AbstractBetterCookingRecipe) pRecipe;
 
-        var itemstack1 = ((Recipe<WorldlyContainer>) pRecipe).assemble(this, pRegistryAccess);
+        var itemstack1 = cookingRecipe.assemble(this, pRegistryAccess);
         var resultItemStack = pInventory.get(SLOT_RESULT);
 
         if (resultItemStack.isEmpty()) pInventory.set(SLOT_RESULT, itemstack1.copy());
@@ -344,17 +346,16 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
             return true;
         }
 
-        var ingredients = ((Recipe<WorldlyContainer>) pRecipe).getIngredients();
+        var ingredients = cookingRecipe.getIngredients();
         var firstIngredient = ingredients.get(0);
-        var secondIngredient = ingredients.get(1);
 
         notEmptyInputItemStack.shrink(firstIngredient.test(notEmptyInputItemStack) ?
-                firstIngredient.getItems()[0].getCount() :
-                secondIngredient.getItems()[0].getCount());
+                cookingRecipe.getIngredientCount(0) :
+                cookingRecipe.getIngredientCount(1));
 
         secondInputItemStack.shrink(firstIngredient.test(secondInputItemStack) ?
-                firstIngredient.getItems()[0].getCount() :
-                secondIngredient.getItems()[0].getCount());
+                cookingRecipe.getIngredientCount(0) :
+                cookingRecipe.getIngredientCount(1));
 
         return true;
     }

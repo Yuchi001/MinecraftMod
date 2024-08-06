@@ -10,12 +10,12 @@ import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
 public class BetterBlastingRecipe extends AbstractBetterCookingRecipe {
-    public BetterBlastingRecipe(RecipeType<?> pType, ResourceLocation pId, String pGroup, CookingBookCategory pCategory, Ingredient pIngredient, Ingredient pSecondIngredient, ItemStack pResult, float pExperience, int pCookingTime) {
-        super(pType, pId, pGroup, pCategory, pIngredient, pSecondIngredient, pResult, pExperience, pCookingTime);
+    public BetterBlastingRecipe(RecipeType<?> pType, ResourceLocation pId, String pGroup, CookingBookCategory pCategory, Ingredient pIngredient, Ingredient pSecondIngredient, ItemStack pResult, float pExperience, int pCookingTime, int firstIngredientCount, int secondIngredientCount) {
+        super(pType, pId, pGroup, pCategory, pIngredient, pSecondIngredient, pResult, pExperience, pCookingTime, firstIngredientCount, secondIngredientCount);
     }
 
-    public BetterBlastingRecipe( ResourceLocation pId, String pGroup, CookingBookCategory pCategory, Ingredient pIngredient, Ingredient pSecondIngredient, ItemStack pResult, float pExperience, int pCookingTime) {
-        super(ModRecipeType.BetterBlastingRecipeType.BETTER_BLASTING, pId, pGroup, pCategory, pIngredient, pSecondIngredient, pResult, pExperience, pCookingTime);
+    public BetterBlastingRecipe( ResourceLocation pId, String pGroup, CookingBookCategory pCategory, Ingredient pIngredient, Ingredient pSecondIngredient, ItemStack pResult, float pExperience, int pCookingTime, int firstIngredientCount, int secondIngredientCount) {
+        super(ModRecipeType.BetterBlastingRecipeType.BETTER_BLASTING, pId, pGroup, pCategory, pIngredient, pSecondIngredient, pResult, pExperience, pCookingTime, firstIngredientCount, secondIngredientCount);
     }
 
     @Override

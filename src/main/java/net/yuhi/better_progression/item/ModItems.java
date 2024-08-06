@@ -324,6 +324,7 @@ public class ModItems {
 
     public enum EMaterialType {
         TIN("tin"),
+        GOLD("gold"),
         BRONZE("bronze"),
         STEEL("steel"),
         COPPER("copper"),

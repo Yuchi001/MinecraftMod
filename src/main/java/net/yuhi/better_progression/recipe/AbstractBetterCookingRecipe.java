@@ -10,10 +10,14 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractBetterCookingRecipe extends AbstractCookingRecipe {
     protected final Ingredient secondIngredient;
+    protected final int firstIngredientCount;
+    protected final int secondIngredientCount;
 
-    public AbstractBetterCookingRecipe(RecipeType<?> pType, ResourceLocation pId, String pGroup, CookingBookCategory pCategory, Ingredient pIngredient, Ingredient secondIngredient, ItemStack pResult, float pExperience, int pCookingTime) {
+    public AbstractBetterCookingRecipe(RecipeType<?> pType, ResourceLocation pId, String pGroup, CookingBookCategory pCategory, Ingredient pIngredient, Ingredient secondIngredient, ItemStack pResult, float pExperience, int pCookingTime, int firstIngredientCount, int secondIngredientCount) {
         super(pType, pId, pGroup, pCategory, pIngredient, pResult, pExperience, pCookingTime);
         this.secondIngredient = secondIngredient;
+        this.firstIngredientCount = firstIngredientCount;
+        this.secondIngredientCount = secondIngredientCount;
     }
 
     @Override
@@ -27,18 +31,18 @@ public abstract class AbstractBetterCookingRecipe extends AbstractCookingRecipe 
         var secondIngredientFirstItemMatch = false;
         if (!firstSlotEmpty) {
             ingredientFirstItemMatch = this.ingredient.test(pInv.getItem(0))
-                    && pInv.getItem(0).getCount() >= this.ingredient.getItems()[0].getCount();
+                    && pInv.getItem(0).getCount() >= this.firstIngredientCount;
             secondIngredientFirstItemMatch = this.secondIngredient.test(pInv.getItem(0))
-                    && pInv.getItem(0).getCount() >= this.secondIngredient.getItems()[0].getCount();
+                    && pInv.getItem(0).getCount() >= this.secondIngredientCount;
         }
 
         var ingredientSecondItemMatch = false;
         var secondIngredientSecondItemMatch = false;
         if (!secondSlotEmpty) {
             ingredientSecondItemMatch = this.ingredient.test(pInv.getItem(1))
-                    && pInv.getItem(1).getCount() >= this.ingredient.getItems()[0].getCount();
+                    && pInv.getItem(1).getCount() >= this.firstIngredientCount;
             secondIngredientSecondItemMatch = this.secondIngredient.test(pInv.getItem(1))
-                    && pInv.getItem(1).getCount() >= this.secondIngredient.getItems()[0].getCount();
+                    && pInv.getItem(1).getCount() >= this.secondIngredientCount;
         }
 
         var isTheSameItem = pInv.getItem(0).sameItem(pInv.getItem(1));
@@ -56,6 +60,10 @@ public abstract class AbstractBetterCookingRecipe extends AbstractCookingRecipe 
         nonnulllist.add(this.ingredient);
         nonnulllist.add(this.secondIngredient);
         return nonnulllist;
+    }
+    
+    public int getIngredientCount(int slot) {
+        return slot == 0 ? this.firstIngredientCount : this.secondIngredientCount;
     }
 
     public ItemStack getResultItem() {

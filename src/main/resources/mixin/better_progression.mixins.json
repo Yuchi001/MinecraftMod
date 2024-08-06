@@ -6,7 +6,8 @@
   "mixins": [
     "ItemInHandRendererMixin",
     "ItemStackMixin",
-    "SmithingMenuMixin"
+    "LegacySmithingMenuMixin",
+    "accessor.ItemCombinerMenuAccessor"
   ],
   "client": [],
   "server": [],

@@ -7,6 +7,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,13 +32,14 @@ public class BetterSimpleCookingSerializer<T extends AbstractBetterCookingRecipe
         else {
             String s1 = GsonHelper.getAsString(pJson, "result");
             ResourceLocation resourcelocation = new ResourceLocation(s1);
-            itemstack = new ItemStack(BuiltInRegistries.ITEM.getOptional(resourcelocation).orElseThrow(() -> {
-                return new IllegalStateException("Item: " + s1 + " does not exist");
-            }));
+            itemstack = new ItemStack(BuiltInRegistries.ITEM.getOptional(resourcelocation).orElseThrow(() -> 
+                    new IllegalStateException("Item: " + s1 + " does not exist")));
         }
         float experience = GsonHelper.getAsFloat(pJson, "experience", 0.0F);
         int cookingTime = GsonHelper.getAsInt(pJson, "cookingtime", this.defaultCookingTime);
-        return this.factory.create(pRecipeId, s, cookingbookcategory, ingredient, secondIngredient, itemstack, experience, cookingTime);
+        int ingredientCount = GsonHelper.getAsInt(pJson, "ingredientcount", 1);
+        int secondIngredientCount = GsonHelper.getAsInt(pJson, "secondingredientcount", 1);
+        return this.factory.create(pRecipeId, s, cookingbookcategory, ingredient, secondIngredient, itemstack, experience, cookingTime, ingredientCount, secondIngredientCount);
     }
 
     public T fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
@@ -48,7 +50,9 @@ public class BetterSimpleCookingSerializer<T extends AbstractBetterCookingRecipe
         ItemStack itemstack = pBuffer.readItem();
         float experience = pBuffer.readFloat();
         int cookingTime = pBuffer.readVarInt();
-        return this.factory.create(pRecipeId, s, cookingbookcategory, firstIngredient, secondIngredient, itemstack, experience, cookingTime);
+        int ingredientCount = pBuffer.readVarInt();
+        int secondIngredientCount = pBuffer.readVarInt();
+        return this.factory.create(pRecipeId, s, cookingbookcategory, firstIngredient, secondIngredient, itemstack, experience, cookingTime, ingredientCount, secondIngredientCount);
     }
 
     public void toNetwork(FriendlyByteBuf pBuffer, T pRecipe) {
@@ -62,9 +66,12 @@ public class BetterSimpleCookingSerializer<T extends AbstractBetterCookingRecipe
         pBuffer.writeItem(pRecipe.getResultItem());
         pBuffer.writeFloat(pRecipe.getExperience());
         pBuffer.writeVarInt(pRecipe.getCookingTime());
+        
+        pBuffer.writeInt(pRecipe.getIngredientCount(0));
+        pBuffer.writeInt(pRecipe.getIngredientCount(1));
     }
 
     interface CookieBaker<T extends AbstractBetterCookingRecipe> {
-        T create(ResourceLocation pId, String pGroup, CookingBookCategory pCategory, Ingredient pIngredient, Ingredient pSecondIngredient, ItemStack pResult, float pExperience, int pCookingTime);
+        T create(ResourceLocation pId, String pGroup, CookingBookCategory pCategory, Ingredient pIngredient, Ingredient pSecondIngredient, ItemStack pResult, float pExperience, int pCookingTime, int pIngredientCount, int pSecondIngredientCount);
     }
 }

@@ -10,5 +10,6 @@
   "secondIngredient": {
     "item": "better_progression:raw_tin"
   },
-  "result": "better_progression:bronze_ingot"
+  "result": "better_progression:bronze_ingot",
+  "ingredientcount": 9
 }

@@ -1,12 +1,19 @@
 package net.yuhi.better_progression.item.custom;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
+import net.yuhi.better_progression.item.EClubItemDropProps;
+import net.yuhi.better_progression.tag.ModTags;
 
 public class ClubItem extends AxeItem {
     private final TagKey<Block>[] mineableTags;
@@ -45,5 +52,18 @@ public class ClubItem extends AxeItem {
     @Override
     public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
         return toolAction == ToolActions.PICKAXE_DIG || toolAction == ToolActions.AXE_DIG || super.canPerformAction(stack, toolAction);
+    }
+    
+    @Override
+    public boolean mineBlock(ItemStack stack, Level world, BlockState state, BlockPos pos, LivingEntity entity) {
+        if (state.is(ModTags.Blocks.ORE_TAG)) { 
+            var additionalDrop = EClubItemDropProps.getDrops(getTier());
+            for (var drop : additionalDrop) {
+                var itemEntity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), drop);
+                world.addFreshEntity(itemEntity);
+            }
+        }
+        
+        return super.mineBlock(stack, world, state, pos, entity);
     }
 }

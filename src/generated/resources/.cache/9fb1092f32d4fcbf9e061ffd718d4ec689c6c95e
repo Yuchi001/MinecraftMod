@@ -1,4 +1,4 @@
-// 1.19.4	2024-08-05T01:23:54.6415788	Recipes
+// 1.19.4	2024-08-07T15:37:53.6733902	Recipes
 e45d4ecae7114b868649c22bd37160c12dcf54ae data/better_progression/advancements/recipes/misc/pink_quartz_from_blasting_pink_quartz_ore.json
 8fd5b035ff1d6e6ef616931a058a270ae758b0b3 data/better_progression/advancements/recipes/misc/pink_quartz_from_smelting_pink_quartz_ore.json
 88109cdf723757a698337805861cbac6a1c4202f data/better_progression/advancements/recipes/misc/tin_ingot_from_blasting_raw_tin.json
@@ -38,6 +38,8 @@ d64edd6cb287ffdad08d26b776b603b3a7f1209c data/minecraft/advancements/recipes/mis
 d978f85dae4009484529620cf376aeaabc50f8b9 data/minecraft/advancements/recipes/misc/diamond_club.json
 668649d15a237ae09a1af75303dfead5e834d994 data/minecraft/advancements/recipes/misc/diamond_dagger.json
 05e375bc046828af949c69ba4430f23e22b62e40 data/minecraft/advancements/recipes/misc/hilt.json
+adde777b1f06fc119044af6f2527ac93ec3953a4 data/minecraft/advancements/recipes/misc/obsidian_club.json
+28d9dbf8e6075f3a55d1b1b07b7c2c4d0545b930 data/minecraft/advancements/recipes/misc/obsidian_dagger.json
 878596807d96eac7a107b6a1a3f862f692906273 data/minecraft/advancements/recipes/misc/planks_club.json
 5a020f5a23430d83ac1276918a7b0eff4ebc0439 data/minecraft/advancements/recipes/misc/pure_diamond.json
 c5b79cc08dbff1f69e0b2144230e8391867e796d data/minecraft/advancements/recipes/misc/steel_axe.json
@@ -72,6 +74,8 @@ fb52205dfd9dbd81a24ef1f09cb0d9f481edba73 data/minecraft/recipes/copper_sword.jso
 815d3f7bc7e8f7b381fa2534eeea15a9c6b96dd4 data/minecraft/recipes/diamond_club.json
 4a500d5df3449651b2ef49b0a974948a7bdec871 data/minecraft/recipes/diamond_dagger.json
 c3b488ff7480ad23c52a6b0ddf30d2ba728fb7e8 data/minecraft/recipes/hilt.json
+39bf6d1c914521e867b3ab5b414a233c766727b4 data/minecraft/recipes/obsidian_club.json
+ffa863e538425bb9e0b1d1d4904176544695d518 data/minecraft/recipes/obsidian_dagger.json
 61fe4e4e0fe6733053b36c62bf1516e534b62fe1 data/minecraft/recipes/planks_club.json
 df8986ed92e4595cc4129d36f8aff4503bbdfe4e data/minecraft/recipes/pure_diamond.json
 d8042d9d6bc8d6fcdd898805b5725fceaffe0b9e data/minecraft/recipes/steel_axe.json

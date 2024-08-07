@@ -137,6 +137,10 @@ public class ModItems {
         var tinSupplier = new TierItemsCreator(EMaterialType.TIN);
         tinSupplier.createBasicItem(EItemCategory.Ingot);
         tinSupplier.createBasicItem(EItemCategory.RawMaterial);
+        
+        var obsidianSupplier = new TierItemsCreator("obsidian", EMaterialType.OBSIDIAN, ModTiers.OBSIDIAN, true);
+        obsidianSupplier.createToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
+        obsidianSupplier.createSimpleToolItem(EItemCategory.Club, 4.0F, -3F);
     }
 
     public static void register(IEventBus bus) {
@@ -145,47 +149,46 @@ public class ModItems {
         ITEMS.register(bus);
         VANILLA_ITEMS.register(bus);
     }
-
     public static class TierItemsCreator {
         private String modId = BetterProgression.MOD_ID;
-        private EMaterialType material_type;
+        private ModItems.EMaterialType material_type;
         private Tier tier = null;
         private TagKey<Item> tag = null;
         private String basis = "";
         private boolean has_default_basis = false;
-        
+
         // region constructors
-        public TierItemsCreator(EMaterialType material_type) {
+        public TierItemsCreator(ModItems.EMaterialType material_type) {
             this.modId = BetterProgression.MOD_ID;
             this.material_type = material_type;
         }
 
-        public TierItemsCreator(String mod_id, EMaterialType material_type) {
+        public TierItemsCreator(String mod_id, ModItems.EMaterialType material_type) {
             this.modId = mod_id;
             this.material_type = material_type;
         }
 
-        public TierItemsCreator(String modId, String basis, EMaterialType material_type, Tier tier) {
+        public TierItemsCreator(String modId, String basis, ModItems.EMaterialType material_type, Tier tier) {
             this.modId = modId;
             this.basis = basis;
             this.tier = tier;
             this.material_type = material_type;
         }
 
-        public TierItemsCreator(String basis, EMaterialType material_type, Tier tier) {
+        public TierItemsCreator(String basis, ModItems.EMaterialType material_type, Tier tier) {
             this.tier = tier;
             this.basis = basis;
             this.material_type = material_type;
         }
 
-        public TierItemsCreator(TagKey<Item> tag, EMaterialType material_type, Tier tier) {
+        public TierItemsCreator(TagKey<Item> tag, ModItems.EMaterialType material_type, Tier tier) {
             this.tier = tier;
             this.basis = tag.location().getPath().toLowerCase();
             this.tag = tag;
             this.material_type = material_type;
         }
 
-        public TierItemsCreator(String basis, EMaterialType material_type, Tier tier, boolean has_default_basis) {
+        public TierItemsCreator(String basis, ModItems.EMaterialType material_type, Tier tier, boolean has_default_basis) {
             this.tier = tier;
             this.has_default_basis = has_default_basis;
             this.basis = basis;
@@ -194,58 +197,62 @@ public class ModItems {
 
         // endregion
 
-        public void createToolItem(EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
+        public void createToolItem(ModItems.EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
             Supplier<Item> itemSupplier = () -> switch (itemCategory) {
                 case Axe -> new LayerableAxeItem(tier, damageMod, attackSpeedMod, new Item.Properties());
                 case Sword -> new LayerableSwordItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
                 case PickAxe -> new LayerablePickaxeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
                 case Hoe -> new LayerableHoeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
                 case Shovel -> new LayerableShovelItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-                case Knife -> new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Animal.class);
+                case Knife ->
+                        new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Animal.class);
                 case Dagger -> new DaggerItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                case Machete -> new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Monster.class);
+                case Machete ->
+                        new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Monster.class);
                 default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
             };
 
-            RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, modId, basis, tag, material_type, tier, has_default_basis);
+            RegistryObject<Item> registryItem = ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
+            var itemInfo = new ModItems.ItemInfo(registryItem, itemCategory, ModItems.EItemType.HandHeld, modId, basis, tag, material_type, tier, has_default_basis);
             REGISTERED_ITEMS.add(itemInfo);
         }
 
-        public void createBigToolItem(EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
+        public void createBigToolItem(ModItems.EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
             Supplier<Item> itemSupplier = () -> switch (itemCategory) {
                 case LongSword -> new LongSwordItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
                 case BattleAxe -> new BattleAxeItem(tier, damageMod, attackSpeedMod, new Item.Properties());
                 default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
             };
 
-            RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeldBig, modId, basis, tag, material_type, tier, has_default_basis);
+            RegistryObject<Item> registryItem = ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
+            var itemInfo = new ModItems.ItemInfo(registryItem, itemCategory, ModItems.EItemType.HandHeldBig, modId, basis, tag, material_type, tier, has_default_basis);
             REGISTERED_ITEMS.add(itemInfo);
         }
 
-        public void createSimpleToolItem(EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
+        public void createSimpleToolItem(ModItems.EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
             Supplier<Item> itemSupplier = () -> switch (itemCategory) {
                 case Club -> new ClubItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-                case Dagger -> new DaggerItem(tier, (int)damageMod, attackSpeedMod, new Item.Properties());
+                case Dagger -> new DaggerItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
                 default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
             };
 
-            RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, modId, basis, tag, material_type, tier, has_default_basis);
+            RegistryObject<Item> registryItem = ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
+            var itemInfo = new ModItems.ItemInfo(registryItem, itemCategory, ModItems.EItemType.HandHeld, modId, basis, tag, material_type, tier, has_default_basis);
             REGISTERED_ITEMS.add(itemInfo);
         }
 
-        public void createBasicItem(EItemCategory itemCategory) {
+        public void createBasicItem(ModItems.EItemCategory itemCategory) {
             Supplier<Item> itemSupplier = () -> switch (itemCategory) {
                 default -> new Item(new Item.Properties());
             };
 
-            RegistryObject<Item> registryItem =  ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.Simple, modId, basis, tag, material_type, tier, has_default_basis);
+            RegistryObject<Item> registryItem = ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
+            var itemInfo = new ModItems.ItemInfo(registryItem, itemCategory, ModItems.EItemType.Simple, modId, basis, tag, material_type, tier, has_default_basis);
             REGISTERED_ITEMS.add(itemInfo);
         }
     }
+    
+    
     public static final class ItemInfo<T extends Item> {
         public final RegistryObject<T> item;
         public final EItemCategory category;
@@ -330,6 +337,7 @@ public class ModItems {
         COPPER("copper"),
         IRON("iron"),
         DIAMOND("diamond"),
+        OBSIDIAN("obsidian"),
         STONE("stone"),
         WOOD("wooden");
         private String name;

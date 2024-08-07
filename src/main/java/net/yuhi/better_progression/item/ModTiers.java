@@ -16,16 +16,6 @@ public class ModTiers {
             BlockTags.NEEDS_STONE_TOOL, 
             () -> Ingredient.of(Items.COPPER_INGOT));
 
-    public static final ForgeTier BETTER_GOLD =
-            new ForgeTier(
-                    1,
-                    250,
-                    12.0f,
-                    0.5f,
-                    22,
-                    BlockTags.NEEDS_IRON_TOOL,
-                    () -> Ingredient.of(Items.GOLD_INGOT));
-
     public static final ForgeTier BRONZE =
             new ForgeTier(
                     3,
@@ -56,10 +46,10 @@ public class ModTiers {
                     BlockTags.NEEDS_DIAMOND_TOOL,
                     () -> Ingredient.of(Items.DIAMOND));
 
-    public static final ForgeTier OBSYDIAN = 
+    public static final ForgeTier OBSIDIAN = 
             new ForgeTier(
                     3,
-                    51,
+                    19,
                     7,
                     2.5f,
                     5,

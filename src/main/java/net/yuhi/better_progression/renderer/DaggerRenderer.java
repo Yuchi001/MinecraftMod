@@ -13,10 +13,8 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.item.custom.ThrownDagger;
+import net.yuhi.better_progression.entity.ThrownDagger;
 import org.joml.Quaternionf;
-
-import java.util.Random;
 
 @OnlyIn(Dist.CLIENT)
 public class DaggerRenderer extends EntityRenderer<ThrownDagger> {

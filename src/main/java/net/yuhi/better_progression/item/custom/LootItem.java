@@ -10,7 +10,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.yuhi.better_progression.item.ELootItemDropProps;
+import net.yuhi.better_progression.item.enums.ELootItemDropProps;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

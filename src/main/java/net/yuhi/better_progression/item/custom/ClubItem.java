@@ -2,7 +2,6 @@ package net.yuhi.better_progression.item.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -12,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
-import net.yuhi.better_progression.item.EClubItemDropProps;
+import net.yuhi.better_progression.item.enums.EClubItemDropProps;
 import net.yuhi.better_progression.tag.ModTags;
 
 public class ClubItem extends AxeItem {

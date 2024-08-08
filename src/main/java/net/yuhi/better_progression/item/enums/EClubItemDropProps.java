@@ -1,13 +1,16 @@
-package net.yuhi.better_progression.item;
+package net.yuhi.better_progression.item.enums;
 
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.world.item.*;
+import net.yuhi.better_progression.item.ModTiers;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
 public enum EClubItemDropProps {
     WOOD(Tiers.WOOD, 0),
@@ -22,7 +25,7 @@ public enum EClubItemDropProps {
             new ClubDropData(Items.FLINT, 0),
             new ClubDropData(Items.COAL, 0),
             new ClubDropData(Items.RAW_COPPER, 1),
-            new ClubDropData(ModItems.getItem(ModItems.EItemCategory.RawMaterial, ModItems.EMaterialType.TIN), 1),
+            new ClubDropData(getItem(EItemCategory.RawMaterial, EMaterialType.TIN), 1),
             new ClubDropData(Items.RAW_IRON, 1),
             new ClubDropData(Items.DIAMOND, 3),
             new ClubDropData(Items.NETHERITE_SCRAP, 6)

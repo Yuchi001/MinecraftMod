@@ -3,7 +3,7 @@ package net.yuhi.better_progression.mixin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.LegacySmithingMenu;
 import net.minecraft.world.item.ItemStack;
-import net.yuhi.better_progression.item.custom.LayerableItem;
+import net.yuhi.better_progression.item.interfaces.LayerableItem;
 import net.yuhi.better_progression.mixin.accessor.ItemCombinerMenuAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

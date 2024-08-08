@@ -24,18 +24,4 @@ public class ModBlockEntities {
         BLOCK_ENTITIES.register(bus);
         VANILLA_BLOCK_ENTITIES.register(bus);
     }
-    
-    /*public static final class BlockEntityTuple<T extends BlockEntityType> {
-        public final RegistryObject<T> blockEntity;
-        public final EBlockEntityType blockEntityType;
-
-        public BlockEntityTuple(RegistryObject<T> blockEntity, EBlockEntityType blockEntityType) {
-            this.blockEntity = blockEntity;
-            this.blockEntityType = blockEntityType;
-        }
-    }
-    
-    public enum EBlockEntityType {
-        Simple
-    }*/
 }

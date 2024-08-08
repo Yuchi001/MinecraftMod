@@ -7,14 +7,18 @@ import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.ModBlocks;
+import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.EMaterialType;
+
+import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
 public class ModCreativeModTabs {
     public static CreativeModeTab BETTER_PROGRESSION_TAB;
 
     @SubscribeEvent
     public static void registerCreativeTab(CreativeModeTabEvent.Register event) {
-        BETTER_PROGRESSION_TAB = event.registerCreativeModeTab(new ResourceLocation(BetterProgression.MOD_ID, "my_tab"),
-                builder -> builder.icon(() -> new ItemStack(ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN)))
+        BETTER_PROGRESSION_TAB = event.registerCreativeModeTab(new ResourceLocation(BetterProgression.MOD_ID, "general"),
+                builder -> builder.icon(() -> new ItemStack(getItem(EItemCategory.Ingot, EMaterialType.TIN)))
                         .title(Component.translatable("creativetab.better_progression.title"))
                         .build());
     }

@@ -1,10 +1,10 @@
 package net.yuhi.better_progression.datagen;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -14,7 +14,6 @@ import net.yuhi.better_progression.item.ModItems;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -34,6 +33,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 case Simple -> simpleItem(item.item);
                 case HandHeld -> handHeldItem(item.item);
                 case HandHeldBig -> bigHandHeldItem(item.item);
+                case Armor -> armorItem(item.item);
             }
         }
     }
@@ -109,5 +109,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0", 
                 new ResourceLocation(BetterProgression.MOD_ID, "item/" + item.getId().getPath()));
+    }
+
+    private void armorItem(RegistryObject<Item> item) {
+        String armorItemPath = "item/" + item.getId().getPath();
+        ResourceLocation armorItemResLoc = new ResourceLocation(BetterProgression.MOD_ID, armorItemPath);
+
+        this.withExistingParent(item.getId().getPath(),
+                        mcLoc("item/generated"))
+                .texture("layer0", armorItemResLoc);
     }
 }

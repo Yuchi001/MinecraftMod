@@ -6,6 +6,7 @@ import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.yuhi.better_progression.item.interfaces.LayerableItem;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;

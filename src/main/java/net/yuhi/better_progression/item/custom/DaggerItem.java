@@ -23,7 +23,9 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.entity.ThrownDagger;
+import net.yuhi.better_progression.item.enums.EMaterialType;
+import net.yuhi.better_progression.item.interfaces.LayerableItem;
 
 
 public class DaggerItem extends SwordItem implements LayerableItem, Vanishable {
@@ -79,7 +81,7 @@ public class DaggerItem extends SwordItem implements LayerableItem, Vanishable {
                     p_43388_.broadcastBreakEvent(pEntityLiving.getUsedItemHand());
                 });
                 if (j == 0) {
-                    var thrownDagger = new ThrownDagger(pLevel, player, pStack, ModItems.EMaterialType.GetMaterialType(pStack));
+                    var thrownDagger = new ThrownDagger(pLevel, player, pStack, EMaterialType.GetMaterialType(pStack));
                     thrownDagger.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F + (float)j * 0.5F, 1.0F);
                     if (player.getAbilities().instabuild) { 
                         thrownDagger.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;

@@ -8,9 +8,11 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.item.enums.EMaterialType;
 
 import java.util.ArrayList;
+
+import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getVanillaTools;
 
 @Mod.EventBusSubscriber(modid = BetterProgression.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class RemoveRecipes {
@@ -23,16 +25,16 @@ public class RemoveRecipes {
     }
 
     private static void removeVanillaRecipes(RecipeManager recipeManager) {
-        ModItems.EMaterialType[] vanillaToolMaterials = {
-                ModItems.EMaterialType.IRON,
-                ModItems.EMaterialType.STONE,
-                ModItems.EMaterialType.WOOD,
-                ModItems.EMaterialType.DIAMOND
+        EMaterialType[] vanillaToolMaterials = {
+                EMaterialType.IRON,
+                EMaterialType.STONE,
+                EMaterialType.WOOD,
+                EMaterialType.DIAMOND
         };
         
         var recipesToRemove = new ArrayList<ResourceLocation>();
         for (var material : vanillaToolMaterials) {
-            for (var tool : ModItems.getVanillaTools()) {
+            for (var tool : getVanillaTools()) {
                 var recipeName = tool.getFullName(material.GetName());
                 recipesToRemove.add(new ResourceLocation("minecraft", recipeName));
             }

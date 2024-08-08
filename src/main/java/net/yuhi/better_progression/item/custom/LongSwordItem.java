@@ -1,6 +1,7 @@
 package net.yuhi.better_progression.item.custom;
 
 import net.minecraft.world.item.Tier;
+import net.yuhi.better_progression.item.interfaces.TwoHandedItem;
 
 public class LongSwordItem extends LayerableSwordItem implements TwoHandedItem {
     public LongSwordItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {

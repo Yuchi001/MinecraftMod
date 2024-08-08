@@ -4,6 +4,10 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeTier;
+import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.EMaterialType;
+
+import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
 public class ModTiers {
     public static final ForgeTier COPPER = 
@@ -24,7 +28,7 @@ public class ModTiers {
                     4.0f,
                     22,
                     BlockTags.NEEDS_DIAMOND_TOOL,
-                    () -> Ingredient.of(ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.BRONZE)));
+                    () -> Ingredient.of(getItem(EItemCategory.Ingot, EMaterialType.BRONZE)));
 
     public static final ForgeTier STEEL =
             new ForgeTier(
@@ -34,7 +38,7 @@ public class ModTiers {
                     1.5f,
                     1,
                     BlockTags.NEEDS_DIAMOND_TOOL,
-                    () -> Ingredient.of(ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.STEEL)));
+                    () -> Ingredient.of(getItem(EItemCategory.Ingot, EMaterialType.STEEL)));
 
     public static final ForgeTier BETTER_DIAMOND =
             new ForgeTier(

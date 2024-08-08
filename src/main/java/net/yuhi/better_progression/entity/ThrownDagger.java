@@ -1,4 +1,4 @@
-package net.yuhi.better_progression.item.custom;
+package net.yuhi.better_progression.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -23,11 +23,13 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.yuhi.better_progression.entity.ModEntityTypes;
-import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.EMaterialType;
 
 import javax.annotation.Nullable;
 import java.util.Random;
+
+import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
 public class ThrownDagger extends AbstractArrow {
     private static final EntityDataAccessor<Byte> ID_LOYALTY = SynchedEntityData.defineId(ThrownDagger.class, EntityDataSerializers.BYTE);
@@ -41,14 +43,14 @@ public class ThrownDagger extends AbstractArrow {
     public float rotationYaw;
     private boolean dealtDamage;
     public int clientSideReturnDaggerTickCount;
-    private ModItems.EMaterialType materialType;
-    private ItemStack daggerItem = new ItemStack(ModItems.getItem(ModItems.EItemCategory.Dagger, ModItems.EMaterialType.DIAMOND));
+    private EMaterialType materialType;
+    private ItemStack daggerItem = new ItemStack(getItem(EItemCategory.Dagger, EMaterialType.DIAMOND));
     
     public ThrownDagger(EntityType<? extends ThrownDagger> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    public ThrownDagger(Level pLevel, LivingEntity pShooter, ItemStack pStack, ModItems.EMaterialType pMaterialType) {
+    public ThrownDagger(Level pLevel, LivingEntity pShooter, ItemStack pStack, EMaterialType pMaterialType) {
         super(ModEntityTypes.DAGGER.get(), pShooter, pLevel);
         this.daggerItem = pStack.copy();
         this.materialType = pMaterialType;
@@ -58,7 +60,7 @@ public class ThrownDagger extends AbstractArrow {
         this.entityData.set(ID_STARTING_ANGLE, new Random(0).nextInt(100 - 1));
     }
     
-    public ModItems.EMaterialType getMaterialType() {
+    public EMaterialType getMaterialType() {
         return materialType;
     }
 

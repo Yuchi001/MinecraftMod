@@ -13,9 +13,12 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.EMaterialType;
 
-import java.util.List;
 import java.util.Set;
+
+import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
     public ModBlockLootTables() {
@@ -33,7 +36,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 block -> createOreDrops(ModBlocks.PINK_QUARTZ_ORE.get(), ModItems.PINK_QUARTZ.get(), 1, 1));
         
         this.add(ModBlocks.TIN_ORE.get(),
-                block -> createOreDrops(ModBlocks.TIN_ORE.get(), ModItems.getItem(ModItems.EItemCategory.RawMaterial, ModItems.EMaterialType.TIN), 1, 3));
+                block -> createOreDrops(ModBlocks.TIN_ORE.get(), getItem(EItemCategory.RawMaterial, EMaterialType.TIN), 1, 3));
     }
 
     protected LootTable.Builder createOreDrops(Block pBlock, Item item, int min, int max) {

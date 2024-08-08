@@ -1,4 +1,4 @@
-package net.yuhi.better_progression.item.custom;
+package net.yuhi.better_progression.item.interfaces;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -7,12 +7,15 @@ import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.EMaterialType;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
 public interface LayerableItem {
     public static final String TIN_COUNT_KEY = "TinCount";
@@ -111,7 +114,7 @@ public interface LayerableItem {
     
     public static List<Item> getLayerItems(){
         return List.of(
-                ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN),
+                getItem(EItemCategory.Ingot, EMaterialType.TIN),
                 Items.GOLD_INGOT
         );
     }

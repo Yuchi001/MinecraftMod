@@ -1,7 +1,8 @@
-package net.yuhi.better_progression.item;
+package net.yuhi.better_progression.item.enums;
 
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
+import net.yuhi.better_progression.item.ModTiers;
 
 public enum ELootItemDropProps {
     STONE(Tiers.STONE, 1),

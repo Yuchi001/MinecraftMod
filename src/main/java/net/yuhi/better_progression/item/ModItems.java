@@ -1,9 +1,6 @@
 package net.yuhi.better_progression.item;
 
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -12,6 +9,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.item.custom.*;
+import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.EMaterialType;
+import net.yuhi.better_progression.item.utils.ItemInfo;
+import net.yuhi.better_progression.item.utils.TierItemsCreator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,60 +32,12 @@ public class ModItems {
     public static final RegistryObject<Item> HILT = register("hilt", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PURE_DIAMOND = register("pure_diamond", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PINK_QUARTZ = register("pink_quartz", () -> new Item(new Item.Properties()));
-
-    public static Item getItem(EItemCategory itemCategory, EMaterialType materialType) {
-        return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && i.material_type == materialType).findFirst().get().item.get();
-    }
-    
-    public static List<Item> getItems(EItemCategory itemCategory) {
-        return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory).map(i -> i.item.get()).collect(Collectors.toList());
-    }
-
-    public static List<ItemInfo> getItemInfos(EItemCategory itemCategory) {
-        return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory).collect(Collectors.toList());
-    }
     
     private static RegistryObject<Item> register(String name, Supplier<Item> item) {
         var toReturn = ITEMS.register(name, item);
         var itemInfo = new ItemInfo<>(toReturn);
         REGISTERED_ITEMS.add(itemInfo);
         return itemInfo.item;
-    }
-    
-    public static List<EItemCategory> getVanillaTools() {
-        return List.of(
-                EItemCategory.Axe,
-                EItemCategory.PickAxe,
-                EItemCategory.Shovel,
-                EItemCategory.Hoe,
-                EItemCategory.Sword
-        );
-    }
-
-    public static List<Item> getItems(EMaterialType materialType) {
-        return REGISTERED_ITEMS.stream().filter(i -> i.material_type == materialType).map(i -> i.item.get()).collect(Collectors.toList());
-    }
-
-    public static List<Item> getLayerableTools() {
-        var toolCategoryList = new ArrayList<>(List.of(
-                EItemCategory.Hoe,
-                EItemCategory.Sword,
-                EItemCategory.Axe,
-                EItemCategory.PickAxe,
-                EItemCategory.Shovel,
-                EItemCategory.Knife,
-                EItemCategory.LongSword,
-                EItemCategory.Machete,
-                EItemCategory.BattleAxe
-        ));
-        return REGISTERED_ITEMS.stream().filter(i -> toolCategoryList.contains(i.category)).map(i -> i.item.get()).collect(Collectors.toList());
-    }
-    
-    public static List<Item> getSmeltableItems() {
-        var smeltableMaterials = new ArrayList<EMaterialType>(List.of(
-                EMaterialType.TIN
-        ));
-        return REGISTERED_ITEMS.stream().filter(itemItemInfo -> smeltableMaterials.contains(itemItemInfo.material_type)).map(i -> i.item.get()).collect(Collectors.toList());
     }
 
     public static void createItems() {
@@ -109,6 +62,7 @@ public class ModItems {
         copperSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
         copperSupplier.createBigToolItem(EItemCategory.BattleAxe, 11, -3.4F);
         copperSupplier.createBigToolItem(EItemCategory.LongSword, 6, -3F);
+        copperSupplier.createArmorSet();
 
         var steelSupplier = new TierItemsCreator("steel_ingot", EMaterialType.STEEL, ModTiers.STEEL);
         steelSupplier.createToolItem(EItemCategory.Axe, 6.5f, -3.4F);
@@ -121,6 +75,7 @@ public class ModItems {
         steelSupplier.createBigToolItem(EItemCategory.LongSword, 7, -3F);
         steelSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
         steelSupplier.createBasicItem(EItemCategory.Ingot);
+        //steelSupplier.createArmorSet();
 
         var bronzeSupplier = new TierItemsCreator("bronze_ingot", EMaterialType.BRONZE, ModTiers.BRONZE);
         bronzeSupplier.createToolItem(EItemCategory.Axe, 7.5F, -3.0F);
@@ -133,6 +88,7 @@ public class ModItems {
         bronzeSupplier.createBigToolItem(EItemCategory.LongSword, 8, -3F);
         bronzeSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
         bronzeSupplier.createBasicItem(EItemCategory.Ingot);
+        //bronzeSupplier.createArmorSet();
         
         var tinSupplier = new TierItemsCreator(EMaterialType.TIN);
         tinSupplier.createBasicItem(EItemCategory.Ingot);
@@ -148,228 +104,5 @@ public class ModItems {
         
         ITEMS.register(bus);
         VANILLA_ITEMS.register(bus);
-    }
-    public static class TierItemsCreator {
-        private String modId = BetterProgression.MOD_ID;
-        private ModItems.EMaterialType material_type;
-        private Tier tier = null;
-        private TagKey<Item> tag = null;
-        private String basis = "";
-        private boolean has_default_basis = false;
-
-        // region constructors
-        public TierItemsCreator(ModItems.EMaterialType material_type) {
-            this.modId = BetterProgression.MOD_ID;
-            this.material_type = material_type;
-        }
-
-        public TierItemsCreator(String mod_id, ModItems.EMaterialType material_type) {
-            this.modId = mod_id;
-            this.material_type = material_type;
-        }
-
-        public TierItemsCreator(String modId, String basis, ModItems.EMaterialType material_type, Tier tier) {
-            this.modId = modId;
-            this.basis = basis;
-            this.tier = tier;
-            this.material_type = material_type;
-        }
-
-        public TierItemsCreator(String basis, ModItems.EMaterialType material_type, Tier tier) {
-            this.tier = tier;
-            this.basis = basis;
-            this.material_type = material_type;
-        }
-
-        public TierItemsCreator(TagKey<Item> tag, ModItems.EMaterialType material_type, Tier tier) {
-            this.tier = tier;
-            this.basis = tag.location().getPath().toLowerCase();
-            this.tag = tag;
-            this.material_type = material_type;
-        }
-
-        public TierItemsCreator(String basis, ModItems.EMaterialType material_type, Tier tier, boolean has_default_basis) {
-            this.tier = tier;
-            this.has_default_basis = has_default_basis;
-            this.basis = basis;
-            this.material_type = material_type;
-        }
-
-        // endregion
-
-        public void createToolItem(ModItems.EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
-            Supplier<Item> itemSupplier = () -> switch (itemCategory) {
-                case Axe -> new LayerableAxeItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-                case Sword -> new LayerableSwordItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                case PickAxe -> new LayerablePickaxeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                case Hoe -> new LayerableHoeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                case Shovel -> new LayerableShovelItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-                case Knife ->
-                        new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Animal.class);
-                case Dagger -> new DaggerItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                case Machete ->
-                        new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Monster.class);
-                default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
-            };
-
-            RegistryObject<Item> registryItem = ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ModItems.ItemInfo(registryItem, itemCategory, ModItems.EItemType.HandHeld, modId, basis, tag, material_type, tier, has_default_basis);
-            REGISTERED_ITEMS.add(itemInfo);
-        }
-
-        public void createBigToolItem(ModItems.EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
-            Supplier<Item> itemSupplier = () -> switch (itemCategory) {
-                case LongSword -> new LongSwordItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                case BattleAxe -> new BattleAxeItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-                default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
-            };
-
-            RegistryObject<Item> registryItem = ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ModItems.ItemInfo(registryItem, itemCategory, ModItems.EItemType.HandHeldBig, modId, basis, tag, material_type, tier, has_default_basis);
-            REGISTERED_ITEMS.add(itemInfo);
-        }
-
-        public void createSimpleToolItem(ModItems.EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
-            Supplier<Item> itemSupplier = () -> switch (itemCategory) {
-                case Club -> new ClubItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-                case Dagger -> new DaggerItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-                default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
-            };
-
-            RegistryObject<Item> registryItem = ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ModItems.ItemInfo(registryItem, itemCategory, ModItems.EItemType.HandHeld, modId, basis, tag, material_type, tier, has_default_basis);
-            REGISTERED_ITEMS.add(itemInfo);
-        }
-
-        public void createBasicItem(ModItems.EItemCategory itemCategory) {
-            Supplier<Item> itemSupplier = () -> switch (itemCategory) {
-                default -> new Item(new Item.Properties());
-            };
-
-            RegistryObject<Item> registryItem = ITEMS.register(itemCategory.getFullName(material_type.GetName()), itemSupplier);
-            var itemInfo = new ModItems.ItemInfo(registryItem, itemCategory, ModItems.EItemType.Simple, modId, basis, tag, material_type, tier, has_default_basis);
-            REGISTERED_ITEMS.add(itemInfo);
-        }
-    }
-    
-    
-    public static final class ItemInfo<T extends Item> {
-        public final RegistryObject<T> item;
-        public final EItemCategory category;
-        public final EItemType type;
-        public final String mod_id;
-        public final String basis;
-        public final EMaterialType material_type;
-        public final Tier tier;
-        public final TagKey<Item> tag;
-        public final boolean has_default_basis;
-
-        public ItemInfo(RegistryObject<T> item, EItemCategory category, EItemType type, String modId, String basis, TagKey<Item> tag, EMaterialType material_type, Tier tier, boolean has_default_basis) {
-            this.item = item;
-            this.category = category;
-            this.type = type;
-            this.mod_id = modId;
-            this.basis = basis;
-            this.tier = tier;
-            this.tag = tag;
-            this.material_type = material_type;
-            this.has_default_basis = has_default_basis;
-        }
-
-
-        public ItemInfo(RegistryObject<T> item) {
-            this.item = item;
-            this.category = EItemCategory.Ingot;
-            this.type = EItemType.Simple;
-            this.mod_id = BetterProgression.MOD_ID;
-            this.basis = "";
-            this.tier = null;
-            this.tag = null;
-            this.material_type = null;
-            this.has_default_basis = false;
-        }
-    }
-
-    public enum EItemCategory {
-        RawMaterial("raw", true),
-        Ingot("ingot"),
-        Material(""),
-        Axe("axe"),
-        PickAxe("pickaxe"),
-        Sword("sword"),
-        Shovel("shovel"),
-        Hoe("hoe"),
-        Knife("knife"),
-        Dagger("dagger"),
-        Club("club"),
-        Machete("machete"),
-        LongSword("longsword"),
-        BattleAxe("battleaxe");
-
-        EItemCategory(String name) {
-            this.name = name;
-            this.nameFirst = false;
-        }
-
-        EItemCategory(String name, boolean nameFirst) {
-            this.name = name;
-            this.nameFirst = nameFirst;
-        }
-
-        private final String name;
-        private final boolean nameFirst;
-
-        public String getFullName(String tierName) {
-            if(name.isEmpty()) return tierName;
-            return nameFirst ? name + "_" + tierName : tierName + "_" + name;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
-
-    public enum EMaterialType {
-        TIN("tin"),
-        GOLD("gold"),
-        BRONZE("bronze"),
-        STEEL("steel"),
-        COPPER("copper"),
-        IRON("iron"),
-        DIAMOND("diamond"),
-        OBSIDIAN("obsidian"),
-        STONE("stone"),
-        WOOD("wooden");
-        private String name;
-        EMaterialType(String name) {
-            this.name = name;
-        }
-
-        public String GetName() {
-            return name;
-        }
-        
-        public static EMaterialType GetMaterialType(ItemStack stack) {
-            return GetMaterialType(stack.getItem());
-        }
-
-        public static EMaterialType GetMaterialType(Item item) {
-            var key = ForgeRegistries.ITEMS.getKey(item);
-            if(key == null) return null;
-            
-            var stringKey = key.toString();
-            var itemKey = stringKey.substring(stringKey.indexOf(":") + 1);
-            var materialName = itemKey.substring(0, itemKey.indexOf("_"));
-            for (var material : EMaterialType.values()) {
-                if (material.GetName().equals(materialName)) return material;
-            }
-            return null;
-        }
-    }
-    
-    public enum EItemType {
-        Simple,
-        HandHeld,
-        HandHeldBig
     }
 }

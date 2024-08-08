@@ -14,9 +14,15 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.EMaterialType;
+import net.yuhi.better_progression.item.utils.ItemInfo;
 
 import java.util.List;
 import java.util.function.Consumer;
+
+import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
+import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItemInfos;
 
 public class ModRecipeProvider extends RecipeProvider {
     public ModRecipeProvider(PackOutput pOutput) {
@@ -24,7 +30,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
     
     private void PickAxeRecipeCreator(Consumer<FinishedRecipe> pWriter) {
-        for (var pickaxe : ModItems.getItemInfos(ModItems.EItemCategory.PickAxe)) {
+        for (var pickaxe : getItemInfos(EItemCategory.PickAxe)) {
             var mod_id = pickaxe.has_default_basis ? "minecraft" : pickaxe.mod_id;
             var registryKey = new ResourceLocation(mod_id, pickaxe.basis);
 
@@ -45,7 +51,7 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void AxeRecipeCreator(Consumer<FinishedRecipe> pWriter) {
-        for (var axe : ModItems.getItemInfos(ModItems.EItemCategory.Axe)) {
+        for (var axe : getItemInfos(EItemCategory.Axe)) {
             var mod_id = axe.has_default_basis ? "minecraft" : axe.mod_id;
             var registryKey = new ResourceLocation(mod_id, axe.basis);
 
@@ -66,7 +72,7 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void SwordRecipeCreator(Consumer<FinishedRecipe> pWriter) {
-        for (var sword : ModItems.getItemInfos(ModItems.EItemCategory.Sword)) {
+        for (var sword : getItemInfos(EItemCategory.Sword)) {
             var mod_id = sword.has_default_basis ? "minecraft" : sword.mod_id;
             var registryKey = new ResourceLocation(mod_id, sword.basis);
 
@@ -87,7 +93,7 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void ShovelRecipeCreator(Consumer<FinishedRecipe> pWriter) {
-        for (var shovel : ModItems.getItemInfos(ModItems.EItemCategory.Shovel)) {
+        for (var shovel : getItemInfos(EItemCategory.Shovel)) {
             var mod_id = shovel.has_default_basis ? "minecraft" : shovel.mod_id;
             var registryKey = new ResourceLocation(mod_id, shovel.basis);
 
@@ -108,7 +114,7 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void HoeRecipeCreator(Consumer<FinishedRecipe> pWriter) {
-        for (var hoe : ModItems.getItemInfos(ModItems.EItemCategory.Hoe)) {
+        for (var hoe : getItemInfos(EItemCategory.Hoe)) {
             var mod_id = hoe.has_default_basis ? "minecraft" : hoe.mod_id;
             var registryKey = new ResourceLocation(mod_id, hoe.basis);
 
@@ -129,7 +135,7 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void KnifeRecipeCreator(Consumer<FinishedRecipe> pWriter) {
-        for (var knife : ModItems.getItemInfos(ModItems.EItemCategory.Knife)) {
+        for (var knife : getItemInfos(EItemCategory.Knife)) {
             var mod_id = knife.has_default_basis ? "minecraft" : knife.mod_id;
             var registryKey = new ResourceLocation(mod_id, knife.basis);
 
@@ -150,7 +156,7 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void MacheteRecipeCreator(Consumer<FinishedRecipe> pWriter) {
-        for (var machete : ModItems.getItemInfos(ModItems.EItemCategory.Machete)) {
+        for (var machete : getItemInfos(EItemCategory.Machete)) {
             var mod_id = machete.has_default_basis ? "minecraft" : machete.mod_id;
             var registryKey = new ResourceLocation(mod_id, machete.basis);
 
@@ -171,7 +177,7 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void LongSwordRecipeCreator(Consumer<FinishedRecipe> pWriter) {
-        for (var longsword : ModItems.getItemInfos(ModItems.EItemCategory.LongSword)) {
+        for (var longsword : getItemInfos(EItemCategory.LongSword)) {
             var mod_id = longsword.has_default_basis ? "minecraft" : longsword.mod_id;
             var longswordResourceLocation = new ResourceLocation(mod_id, longsword.basis);
 
@@ -198,7 +204,7 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void BattleAxeRecipeCreator(Consumer<FinishedRecipe> pWriter) {
-        for (var battleaxe : ModItems.getItemInfos(ModItems.EItemCategory.BattleAxe)) {
+        for (var battleaxe : getItemInfos(EItemCategory.BattleAxe)) {
             var mod_id = battleaxe.has_default_basis ? "minecraft" : battleaxe.mod_id;
             var longswordResourceLocation = new ResourceLocation(mod_id, battleaxe.basis);
 
@@ -225,7 +231,7 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void DaggerRecipeCreator(Consumer<FinishedRecipe> pWriter) {
-        for (var dagger : ModItems.getItemInfos(ModItems.EItemCategory.Dagger)) {
+        for (var dagger : getItemInfos(EItemCategory.Dagger)) {
             var builder = ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item) dagger.item.get())
                     .pattern("   ")
                     .pattern(" * ")
@@ -238,7 +244,7 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void ClubRecipeCreator(Consumer<FinishedRecipe> pWriter) {
-        for (var club : ModItems.getItemInfos(ModItems.EItemCategory.Club)) {
+        for (var club : getItemInfos(EItemCategory.Club)) {
             var builder = ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item) club.item.get())
                     .pattern(" * ")
                     .pattern(" * ")
@@ -251,14 +257,14 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
     private void SmeltingRecipeCreator(Consumer<FinishedRecipe> pWriter) {
-        oreGeneric(pWriter, List.of(ModItems.getItem(ModItems.EItemCategory.RawMaterial, ModItems.EMaterialType.TIN)), RecipeCategory.MISC, ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN), 0.7f, 200, "better_progression");
-        oreGeneric(pWriter, List.of(ModBlocks.TIN_ORE.get()), RecipeCategory.MISC, ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN), 0.7f, 200, "better_progression");
-        oreGeneric(pWriter, List.of(ModBlocks.STANNIN_ORE.get()), RecipeCategory.MISC, ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN), 0.7f, 200, "better_progression");
+        oreGeneric(pWriter, List.of(getItem(EItemCategory.RawMaterial, EMaterialType.TIN)), RecipeCategory.MISC, getItem(EItemCategory.Ingot, EMaterialType.TIN), 0.7f, 200, "better_progression");
+        oreGeneric(pWriter, List.of(ModBlocks.TIN_ORE.get()), RecipeCategory.MISC, getItem(EItemCategory.Ingot, EMaterialType.TIN), 0.7f, 200, "better_progression");
+        oreGeneric(pWriter, List.of(ModBlocks.STANNIN_ORE.get()), RecipeCategory.MISC, getItem(EItemCategory.Ingot, EMaterialType.TIN), 0.7f, 200, "better_progression");
         oreGeneric(pWriter, List.of(ModBlocks.PINK_QUARTZ_ORE.get()), RecipeCategory.MISC, ModItems.PINK_QUARTZ.get(), 0.7f, 200, "better_progression");
     }
 
 
-    private String defineBasisItemSchema(ModItems.ItemInfo<Item> item, ShapedRecipeBuilder builder){
+    private String defineBasisItemSchema(ItemInfo<Item> item, ShapedRecipeBuilder builder){
         var basisItem = getBasisItem(item);
         if (basisItem == null) return "";
 
@@ -272,7 +278,7 @@ public class ModRecipeProvider extends RecipeProvider {
         return recipeId;
     }
 
-    private String defineBasisTagSchema(ModItems.ItemInfo<Item> item, ShapedRecipeBuilder builder){
+    private String defineBasisTagSchema(ItemInfo<Item> item, ShapedRecipeBuilder builder){
         var tag = item.tag;
         if (tag == null) return "";
 
@@ -285,7 +291,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
         return recipeId;
     }
-    private Item getBasisItem(ModItems.ItemInfo<Item> item) {
+    private Item getBasisItem(ItemInfo<Item> item) {
         var mod_id = item.has_default_basis ? "minecraft" : item.mod_id;
         var registryKey = new ResourceLocation(mod_id, item.basis);
 
@@ -300,7 +306,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern(" t ")
                 .define('s', Items.STICK)
                 .define('l', Items.LEATHER)
-                .define('t', ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN))
+                .define('t', getItem(EItemCategory.Ingot, EMaterialType.TIN))
                 .unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER))
                 .save(pWriter, "hilt");
 

@@ -1,22 +1,23 @@
 package net.yuhi.better_progression.recipe;
 
 import com.google.gson.JsonObject;
-import net.minecraft.client.ClientRecipeBook;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.yuhi.better_progression.item.ModItems;
-import net.yuhi.better_progression.item.custom.LayerableItem;
+import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.EMaterialType;
+import net.yuhi.better_progression.item.interfaces.LayerableItem;
 import net.yuhi.better_progression.tag.ModTags;
 import org.jetbrains.annotations.NotNull;
+
+import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
 @SuppressWarnings("removal")
 public class LayerRecipe extends LegacyUpgradeRecipe {
@@ -45,7 +46,7 @@ public class LayerRecipe extends LegacyUpgradeRecipe {
 
     @Override
     public @NotNull ItemStack assemble(Container inv, @NotNull RegistryAccess pRegistryAccess) {
-        var tin_ingot = ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN);
+        var tin_ingot = getItem(EItemCategory.Ingot, EMaterialType.TIN);
         ItemStack item = inv.getItem(0).copy();
         int tinCount = inv.countItem(tin_ingot);
         int goldCount = inv.countItem(Items.GOLD_INGOT);
@@ -59,7 +60,7 @@ public class LayerRecipe extends LegacyUpgradeRecipe {
 
     @Override
     public @NotNull NonNullList<ItemStack> getRemainingItems(Container pContainer) {
-        var tin_ingot = ModItems.getItem(ModItems.EItemCategory.Ingot, ModItems.EMaterialType.TIN);
+        var tin_ingot = getItem(EItemCategory.Ingot, EMaterialType.TIN);
         for (var i = 0; i < pContainer.getContainerSize(); i++) {
             if(pContainer.getItem(i).is(tin_ingot)) pContainer.removeItem(i, pContainer.countItem(tin_ingot));
             if(pContainer.getItem(i).is(Items.GOLD_INGOT)) pContainer.removeItem(i, pContainer.countItem(Items.GOLD_INGOT));

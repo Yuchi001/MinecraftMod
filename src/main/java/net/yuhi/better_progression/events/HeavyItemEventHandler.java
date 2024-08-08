@@ -11,8 +11,8 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.item.custom.LayerableItem;
-import net.yuhi.better_progression.item.custom.TwoHandedItem;
+import net.yuhi.better_progression.item.interfaces.LayerableItem;
+import net.yuhi.better_progression.item.interfaces.TwoHandedItem;
 
 @Mod.EventBusSubscriber(modid = BetterProgression.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class HeavyItemEventHandler {

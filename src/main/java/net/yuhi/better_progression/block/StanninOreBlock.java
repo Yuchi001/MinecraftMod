@@ -12,13 +12,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.yuhi.better_progression.block.utils.OreDropPair;
-import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.EMaterialType;
 import org.jetbrains.annotations.NotNull;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
 public class StanninOreBlock extends DropExperienceBlock {
     public StanninOreBlock(IntProvider pXpRange) {
@@ -85,7 +87,7 @@ public class StanninOreBlock extends DropExperienceBlock {
     
     private Item getDrop() {
         var drops = new ArrayList<>(List.of(
-                new OreDropPair(ModItems.getItem(ModItems.EItemCategory.RawMaterial, ModItems.EMaterialType.TIN), 70),
+                new OreDropPair(getItem(EItemCategory.RawMaterial, EMaterialType.TIN), 70),
                 new OreDropPair(Items.RAW_COPPER, 20),
                 new OreDropPair(Items.RAW_IRON, 10)
         ));

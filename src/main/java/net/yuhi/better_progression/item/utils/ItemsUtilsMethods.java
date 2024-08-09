@@ -1,14 +1,19 @@
 package net.yuhi.better_progression.item.utils;
 
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.yuhi.better_progression.item.custom.BattleAxeItem;
+import net.yuhi.better_progression.item.custom.LongSwordItem;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 import net.yuhi.better_progression.item.enums.EModArmorMaterial;
+import net.yuhi.better_progression.item.interfaces.LayerableItem;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static net.yuhi.better_progression.item.ModItems.REGISTERED_ITEMS;
 
@@ -28,18 +33,20 @@ public final class ItemsUtilsMethods {
     }
 
     public static List<Item> getLayerableTools() {
-        var toolCategoryList = new ArrayList<>(List.of(
-                EItemCategory.Hoe,
-                EItemCategory.Sword,
-                EItemCategory.Axe,
-                EItemCategory.PickAxe,
-                EItemCategory.Shovel,
-                EItemCategory.Knife,
-                EItemCategory.LongSword,
-                EItemCategory.Machete,
-                EItemCategory.BattleAxe
-        ));
-        return REGISTERED_ITEMS.stream().filter(i -> toolCategoryList.contains(i.category)).map(i -> i.item.get()).collect(Collectors.toList());
+        List<Type> layerableClasses = List.of(
+                SwordItem.class,
+                AxeItem.class,
+                PickaxeItem.class,
+                ShovelItem.class,
+                HoeItem.class,
+                LongSwordItem.class,
+                BattleAxeItem.class);
+
+        var vanillaLayeredItems = new ArrayList<Item>();
+        for(var item : ForgeRegistries.ITEMS) {
+            if(layerableClasses.contains(item.getClass())) vanillaLayeredItems.add(item);
+        }
+        return vanillaLayeredItems;
     }
 
     public static List<Item> getSmeltableItems() {

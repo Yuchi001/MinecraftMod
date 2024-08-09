@@ -7,7 +7,13 @@
     "ItemInHandRendererMixin",
     "ItemStackMixin",
     "LegacySmithingMenuMixin",
-    "accessor.ItemCombinerMenuAccessor"
+    "accessor.ItemCombinerMenuAccessor",
+    "items.AxeItemMixin",
+    "items.HoeItemMixin",
+    "items.ItemMixin",
+    "items.PickAxeItemMixin",
+    "items.ShovelItemMixin",
+    "items.SwordItemMixin"
   ],
   "client": [],
   "server": [],

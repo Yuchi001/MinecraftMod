@@ -3,9 +3,7 @@ package net.yuhi.better_progression.item.utils;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.*;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.item.ModItems;
@@ -66,16 +64,14 @@ public class TierItemsCreator {
 
     public void createToolItem(EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
         Supplier<Item> itemSupplier = () -> switch (itemCategory) {
-            case Axe -> new LayerableAxeItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-            case Sword -> new LayerableSwordItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-            case PickAxe -> new LayerablePickaxeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-            case Hoe -> new LayerableHoeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-            case Shovel -> new LayerableShovelItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-            case Knife ->
-                    new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Animal.class);
+            case Axe -> new AxeItem(tier, damageMod, attackSpeedMod, new Item.Properties());
+            case Sword -> new SwordItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+            case PickAxe -> new PickaxeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+            case Hoe -> new HoeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+            case Shovel -> new ShovelItem(tier, damageMod, attackSpeedMod, new Item.Properties());
+            case Knife -> new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Animal.class);
             case Dagger -> new DaggerItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-            case Machete ->
-                    new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Monster.class);
+            case Machete -> new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Monster.class);
             default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
         };
 
@@ -109,6 +105,14 @@ public class TierItemsCreator {
     }
 
     public void createArmorSet() {
+        createArmorSet(false);
+    }
+
+    public void createVanillaArmorSet() {
+        createArmorSet(true);
+    }
+
+    private void createArmorSet(boolean isVanilla) {
         var armorMaterial = ItemsUtilsMethods.materialToArmorMaterial(material_type);
         if (armorMaterial == null) return;
 
@@ -119,7 +123,9 @@ public class TierItemsCreator {
 
         java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerArmorItem = (item, category) -> {
             var name = material_type.GetName() + "_" + category.getName();
-            RegistryObject<Item> registryItem = ModItems.ITEMS.register(name, item);
+            RegistryObject<Item> registryItem = isVanilla ?
+                    ModItems.VANILLA_ITEMS.register(name, item) :
+                    ModItems.ITEMS.register(name, item);
             var itemInfo = new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);
             ModItems.REGISTERED_ITEMS.add(itemInfo);
         };

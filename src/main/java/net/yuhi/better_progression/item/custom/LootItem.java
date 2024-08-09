@@ -4,6 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -16,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class LootItem<T extends LivingEntity> extends LayerableSwordItem {
+public class LootItem<T extends LivingEntity> extends SwordItem {
     private final Class<T> entityClass;
 
     public LootItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties, Class<T> pEntityClass) {

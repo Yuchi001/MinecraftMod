@@ -28,7 +28,7 @@ import net.yuhi.better_progression.item.enums.EMaterialType;
 import net.yuhi.better_progression.item.interfaces.LayerableItem;
 
 
-public class DaggerItem extends SwordItem implements LayerableItem, Vanishable {
+public class DaggerItem extends SwordItem implements Vanishable {
     public static final int THROW_THRESHOLD_TIME = 10;
     public static final float BASE_DAMAGE = 8.0F;
     public static final float SHOOT_POWER = 2.5F;

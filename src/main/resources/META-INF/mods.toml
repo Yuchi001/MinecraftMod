@@ -48,6 +48,12 @@ side="BOTH"
 modId="mymod"
 mixinConfigs=["mymod.mixins.json"]
 
+environment=[
+    "client",
+    "server",
+    "runData"
+]
+
 versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"

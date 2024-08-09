@@ -1,5 +1,6 @@
 ﻿{
   "item.better_progression.hilt": "Hilt",
+  "item.better_progression.pure_diamond": "Pure Diamond",
   "item.better_progression.tin_item_interface": "Tinned Item",
 
   "item.better_progression.diamond_club": "Diamond Club",
@@ -33,6 +34,10 @@
   "item.better_progression.copper_machete": "Copper Machete",
   "item.better_progression.copper_longsword": "Copper Longsword",
   "item.better_progression.copper_battleaxe": "Copper Battleaxe",
+  "item.better_progression.copper_helmet": "Copper Battleaxe",
+  "item.better_progression.copper_chestplate": "Copper Battleaxe",
+  "item.better_progression.copper_leggings": "Copper Battleaxe",
+  "item.better_progression.copper_boots": "Copper Battleaxe",
 
   "item.better_progression.steel_ingot": "Steel Ingot",
   "block.better_progression.steel_block": "Steel Block",
@@ -45,6 +50,11 @@
   "item.better_progression.steel_machete": "Steel Machete",
   "item.better_progression.steel_longsword": "Steel Longsword",
   "item.better_progression.steel_battleaxe": "Steel Battleaxe",
+  "item.better_progression.steel_helmet": "Steel Helmet",
+  "item.better_progression.steel_chestplate": "Steel Chestplate",
+  "item.better_progression.steel_leggings": "Steel Leggings",
+  "item.better_progression.steel_boots": "Steel Boots",
+
 
   "item.better_progression.bronze_ingot": "Bronze Ingot",
   "block.better_progression.bronze_block": "Bronze Block",
@@ -57,7 +67,11 @@
   "item.better_progression.bronze_machete": "Bronze Machete",
   "item.better_progression.bronze_longsword": "Bronze Longsword",
   "item.better_progression.bronze_battleaxe": "Bronze Battleaxe",
-
+  "item.better_progression.bronze_helmet": "Bronze Helmet",
+  "item.better_progression.bronze_chestplate": "Bronze Chestplate",
+  "item.better_progression.bronze_leggings": "Bronze Leggings",
+  "item.better_progression.bronze_boots": "Bronze Boots",
+  
   "creativetab.better_progression.title": "Better Progression",
 
   "tooltip.better_progression.tined_item.tooltip_general": "This item has <v1> tin layer<v2>",

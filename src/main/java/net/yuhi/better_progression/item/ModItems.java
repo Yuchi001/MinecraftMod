@@ -55,6 +55,8 @@ public class ModItems {
         diamondSupplier.createSimpleToolItem(EItemCategory.Club, 5.0F, -2.8F);
         diamondSupplier.createSimpleToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
 
+        var ironSupplier = new TierItemsCreator("iron_ingot", EMaterialType.IRON, Tiers.IRON, true);
+
         var copperSupplier = new TierItemsCreator("copper_ingot", EMaterialType.COPPER, ModTiers.COPPER, true);
         copperSupplier.createToolItem(EItemCategory.Axe, 5.5F, -3.2F);
         copperSupplier.createToolItem(EItemCategory.PickAxe, 1, -2.8f);

@@ -11,6 +11,7 @@ import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.item.custom.*;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EMaterialType;
+import net.yuhi.better_progression.item.enums.EModArmorMaterial;
 import net.yuhi.better_progression.item.utils.ItemInfo;
 import net.yuhi.better_progression.item.utils.TierItemsCreator;
 
@@ -32,6 +33,8 @@ public class ModItems {
     public static final RegistryObject<Item> HILT = register("hilt", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PURE_DIAMOND = register("pure_diamond", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PINK_QUARTZ = register("pink_quartz", () -> new Item(new Item.Properties()));
+    
+    //public static final RegistryObject<Item> Test = ITEMS.register("copper_helmet", () -> new ArmorItem(EModArmorMaterial.COPPER, ArmorItem.Type.HELMET, new Item.Properties()));
     
     private static RegistryObject<Item> register(String name, Supplier<Item> item) {
         var toReturn = ITEMS.register(name, item);
@@ -75,7 +78,7 @@ public class ModItems {
         steelSupplier.createBigToolItem(EItemCategory.LongSword, 7, -3F);
         steelSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
         steelSupplier.createBasicItem(EItemCategory.Ingot);
-        //steelSupplier.createArmorSet();
+        steelSupplier.createArmorSet();
 
         var bronzeSupplier = new TierItemsCreator("bronze_ingot", EMaterialType.BRONZE, ModTiers.BRONZE);
         bronzeSupplier.createToolItem(EItemCategory.Axe, 7.5F, -3.0F);
@@ -88,7 +91,7 @@ public class ModItems {
         bronzeSupplier.createBigToolItem(EItemCategory.LongSword, 8, -3F);
         bronzeSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
         bronzeSupplier.createBasicItem(EItemCategory.Ingot);
-        //bronzeSupplier.createArmorSet();
+        bronzeSupplier.createArmorSet();
         
         var tinSupplier = new TierItemsCreator(EMaterialType.TIN);
         tinSupplier.createBasicItem(EItemCategory.Ingot);

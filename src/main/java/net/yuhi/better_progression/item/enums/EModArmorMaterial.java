@@ -2,6 +2,7 @@ package net.yuhi.better_progression.item.enums;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Items;
@@ -12,7 +13,7 @@ import java.util.function.Supplier;
 
 import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
-public enum EModArmorMaterial implements ArmorMaterial {
+public enum EModArmorMaterial implements ArmorMaterial, StringRepresentable {
     BRONZE("bronze", 15, new int[]{ 4, 9, 7, 4 }, 20, SoundEvents.ARMOR_EQUIP_GOLD, 3.0f, 0, () -> Ingredient.of(getItem(EItemCategory.Ingot, EMaterialType.COPPER))),
     STEEL("steel", 33, new int[]{ 3, 8, 6, 3 }, 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0f, 0.1f, () -> Ingredient.of(getItem(EItemCategory.Ingot, EMaterialType.STEEL))),
     COPPER("copper", 10, new int[]{ 1, 4, 3, 1 }, 15,SoundEvents.ARMOR_EQUIP_IRON, 0, 0, () -> Ingredient.of(Items.COPPER_INGOT));
@@ -65,7 +66,7 @@ public enum EModArmorMaterial implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return BetterProgression.MOD_ID + ':' + this.name;
+        return BetterProgression.MOD_ID + ":" + this.name;
     }
 
     @Override
@@ -76,5 +77,10 @@ public enum EModArmorMaterial implements ArmorMaterial {
     @Override
     public float getKnockbackResistance() {
         return this.knockbackResistance;
+    }
+
+    @Override
+    public String getSerializedName() {
+        return BetterProgression.MOD_ID + ":" + this.name;
     }
 }

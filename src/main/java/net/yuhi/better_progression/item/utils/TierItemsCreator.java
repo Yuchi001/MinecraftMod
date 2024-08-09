@@ -112,23 +112,22 @@ public class TierItemsCreator {
         var armorMaterial = ItemsUtilsMethods.materialToArmorMaterial(material_type);
         if (armorMaterial == null) return;
 
-        var helmet = new ArmorItem(armorMaterial, ArmorItem.Type.HELMET, new Item.Properties());
-        var chestplate = new ArmorItem(armorMaterial, ArmorItem.Type.CHESTPLATE, new Item.Properties());
-        var leggings = new ArmorItem(armorMaterial, ArmorItem.Type.LEGGINGS, new Item.Properties());
-        var boots = new ArmorItem(armorMaterial, ArmorItem.Type.BOOTS, new Item.Properties());
+        Supplier<ArmorItem> helmet = () -> new ArmorItem(armorMaterial, ArmorItem.Type.HELMET, new Item.Properties());
+        Supplier<ArmorItem> chestplate = () -> new ArmorItem(armorMaterial, ArmorItem.Type.CHESTPLATE, new Item.Properties());
+        Supplier<ArmorItem> leggings = () -> new ArmorItem(armorMaterial, ArmorItem.Type.LEGGINGS, new Item.Properties());
+        Supplier<ArmorItem> boots = () -> new ArmorItem(armorMaterial, ArmorItem.Type.BOOTS, new Item.Properties());
 
-        java.util.function.Consumer<ArmorItem> registerArmorItem = (item) -> {
-            var name = material_type.GetName() + "_" + item.getType();
-            var itemCategory = ItemsUtilsMethods.armorTypeToItemCategory(item.getType());
-            RegistryObject<Item> registryItem = ModItems.ITEMS.register(name, () -> item);
-            var itemInfo = new ItemInfo<>(registryItem, itemCategory, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);
+        java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerArmorItem = (item, category) -> {
+            var name = material_type.GetName() + "_" + category.getName();
+            RegistryObject<Item> registryItem = ModItems.ITEMS.register(name, item);
+            var itemInfo = new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);
             ModItems.REGISTERED_ITEMS.add(itemInfo);
         };
 
-        registerArmorItem.accept(helmet);
-        registerArmorItem.accept(chestplate);
-        registerArmorItem.accept(leggings);
-        registerArmorItem.accept(boots);
+        registerArmorItem.accept(helmet, EItemCategory.Helmet);
+        registerArmorItem.accept(chestplate, EItemCategory.Chestplate);
+        registerArmorItem.accept(leggings, EItemCategory.Leggings);
+        registerArmorItem.accept(boots, EItemCategory.Boots);
     }
 
     public void createBasicItem(EItemCategory itemCategory) {

@@ -35,10 +35,10 @@ public enum EItemCategory {
 
     public String getFullName(String tierName) {
         if(name.isEmpty()) return tierName;
-        return nameFirst ? name + "_" + tierName : tierName + "_" + name;
+        return nameFirst ? name.toLowerCase() + "_" + tierName : tierName + "_" + name.toLowerCase();
     }
 
     public String getName() {
-        return name;
+        return name.toLowerCase();
     }
 }

@@ -68,6 +68,7 @@ public class ModItems {
         copperSupplier.createBigToolItem(EItemCategory.BattleAxe, 11, -3.4F);
         copperSupplier.createBigToolItem(EItemCategory.LongSword, 6, -3F);
         copperSupplier.createArmorSet();
+        copperSupplier.createChainmailArmorSet();
 
         var steelSupplier = new TierItemsCreator("steel_ingot", EMaterialType.STEEL, ModTiers.STEEL);
         steelSupplier.createToolItem(EItemCategory.Axe, 6.5f, -3.4F);
@@ -81,6 +82,7 @@ public class ModItems {
         steelSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
         steelSupplier.createBasicItem(EItemCategory.Ingot);
         steelSupplier.createArmorSet();
+        steelSupplier.createChainmailArmorSet();
 
         var bronzeSupplier = new TierItemsCreator("bronze_ingot", EMaterialType.BRONZE, ModTiers.BRONZE);
         bronzeSupplier.createToolItem(EItemCategory.Axe, 7.5F, -3.0F);
@@ -94,6 +96,7 @@ public class ModItems {
         bronzeSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
         bronzeSupplier.createBasicItem(EItemCategory.Ingot);
         bronzeSupplier.createArmorSet();
+        bronzeSupplier.createChainmailArmorSet();
         
         var tinSupplier = new TierItemsCreator(EMaterialType.TIN);
         tinSupplier.createBasicItem(EItemCategory.Ingot);

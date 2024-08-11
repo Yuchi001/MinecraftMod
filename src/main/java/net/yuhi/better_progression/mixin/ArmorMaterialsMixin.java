@@ -27,33 +27,33 @@ public class ArmorMaterialsMixin implements BetterArmorMaterial {
         
         switch (pName) {
             case "leather" -> {
-                pProtectionFunctionForType.put(ArmorItem.Type.BOOTS, 1);
-                pProtectionFunctionForType.put(ArmorItem.Type.LEGGINGS, 2);
-                pProtectionFunctionForType.put(ArmorItem.Type.CHESTPLATE, 2);
                 pProtectionFunctionForType.put(ArmorItem.Type.HELMET, 1);
+                pProtectionFunctionForType.put(ArmorItem.Type.CHESTPLATE, 2);
+                pProtectionFunctionForType.put(ArmorItem.Type.LEGGINGS, 2);
+                pProtectionFunctionForType.put(ArmorItem.Type.BOOTS, 1);
 
-                this.betterProgression$lifeMod = new int[]{ 0, 2, 2, 0 };
+                this.betterProgression$lifeMod = new int[]{ 1, 1, 1, 1 };
             }
             case "chainmail" -> {
-                pProtectionFunctionForType.put(ArmorItem.Type.BOOTS, 2);
-                pProtectionFunctionForType.put(ArmorItem.Type.LEGGINGS, 3);
-                pProtectionFunctionForType.put(ArmorItem.Type.CHESTPLATE, 4);
                 pProtectionFunctionForType.put(ArmorItem.Type.HELMET, 2);
+                pProtectionFunctionForType.put(ArmorItem.Type.CHESTPLATE, 3);
+                pProtectionFunctionForType.put(ArmorItem.Type.LEGGINGS, 3);
+                pProtectionFunctionForType.put(ArmorItem.Type.BOOTS, 2);
 
                 accessor.setRepairIngredient(new LazyLoadedValue<>(() -> Ingredient.of(Items.IRON_INGOT)));
 
-                this.betterProgression$lifeMod = new int[]{ 0, 2, 2, 0 };
+                this.betterProgression$lifeMod = new int[]{ 1, 2, 2, 1 };
             }
             case "iron" -> {
-                pProtectionFunctionForType.put(ArmorItem.Type.BOOTS, 2);
-                pProtectionFunctionForType.put(ArmorItem.Type.LEGGINGS, 5);
-                pProtectionFunctionForType.put(ArmorItem.Type.CHESTPLATE, 6);
                 pProtectionFunctionForType.put(ArmorItem.Type.HELMET, 2);
+                pProtectionFunctionForType.put(ArmorItem.Type.CHESTPLATE, 6);
+                pProtectionFunctionForType.put(ArmorItem.Type.LEGGINGS, 5);
+                pProtectionFunctionForType.put(ArmorItem.Type.BOOTS, 2);
                 
                 accessor.setToughness(1.0f);
-                accessor.setKnockbackResistance(0.1f);
+                accessor.setKnockbackResistance(0.2f);
                 
-                this.betterProgression$lifeMod = new int[]{ 2, 4, 4, 2 };
+                this.betterProgression$lifeMod = new int[]{ 2, 4, 3, 1 };
             }
         }
     }

@@ -68,16 +68,16 @@ public final class ItemsUtilsMethods {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory).collect(Collectors.toList());
     }
 
-    public static EModArmorMaterial materialToArmorMaterial(EMaterialType materialType) {
+    public static EModArmorMaterial materialToArmorMaterial(EMaterialType materialType, boolean chainmail) {
         switch (materialType) {
             case BRONZE -> {
-                return EModArmorMaterial.BRONZE;
+                return chainmail ? EModArmorMaterial.BRONZE_CHAINMAIL : EModArmorMaterial.BRONZE;
             }
             case STEEL -> {
-                return EModArmorMaterial.STEEL;
+                return chainmail ? EModArmorMaterial.STEEL_CHAINMAIL : EModArmorMaterial.STEEL;
             }
             case COPPER -> {
-                return EModArmorMaterial.COPPER;
+                return chainmail ? EModArmorMaterial.COPPER_CHAINMAIL : EModArmorMaterial.COPPER;
             }
         }
         return null;

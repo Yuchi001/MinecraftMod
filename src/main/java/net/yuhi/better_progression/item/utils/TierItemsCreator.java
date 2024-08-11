@@ -12,6 +12,7 @@ import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EItemType;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class TierItemsCreator {
@@ -103,17 +104,9 @@ public class TierItemsCreator {
         var itemInfo = new ItemInfo<>(registryItem, itemCategory, EItemType.HandHeld, modId, basis, tag, material_type, tier, has_default_basis);
         ModItems.REGISTERED_ITEMS.add(itemInfo);
     }
-
-    public void createArmorSet() {
-        createArmorSet(false);
-    }
-
-    public void createVanillaArmorSet() {
-        createArmorSet(true);
-    }
-
-    private void createArmorSet(boolean isVanilla) {
-        var armorMaterial = ItemsUtilsMethods.materialToArmorMaterial(material_type);
+    
+    private void createArmorSet(java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerArmorItem, boolean chainmail) {
+        var armorMaterial = ItemsUtilsMethods.materialToArmorMaterial(material_type, chainmail);
         if (armorMaterial == null) return;
 
         Supplier<ArmorItem> helmet = () -> new ArmorItem(armorMaterial, ArmorItem.Type.HELMET, new Item.Properties());
@@ -121,19 +114,32 @@ public class TierItemsCreator {
         Supplier<ArmorItem> leggings = () -> new ArmorItem(armorMaterial, ArmorItem.Type.LEGGINGS, new Item.Properties());
         Supplier<ArmorItem> boots = () -> new ArmorItem(armorMaterial, ArmorItem.Type.BOOTS, new Item.Properties());
 
-        java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerArmorItem = (item, category) -> {
-            var name = material_type.GetName() + "_" + category.getName();
-            RegistryObject<Item> registryItem = isVanilla ?
-                    ModItems.VANILLA_ITEMS.register(name, item) :
-                    ModItems.ITEMS.register(name, item);
-            var itemInfo = new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);
-            ModItems.REGISTERED_ITEMS.add(itemInfo);
-        };
-
         registerArmorItem.accept(helmet, EItemCategory.Helmet);
         registerArmorItem.accept(chestplate, EItemCategory.Chestplate);
         registerArmorItem.accept(leggings, EItemCategory.Leggings);
         registerArmorItem.accept(boots, EItemCategory.Boots);
+    }
+
+    public void createArmorSet() {
+        java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerArmorItem = (item, category) -> {
+            var name = material_type.GetName() + "_" + category.getName();
+            RegistryObject<Item> registryItem = ModItems.ITEMS.register(name, item);
+            var itemInfo = new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);
+            ModItems.REGISTERED_ITEMS.add(itemInfo);
+        };
+        
+        createArmorSet(registerArmorItem, false);
+    }
+
+    public void createChainmailArmorSet() {
+        java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerArmorItem = (item, category) -> {
+            var name = material_type.GetName() + "_chainmail_" + category.getName();
+            RegistryObject<Item> registryItem = ModItems.ITEMS.register(name, item);
+            var itemInfo = new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);
+            ModItems.REGISTERED_ITEMS.add(itemInfo);
+        };
+
+        createArmorSet(registerArmorItem, true);
     }
 
     public void createBasicItem(EItemCategory itemCategory) {

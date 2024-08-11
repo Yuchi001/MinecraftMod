@@ -8,15 +8,16 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.item.interfaces.BetterArmorMaterial;
 
 import java.util.function.Supplier;
 
 import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
-public enum EModArmorMaterial implements ArmorMaterial, StringRepresentable {
-    BRONZE("bronze", 15, new int[]{ 4, 9, 7, 4 }, 20, SoundEvents.ARMOR_EQUIP_GOLD, 3.0f, 0, () -> Ingredient.of(getItem(EItemCategory.Ingot, EMaterialType.COPPER))),
-    STEEL("steel", 33, new int[]{ 3, 8, 6, 3 }, 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0f, 0.1f, () -> Ingredient.of(getItem(EItemCategory.Ingot, EMaterialType.STEEL))),
-    COPPER("copper", 10, new int[]{ 1, 4, 3, 1 }, 15,SoundEvents.ARMOR_EQUIP_IRON, 0, 0, () -> Ingredient.of(Items.COPPER_INGOT));
+public enum EModArmorMaterial implements ArmorMaterial, StringRepresentable, BetterArmorMaterial {
+    BRONZE("bronze", 15, new int[]{ 4, 9, 7, 4 }, 20, SoundEvents.ARMOR_EQUIP_GOLD, 3.0f, 0, () -> Ingredient.of(getItem(EItemCategory.Ingot, EMaterialType.COPPER)), new int[]{ 1, 1, 1, 1 }),
+    STEEL("steel", 33, new int[]{ 3, 8, 6, 3 }, 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0f, 0.1f, () -> Ingredient.of(getItem(EItemCategory.Ingot, EMaterialType.STEEL)), new int[]{ 1, 1, 1, 1 }),
+    COPPER("copper", 10, new int[]{ 1, 4, 3, 1 }, 15, SoundEvents.ARMOR_EQUIP_IRON, 0, 0, () -> Ingredient.of(Items.COPPER_INGOT), new int[]{ 1, 1, 1, 1 });
 
     private final String name;
     private final int durabilityMultiplier;
@@ -26,9 +27,10 @@ public enum EModArmorMaterial implements ArmorMaterial, StringRepresentable {
     private final float toughness;
     private final float knockbackResistance;
     private final Supplier<Ingredient> repairIngredient;
+    private final int[] lifeMod;
     private final static int[] BASE_DURABILITY = { 11, 16, 16, 13 };
 
-    EModArmorMaterial(String name, int durabilityMultiplier, int[] protectionAmmounts, int enchantmentValue, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
+    EModArmorMaterial(String name, int durabilityMultiplier, int[] protectionAmmounts, int enchantmentValue, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient, int[] lifeMod) {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;
         this.protectionAmounts = protectionAmmounts;
@@ -37,6 +39,7 @@ public enum EModArmorMaterial implements ArmorMaterial, StringRepresentable {
         this.toughness = toughness;
         this.knockbackResistance = knockbackResistance;
         this.repairIngredient = repairIngredient;
+        this.lifeMod = lifeMod;
     }
 
     @Override
@@ -82,5 +85,10 @@ public enum EModArmorMaterial implements ArmorMaterial, StringRepresentable {
     @Override
     public String getSerializedName() {
         return BetterProgression.MOD_ID + ":" + this.name;
+    }
+
+    @Override
+    public int getLifeMod(ArmorItem.Type type) {
+        return lifeMod[type.ordinal()];
     }
 }

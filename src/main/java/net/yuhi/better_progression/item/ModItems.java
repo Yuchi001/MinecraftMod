@@ -55,48 +55,46 @@ public class ModItems {
         diamondSupplier.createSimpleToolItem(EItemCategory.Club, 5.0F, -2.8F);
         diamondSupplier.createSimpleToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
 
-        var ironSupplier = new TierItemsCreator("iron_ingot", EMaterialType.IRON, Tiers.IRON, true);
-
         var copperSupplier = new TierItemsCreator("copper_ingot", EMaterialType.COPPER, ModTiers.COPPER, true);
-        copperSupplier.createToolItem(EItemCategory.Axe, 5.5F, -3.2F);
-        copperSupplier.createToolItem(EItemCategory.PickAxe, 1, -2.8f);
-        copperSupplier.createToolItem(EItemCategory.Sword, 3, -2.4F);
-        copperSupplier.createToolItem(EItemCategory.Shovel, 1.5F, -3.0F);
-        copperSupplier.createToolItem(EItemCategory.Hoe, -1, -2.0F);
-        copperSupplier.createToolItem(EItemCategory.Knife, 1.5F, -2.8F);
-        copperSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
-        copperSupplier.createBigToolItem(EItemCategory.BattleAxe, 11, -3.4F);
-        copperSupplier.createBigToolItem(EItemCategory.LongSword, 6, -3F);
+        copperSupplier.createToolItem(EItemCategory.Axe, 6.5F, -3.1F);
+        copperSupplier.createToolItem(EItemCategory.PickAxe, 1.5f, -2.8f);
+        copperSupplier.createToolItem(EItemCategory.Sword, 3.5f, -2.4F);
+        copperSupplier.createToolItem(EItemCategory.Shovel, 2F, -3.0F);
+        copperSupplier.createToolItem(EItemCategory.Hoe, -1.5f, -1.0F);
+        copperSupplier.createToolItem(EItemCategory.Knife, 1.5F, -1.4F);
+        copperSupplier.createToolItem(EItemCategory.Machete, 1.5F, -1.4F);
+        copperSupplier.createBigToolItem(EItemCategory.BattleAxe, 8.0f, -3.6F);
+        copperSupplier.createBigToolItem(EItemCategory.LongSword, 5.0f, -2.9F);
         copperSupplier.createArmorSet();
         copperSupplier.createChainmailArmorSet();
 
-        var steelSupplier = new TierItemsCreator("steel_ingot", EMaterialType.STEEL, ModTiers.STEEL);
-        steelSupplier.createToolItem(EItemCategory.Axe, 6.5f, -3.4F);
-        steelSupplier.createToolItem(EItemCategory.PickAxe, 2.0f, -3.0f);
-        steelSupplier.createToolItem(EItemCategory.Sword, 4.0f, -2.6F);
-        steelSupplier.createToolItem(EItemCategory.Shovel, 2.5F, -3.2F);
-        steelSupplier.createToolItem(EItemCategory.Hoe, 1.0f, -2.2F);
-        steelSupplier.createToolItem(EItemCategory.Knife, 2.0f, -1.6F);
-        steelSupplier.createBigToolItem(EItemCategory.BattleAxe, 12, -3.4F);
-        steelSupplier.createBigToolItem(EItemCategory.LongSword, 7, -3F);
-        steelSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
-        steelSupplier.createBasicItem(EItemCategory.Ingot);
-        steelSupplier.createArmorSet();
-        steelSupplier.createChainmailArmorSet();
-
         var bronzeSupplier = new TierItemsCreator("bronze_ingot", EMaterialType.BRONZE, ModTiers.BRONZE);
-        bronzeSupplier.createToolItem(EItemCategory.Axe, 7.5F, -3.0F);
-        bronzeSupplier.createToolItem(EItemCategory.PickAxe, 3, -2.8f);
-        bronzeSupplier.createToolItem(EItemCategory.Sword, 5, -2.2F);
-        bronzeSupplier.createToolItem(EItemCategory.Shovel, 3.5F, -2.8F);
-        bronzeSupplier.createToolItem(EItemCategory.Hoe, 1, -1.8F);
-        bronzeSupplier.createToolItem(EItemCategory.Knife, 3, -1.2F);
-        bronzeSupplier.createBigToolItem(EItemCategory.BattleAxe, 13, -3.4F);
-        bronzeSupplier.createBigToolItem(EItemCategory.LongSword, 8, -3F);
-        bronzeSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
+        bronzeSupplier.createToolItem(EItemCategory.Axe, 6.5F, -3.1F);
+        bronzeSupplier.createToolItem(EItemCategory.PickAxe, 1.5f, -2.8f);
+        bronzeSupplier.createToolItem(EItemCategory.Sword, 3.5f, -2.4F);
+        bronzeSupplier.createToolItem(EItemCategory.Shovel, 2.0F, -3.0F);
+        bronzeSupplier.createToolItem(EItemCategory.Hoe, -1.5f, -1.0F);
+        bronzeSupplier.createToolItem(EItemCategory.Knife, 1.5f, -1.4F);
+        bronzeSupplier.createToolItem(EItemCategory.Machete, 1.5F, -1.4F);
+        bronzeSupplier.createBigToolItem(EItemCategory.BattleAxe, 8.0f, -3.6F);
+        bronzeSupplier.createBigToolItem(EItemCategory.LongSword, 5.0f, -2.9F);
         bronzeSupplier.createBasicItem(EItemCategory.Ingot);
         bronzeSupplier.createArmorSet();
         bronzeSupplier.createChainmailArmorSet();
+
+        var steelSupplier = new TierItemsCreator("steel_ingot", EMaterialType.STEEL, ModTiers.STEEL);
+        steelSupplier.createToolItem(EItemCategory.Axe, 6.0f, -3.1F);
+        steelSupplier.createToolItem(EItemCategory.PickAxe, 1.0f, -2.8f);
+        steelSupplier.createToolItem(EItemCategory.Sword, 3.0f, -2.4F);
+        steelSupplier.createToolItem(EItemCategory.Shovel, 1.5F, -3.0F);
+        steelSupplier.createToolItem(EItemCategory.Hoe, -2.0f, -1F);
+        steelSupplier.createToolItem(EItemCategory.Knife, 1.0f, -1.4F);
+        steelSupplier.createToolItem(EItemCategory.Machete, 1.0F, -1.4F);
+        steelSupplier.createBigToolItem(EItemCategory.BattleAxe, 7.0f, -3.6F);
+        steelSupplier.createBigToolItem(EItemCategory.LongSword, 4.0f, -2.9F);
+        steelSupplier.createBasicItem(EItemCategory.Ingot);
+        steelSupplier.createArmorSet();
+        steelSupplier.createChainmailArmorSet();
         
         var tinSupplier = new TierItemsCreator(EMaterialType.TIN);
         tinSupplier.createBasicItem(EItemCategory.Ingot);
@@ -105,6 +103,18 @@ public class ModItems {
         var obsidianSupplier = new TierItemsCreator("obsidian", EMaterialType.OBSIDIAN, ModTiers.OBSIDIAN, true);
         obsidianSupplier.createToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
         obsidianSupplier.createSimpleToolItem(EItemCategory.Club, 4.0F, -3F);
+
+        var netherSteelSupplier = new TierItemsCreator("nether_steel_ingot", EMaterialType.STEEL, ModTiers.STEEL);
+        netherSteelSupplier.createToolItem(EItemCategory.Axe, 7.5F, -3.0F);
+        netherSteelSupplier.createToolItem(EItemCategory.PickAxe, 3, -2.8f);
+        netherSteelSupplier.createToolItem(EItemCategory.Sword, 5, -2.2F);
+        netherSteelSupplier.createToolItem(EItemCategory.Shovel, 3.5F, -2.8F);
+        netherSteelSupplier.createToolItem(EItemCategory.Hoe, 1, -1.8F);
+        netherSteelSupplier.createToolItem(EItemCategory.Knife, 3, -1.2F);
+        netherSteelSupplier.createBigToolItem(EItemCategory.BattleAxe, 13, -3.4F);
+        netherSteelSupplier.createBigToolItem(EItemCategory.LongSword, 8, -3F);
+        netherSteelSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
+        netherSteelSupplier.createBasicItem(EItemCategory.Ingot);
     }
 
     public static void register(IEventBus bus) {

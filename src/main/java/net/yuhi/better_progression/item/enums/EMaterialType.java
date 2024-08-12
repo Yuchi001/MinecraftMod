@@ -5,6 +5,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public enum EMaterialType {
+    NETHERRITE("netherrite"),
+    ENDERRITE("enderrite"),
     TIN("tin"),
     GOLD("gold"),
     BRONZE("bronze"),

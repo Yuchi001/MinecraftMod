@@ -12,7 +12,6 @@ import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EItemType;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 public class TierItemsCreator {
@@ -129,6 +128,44 @@ public class TierItemsCreator {
         };
         
         createArmorSet(registerArmorItem, false);
+    }
+
+    public void createEndGameArmorSet() {
+        java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerNetherArmorItem = (item, category) -> {
+            var name = "nether_" + material_type.GetName() + "_" + category.getName();
+            RegistryObject<Item> registryItem = ModItems.ITEMS.register(name, item);
+            var itemInfo = new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);
+            ModItems.REGISTERED_ITEMS.add(itemInfo);
+        };
+
+        java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerEndArmorItem = (item, category) -> {
+            var name = "end_" + material_type.GetName() + "_" + category.getName();
+            RegistryObject<Item> registryItem = ModItems.ITEMS.register(name, item);
+            var itemInfo = new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);
+            ModItems.REGISTERED_ITEMS.add(itemInfo);
+        };
+
+        createArmorSet(registerEndArmorItem, false);
+        createArmorSet(registerNetherArmorItem, false);
+    }
+
+    public void createEndGameChainmailArmorSet() {
+        java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerNetherArmorItem = (item, category) -> {
+            var name = "nether_" + material_type.GetName() + "_chainmail_" + category.getName();
+            RegistryObject<Item> registryItem = ModItems.ITEMS.register(name, item);
+            var itemInfo = new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);
+            ModItems.REGISTERED_ITEMS.add(itemInfo);
+        };
+
+        java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerEndArmorItem = (item, category) -> {
+            var name = "end_" + material_type.GetName() + "_chainmail_" + category.getName();
+            RegistryObject<Item> registryItem = ModItems.ITEMS.register(name, item);
+            var itemInfo = new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);
+            ModItems.REGISTERED_ITEMS.add(itemInfo);
+        };
+
+        createArmorSet(registerNetherArmorItem, true);
+        createArmorSet(registerEndArmorItem, true);
     }
 
     public void createChainmailArmorSet() {

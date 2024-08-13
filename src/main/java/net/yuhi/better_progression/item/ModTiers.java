@@ -13,30 +13,30 @@ public class ModTiers {
     public static final ForgeTier COPPER = 
             new ForgeTier(
                     1, 
-                    250, 
-                    5.0f, 
-                    1.5f, 
-                    10, 
+                    150,
+                    6.5f,
+                    3.0f,
+                    20,
             BlockTags.NEEDS_STONE_TOOL, 
             () -> Ingredient.of(Items.COPPER_INGOT));
 
     public static final ForgeTier BRONZE =
             new ForgeTier(
                     3,
-                    59,
-                    4.5f,
+                    300,
+                    8.5f,
                     4.0f,
-                    22,
+                    10,
                     BlockTags.NEEDS_DIAMOND_TOOL,
                     () -> Ingredient.of(getItem(EItemCategory.Ingot, EMaterialType.BRONZE)));
 
     public static final ForgeTier STEEL =
             new ForgeTier(
                     3,
-                    750,
-                    5.5f,
-                    1.5f,
-                    1,
+                    500,
+                    8.0f,
+                    3f,
+                    10,
                     BlockTags.NEEDS_DIAMOND_TOOL,
                     () -> Ingredient.of(getItem(EItemCategory.Ingot, EMaterialType.STEEL)));
 
@@ -44,9 +44,9 @@ public class ModTiers {
             new ForgeTier(
                     3,
                     500,
-                    7f,
-                    3.0f,
-                    10,
+                    8f,
+                    3.5f,
+                    15,
                     BlockTags.NEEDS_DIAMOND_TOOL,
                     () -> Ingredient.of(Items.DIAMOND));
 
@@ -54,9 +54,29 @@ public class ModTiers {
             new ForgeTier(
                     3,
                     19,
-                    7,
-                    2.5f,
-                    5,
+                    6.0f,
+                    5.0f,
+                    1,
                     BlockTags.NEEDS_DIAMOND_TOOL,
                     () -> Ingredient.of(Items.OBSIDIAN));
+
+    public static final ForgeTier ENDGAMEBRONZE =
+            new ForgeTier(
+                    4,
+                    600,
+                    9.0f,
+                    4.5f,
+                    15,
+                    BlockTags.NEEDS_DIAMOND_TOOL,
+                    () -> Ingredient.of(Items.NETHERITE_INGOT));
+
+    public static final ForgeTier ENDGAMESTEEL =
+            new ForgeTier(
+                    4,
+                    1000,
+                    9.0f,
+                    4.0f,
+                    15,
+                    BlockTags.NEEDS_DIAMOND_TOOL,
+                    () -> Ingredient.of(Items.NETHERITE_INGOT));
 }

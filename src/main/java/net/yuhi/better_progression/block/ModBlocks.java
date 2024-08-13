@@ -16,6 +16,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.BetterBlastFurnace.BetterBlastFurnaceBlock;
+import net.yuhi.better_progression.block.custom.StanninOreBlock;
 import net.yuhi.better_progression.item.ModItems;
 
 import java.util.ArrayList;

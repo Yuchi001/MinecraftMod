@@ -1,4 +1,4 @@
-package net.yuhi.better_progression.block;
+package net.yuhi.better_progression.block.custom;
 
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.item.Item;

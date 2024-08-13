@@ -17,11 +17,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         for (ModBlocks.BlockRegistryPair<Block> blockData : ModBlocks.BLOCKS_DATA) {
+            Block block;
             switch (blockData.blockType) {
                 case Simple -> blockWithItem(blockData.block);
             }
         }
-            
     }
     
     private void blockWithItem(RegistryObject<Block> block) {

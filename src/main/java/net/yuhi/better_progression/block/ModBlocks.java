@@ -6,6 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -16,6 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.BetterBlastFurnace.BetterBlastFurnaceBlock;
+import net.yuhi.better_progression.block.custom.BrakeRail;
 import net.yuhi.better_progression.block.custom.StanninOreBlock;
 import net.yuhi.better_progression.item.ModItems;
 
@@ -68,6 +70,14 @@ public class ModBlocks {
             () -> new BetterBlastFurnaceBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(litBlockEmission(13))),
             EBlockType.Vanilla);
 
+    public static final RegistryObject<Block> BRAKE_RAIL = registerBlock("brake_rail",
+            () -> new BrakeRail(BlockBehaviour.Properties.copy(Blocks.RAIL)),
+            EBlockType.Custom);
+
+    public static final RegistryObject<Block> DIRECTIONAL_BRAKE_RAIL = registerBlock("directional_brake_rail",
+            () -> new BrakeRail(BlockBehaviour.Properties.copy(Blocks.RAIL)),
+            EBlockType.Custom);
+
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, EBlockType blockType) {
         RegistryObject<T> blockObj = BLOCKS.register(name, block);
         registerBlockItem(name, blockObj);
@@ -106,6 +116,7 @@ public class ModBlocks {
     
     public enum EBlockType {
         Simple,
-        Vanilla
+        Vanilla,
+        Custom
     }
 }

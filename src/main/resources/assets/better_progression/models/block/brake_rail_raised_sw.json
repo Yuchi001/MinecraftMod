@@ -1,0 +1,6 @@
+﻿{
+  "parent": "minecraft:block/template_rail_raised_sw",
+  "textures": {
+    "rail": "better_progression:block/brake_rail"
+  }
+}

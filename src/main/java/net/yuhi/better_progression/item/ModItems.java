@@ -113,7 +113,7 @@ public class ModItems {
         obsidianSupplier.createToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
         obsidianSupplier.createSimpleToolItem(EItemCategory.Club, 4.0F, -3F);
 
-        var netherSteelSupplier = new TierItemsCreator("netherite_ingot", EMaterialType.NETHERITE, ModTiers.ENDGAMESTEEL, true);
+        /*var netherSteelSupplier = new TierItemsCreator("netherite_ingot", EMaterialType.NETHERITE, ModTiers.ENDGAMESTEEL, true);
         netherSteelSupplier.createToolItem(EItemCategory.Axe, 6.5f, -3.1F);
         netherSteelSupplier.createToolItem(EItemCategory.PickAxe, 1.5f, -2.8f);
         netherSteelSupplier.createToolItem(EItemCategory.Sword, 3.5f, -2.4F);
@@ -171,7 +171,7 @@ public class ModItems {
         endBronzeSupplier.createBasicItem(EItemCategory.Chainmail);
         endBronzeSupplier.createBasicItem(EItemCategory.Plate);
         endBronzeSupplier.createArmorSet();
-        endBronzeSupplier.createChainmailArmorSet();
+        endBronzeSupplier.createChainmailArmorSet();*/
     }
 
     public static void register(IEventBus bus) {

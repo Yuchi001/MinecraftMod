@@ -1,4 +1,6 @@
-// 1.19.4	2024-08-01T00:51:30.2256728	Loot Tables
+// 1.19.4	2024-08-14T00:08:32.4685528	Loot Tables
+4354079df0e4b323d5f377c422ca1f892e699781 data/better_progression/loot_tables/blocks/brake_rail.json
+01314dd0538ecca89b0240b250a8ac8c5d809b80 data/better_progression/loot_tables/blocks/directional_brake_rail.json
 28b6fea8b259a6cf0935f2b2e50ea84d6e9187d7 data/better_progression/loot_tables/blocks/pink_quartz_ore.json
 31abea0ea1982d1a0f9df46fbabd81903943a41c data/better_progression/loot_tables/blocks/raw_tin_block.json
 21da5607068e24047c436240433d6650d7423c49 data/better_progression/loot_tables/blocks/stannin_ore.json

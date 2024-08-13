@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "minecraft:gold_ingot"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "c c",
+    "csc",
+    "crc"
+  ],
+  "result": {
+    "count": 16,
+    "item": "minecraft:powered_rail"
+  },
+  "show_notification": true
+}

@@ -8,7 +8,7 @@ public enum EMaterialType {
     NETHERRITE("netherrite"),
     ENDERRITE("enderrite"),
     TIN("tin"),
-    GOLD("gold"),
+    GOLD("golden"),
     BRONZE("bronze"),
     STEEL("steel"),
     COPPER("copper"),

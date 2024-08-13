@@ -65,6 +65,9 @@ public class ModItems {
         copperSupplier.createToolItem(EItemCategory.Machete, 1.5F, -1.4F);
         copperSupplier.createBigToolItem(EItemCategory.BattleAxe, 8.0f, -3.6F);
         copperSupplier.createBigToolItem(EItemCategory.LongSword, 5.0f, -2.9F);
+        copperSupplier.createBasicItem(EItemCategory.Plate);
+        copperSupplier.createBasicItem(EItemCategory.Chainmail);
+        copperSupplier.createBasicItem(EItemCategory.Nugget);
         copperSupplier.createArmorSet();
         copperSupplier.createChainmailArmorSet();
 
@@ -79,6 +82,9 @@ public class ModItems {
         bronzeSupplier.createBigToolItem(EItemCategory.BattleAxe, 8.0f, -3.6F);
         bronzeSupplier.createBigToolItem(EItemCategory.LongSword, 5.0f, -2.9F);
         bronzeSupplier.createBasicItem(EItemCategory.Ingot);
+        bronzeSupplier.createBasicItem(EItemCategory.Chainmail);
+        bronzeSupplier.createBasicItem(EItemCategory.Plate);
+        bronzeSupplier.createBasicItem(EItemCategory.Nugget);
         bronzeSupplier.createArmorSet();
         bronzeSupplier.createChainmailArmorSet();
 
@@ -93,6 +99,9 @@ public class ModItems {
         steelSupplier.createBigToolItem(EItemCategory.BattleAxe, 7.0f, -3.6F);
         steelSupplier.createBigToolItem(EItemCategory.LongSword, 4.0f, -2.9F);
         steelSupplier.createBasicItem(EItemCategory.Ingot);
+        steelSupplier.createBasicItem(EItemCategory.Chainmail);
+        steelSupplier.createBasicItem(EItemCategory.Plate);
+        steelSupplier.createBasicItem(EItemCategory.Nugget);
         steelSupplier.createArmorSet();
         steelSupplier.createChainmailArmorSet();
         
@@ -104,7 +113,7 @@ public class ModItems {
         obsidianSupplier.createToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
         obsidianSupplier.createSimpleToolItem(EItemCategory.Club, 4.0F, -3F);
 
-        var netherSteelSupplier = new TierItemsCreator("nether_steel_ingot", EMaterialType.STEEL, ModTiers.STEEL);
+        /*var netherSteelSupplier = new TierItemsCreator("nether_steel_ingot", EMaterialType.STEEL, ModTiers.STEEL);
         netherSteelSupplier.createToolItem(EItemCategory.Axe, 7.5F, -3.0F);
         netherSteelSupplier.createToolItem(EItemCategory.PickAxe, 3, -2.8f);
         netherSteelSupplier.createToolItem(EItemCategory.Sword, 5, -2.2F);
@@ -114,7 +123,7 @@ public class ModItems {
         netherSteelSupplier.createBigToolItem(EItemCategory.BattleAxe, 13, -3.4F);
         netherSteelSupplier.createBigToolItem(EItemCategory.LongSword, 8, -3F);
         netherSteelSupplier.createToolItem(EItemCategory.Machete, 0.5F, -1.4F);
-        netherSteelSupplier.createBasicItem(EItemCategory.Ingot);
+        netherSteelSupplier.createBasicItem(EItemCategory.Ingot);*/
     }
 
     public static void register(IEventBus bus) {

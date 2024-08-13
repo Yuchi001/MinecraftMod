@@ -37,19 +37,19 @@
     "better_progression:copper_hoe",
     "better_progression:copper_battleaxe",
     "better_progression:copper_longsword",
-    "better_progression:steel_axe",
-    "better_progression:steel_pickaxe",
-    "better_progression:steel_sword",
-    "better_progression:steel_shovel",
-    "better_progression:steel_hoe",
-    "better_progression:steel_battleaxe",
-    "better_progression:steel_longsword",
     "better_progression:bronze_axe",
     "better_progression:bronze_pickaxe",
     "better_progression:bronze_sword",
     "better_progression:bronze_shovel",
     "better_progression:bronze_hoe",
     "better_progression:bronze_battleaxe",
-    "better_progression:bronze_longsword"
+    "better_progression:bronze_longsword",
+    "better_progression:steel_axe",
+    "better_progression:steel_pickaxe",
+    "better_progression:steel_sword",
+    "better_progression:steel_shovel",
+    "better_progression:steel_hoe",
+    "better_progression:steel_battleaxe",
+    "better_progression:steel_longsword"
   ]
 }

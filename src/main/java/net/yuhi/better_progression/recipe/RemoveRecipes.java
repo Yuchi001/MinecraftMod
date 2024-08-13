@@ -2,6 +2,9 @@ package net.yuhi.better_progression.recipe;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -32,6 +35,12 @@ public class RemoveRecipes {
                 EMaterialType.DIAMOND
         };
         
+        EMaterialType[] vanillaArmorMaterials = {
+                EMaterialType.IRON,
+                EMaterialType.DIAMOND,
+                EMaterialType.GOLD,
+        };
+        
         var recipesToRemove = new ArrayList<ResourceLocation>();
         for (var material : vanillaToolMaterials) {
             for (var tool : getVanillaTools()) {
@@ -39,6 +48,16 @@ public class RemoveRecipes {
                 recipesToRemove.add(new ResourceLocation("minecraft", recipeName));
             }
         }
+        for (var material : vanillaArmorMaterials) {
+            for (var armor : ArmorItem.Type.values()) {
+                var recipeName = material.GetName() + "_" + armor.getName();
+                recipesToRemove.add(new ResourceLocation("minecraft", recipeName));
+            }
+        }
+        recipesToRemove.add(new ResourceLocation("minecraft", "rail"));
+        recipesToRemove.add(new ResourceLocation("minecraft", "powered_rail"));
+        recipesToRemove.add(new ResourceLocation("minecraft", "detector_rail"));
+        recipesToRemove.add(new ResourceLocation("minecraft", "activator_rail"));
 
         var recipes = recipeManager.getRecipes();
         for (ResourceLocation recipeId : recipesToRemove) {

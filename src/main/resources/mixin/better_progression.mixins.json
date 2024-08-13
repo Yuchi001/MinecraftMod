@@ -8,6 +8,7 @@
     "ItemInHandRendererMixin",
     "ItemStackMixin",
     "LegacySmithingMenuMixin",
+    "MinecartMixin",
     "accessor.ArmorItemAccessor",
     "accessor.ArmorMaterialsAccessor",
     "accessor.ItemCombinerMenuAccessor",

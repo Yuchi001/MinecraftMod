@@ -113,10 +113,10 @@ public class TierItemsCreator {
         Supplier<ArmorItem> leggings = () -> new ArmorItem(armorMaterial, ArmorItem.Type.LEGGINGS, new Item.Properties());
         Supplier<ArmorItem> boots = () -> new ArmorItem(armorMaterial, ArmorItem.Type.BOOTS, new Item.Properties());
 
-        registerArmorItem.accept(helmet, EItemCategory.Helmet);
-        registerArmorItem.accept(chestplate, EItemCategory.Chestplate);
-        registerArmorItem.accept(leggings, EItemCategory.Leggings);
-        registerArmorItem.accept(boots, EItemCategory.Boots);
+        registerArmorItem.accept(helmet, chainmail ? EItemCategory.ChainmailHelmet : EItemCategory.Helmet);
+        registerArmorItem.accept(chestplate, chainmail ? EItemCategory.ChainmailChestplate : EItemCategory.Chestplate);
+        registerArmorItem.accept(leggings, chainmail ? EItemCategory.ChainmailLeggings : EItemCategory.Leggings);
+        registerArmorItem.accept(boots, chainmail ? EItemCategory.ChainmailBoots : EItemCategory.Boots);
     }
 
     public void createArmorSet() {
@@ -128,6 +128,17 @@ public class TierItemsCreator {
         };
         
         createArmorSet(registerArmorItem, false);
+    }
+
+    public void createChainmailArmorSet() {
+        java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerArmorItem = (item, category) -> {
+            var name = material_type.GetName() + "_" + category.getName();
+            RegistryObject<Item> registryItem = ModItems.ITEMS.register(name, item);
+            var itemInfo = new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);
+            ModItems.REGISTERED_ITEMS.add(itemInfo);
+        };
+
+        createArmorSet(registerArmorItem, true);
     }
 
     public void createEndGameArmorSet() {
@@ -166,17 +177,6 @@ public class TierItemsCreator {
 
         createArmorSet(registerNetherArmorItem, true);
         createArmorSet(registerEndArmorItem, true);
-    }
-
-    public void createChainmailArmorSet() {
-        java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerArmorItem = (item, category) -> {
-            var name = material_type.GetName() + "_chainmail_" + category.getName();
-            RegistryObject<Item> registryItem = ModItems.ITEMS.register(name, item);
-            var itemInfo = new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);
-            ModItems.REGISTERED_ITEMS.add(itemInfo);
-        };
-
-        createArmorSet(registerArmorItem, true);
     }
 
     public void createBasicItem(EItemCategory itemCategory) {

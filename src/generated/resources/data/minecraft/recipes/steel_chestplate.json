@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:leather_chestplate"
+    },
+    "*": {
+      "item": "better_progression:steel_plate"
+    }
+  },
+  "pattern": [
+    " * ",
+    "*#*",
+    " * "
+  ],
+  "result": {
+    "item": "better_progression:steel_chestplate"
+  },
+  "show_notification": true
+}

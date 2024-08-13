@@ -1,6 +1,9 @@
 package net.yuhi.better_progression.item.enums;
 
 public enum EItemCategory {
+    Plate("plate"),
+    Nugget("nugget"),
+    Chainmail("chainmail"),
     RawMaterial("raw", true),
     Ingot("ingot"),
     Material(""),
@@ -18,7 +21,11 @@ public enum EItemCategory {
     Boots("boots"),
     Chestplate("chestplate"),
     Leggings("leggings"),
-    Helmet("helmet");
+    Helmet("helmet"),
+    ChainmailBoots("chainmail_boots"),
+    ChainmailChestplate("chainmail_chestplate"),
+    ChainmailLeggings("chainmail_leggings"),
+    ChainmailHelmet("chainmail_helmet");
 
     EItemCategory(String name) {
         this.name = name;

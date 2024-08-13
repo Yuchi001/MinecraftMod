@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:leather_leggings"
+    },
+    "*": {
+      "item": "better_progression:bronze_plate"
+    }
+  },
+  "pattern": [
+    " * ",
+    "*#*",
+    " * "
+  ],
+  "result": {
+    "item": "better_progression:bronze_leggings"
+  },
+  "show_notification": true
+}

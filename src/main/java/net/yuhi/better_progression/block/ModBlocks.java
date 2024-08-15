@@ -71,12 +71,12 @@ public class ModBlocks {
             EBlockType.Vanilla);
 
     public static final RegistryObject<Block> BRAKE_RAIL = registerBlock("brake_rail",
-            () -> new BrakeRail(BlockBehaviour.Properties.copy(Blocks.RAIL)),
-            EBlockType.Custom);
+            BrakeRail::new,
+            EBlockType.Rail);
 
-    public static final RegistryObject<Block> DIRECTIONAL_BRAKE_RAIL = registerBlock("directional_brake_rail",
-            () -> new BrakeRail(BlockBehaviour.Properties.copy(Blocks.RAIL)),
-            EBlockType.Custom);
+    /*public static final RegistryObject<Block> DIRECTIONAL_BRAKE_RAIL = registerBlock("directional_brake_rail",
+            BrakeRail::new,
+            EBlockType.Rail);*/
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, EBlockType blockType) {
         RegistryObject<T> blockObj = BLOCKS.register(name, block);
@@ -117,6 +117,7 @@ public class ModBlocks {
     public enum EBlockType {
         Simple,
         Vanilla,
+        Rail,
         Custom
     }
 }

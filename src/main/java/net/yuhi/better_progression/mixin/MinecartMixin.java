@@ -1,14 +1,17 @@
 package net.yuhi.better_progression.mixin;
 
+import com.ibm.icu.impl.Trie;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.Minecart;
 import net.minecraft.world.level.block.BaseRailBlock;
+import net.minecraft.world.level.block.RailBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.phys.Vec3;
 import net.yuhi.better_progression.block.custom.BrakeRail;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -20,22 +23,26 @@ public abstract class MinecartMixin {
     @Inject(method = "moveAlongTrack", at = @At("HEAD"))
     private void increaseSpeedAlongTrack(BlockPos pPos, BlockState pState, CallbackInfo ci) {
         var cart = (AbstractMinecart) (Object) this;
-        if (cart instanceof Minecart) return;
+        if (!(cart instanceof Minecart)) return;
 
-        double normalSpeedMultiplier = 2.0;
-        double brakeMultiplier = 0.5;
+        double normalSpeedMultiplier = 5.0;
+        double brakeMultiplier = 5.0;
 
         if (!(pState.getBlock() instanceof BaseRailBlock railBlock)) return;
 
-        var speedMultiplier = railBlock instanceof BrakeRail brakeRail && shouldBrake(cart, brakeRail, pState) ? brakeMultiplier : normalSpeedMultiplier;
+        var speedMultiplier = shouldBrake(cart, railBlock, pState) ? brakeMultiplier : normalSpeedMultiplier;
 
+        cart.setCurrentCartSpeedCapOnRail(shouldBrake(cart, railBlock, pState) ? 0.4f : 0.8f);
+        
         cart.setDeltaMovement(cart.getDeltaMovement().multiply(speedMultiplier, 1.0, speedMultiplier));
     }
 
-    private boolean shouldBrake(AbstractMinecart cart, BrakeRail brakeRail, BlockState pState) {
-        if (brakeRail == null) return false;
+    private boolean shouldBrake(AbstractMinecart cart, BaseRailBlock railBlock, BlockState pState) {
+        if (!(railBlock instanceof BrakeRail)) return false;
+        
+        if(railBlock.getClass() == BrakeRail.class) return true;
 
-        RailShape railShape = pState.getValue(((BaseRailBlock) pState.getBlock()).getShapeProperty());
+        var railShape = pState.getValue(((BaseRailBlock) pState.getBlock()).getShapeProperty());
 
         Vec3 motion = cart.getDeltaMovement();
 

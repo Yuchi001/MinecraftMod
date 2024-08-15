@@ -1,6 +1,8 @@
 package net.yuhi.better_progression;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -88,7 +90,8 @@ public class BetterProgression
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            
+            //noinspection removal
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BRAKE_RAIL.get(), RenderType.cutout());
         }
     }
 }

@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.tag.ModTags;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -20,7 +21,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider pProvider) {
+    protected void addTags(HolderLookup.@NotNull Provider pProvider) {
+        this.tag(BlockTags.RAILS).add(
+                ModBlocks.BRAKE_RAIL.get()
+        );
+        
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
                 ModBlocks.TIN_BLOCK.get(),
                 ModBlocks.RAW_TIN_BLOCK.get(),

@@ -1,4 +1,4 @@
-// 1.19.4	2024-08-13T02:21:18.7890485	Item Models: better_progression
+// 1.19.4	2024-08-16T02:44:01.8399485	Item Models: better_progression
 070e97230f9570aed29526e5fe4de47f33a09376 assets/better_progression/models/item/bronze_axe.json
 301b9fe194d1ab50bb530df36dbeb266db3b7e1d assets/better_progression/models/item/bronze_boots.json
 78194bc229a8ac2e9f8825377a5e7602a46f3ad4 assets/better_progression/models/item/bronze_chainmail.json
@@ -39,6 +39,8 @@ c0c5addb7f29ff26c733a4bdc3dc1bca79afbcf3 assets/better_progression/models/item/c
 c786b14fe517913d5bec9b130c425bd1aa28455e assets/better_progression/models/item/diamond_club.json
 55d65db43b81f49feb2c62182d37d096aa444190 assets/better_progression/models/item/diamond_dagger.json
 abe15169a3245ee9b46d6c460c37b49b84baa97c assets/better_progression/models/item/hilt.json
+0a6dd6abb3b3711e9577ead4a13db11d54a951d4 assets/better_progression/models/item/iron_knife.json
+4e895a79025cbf9c4835f0f8dd46f2c3f69f2d19 assets/better_progression/models/item/iron_machete.json
 686ab6a3aabcbadd623a9dc9f3e87dbe78c5e39a assets/better_progression/models/item/obsidian_club.json
 50f7feef5d211963de6d2a00eab3b4e42182c296 assets/better_progression/models/item/obsidian_dagger.json
 f83cc90fb8ca2d93d887d77f357a8778227a2141 assets/better_progression/models/item/pink_quartz.json

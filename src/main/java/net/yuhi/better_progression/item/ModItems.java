@@ -10,6 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.item.custom.*;
 import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.EItemType;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 import net.yuhi.better_progression.item.enums.EModArmorMaterial;
 import net.yuhi.better_progression.item.utils.ItemInfo;
@@ -104,6 +105,12 @@ public class ModItems {
         steelSupplier.createBasicItem(EItemCategory.Nugget);
         steelSupplier.createArmorSet();
         steelSupplier.createChainmailArmorSet();
+        
+        var ironSupplier = new TierItemsCreator("iron_ingot", EMaterialType.IRON, Tiers.IRON, true);
+        ironSupplier.createToolItem(EItemCategory.Knife, 1.0f, -1.4F);
+        ironSupplier.createToolItem(EItemCategory.Machete, 1.0F, -1.4F);
+        ironSupplier.createBigToolItem(EItemCategory.BattleAxe, 7.0f, -3.6F);
+        ironSupplier.createBigToolItem(EItemCategory.LongSword, 4.0f, -2.9F);
         
         var tinSupplier = new TierItemsCreator(EMaterialType.TIN);
         tinSupplier.createBasicItem(EItemCategory.Ingot);

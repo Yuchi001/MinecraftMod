@@ -19,22 +19,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractMinecart.class)
 public abstract class MinecartMixin {
+    private boolean isBraking = false;
 
-    @Inject(method = "moveAlongTrack", at = @At("HEAD"))
+    @Inject(method = "moveAlongTrack", at = @At("TAIL"))
     private void increaseSpeedAlongTrack(BlockPos pPos, BlockState pState, CallbackInfo ci) {
         var cart = (AbstractMinecart) (Object) this;
         if (!(cart instanceof Minecart)) return;
 
         double normalSpeedMultiplier = 5.0;
-        double brakeMultiplier = 5.0;
 
         if (!(pState.getBlock() instanceof BaseRailBlock railBlock)) return;
-
-        var speedMultiplier = shouldBrake(cart, railBlock, pState) ? brakeMultiplier : normalSpeedMultiplier;
-
-        cart.setCurrentCartSpeedCapOnRail(shouldBrake(cart, railBlock, pState) ? 0.4f : 0.8f);
         
-        cart.setDeltaMovement(cart.getDeltaMovement().multiply(speedMultiplier, 1.0, speedMultiplier));
+        isBraking = shouldBrake(cart, railBlock, pState);
+        
+        cart.setDeltaMovement(cart.getDeltaMovement().multiply(normalSpeedMultiplier, 1.0, normalSpeedMultiplier));
     }
 
     private boolean shouldBrake(AbstractMinecart cart, BaseRailBlock railBlock, BlockState pState) {
@@ -57,7 +55,7 @@ public abstract class MinecartMixin {
 
     @Inject(method = "getMaxSpeedWithRail", at = @At("HEAD"), cancellable = true)
     private void getMaxSpeedWithRail(CallbackInfoReturnable<Double> cir) {
-        double newMaxSpeed = 0.8;
+        double newMaxSpeed = isBraking ? 0.4 : 0.8;
         cir.setReturnValue(newMaxSpeed);
     }
 }

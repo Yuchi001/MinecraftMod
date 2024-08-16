@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "better_progression:hilt"
+    },
+    "*": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": []
+  },
+  "pattern": [
+    " *S",
+    " #*",
+    "#  "
+  ],
+  "result": {
+    "item": "better_progression:iron_battleaxe"
+  },
+  "show_notification": true
+}

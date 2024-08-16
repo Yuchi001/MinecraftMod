@@ -50,6 +50,8 @@
     "better_progression:steel_shovel",
     "better_progression:steel_hoe",
     "better_progression:steel_battleaxe",
-    "better_progression:steel_longsword"
+    "better_progression:steel_longsword",
+    "better_progression:iron_battleaxe",
+    "better_progression:iron_longsword"
   ]
 }

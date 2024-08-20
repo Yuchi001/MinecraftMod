@@ -36,26 +36,39 @@ public abstract class MinecartMixin {
     }
 
     private boolean shouldBrake(AbstractMinecart cart, BaseRailBlock railBlock, BlockState pState) {
-        if (!(railBlock instanceof BrakeRail)) return false;
-        
         if(railBlock.getClass() == BrakeRail.class) return true;
 
         var railShape = pState.getValue(((BaseRailBlock) pState.getBlock()).getShapeProperty());
+
+        switch (railShape) {
+            case ASCENDING_NORTH -> {
+                return cart.getDeltaMovement().z < 0; // Jedzie na północ pod górę
+            }
+            case ASCENDING_SOUTH -> {
+                return cart.getDeltaMovement().z > 0; // Jedzie na południe pod górę
+            }
+            case ASCENDING_EAST -> {
+                return cart.getDeltaMovement().x > 0; // Jedzie na wschód pod górę
+            }
+            case ASCENDING_WEST -> {
+                return  cart.getDeltaMovement().x < 0; // Jedzie na zachód pod górę
+            }
+        }
+        
+        if (!(railBlock instanceof BrakeRail)) return false;
 
         Vec3 motion = cart.getDeltaMovement();
 
         return switch (railShape) {
             case NORTH_SOUTH -> motion.z > 0 || motion.z < 0;
             case EAST_WEST -> motion.x > 0 || motion.x < 0;
-            case ASCENDING_NORTH, ASCENDING_SOUTH -> Math.signum(motion.z) == (railShape == RailShape.ASCENDING_NORTH ? -1 : 1);
-            case ASCENDING_EAST, ASCENDING_WEST -> Math.signum(motion.x) == (railShape == RailShape.ASCENDING_EAST ? -1 : 1);
             default -> false;
         };
     }
 
     @Inject(method = "getMaxSpeedWithRail", at = @At("HEAD"), cancellable = true)
     private void getMaxSpeedWithRail(CallbackInfoReturnable<Double> cir) {
-        double newMaxSpeed = isBraking ? 0.4 : 0.8;
+        double newMaxSpeed = isBraking ? 0.4 : 1.1;
         cir.setReturnValue(newMaxSpeed);
     }
 }

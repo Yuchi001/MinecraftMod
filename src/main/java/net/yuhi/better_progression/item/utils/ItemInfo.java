@@ -16,9 +16,11 @@ public final class ItemInfo<T extends Item> {
     public final String mod_id;
     public final String basis;
     public final EMaterialType material_type;
+    public final EMaterialType sub_material_type;
     public final Tier tier;
     public final TagKey<Item> tag;
     public final boolean has_default_basis;
+    public final boolean is_upgrade;
 
     public ItemInfo(RegistryObject<T> item, EItemCategory category, EItemType type, String modId, String basis, TagKey<Item> tag, EMaterialType material_type, Tier tier, boolean has_default_basis) {
         this.item = item;
@@ -30,6 +32,22 @@ public final class ItemInfo<T extends Item> {
         this.tag = tag;
         this.material_type = material_type;
         this.has_default_basis = has_default_basis;
+        this.is_upgrade = false;
+        this.sub_material_type = null;
+    }
+
+    public ItemInfo(RegistryObject<T> item, EItemCategory category, EItemType type, String modId, String basis, TagKey<Item> tag, EMaterialType material_type, EMaterialType sub_material_type, Tier tier, boolean has_default_basis) {
+        this.item = item;
+        this.category = category;
+        this.type = type;
+        this.mod_id = modId;
+        this.basis = basis;
+        this.tier = tier;
+        this.tag = tag;
+        this.material_type = material_type;
+        this.sub_material_type = sub_material_type;
+        this.has_default_basis = has_default_basis;
+        this.is_upgrade = true;
     }
 
 
@@ -43,5 +61,7 @@ public final class ItemInfo<T extends Item> {
         this.tag = null;
         this.material_type = null;
         this.has_default_basis = false;
+        this.is_upgrade = false;
+        this.sub_material_type = null;
     }
 }

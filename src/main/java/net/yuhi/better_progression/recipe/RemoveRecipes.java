@@ -44,7 +44,7 @@ public class RemoveRecipes {
         var recipesToRemove = new ArrayList<ResourceLocation>();
         for (var material : vanillaToolMaterials) {
             for (var tool : getVanillaTools()) {
-                var recipeName = tool.getFullName(material.GetName());
+                var recipeName = tool.getFullName(material);
                 recipesToRemove.add(new ResourceLocation("minecraft", recipeName));
             }
         }

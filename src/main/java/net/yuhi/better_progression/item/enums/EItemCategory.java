@@ -40,9 +40,15 @@ public enum EItemCategory {
     private final String name;
     private final boolean nameFirst;
 
-    public String getFullName(String tierName) {
-        if(name.isEmpty()) return tierName;
-        return nameFirst ? name.toLowerCase() + "_" + tierName : tierName + "_" + name.toLowerCase();
+    public String getFullName(EMaterialType materialType) {
+        var materialTypeName = materialType.GetName();
+        if(name.isEmpty()) return materialTypeName;
+        return nameFirst ? name.toLowerCase() + "_" + materialTypeName : materialTypeName + "_" + name.toLowerCase();
+    }
+
+    public String getFullName(EMaterialType materialType, EMaterialType sub_material) {
+        if(name.isEmpty()) return materialType.GetName();
+        return materialType.GetName(true) + "_" + sub_material.GetName() + "_" + name.toLowerCase();
     }
 
     public String getName() {

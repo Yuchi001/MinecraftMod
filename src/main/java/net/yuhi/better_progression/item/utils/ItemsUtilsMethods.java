@@ -7,13 +7,11 @@ import net.yuhi.better_progression.item.custom.LongSwordItem;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 import net.yuhi.better_progression.item.enums.EModArmorMaterial;
-import net.yuhi.better_progression.item.interfaces.LayerableItem;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static net.yuhi.better_progression.item.ModItems.REGISTERED_ITEMS;
 
@@ -64,8 +62,8 @@ public final class ItemsUtilsMethods {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory).map(i -> i.item.get()).collect(Collectors.toList());
     }
 
-    public static List<ItemInfo> getItemInfos(EItemCategory itemCategory) {
-        return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory).collect(Collectors.toList());
+    public static List<ItemInfo> getItemInfosForCraftingRecipes(EItemCategory itemCategory) {
+        return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && !i.is_upgrade).collect(Collectors.toList());
     }
 
     public static EModArmorMaterial materialToArmorMaterial(EMaterialType materialType, boolean chainmail) {
@@ -78,6 +76,26 @@ public final class ItemsUtilsMethods {
             }
             case COPPER -> {
                 return chainmail ? EModArmorMaterial.COPPER_CHAINMAIL : EModArmorMaterial.COPPER;
+            }
+        }
+        return null;
+    }
+
+    public static EModArmorMaterial materialToArmorMaterial(EMaterialType materialType, EMaterialType subMaterialType, boolean chainmail) {
+        switch (materialType) {
+            case NETHERITE -> {
+                return switch (subMaterialType) {
+                    case BRONZE -> chainmail ? EModArmorMaterial.NETHER_BRONZE_CHAINMAIL : EModArmorMaterial.NETHER_BRONZE;
+                    case STEEL -> chainmail ? EModArmorMaterial.NETHER_STEEL_CHAINMAIL : EModArmorMaterial.NETHER_STEEL;
+                    default -> null;
+                };
+            }
+            case ENDERITE -> {
+                return switch (subMaterialType) {
+                    case BRONZE -> chainmail ? EModArmorMaterial.ENDER_BRONZE_CHAINMAIL : EModArmorMaterial.ENDER_BRONZE;
+                    case STEEL -> chainmail ? EModArmorMaterial.ENDER_STEEL_CHAINMAIL : EModArmorMaterial.ENDER_STEEL;
+                    default -> null;
+                };
             }
         }
         return null;

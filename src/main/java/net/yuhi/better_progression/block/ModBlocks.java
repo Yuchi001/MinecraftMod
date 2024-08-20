@@ -16,6 +16,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.BetterBlastFurnace.BetterBlastFurnaceBlock;
 import net.yuhi.better_progression.block.custom.BrakeRail;
+import net.yuhi.better_progression.block.custom.DirectionalBrakeRail;
 import net.yuhi.better_progression.block.custom.StanninOreBlock;
 import net.yuhi.better_progression.item.ModItems;
 
@@ -71,10 +72,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> BRAKE_RAIL = registerBlock("brake_rail",
             BrakeRail::new,
             EBlockType.Rail);
-
-    /*public static final RegistryObject<Block> DIRECTIONAL_BRAKE_RAIL = registerBlock("directional_brake_rail",
-            BrakeRail::new,
-            EBlockType.Rail);*/
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, EBlockType blockType) {
         RegistryObject<T> blockObj = BLOCKS.register(name, block);

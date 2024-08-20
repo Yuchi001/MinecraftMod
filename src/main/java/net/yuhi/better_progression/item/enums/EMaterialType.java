@@ -26,6 +26,17 @@ public enum EMaterialType {
         return name;
     }
 
+    public String GetName(boolean get_prefix) {
+        if(!get_prefix) return name;
+
+        return switch (this) {
+            case NETHERITE -> "nether";
+            case ENDERITE -> "ender";
+            default -> name;
+        };
+
+    }
+
     public static EMaterialType GetMaterialType(ItemStack stack) {
         return GetMaterialType(stack.getItem());
     }

@@ -52,6 +52,27 @@
     "better_progression:steel_battleaxe",
     "better_progression:steel_longsword",
     "better_progression:iron_battleaxe",
-    "better_progression:iron_longsword"
+    "better_progression:iron_longsword",
+    "better_progression:nether_steel_axe",
+    "better_progression:nether_steel_pickaxe",
+    "better_progression:nether_steel_sword",
+    "better_progression:nether_steel_shovel",
+    "better_progression:nether_steel_hoe",
+    "better_progression:nether_steel_battleaxe",
+    "better_progression:nether_steel_longsword",
+    "better_progression:nether_bronze_axe",
+    "better_progression:nether_bronze_pickaxe",
+    "better_progression:nether_bronze_sword",
+    "better_progression:nether_bronze_shovel",
+    "better_progression:nether_bronze_hoe",
+    "better_progression:nether_bronze_battleaxe",
+    "better_progression:nether_bronze_longsword",
+    "better_progression:ender_bronze_axe",
+    "better_progression:ender_bronze_pickaxe",
+    "better_progression:ender_bronze_sword",
+    "better_progression:ender_bronze_shovel",
+    "better_progression:ender_bronze_hoe",
+    "better_progression:ender_bronze_battleaxe",
+    "better_progression:ender_bronze_longsword"
   ]
 }

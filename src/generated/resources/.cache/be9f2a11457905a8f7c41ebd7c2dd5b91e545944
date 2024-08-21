@@ -1,2 +1,3 @@
-// 1.19.4	2024-08-20T18:37:37.9163169	Tags for minecraft:item mod id better_progression
-bf700114a37a5addda21a45a29c25957b131b93f data/better_progression/tags/items/layerable.json
+// 1.19.4	2024-08-22T01:04:57.9698063	Tags for minecraft:item mod id better_progression
+c50c988c7d44db2de99194ecbe1276de2b973a1d data/better_progression/tags/items/armor.json
+210b18abb13ce9e3594fec080361196f63211244 data/better_progression/tags/items/layerable.json

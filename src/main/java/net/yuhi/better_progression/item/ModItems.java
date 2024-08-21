@@ -149,7 +149,7 @@ public class ModItems {
         netherBronzeSupplier.createArmorSet();
         netherBronzeSupplier.createChainmailArmorSet();
 
-        /*var endSteelSupplier = new TierItemsCreator("enderite_ingot", EMaterialType.ENDERITE, ModTiers.ENDGAMESTEEL);
+        var endSteelSupplier = new TierItemsCreator("enderite_ingot", EMaterialType.ENDERITE, EMaterialType.STEEL, ModTiers.ENDGAMESTEEL);
         endSteelSupplier.createToolItem(EItemCategory.Axe, 6.0f, -2.6F);
         endSteelSupplier.createToolItem(EItemCategory.PickAxe, 1.0f, -2.3f);
         endSteelSupplier.createToolItem(EItemCategory.Sword, 3.0f, -1.9F);
@@ -160,7 +160,7 @@ public class ModItems {
         endSteelSupplier.createBigToolItem(EItemCategory.BattleAxe, 7.0f, -3.1F);
         endSteelSupplier.createBigToolItem(EItemCategory.LongSword, 4.0f, -2.4F);
         endSteelSupplier.createArmorSet();
-        endSteelSupplier.createChainmailArmorSet();*/
+        endSteelSupplier.createChainmailArmorSet();
 
         var enderBronzeSupplier = new TierItemsCreator("enderite_ingot", EMaterialType.ENDERITE, EMaterialType.BRONZE, ModTiers.ENDGAMEBRONZE);
         enderBronzeSupplier.createToolItem(EItemCategory.Axe, 6.5F, -2.6F);

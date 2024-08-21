@@ -49,8 +49,6 @@ public class ArmorItemMixin {
 
             cir.setReturnValue(modifiedModifiers);
         }
-        catch(Exception ignored) {
-            
-        }
+        catch(Exception ignored) { }
     }
 }

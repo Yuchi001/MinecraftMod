@@ -15,6 +15,7 @@ public enum EItemCategory {
     Knife("knife"),
     Dagger("dagger"),
     Club("club"),
+    Spear("spear"),
     Machete("machete"),
     LongSword("longsword"),
     BattleAxe("battleaxe"),

@@ -34,6 +34,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 case HandHeld -> handHeldItem(item.item);
                 case HandHeldBig -> bigHandHeldItem(item.item);
                 case Armor -> armorItem(item.item);
+                case Chainmail -> armorItem(item.item);
             }
         }
     }

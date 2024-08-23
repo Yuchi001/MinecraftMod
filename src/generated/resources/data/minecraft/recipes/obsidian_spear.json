@@ -3,19 +3,19 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "better_progression:hilt"
+      "tag": "forge:rods/wooden"
     },
     "*": {
-      "item": "minecraft:copper_ingot"
+      "item": "minecraft:obsidian"
     }
   },
   "pattern": [
-    "   ",
-    " * ",
-    " # "
+    "  *",
+    " # ",
+    "#  "
   ],
   "result": {
-    "item": "better_progression:copper_knife"
+    "item": "better_progression:obsidian_spear"
   },
   "show_notification": true
 }

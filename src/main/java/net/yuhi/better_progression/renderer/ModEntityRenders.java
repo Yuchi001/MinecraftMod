@@ -11,7 +11,7 @@ import net.yuhi.better_progression.entity.ModEntityTypes;
 public class ModEntityRenders {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntityTypes.DAGGER.get(), DaggerRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.THROWN_WEAPON.get(), ThrownWeaponRenderer::new);
     }
 }
  

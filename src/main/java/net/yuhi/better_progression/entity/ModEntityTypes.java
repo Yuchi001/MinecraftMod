@@ -13,12 +13,12 @@ import net.yuhi.better_progression.BetterProgression;
 public class ModEntityTypes {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, BetterProgression.MOD_ID);
 
-    public static final RegistryObject<EntityType<ThrownDagger>> DAGGER = ENTITY_TYPES.register("thrown_dagger",
-            () -> EntityType.Builder.<ThrownDagger>of(ThrownDagger::new, MobCategory.MISC)
+    public static final RegistryObject<EntityType<ThrownWeapon>> THROWN_WEAPON = ENTITY_TYPES.register("thrown_weapon",
+            () -> EntityType.Builder.<ThrownWeapon>of(ThrownWeapon::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .clientTrackingRange(4)
                     .updateInterval(20)
-                    .build(new ResourceLocation(BetterProgression.MOD_ID, "thrown_dagger").toString()));
+                    .build(new ResourceLocation(BetterProgression.MOD_ID, "thrown_weapon").toString()));
 
     public static void register(IEventBus bus) {
         ENTITY_TYPES.register(bus);

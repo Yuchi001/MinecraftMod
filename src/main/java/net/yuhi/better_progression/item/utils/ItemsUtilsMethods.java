@@ -5,12 +5,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.item.custom.BattleAxeItem;
 import net.yuhi.better_progression.item.custom.LongSwordItem;
 import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.ELootItemDropProps;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 import net.yuhi.better_progression.item.enums.EModArmorMaterial;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 import static net.yuhi.better_progression.item.ModItems.REGISTERED_ITEMS;
@@ -117,5 +119,36 @@ public final class ItemsUtilsMethods {
             }
         }
         return null;
+    }
+
+    public static int getCount(int defaultCount, SwordItem sword){
+        class DropTuple {
+            public final int count;
+            public final float weight;
+            DropTuple(int count, float weight) {
+                this.count = count;
+                this.weight = weight;
+            }
+        }
+
+        var dropList = new ArrayList<DropTuple>();
+        var maxCount = ELootItemDropProps.getTierDrop(sword.getTier());
+        var weightSum = 0.0f;
+        var baseWeight = 100.0f;
+        for (var i = 0; i <= maxCount; i++) {
+            dropList.add(new DropTuple(i, baseWeight));
+            weightSum += baseWeight;
+            baseWeight /= 1.5f;
+        }
+
+        dropList.sort((o1, o2) -> Float.compare(o1.weight, o2.weight));
+
+        var randomNum = ThreadLocalRandom.current().nextFloat(0.0f, weightSum + 1);
+        for (var dropItem : dropList) {
+            if (randomNum <= dropItem.weight) return dropItem.count + defaultCount;
+            randomNum -= dropItem.weight;
+        }
+
+        return defaultCount;
     }
 }

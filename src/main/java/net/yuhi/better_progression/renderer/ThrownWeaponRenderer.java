@@ -13,45 +13,49 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.entity.ThrownDagger;
+import net.yuhi.better_progression.entity.ThrownWeapon;
 import org.joml.Quaternionf;
 
 @OnlyIn(Dist.CLIENT)
-public class DaggerRenderer extends EntityRenderer<ThrownDagger> {
+public class ThrownWeaponRenderer extends EntityRenderer<ThrownWeapon> {
     private final ItemRenderer itemRenderer;
     private final ItemModelShaper itemModelShaper;
     
     private Quaternionf rotation = null;
 
-    public DaggerRenderer(EntityRendererProvider.Context pContext) {
+    public ThrownWeaponRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
         itemRenderer = pContext.getItemRenderer();
         itemModelShaper = pContext.getItemRenderer().getItemModelShaper();
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ThrownDagger pEntity) {
+    public ResourceLocation getTextureLocation(ThrownWeapon pEntity) {
         return new ResourceLocation(BetterProgression.MOD_ID, "textures/item/" + pEntity.getMaterialType() + "_dagger.png");
     }
 
     @Override
-    public void render(ThrownDagger pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
-        var pItemStack = pEntity.getDagger();
+    public void render(ThrownWeapon pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
+        var pItemStack = pEntity.getItem();
         if (pItemStack.isEmpty()) return;
-
-        float degrees = pEntity.getRotationAnimation(pPartialTicks);
-        
-        if(rotation == null) rotation = this.entityRenderDispatcher.cameraOrientation();
         
         pPoseStack.pushPose();
-        pPoseStack.translate(0.F, 0.15F, 0.0F);
 
-        float yaw = Mth.lerp(pEntity.tickCount, pEntity.yRotO, pEntity.getYRot());
-        float pitch = Mth.lerp(pEntity.tickCount, pEntity.xRotO, pEntity.getXRot());
+        if (pEntity.shouldRotate()) {
+            float degrees = pEntity.getRotationAnimation(pPartialTicks);
+            if(rotation == null) rotation = this.entityRenderDispatcher.cameraOrientation();
+            
+            pPoseStack.translate(0.F, 0.15F, 0.0F);
+            
+            float yaw = Mth.lerp(pEntity.tickCount, pEntity.yRotO, pEntity.getYRot());
+            float pitch = Mth.lerp(pEntity.tickCount, pEntity.xRotO, pEntity.getXRot());
 
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(yaw - 90F));
-        pPoseStack.mulPose(Axis.ZP.rotationDegrees(-pitch - degrees - pEntity.getStartingAngle()));
-
+            pPoseStack.mulPose(Axis.YP.rotationDegrees(yaw - 90F));
+            pPoseStack.mulPose(Axis.ZP.rotationDegrees(-pitch - degrees - pEntity.getStartingAngle()));
+        } else {
+            pPoseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.yRotO, pEntity.getYRot()) - 90.0F));
+            pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.xRotO, pEntity.getXRot()) + 90.0F));
+        }
 
         pPoseStack.scale(0.88F, 0.88F, 0.88F);
 

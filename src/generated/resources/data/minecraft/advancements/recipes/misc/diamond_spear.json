@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bronze_ingot": {
+    "has_diamond": {
       "conditions": {
         "items": [
           {
             "items": [
-              "better_progression:bronze_ingot"
+              "minecraft:diamond"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:bronze_knife"
+        "recipe": "minecraft:diamond_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_bronze_ingot",
+      "has_diamond",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:bronze_knife"
+      "minecraft:diamond_spear"
     ]
   }
 }

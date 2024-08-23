@@ -314,6 +314,7 @@ public class ModRecipeProvider extends RecipeProvider {
                     .save(pWriter, recipeId);
         }
     }
+    
     private void DaggerRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         for (var dagger : getItemInfosForCraftingRecipes(EItemCategory.Dagger)) {
             var builder = ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item) dagger.item.get())
@@ -327,6 +328,21 @@ public class ModRecipeProvider extends RecipeProvider {
             builder.save(pWriter, recipeId);
         }
     }
+
+    private void SpearRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        for (var spear : getItemInfosForCraftingRecipes(EItemCategory.Spear)) {
+            var builder = ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item) spear.item.get())
+                    .pattern("  *")
+                    .pattern(" # ")
+                    .pattern("#  ")
+                    .define('#', Tags.Items.RODS_WOODEN);
+            var recipeId = spear.tag == null ? defineBasisItemSchema(spear, builder) : defineBasisTagSchema(spear, builder);
+            if(recipeId.isEmpty()) continue;
+
+            builder.save(pWriter, recipeId);
+        }
+    }
+    
     private void ClubRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         for (var club : getItemInfosForCraftingRecipes(EItemCategory.Club)) {
             var builder = ShapedRecipeBuilder.shaped(RecipeCategory.MISC, (Item) club.item.get())
@@ -453,6 +469,7 @@ public class ModRecipeProvider extends RecipeProvider {
         LongSwordRecipeCreator(pWriter);
         BattleAxeRecipeCreator(pWriter);
         DaggerRecipeCreator(pWriter);
+        SpearRecipeCreator(pWriter);
         ClubRecipeCreator(pWriter);
         ArmorRecipeCreator(pWriter);
         ChainmailRecipeCreator(pWriter);

@@ -1,3 +1,5 @@
-// 1.19.4	2024-08-22T01:04:57.9698063	Tags for minecraft:item mod id better_progression
-c50c988c7d44db2de99194ecbe1276de2b973a1d data/better_progression/tags/items/armor.json
+// 1.19.4	2024-08-22T22:35:11.3607033	Tags for minecraft:item mod id better_progression
+c19ef66bb742734e3b7aa2be43478c3c049fb380 data/better_progression/tags/items/armor.json
+b2cfb3d827a81e025e26314f09b3bd7e0f3829d4 data/better_progression/tags/items/enderite_armor.json
 210b18abb13ce9e3594fec080361196f63211244 data/better_progression/tags/items/layerable.json
+01911e8c90052336fe941824510a102686840b22 data/better_progression/tags/items/netherite_armor.json

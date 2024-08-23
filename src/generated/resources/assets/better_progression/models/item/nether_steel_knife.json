@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/handheld",
-  "textures": {
-    "layer0": "better_progression:item/nether_steel_knife"
-  }
-}

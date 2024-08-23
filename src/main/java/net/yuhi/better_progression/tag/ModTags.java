@@ -20,6 +20,8 @@ public class ModTags {
     public static class Items {
         public static TagKey<Item> LAYERABLE_TAG = tag("layerable");
         public static TagKey<Item> HEAVY_ARMOR_TAG = tag("armor");
+        public static TagKey<Item> NETHERITE_ARMOR_TAG = tag("netherite_armor");
+        public static TagKey<Item> ENDERITE_ARMOR_TAG = tag("enderite_armor");
         
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(BetterProgression.MOD_ID, name));

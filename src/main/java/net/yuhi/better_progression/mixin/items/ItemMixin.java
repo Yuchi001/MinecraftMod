@@ -41,10 +41,12 @@ public class ItemMixin {
     public void onArmorTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected, CallbackInfo ci) {
         if (!(pEntity instanceof Player player)) return;
         
+        onNetheriteArmorTick(player);
+        onEnderiteArmorTick(player);
+        
         int heavy_armor_weight = 0;
         
         for (var slot : player.getArmorSlots()) {
-            System.out.println(slot.is(ModTags.Items.HEAVY_ARMOR_TAG));
             if (!slot.is(ModTags.Items.HEAVY_ARMOR_TAG)) continue;
             heavy_armor_weight += 1;
         }
@@ -52,5 +54,31 @@ public class ItemMixin {
         if (heavy_armor_weight == 0) return;
         
         player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, (heavy_armor_weight - 1) / 2, false, false, true));
+    }
+    
+    public void onNetheriteArmorTick(Player player) {
+        int netherite_armor_count = 0;
+
+        for (var slot : player.getArmorSlots()) {
+            if (!slot.is(ModTags.Items.NETHERITE_ARMOR_TAG)) continue;
+            netherite_armor_count += 1;
+        }
+
+        if (netherite_armor_count == 0) return;
+
+        player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 10, (netherite_armor_count - 1) / 2, false, false, true));
+    }
+
+    public void onEnderiteArmorTick(Player player) {
+        int enderite_armor_count = 0;
+
+        for (var slot : player.getArmorSlots()) {
+            if (!slot.is(ModTags.Items.ENDERITE_ARMOR_TAG)) continue;
+            enderite_armor_count += 1;
+        }
+
+        if (enderite_armor_count == 0) return;
+
+        player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 10, (enderite_armor_count - 1) / 2, false, false, true));
     }
 }

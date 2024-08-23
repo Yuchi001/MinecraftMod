@@ -11,6 +11,7 @@ import net.yuhi.better_progression.item.custom.*;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EItemType;
 import net.yuhi.better_progression.item.enums.EMaterialType;
+import net.yuhi.better_progression.item.interfaces.Lootable;
 
 import java.util.function.Supplier;
 
@@ -79,9 +80,8 @@ public class TierItemsCreator {
             case PickAxe -> new PickaxeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
             case Hoe -> new HoeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
             case Shovel -> new ShovelItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-            case Knife -> new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Animal.class);
-            case Dagger -> new DaggerItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-            case Machete -> new LootItem<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Monster.class);
+            //case Knife -> new Lootable<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Animal.class);
+            case Machete -> new MacheteItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
             default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
         };
 
@@ -96,6 +96,7 @@ public class TierItemsCreator {
         Supplier<Item> itemSupplier = () -> switch (itemCategory) {
             case LongSword -> new LongSwordItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
             case BattleAxe -> new BattleAxeItem(tier, damageMod, attackSpeedMod, new Item.Properties());
+            case Spear -> new SpearItem(tier, (int)damageMod, attackSpeedMod, new Item.Properties());
             default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
         };
 
@@ -151,8 +152,8 @@ public class TierItemsCreator {
         java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerArmorItem = (item, category) -> {
             var itemName = is_upgrade_tier ? category.getFullName(material_type, sub_material_type) : category.getFullName(material_type);
             RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemName, item);
-            var itemInfo = is_upgrade_tier ? new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, sub_material_type, tier, has_default_basis)
-                    : new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);
+            var itemInfo = is_upgrade_tier ? new ItemInfo<>(registryItem, category, EItemType.Chainmail, modId, basis, tag, material_type, sub_material_type, tier, has_default_basis)
+                    : new ItemInfo<>(registryItem, category, EItemType.Chainmail, modId, basis, tag, material_type, tier, has_default_basis);
             ModItems.REGISTERED_ITEMS.add(itemInfo);
         };
 

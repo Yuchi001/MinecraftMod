@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.yuhi.better_progression.attribute.ModAttributes;
 import net.yuhi.better_progression.block.ModBlockEntities;
 import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.entity.ModEntityTypes;
@@ -46,6 +47,7 @@ public class BetterProgression
         
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
 
+        ModAttributes.register(modEventBus);
         ModEntityTypes.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);

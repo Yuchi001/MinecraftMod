@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "better_progression:steel_ingot"
+    },
+    "*": {
+      "item": "better_progression:steel_nugget"
+    }
+  },
+  "pattern": [
+    " * ",
+    "*#*",
+    " * "
+  ],
+  "result": {
+    "item": "better_progression:steel_chainmail"
+  },
+  "show_notification": true
+}

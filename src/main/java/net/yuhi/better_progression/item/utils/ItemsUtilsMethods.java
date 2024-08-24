@@ -68,6 +68,10 @@ public final class ItemsUtilsMethods {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && !i.is_upgrade).collect(Collectors.toList());
     }
 
+    public static List<ItemInfo> getItemInfosForCraftingRecipes(EItemCategory itemCategory, boolean isUpgrade) {
+        return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && i.is_upgrade == isUpgrade).collect(Collectors.toList());
+    }
+
     public static EModArmorMaterial materialToArmorMaterial(EMaterialType materialType, boolean chainmail) {
         switch (materialType) {
             case BRONZE -> {

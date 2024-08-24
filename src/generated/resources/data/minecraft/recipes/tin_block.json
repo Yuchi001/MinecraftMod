@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "better_progression:tin_ingot"
+    },
+    {
+      "item": "better_progression:tin_ingot"
+    },
+    {
+      "item": "better_progression:tin_ingot"
+    },
+    {
+      "item": "better_progression:tin_ingot"
+    },
+    {
+      "item": "better_progression:tin_ingot"
+    },
+    {
+      "item": "better_progression:tin_ingot"
+    },
+    {
+      "item": "better_progression:tin_ingot"
+    },
+    {
+      "item": "better_progression:tin_ingot"
+    },
+    {
+      "item": "better_progression:tin_ingot"
+    }
+  ],
+  "result": {
+    "item": "better_progression:tin_block"
+  }
+}

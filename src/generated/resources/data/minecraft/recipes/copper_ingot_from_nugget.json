@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "better_progression:copper_nugget"
+    },
+    {
+      "item": "better_progression:copper_nugget"
+    },
+    {
+      "item": "better_progression:copper_nugget"
+    },
+    {
+      "item": "better_progression:copper_nugget"
+    },
+    {
+      "item": "better_progression:copper_nugget"
+    },
+    {
+      "item": "better_progression:copper_nugget"
+    },
+    {
+      "item": "better_progression:copper_nugget"
+    },
+    {
+      "item": "better_progression:copper_nugget"
+    },
+    {
+      "item": "better_progression:copper_nugget"
+    }
+  ],
+  "result": {
+    "item": "minecraft:copper_ingot"
+  }
+}

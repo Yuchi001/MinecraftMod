@@ -54,7 +54,7 @@ public class ThrownWeaponRenderer extends EntityRenderer<ThrownWeapon> {
             pPoseStack.mulPose(Axis.ZP.rotationDegrees(-pitch - degrees - pEntity.getStartingAngle()));
         } else {
             pPoseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.yRotO, pEntity.getYRot()) - 90.0F));
-            pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.xRotO, pEntity.getXRot()) + 90.0F));
+            pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.xRotO, pEntity.getXRot()) - 135.0F));
         }
 
         pPoseStack.scale(0.88F, 0.88F, 0.88F);

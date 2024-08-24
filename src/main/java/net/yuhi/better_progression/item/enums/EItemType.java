@@ -4,6 +4,7 @@ public enum EItemType {
     Simple,
     HandHeld,
     HandHeldBig,
+    Spear,
     Armor,
     Chainmail
 }

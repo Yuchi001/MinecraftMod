@@ -49,17 +49,17 @@ public class ModItems {
         var stoneSupplier = new TierItemsCreator(Tags.Items.COBBLESTONE, EMaterialType.STONE, Tiers.STONE);
         stoneSupplier.createSimpleToolItem(EItemCategory.Club, 3.5F, -3.2F);
         stoneSupplier.createSimpleToolItem(EItemCategory.Dagger, 0.5F, -1.4F);
-        stoneSupplier.createBigToolItem(EItemCategory.Spear, 4F, -2.9F);
+        stoneSupplier.createSpearItem(4F, -2.9F, 1.5D);
 
         var diamondSupplier = new TierItemsCreator("diamond", EMaterialType.DIAMOND, ModTiers.BETTER_DIAMOND, true);
         diamondSupplier.createSimpleToolItem(EItemCategory.Club, 5.0F, -2.8F);
         diamondSupplier.createSimpleToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
-        diamondSupplier.createBigToolItem(EItemCategory.Spear, 6F, -2.9F);
+        diamondSupplier.createSpearItem(6F, -2.9F, 1.5D);
 
         var obsidianSupplier = new TierItemsCreator("obsidian", EMaterialType.OBSIDIAN, ModTiers.OBSIDIAN, true);
         obsidianSupplier.createSimpleToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
         obsidianSupplier.createSimpleToolItem(EItemCategory.Club, 4.0F, -3F);
-        obsidianSupplier.createBigToolItem(EItemCategory.Spear, 7F, -2.9F);
+        obsidianSupplier.createSpearItem(7F, -2.9F, 1.5D);
 
         var copperSupplier = new TierItemsCreator("copper_ingot", EMaterialType.COPPER, ModTiers.COPPER, true);
         copperSupplier.createToolItem(EItemCategory.Axe, 6.5F, -3.1F);
@@ -69,8 +69,8 @@ public class ModItems {
         copperSupplier.createToolItem(EItemCategory.Hoe, -1.5f, -1.0F);
         //copperSupplier.createToolItem(EItemCategory.Knife, 1.5F, -1.4F);
         copperSupplier.createToolItem(EItemCategory.Machete, 1.5F, -1.4F);
-        copperSupplier.createBigToolItem(EItemCategory.BattleAxe, 8.0f, -3.6F);
-        copperSupplier.createBigToolItem(EItemCategory.LongSword, 5.0f, -2.9F);
+        copperSupplier.createBigToolItem(EItemCategory.BattleAxe, 8.0f, -3.6F, 1.5D);
+        copperSupplier.createBigToolItem(EItemCategory.LongSword, 5.0f, -2.9F, 1.5D);
         copperSupplier.createBasicItem(EItemCategory.Plate);
         copperSupplier.createBasicItem(EItemCategory.Chainmail);
         copperSupplier.createBasicItem(EItemCategory.Nugget);
@@ -85,8 +85,8 @@ public class ModItems {
         bronzeSupplier.createToolItem(EItemCategory.Hoe, -1.5f, -1.0F);
         //bronzeSupplier.createToolItem(EItemCategory.Knife, 1.5f, -1.4F);
         bronzeSupplier.createToolItem(EItemCategory.Machete, 1.5F, -1.4F);
-        bronzeSupplier.createBigToolItem(EItemCategory.BattleAxe, 8.0f, -3.6F);
-        bronzeSupplier.createBigToolItem(EItemCategory.LongSword, 5.0f, -2.9F);
+        bronzeSupplier.createBigToolItem(EItemCategory.BattleAxe, 8.0f, -3.6F, 1.5D);
+        bronzeSupplier.createBigToolItem(EItemCategory.LongSword, 5.0f, -2.9F, 1.5D);
         bronzeSupplier.createBasicItem(EItemCategory.Ingot);
         bronzeSupplier.createBasicItem(EItemCategory.Chainmail);
         bronzeSupplier.createBasicItem(EItemCategory.Plate);
@@ -102,8 +102,8 @@ public class ModItems {
         steelSupplier.createToolItem(EItemCategory.Hoe, -2.0f, -1F);
         //steelSupplier.createToolItem(EItemCategory.Knife, 1.0f, -1.4F);
         steelSupplier.createToolItem(EItemCategory.Machete, 1.0F, -1.4F);
-        steelSupplier.createBigToolItem(EItemCategory.BattleAxe, 7.0f, -3.6F);
-        steelSupplier.createBigToolItem(EItemCategory.LongSword, 4.0f, -2.9F);
+        steelSupplier.createBigToolItem(EItemCategory.BattleAxe, 7.0f, -3.6F, 1.5D);
+        steelSupplier.createBigToolItem(EItemCategory.LongSword, 4.0f, -2.9F, 1.5D);
         steelSupplier.createBasicItem(EItemCategory.Ingot);
         steelSupplier.createBasicItem(EItemCategory.Chainmail);
         steelSupplier.createBasicItem(EItemCategory.Plate);
@@ -114,8 +114,8 @@ public class ModItems {
         var ironSupplier = new TierItemsCreator("iron_ingot", EMaterialType.IRON, Tiers.IRON, true);
         //ironSupplier.createToolItem(EItemCategory.Knife, 1.0f, -1.4F);
         ironSupplier.createToolItem(EItemCategory.Machete, 1.0F, -1.4F);
-        ironSupplier.createBigToolItem(EItemCategory.BattleAxe, 7.0f, -3.6F);
-        ironSupplier.createBigToolItem(EItemCategory.LongSword, 4.0f, -2.9F);
+        ironSupplier.createBigToolItem(EItemCategory.BattleAxe, 7.0f, -3.6F, 1.5D);
+        ironSupplier.createBigToolItem(EItemCategory.LongSword, 4.0f, -2.9F, 1.5D);
         ironSupplier.createBasicItem(EItemCategory.Plate);
         ironSupplier.createBasicItem(EItemCategory.Chainmail);
         
@@ -134,8 +134,8 @@ public class ModItems {
         netherSteelSupplier.createToolItem(EItemCategory.Hoe, -1.5f, -1F);
         //netherSteelSupplier.createToolItem(EItemCategory.Knife, 1.5f, -1.4F);
         netherSteelSupplier.createToolItem(EItemCategory.Machete, 1.5F, -1.4F);
-        netherSteelSupplier.createBigToolItem(EItemCategory.BattleAxe, 7.5f, -3.6F);
-        netherSteelSupplier.createBigToolItem(EItemCategory.LongSword, 4.5f, -2.9F);
+        netherSteelSupplier.createBigToolItem(EItemCategory.BattleAxe, 7.5f, -3.6F, 1.5D);
+        netherSteelSupplier.createBigToolItem(EItemCategory.LongSword, 4.5f, -2.9F, 1.5D);
         netherSteelSupplier.createArmorSet();
         netherSteelSupplier.createChainmailArmorSet();
 
@@ -147,8 +147,8 @@ public class ModItems {
         netherBronzeSupplier.createToolItem(EItemCategory.Hoe, -1.0f, -1.0F);
         //netherBronzeSupplier.createToolItem(EItemCategory.Knife, 2.0f, -1.4F);
         netherBronzeSupplier.createToolItem(EItemCategory.Machete, 2.0F, -1.4F);
-        netherBronzeSupplier.createBigToolItem(EItemCategory.BattleAxe, 8.5f, -3.6F);
-        netherBronzeSupplier.createBigToolItem(EItemCategory.LongSword, 5.5f, -2.9F);
+        netherBronzeSupplier.createBigToolItem(EItemCategory.BattleAxe, 8.5f, -3.6F, 1.5D);
+        netherBronzeSupplier.createBigToolItem(EItemCategory.LongSword, 5.5f, -2.9F, 1.5D);
         netherBronzeSupplier.createArmorSet();
         netherBronzeSupplier.createChainmailArmorSet();
 
@@ -160,8 +160,8 @@ public class ModItems {
         endSteelSupplier.createToolItem(EItemCategory.Hoe, -2.0f, -0.5F);
         //endSteelSupplier.createToolItem(EItemCategory.Knife, 1.0f, -0.9F);
         endSteelSupplier.createToolItem(EItemCategory.Machete, 1.F, -0.9F);
-        endSteelSupplier.createBigToolItem(EItemCategory.BattleAxe, 7.0f, -3.1F);
-        endSteelSupplier.createBigToolItem(EItemCategory.LongSword, 4.0f, -2.4F);
+        endSteelSupplier.createBigToolItem(EItemCategory.BattleAxe, 7.0f, -3.1F, 1.5D);
+        endSteelSupplier.createBigToolItem(EItemCategory.LongSword, 4.0f, -2.4F, 1.5D);
         endSteelSupplier.createArmorSet();
         endSteelSupplier.createChainmailArmorSet();
 
@@ -173,8 +173,8 @@ public class ModItems {
         enderBronzeSupplier.createToolItem(EItemCategory.Hoe, -1.5f, -0.5F);
         //enderBronzeSupplier.createToolItem(EItemCategory.Knife, 1.5f, -0.9F);
         enderBronzeSupplier.createToolItem(EItemCategory.Machete, 1.5F, -0.9F);
-        enderBronzeSupplier.createBigToolItem(EItemCategory.BattleAxe, 8.0f, -3.1F);
-        enderBronzeSupplier.createBigToolItem(EItemCategory.LongSword, 5.0f, -2.4F);
+        enderBronzeSupplier.createBigToolItem(EItemCategory.BattleAxe, 8.0f, -3.1F, 1.5D);
+        enderBronzeSupplier.createBigToolItem(EItemCategory.LongSword, 5.0f, -2.4F, 1.5D);
         enderBronzeSupplier.createArmorSet();
         enderBronzeSupplier.createChainmailArmorSet();
     }

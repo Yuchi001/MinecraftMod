@@ -92,11 +92,10 @@ public class TierItemsCreator {
         ModItems.REGISTERED_ITEMS.add(itemInfo);
     }
 
-    public void createBigToolItem(EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
+    public void createBigToolItem(EItemCategory itemCategory, float damageMod, float attackSpeedMod, double attackReach) {
         Supplier<Item> itemSupplier = () -> switch (itemCategory) {
-            case LongSword -> new LongSwordItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
-            case BattleAxe -> new BattleAxeItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-            case Spear -> new SpearItem(tier, (int)damageMod, attackSpeedMod, new Item.Properties());
+            case LongSword -> new LongSwordItem(tier, (int) damageMod, attackSpeedMod, attackReach, new Item.Properties());
+            case BattleAxe -> new BattleAxeItem(tier, damageMod, attackSpeedMod, attackReach, new Item.Properties());
             default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
         };
 
@@ -104,6 +103,16 @@ public class TierItemsCreator {
         RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemName, itemSupplier);
         var itemInfo = is_upgrade_tier ? new ItemInfo<>(registryItem, itemCategory, EItemType.HandHeldBig, modId, basis, tag, material_type, sub_material_type, tier, has_default_basis)
                 : new ItemInfo<>(registryItem, itemCategory, EItemType.HandHeldBig, modId, basis, tag, material_type, tier, has_default_basis);
+        ModItems.REGISTERED_ITEMS.add(itemInfo);
+    }
+
+    public void createSpearItem(float damageMod, float attackSpeedMod, double attackReach) {
+        var itemCategory = EItemCategory.Spear;
+        var itemName = is_upgrade_tier ? itemCategory.getFullName(material_type, sub_material_type) : itemCategory.getFullName(material_type);
+        RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemName, () ->
+                new SpearItem(tier, (int)damageMod, attackSpeedMod, attackReach, new Item.Properties()));
+        var itemInfo = is_upgrade_tier ? new ItemInfo<>(registryItem, itemCategory, EItemType.Spear, modId, basis, tag, material_type, sub_material_type, tier, has_default_basis)
+                : new ItemInfo<>(registryItem, itemCategory, EItemType.Spear, modId, basis, tag, material_type, tier, has_default_basis);
         ModItems.REGISTERED_ITEMS.add(itemInfo);
     }
 

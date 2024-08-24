@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": [],
+    "*": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    " * ",
+    "*#*",
+    " * "
+  ],
+  "result": {
+    "item": "better_progression:copper_plate"
+  },
+  "show_notification": true
+}

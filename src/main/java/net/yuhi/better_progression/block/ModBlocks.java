@@ -3,7 +3,6 @@ package net.yuhi.better_progression.block;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,7 +15,6 @@ import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.BetterBlastFurnace.BetterBlastFurnaceBlock;
 import net.yuhi.better_progression.block.custom.BrakeRail;
-import net.yuhi.better_progression.block.custom.DirectionalBrakeRail;
 import net.yuhi.better_progression.block.custom.StanninOreBlock;
 import net.yuhi.better_progression.item.ModItems;
 
@@ -35,9 +33,19 @@ public class ModBlocks {
     public static final List<BlockRegistryPair<Block>> BLOCKS_DATA = new ArrayList<>();
     
     public static final RegistryObject<Block> TIN_BLOCK = registerBlock("tin_block", 
-            () -> new Block(
-                    BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
-                            .strength(4.0F, 5.0F)),
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(4.0F, 6.0F)),
+            EBlockType.Simple);
+
+    public static final RegistryObject<Block> STEEL_BLOCK = registerBlock("steel_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(6.0F, 6.0F)),
+            EBlockType.Simple);
+
+    public static final RegistryObject<Block> BRONZE_BLOCK = registerBlock("bronze_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).strength(6.0F, 6.0F)),
+            EBlockType.Simple);
+
+    public static final RegistryObject<Block> ENDERITE_BLOCK = registerBlock("enderite_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK).strength(50.0F, 1200.0F)),
             EBlockType.Simple);
 
     public static final RegistryObject<Block> RAW_TIN_BLOCK = registerBlock("raw_tin_block",

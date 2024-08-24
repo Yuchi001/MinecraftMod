@@ -29,8 +29,54 @@ public class ModRecipeProvider extends RecipeProvider {
     public ModRecipeProvider(PackOutput pOutput) {
         super(pOutput);
     }
+    
+    private void PlateRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        for (var plate : getItemInfosForCraftingRecipes(EItemCategory.Plate)) {
+            var mod_id = plate.has_default_basis ? "minecraft" : plate.mod_id;
+            var ingotRegistryKey = new ResourceLocation(mod_id, plate.basis);
+            var nuggetRegistryKey = new ResourceLocation(mod_id, plate.basis.substring(0, plate.basis.lastIndexOf("_")) + "_nugget");
 
-    private void ArmorRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+            var ingotItem = ForgeRegistries.ITEMS.getValue(ingotRegistryKey);
+            var nuggetItem = ForgeRegistries.ITEMS.getValue(nuggetRegistryKey);
+            if (ingotItem == null || nuggetItem == null) continue;
+
+            var tier_name = plate.basis;
+            var recipeId = tier_name.substring(0, tier_name.lastIndexOf('_')) + "_" + plate.category.getName().toLowerCase();
+            ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, (Item)plate.item.get())
+                    .pattern(" * ")
+                    .pattern("*#*")
+                    .pattern(" * ")
+                    .define('#', nuggetItem)
+                    .define('*', ingotItem)
+                    .unlockedBy(getHasName(ingotItem), has(ingotItem))
+                    .save(pWriter, recipeId);
+        }
+    }
+
+    private void ChainmailRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        for (var chainmail : getItemInfosForCraftingRecipes(EItemCategory.Chainmail)) {
+            var mod_id = chainmail.has_default_basis ? "minecraft" : chainmail.mod_id;
+            var ingotRegistryKey = new ResourceLocation(mod_id, chainmail.basis);
+            var nuggetRegistryKey = new ResourceLocation(mod_id, chainmail.basis.substring(0, chainmail.basis.lastIndexOf("_")) + "_nugget");
+
+            var ingotItem = ForgeRegistries.ITEMS.getValue(ingotRegistryKey);
+            var nuggetItem = ForgeRegistries.ITEMS.getValue(nuggetRegistryKey);
+            if (ingotItem == null || nuggetItem == null) continue;
+
+            var tier_name = chainmail.basis;
+            var recipeId = tier_name.substring(0, tier_name.lastIndexOf('_')) + "_" + chainmail.category.getName().toLowerCase();
+            ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, (Item)chainmail.item.get())
+                    .pattern(" * ")
+                    .pattern("*#*")
+                    .pattern(" * ")
+                    .define('*', nuggetItem)
+                    .define('#', ingotItem)
+                    .unlockedBy(getHasName(ingotItem), has(ingotItem))
+                    .save(pWriter, recipeId);
+        }
+    }
+
+    private void PlateArmorRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         var armorCategories = List.of(EItemCategory.Helmet,
                 EItemCategory.Chestplate,
                 EItemCategory.Leggings,
@@ -62,7 +108,7 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
 
-    private void ChainmailRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+    private void ChainmailArmorRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         var armorCategories = List.of(EItemCategory.ChainmailHelmet, 
                 EItemCategory.ChainmailChestplate, 
                 EItemCategory.ChainmailLeggings, 
@@ -94,7 +140,7 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
 
-    private void NuggetRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+    private void MetalRecipesCollectionCreator(Consumer<FinishedRecipe> pWriter) {
         for (var nugget : getItemInfosForCraftingRecipes(EItemCategory.Nugget)) {
             var mod_id = nugget.has_default_basis ? "minecraft" : nugget.mod_id;
             var registryKey = new ResourceLocation(mod_id, nugget.basis);
@@ -104,15 +150,42 @@ public class ModRecipeProvider extends RecipeProvider {
 
             var tier_name = nugget.basis;
             if(tier_name.contains("_")) tier_name = tier_name.substring(0, tier_name.indexOf("_"));
-            var recipeId = tier_name + "_" + nugget.category.getName().toLowerCase();
+            var nuggetRecipeId = tier_name + "_" + nugget.category.getName().toLowerCase();
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, (Item)nugget.item.get(), 9)
                     .requires(basisItem)
                     .unlockedBy(getHasName(basisItem), has(basisItem))
-                    .save(pWriter, recipeId);
+                    .save(pWriter, nuggetRecipeId);
+
+            var ingotRecipeId = tier_name + "_ingot_from_nugget";
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, basisItem, 1)
+                    .requires((Item)nugget.item.get(), 9)
+                    .unlockedBy(getHasName(basisItem), has(basisItem))
+                    .save(pWriter, ingotRecipeId);
+
+            if (nugget.has_default_basis) continue;
+            
+            var metalBlockStr = tier_name + "_block";
+            
+            var metalBlockRegistryKey = new ResourceLocation(mod_id, metalBlockStr);
+
+            var metalBlock = ForgeRegistries.BLOCKS.getValue(metalBlockRegistryKey);
+            if (metalBlock == null) continue;
+
+            var metalBlockRecipeId = tier_name + "_block_from_ingots";
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, metalBlock, 1)
+                    .requires(basisItem, 9)
+                    .unlockedBy(getHasName(basisItem), has(basisItem))
+                    .save(pWriter, metalBlockRecipeId);
+
+            var ingotsFromBlockRecipeId = tier_name + "_ingot_from_block";
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, basisItem, 9)
+                    .requires(metalBlock)
+                    .unlockedBy(getHasName(basisItem), has(basisItem))
+                    .save(pWriter, ingotsFromBlockRecipeId);
         }
     }
     
-    private void PickAxeRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+    private void PickaxeRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         for (var pickaxe : getItemInfosForCraftingRecipes(EItemCategory.PickAxe)) {
             var mod_id = pickaxe.has_default_basis ? "minecraft" : pickaxe.mod_id;
             var registryKey = new ResourceLocation(mod_id, pickaxe.basis);
@@ -401,6 +474,16 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
+        var tinIngot = getItem(EItemCategory.Ingot, EMaterialType.TIN);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TIN_BLOCK.get())
+                .requires(tinIngot, 9)
+                .unlockedBy(getHasName(tinIngot), has(tinIngot)).save(pWriter, "tin_block");
+
+        var enderiteIngot = getItem(EItemCategory.Ingot, EMaterialType.ENDERITE);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ENDERITE_BLOCK.get())
+                .requires(enderiteIngot, 9)
+                .unlockedBy(getHasName(enderiteIngot), has(enderiteIngot)).save(pWriter, "enderite_block");
+        
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.HILT.get())
                 .pattern(" t ")
                 .pattern("lsl")
@@ -459,7 +542,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.DIAMOND), has(Items.DIAMOND))
                 .save(pWriter, "pure_diamond");
         
-        PickAxeRecipeCreator(pWriter);
+        PickaxeRecipeCreator(pWriter);
         AxeRecipeCreator(pWriter);
         SwordRecipeCreator(pWriter);
         ShovelRecipeCreator(pWriter);
@@ -471,9 +554,11 @@ public class ModRecipeProvider extends RecipeProvider {
         DaggerRecipeCreator(pWriter);
         SpearRecipeCreator(pWriter);
         ClubRecipeCreator(pWriter);
-        ArmorRecipeCreator(pWriter);
+        PlateArmorRecipeCreator(pWriter);
+        ChainmailArmorRecipeCreator(pWriter);
+        MetalRecipesCollectionCreator(pWriter);
         ChainmailRecipeCreator(pWriter);
-        NuggetRecipeCreator(pWriter);
+        PlateRecipeCreator(pWriter);
         SmeltingRecipeCreator(pWriter);
     }
     

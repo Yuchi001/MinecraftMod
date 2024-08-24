@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_nugget"
+    },
+    "*": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    " * ",
+    "*#*",
+    " * "
+  ],
+  "result": {
+    "item": "better_progression:iron_plate"
+  },
+  "show_notification": true
+}

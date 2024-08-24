@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "better_progression:steel_nugget"
+    },
+    {
+      "item": "better_progression:steel_nugget"
+    },
+    {
+      "item": "better_progression:steel_nugget"
+    },
+    {
+      "item": "better_progression:steel_nugget"
+    },
+    {
+      "item": "better_progression:steel_nugget"
+    },
+    {
+      "item": "better_progression:steel_nugget"
+    },
+    {
+      "item": "better_progression:steel_nugget"
+    },
+    {
+      "item": "better_progression:steel_nugget"
+    },
+    {
+      "item": "better_progression:steel_nugget"
+    }
+  ],
+  "result": {
+    "item": "better_progression:steel_ingot"
+  }
+}

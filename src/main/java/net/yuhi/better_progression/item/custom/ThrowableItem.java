@@ -23,7 +23,6 @@ import net.yuhi.better_progression.item.enums.EMaterialType;
 
 
 public abstract class ThrowableItem extends SwordItem implements Vanishable {
-    private final Multimap<Attribute, AttributeModifier> defaultModifiers;
     private final int useTime;
     private final boolean shouldRotate;
 
@@ -34,10 +33,6 @@ public abstract class ThrowableItem extends SwordItem implements Vanishable {
 
     public ThrowableItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, int useTime, boolean shouldRotate, Properties pProperties) {
         super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
-        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", pAttackDamageModifier, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", pAttackSpeedModifier, AttributeModifier.Operation.ADDITION));
-        this.defaultModifiers = builder.build();
         this.useTime = useTime;
         this.shouldRotate = shouldRotate;
     }
@@ -93,6 +88,9 @@ public abstract class ThrowableItem extends SwordItem implements Vanishable {
 
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         var itemstack = pPlayer.getItemInHand(pHand);
+        if (pPlayer.isCrouching())
+            return InteractionResultHolder.pass(itemstack);
+
         if (itemstack.getDamageValue() >= itemstack.getMaxDamage() - 1) 
             return InteractionResultHolder.fail(itemstack);
 
@@ -123,19 +121,5 @@ public abstract class ThrowableItem extends SwordItem implements Vanishable {
         }
 
         return true;
-    }
-
-    /**
-     * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
-     */
-    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot) {
-        return pEquipmentSlot == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(pEquipmentSlot);
-    }
-
-    /**
-     * Return the enchantability factor of the item, most of the time is based on material.
-     */
-    public int getEnchantmentValue() {
-        return 1;
     }
 }

@@ -19,14 +19,17 @@
 
   "item.better_progression.diamond_club": "Diamond Club",
   "item.better_progression.diamond_dagger": "Diamond Dagger",
+  "item.better_progression.diamond_spear": "Diamond Spear",
 
   "item.better_progression.stone_club": "Stone Club",
   "item.better_progression.stone_dagger": "Stone Dagger",
+  "item.better_progression.stone_spear": "Stone Spear",
 
   "item.better_progression.obsidian_club": "Obsidian Club",
   "item.better_progression.obsidian_dagger": "Obsidian Dagger",
+  "item.better_progression.obsidian_spear": "Obsidian Spear",
 
-  "item.better_progression.wooden_club": "Diamond Club",
+  "item.better_progression.wooden_club": "Wooden Club",
 
   "item.better_progression.raw_tin": "Raw Tin",
   "item.better_progression.tin_ingot": "Tin Ingot",
@@ -38,6 +41,9 @@
   "item.better_progression.pink_quartz": "Pink Quartz",
 
   "block.better_progression.stannin_ore": "Stannin Ore",
+  
+  "block.better_progression.enderite_block": "Enderite Block",
+  "item.better_progression.enderite_ingot": "Enderite Ingot",
   
   "item.better_progression.copper_sword": "Copper Sword",
   "item.better_progression.copper_pickaxe": "Copper Pickaxe",
@@ -187,5 +193,7 @@
   "tooltip.better_progression.tined_item_interface_tooltip": "Enhances durability of an item",
 
   "tooltip.better_progression.golded_item.tooltip_general": "This item has <v1> gold layer<v2>",
-  "tooltip.better_progression.golded_item.tooltip_additional": "Additional enchanting value: <v1>"
+  "tooltip.better_progression.golded_item.tooltip_additional": "Additional enchanting value: <v1>",
+  
+  "attribute.better_progression.attack_reach": "Attack Reach"
 }

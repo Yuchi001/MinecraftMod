@@ -1,6 +1,9 @@
 {
   "values": [
+    "better_progression:steel_block",
     "better_progression:tin_block",
+    "better_progression:bronze_block",
+    "better_progression:enderite_block",
     "better_progression:raw_tin_block",
     "better_progression:tin_ore",
     "better_progression:pink_quartz_ore",

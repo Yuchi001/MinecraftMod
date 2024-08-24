@@ -180,24 +180,10 @@ public class ThrownWeapon extends AbstractArrow {
                     EnchantmentHelper.doPostHurtEffects(livingentity1, entity1);
                     EnchantmentHelper.doPostDamageEffects((LivingEntity)entity1, livingentity1);
                 }
-
-                this.doPostHurtEffects(livingentity1);
-
-                this.setNoPhysics(true);
-                this.setDeltaMovement(Vec3.ZERO);
-                this.setPos(entity.getX(), entity.getY() + entity.getBbHeight() / 2.0, entity.getZ());
-
-                livingentity1.setArrowCount(livingentity1.getArrowCount() + 1); // Dodaj wbicie
-                livingentity1.getPersistentData().putUUID("ThrownWeaponUUID", this.getUUID()); // Przechowaj UUID broni
-                livingentity1.getPersistentData().put("ThrownWeaponItem", this.getPickupItem().save(new CompoundTag())); // Przechowaj przedmiot broni
-
-                this.setOwner(null);
             }
         }
-        
-        this.setNoPhysics(true);
 
-        //this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01D, -0.1D, -0.01D));
+        this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01D, -0.1D, -0.01D));
         float f1 = 1.0F;
 
         this.playSound(soundevent, f1, 1.0F);

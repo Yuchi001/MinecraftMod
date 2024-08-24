@@ -35,12 +35,17 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.BRAKE_RAIL.get());
         
         this.dropSelf(ModBlocks.STANNIN_ORE.get());
+        this.dropSelf(ModBlocks.DEEPSLATE_STANNIN_ORE.get());
         
         this.add(ModBlocks.PINK_QUARTZ_ORE.get(),
                 block -> createOreDrops(ModBlocks.PINK_QUARTZ_ORE.get(), ModItems.PINK_QUARTZ.get(), 1, 1));
+
+        this.add(ModBlocks.DRAGON_DEBRIS.get(),
+                block -> createOreDrops(ModBlocks.DRAGON_DEBRIS.get(), ModItems.DRAGON_REMAINS.get(), 1, 2));
         
-        this.add(ModBlocks.TIN_ORE.get(),
-                block -> createOreDrops(ModBlocks.TIN_ORE.get(), getItem(EItemCategory.RawMaterial, EMaterialType.TIN), 1, 3));
+        this.add(ModBlocks.TIN_ORE.get(), block -> createOreDrops(ModBlocks.TIN_ORE.get(), getItem(EItemCategory.RawMaterial, EMaterialType.TIN), 1, 3));
+        this.add(ModBlocks.DEEPSLATE_TIN_ORE.get(), block -> createOreDrops(ModBlocks.TIN_ORE.get(), getItem(EItemCategory.RawMaterial, EMaterialType.TIN), 1, 3));
+        this.add(ModBlocks.END_TIN_ORE.get(), block -> createOreDrops(ModBlocks.TIN_ORE.get(), getItem(EItemCategory.RawMaterial, EMaterialType.TIN), 2, 5));
     }
 
     protected LootTable.Builder createOreDrops(Block pBlock, Item item, int min, int max) {

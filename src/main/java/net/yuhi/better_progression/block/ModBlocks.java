@@ -53,6 +53,14 @@ public class ModBlocks {
                     BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)
                             .strength(4.0F, 5.0F)),
             EBlockType.Simple);
+
+    public static final RegistryObject<Block> DRAGON_DEBRIS = registerBlock("dragon_debris",
+            () -> new DropExperienceBlock(
+                    BlockBehaviour.Properties.copy(Blocks.STONE)
+                            .requiresCorrectToolForDrops()
+                            .strength(30.0F, 1200.0F),
+                    UniformInt.of(0, 2)),
+            EBlockType.Debris);
     
     public static final RegistryObject<Block> TIN_ORE = registerBlock("tin_ore",
             () -> new DropExperienceBlock(
@@ -61,6 +69,22 @@ public class ModBlocks {
                             .strength(3.0F, 3.0F), 
                     UniformInt.of(0, 2)),
                     EBlockType.Simple);
+
+    public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = registerBlock("deepslate_tin_ore",
+            () -> new DropExperienceBlock(
+                    BlockBehaviour.Properties.copy(Blocks.STONE)
+                            .requiresCorrectToolForDrops()
+                            .strength(3.0F, 3.0F),
+                    UniformInt.of(0, 2)),
+            EBlockType.Simple);
+
+    public static final RegistryObject<Block> END_TIN_ORE = registerBlock("end_tin_ore",
+            () -> new DropExperienceBlock(
+                    BlockBehaviour.Properties.copy(Blocks.STONE)
+                            .requiresCorrectToolForDrops()
+                            .strength(3.0F, 3.0F),
+                    UniformInt.of(0, 2)),
+            EBlockType.Simple);
 
     public static final RegistryObject<Block> PINK_QUARTZ_ORE = registerBlock("pink_quartz_ore",
             () -> new DropExperienceBlock(
@@ -71,6 +95,9 @@ public class ModBlocks {
             EBlockType.Simple);
     
     public static final RegistryObject<Block> STANNIN_ORE = registerBlock("stannin_ore",
+            () -> new StanninOreBlock(UniformInt.of(0, 2)), EBlockType.Simple);
+
+    public static final RegistryObject<Block> DEEPSLATE_STANNIN_ORE = registerBlock("deepslate_stannin_ore",
             () -> new StanninOreBlock(UniformInt.of(0, 2)), EBlockType.Simple);
 
     public static final RegistryObject<Block> BETTER_BLAST_FURNACE = registerVanillaBlock("blast_furnace",
@@ -119,6 +146,7 @@ public class ModBlocks {
     
     public enum EBlockType {
         Simple,
+        Debris,
         Vanilla,
         Rail,
         Custom

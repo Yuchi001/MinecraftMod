@@ -18,7 +18,11 @@
     "minecraft:redstone_ore",
     "minecraft:deepslate_redstone_ore",
     "better_progression:stannin_ore",
+    "better_progression:deepslate_stannin_ore",
     "better_progression:tin_ore",
-    "better_progression:pink_quartz_ore"
+    "better_progression:deepslate_tin_ore",
+    "better_progression:end_tin_ore",
+    "better_progression:pink_quartz_ore",
+    "better_progression:dragon_debris"
   ]
 }

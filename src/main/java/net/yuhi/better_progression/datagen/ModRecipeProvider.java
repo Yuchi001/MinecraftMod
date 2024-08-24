@@ -432,7 +432,10 @@ public class ModRecipeProvider extends RecipeProvider {
     private void SmeltingRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         oreGeneric(pWriter, List.of(getItem(EItemCategory.RawMaterial, EMaterialType.TIN)), RecipeCategory.MISC, getItem(EItemCategory.Ingot, EMaterialType.TIN), 0.7f, 200, "better_progression");
         oreGeneric(pWriter, List.of(ModBlocks.TIN_ORE.get()), RecipeCategory.MISC, getItem(EItemCategory.Ingot, EMaterialType.TIN), 0.7f, 200, "better_progression");
+        oreGeneric(pWriter, List.of(ModBlocks.DEEPSLATE_TIN_ORE.get()), RecipeCategory.MISC, getItem(EItemCategory.Ingot, EMaterialType.TIN), 0.7f, 200, "better_progression");
+        oreGeneric(pWriter, List.of(ModBlocks.END_TIN_ORE.get()), RecipeCategory.MISC, getItem(EItemCategory.Ingot, EMaterialType.TIN), 1.4f, 200, "better_progression");
         oreGeneric(pWriter, List.of(ModBlocks.STANNIN_ORE.get()), RecipeCategory.MISC, getItem(EItemCategory.Ingot, EMaterialType.TIN), 0.7f, 200, "better_progression");
+        oreGeneric(pWriter, List.of(ModBlocks.DEEPSLATE_STANNIN_ORE.get()), RecipeCategory.MISC, getItem(EItemCategory.Ingot, EMaterialType.TIN), 0.7f, 200, "better_progression");
         oreGeneric(pWriter, List.of(ModBlocks.PINK_QUARTZ_ORE.get()), RecipeCategory.MISC, ModItems.PINK_QUARTZ.get(), 0.7f, 200, "better_progression");
     }
 
@@ -483,6 +486,15 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ENDERITE_BLOCK.get())
                 .requires(enderiteIngot, 9)
                 .unlockedBy(getHasName(enderiteIngot), has(enderiteIngot)).save(pWriter, "enderite_block");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, enderiteIngot, 9)
+                .requires(ModBlocks.ENDERITE_BLOCK.get())
+                .unlockedBy(getHasName(enderiteIngot), has(ModItems.DRAGON_REMAINS.get())).save(pWriter, "enderite_ingot_from_block");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, enderiteIngot)
+                .requires(ModItems.DRAGON_REMAINS.get(), 4)
+                .requires(tinIngot, 4)
+                .unlockedBy(getHasName(ModItems.DRAGON_REMAINS.get()), has(ModItems.DRAGON_REMAINS.get())).save(pWriter, "enderite_ingot_from_remains");
         
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.HILT.get())
                 .pattern(" t ")

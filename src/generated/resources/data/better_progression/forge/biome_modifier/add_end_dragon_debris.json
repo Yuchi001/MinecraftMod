@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_end",
+  "features": [
+    "better_progression:dragon_debris_large_end_placed",
+    "better_progression:dragon_debris_small_end_placed"
+  ],
+  "step": "underground_ores"
+}

@@ -1,7 +1,11 @@
-// 1.19.4	2024-08-23T19:49:03.5318114	Loot Tables
+// 1.19.4	2024-08-24T13:27:36.4360081	Loot Tables
 4354079df0e4b323d5f377c422ca1f892e699781 data/better_progression/loot_tables/blocks/brake_rail.json
 5e1ed6e403ec6a139e9b98880bd1bc775df5bffe data/better_progression/loot_tables/blocks/bronze_block.json
+1a4a925e9c06e7ae20bb89eaee350e569e5305ed data/better_progression/loot_tables/blocks/deepslate_stannin_ore.json
+0b1e15edaecb5c7be01b82d51f79f6712bff180f data/better_progression/loot_tables/blocks/deepslate_tin_ore.json
+d9b2e703289a9d23f0016d1ea245e45a09a45581 data/better_progression/loot_tables/blocks/dragon_debris.json
 d4f3c1022fa708dea12385e89264c8f919af9b56 data/better_progression/loot_tables/blocks/enderite_block.json
+7e610bab99f6c971bc3db4eedb469e0db3c31ce3 data/better_progression/loot_tables/blocks/end_tin_ore.json
 28b6fea8b259a6cf0935f2b2e50ea84d6e9187d7 data/better_progression/loot_tables/blocks/pink_quartz_ore.json
 31abea0ea1982d1a0f9df46fbabd81903943a41c data/better_progression/loot_tables/blocks/raw_tin_block.json
 21da5607068e24047c436240433d6650d7423c49 data/better_progression/loot_tables/blocks/stannin_ore.json

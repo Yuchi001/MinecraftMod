@@ -35,11 +35,16 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         
         this.tag(BlockTags.NEEDS_IRON_TOOL).add(
                 ModBlocks.STEEL_BLOCK.get(),
+                ModBlocks.DEEPSLATE_TIN_ORE.get(),
+                ModBlocks.DEEPSLATE_STANNIN_ORE.get(),
+                ModBlocks.END_TIN_ORE.get(),
+                ModBlocks.STEEL_BLOCK.get(),
                 ModBlocks.BRONZE_BLOCK.get()
         );
         
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
-                ModBlocks.ENDERITE_BLOCK.get()
+                ModBlocks.ENDERITE_BLOCK.get(),
+                ModBlocks.DRAGON_DEBRIS.get()
         );
         
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
@@ -49,8 +54,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 ModBlocks.ENDERITE_BLOCK.get(),
                 ModBlocks.RAW_TIN_BLOCK.get(),
                 ModBlocks.TIN_ORE.get(),
+                ModBlocks.DEEPSLATE_TIN_ORE.get(),
+                ModBlocks.END_TIN_ORE.get(),
                 ModBlocks.PINK_QUARTZ_ORE.get(),
-                ModBlocks.STANNIN_ORE.get()
+                ModBlocks.STANNIN_ORE.get(),
+                ModBlocks.DEEPSLATE_STANNIN_ORE.get(),
+                ModBlocks.DRAGON_DEBRIS.get()
         );
 
         this.tag(ModTags.Blocks.ORE_TAG).add(
@@ -72,8 +81,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 Blocks.REDSTONE_ORE,
                 Blocks.DEEPSLATE_REDSTONE_ORE,
                 ModBlocks.STANNIN_ORE.get(),
+                ModBlocks.DEEPSLATE_STANNIN_ORE.get(),
                 ModBlocks.TIN_ORE.get(),
-                ModBlocks.PINK_QUARTZ_ORE.get()
+                ModBlocks.DEEPSLATE_TIN_ORE.get(),
+                ModBlocks.END_TIN_ORE.get(),
+                ModBlocks.PINK_QUARTZ_ORE.get(),
+                ModBlocks.DRAGON_DEBRIS.get()
         );
     }
 }

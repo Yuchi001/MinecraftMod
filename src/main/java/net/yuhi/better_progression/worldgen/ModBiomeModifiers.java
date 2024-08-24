@@ -16,6 +16,8 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_TIN_ORE = registerKey("add_tin_ore");
     public static final ResourceKey<BiomeModifier> ADD_STANNIN_ORE = registerKey("add_stannin_ore");
     public static final ResourceKey<BiomeModifier> ADD_PINK_QUARTZ_ORE = registerKey("add_pink_quartz_ore");
+    public static final ResourceKey<BiomeModifier> ADD_END_TIN_ORE = registerKey("add_end_tin_ore");
+    public static final ResourceKey<BiomeModifier> ADD_END_DRAGON_DEBRIS = registerKey("add_end_dragon_debris");
     
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -23,19 +25,40 @@ public class ModBiomeModifiers {
         
         context.register(ADD_TIN_ORE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.TIN_ORE_PLACED_KEY)),
+                HolderSet.direct(
+                        placedFeatures.getOrThrow(ModPlacedFeatures.TIN_ORE_PLACED_KEY),
+                        placedFeatures.getOrThrow(ModPlacedFeatures.TIN_ORE_MIDDLE_PLACED_KEY)
+                ),
                 GenerationStep.Decoration.UNDERGROUND_ORES
         ));
 
         context.register(ADD_STANNIN_ORE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.STANNIN_ORE_PLACED_KEY)),
+                HolderSet.direct(
+                        placedFeatures.getOrThrow(ModPlacedFeatures.STANNIN_ORE_PLACED_KEY),
+                        placedFeatures.getOrThrow(ModPlacedFeatures.STANNIN_ORE_MIDDLE_PLACED_KEY)
+                ),
                 GenerationStep.Decoration.UNDERGROUND_ORES
         ));
 
         context.register(ADD_PINK_QUARTZ_ORE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.PINK_QUARTZ_ORE_PLACED_KEY)),
+                GenerationStep.Decoration.UNDERGROUND_ORES
+        ));
+
+        context.register(ADD_END_TIN_ORE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(BiomeTags.IS_END),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.TIN_ORE_END_PLACED_KEY)),
+                GenerationStep.Decoration.UNDERGROUND_ORES
+        ));
+
+        context.register(ADD_END_DRAGON_DEBRIS, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(BiomeTags.IS_END),
+                HolderSet.direct(
+                        placedFeatures.getOrThrow(ModPlacedFeatures.DRAGON_DEBRIS_END_LARGE_PLACED_KEY),
+                        placedFeatures.getOrThrow(ModPlacedFeatures.DRAGON_DEBRIS_END_SMALL_PLACED_KEY)
+                ),
                 GenerationStep.Decoration.UNDERGROUND_ORES
         ));
     }

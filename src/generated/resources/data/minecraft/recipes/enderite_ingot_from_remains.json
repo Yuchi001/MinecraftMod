@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "better_progression:dragon_remains"
+    },
+    {
+      "item": "better_progression:dragon_remains"
+    },
+    {
+      "item": "better_progression:dragon_remains"
+    },
+    {
+      "item": "better_progression:dragon_remains"
+    },
+    {
+      "item": "better_progression:tin_ingot"
+    },
+    {
+      "item": "better_progression:tin_ingot"
+    },
+    {
+      "item": "better_progression:tin_ingot"
+    },
+    {
+      "item": "better_progression:tin_ingot"
+    }
+  ],
+  "result": {
+    "item": "better_progression:enderite_ingot"
+  }
+}

@@ -32,6 +32,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> TIN_ITEM_INTERFACE = ITEMS.register("tin_item_interface", TinnedItemRecipeInterface::new);
     public static final RegistryObject<Item> HILT = register("hilt", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DRAGON_REMAINS = register("dragon_remains", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PURE_DIAMOND = register("pure_diamond", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PINK_QUARTZ = register("pink_quartz", () -> new Item(new Item.Properties()));
     

@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
+
+import static net.minecraft.world.level.block.Blocks.QUARTZ_BLOCK;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = 
@@ -93,6 +96,42 @@ public class ModBlocks {
                             .strength(3.0F, 3.0F),
                     UniformInt.of(0, 2)),
             EBlockType.Simple);
+
+    public static final RegistryObject<Block> CHISELED_PINK_QUARTZ_BLOCK = registerBlock("chiseled_pink_quartz_block", 
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)),
+            EBlockType.Custom);
+
+    public static final RegistryObject<Block> PINK_QUARTZ_PILLAR = registerBlock("pink_quartz_pillar",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)),
+            EBlockType.Custom);
+
+    public static final RegistryObject<Block> PINK_QUARTZ_BLOCK = registerBlock("pink_quartz_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)),
+            EBlockType.Custom);
+
+    public static final RegistryObject<Block> PINK_QUARTZ_BRICKS = registerBlock("pink_quartz_bricks",
+            () -> new Block(BlockBehaviour.Properties.copy(QUARTZ_BLOCK)),
+            EBlockType.Simple);
+
+    public static final RegistryObject<SlabBlock> PINK_QUARTZ_SLAB = registerBlock("pink_quartz_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(QUARTZ_BLOCK)),
+            EBlockType.Slab);
+
+    public static final RegistryObject<StairBlock> PINK_QUARTZ_STAIRS = registerBlock("pink_quartz_stairs",
+            () -> new StairBlock(QUARTZ_BLOCK.defaultBlockState(), BlockBehaviour.Properties.copy(QUARTZ_BLOCK)),
+            EBlockType.Stairs);
+
+    public static final RegistryObject<Block> SMOOTH_PINK_QUARTZ = registerBlock("smooth_pink_quartz_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)),
+            EBlockType.Custom);
+
+    public static final RegistryObject<SlabBlock> SMOOTH_PINK_QUARTZ_SLAB = registerBlock("smooth_pink_quartz_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(QUARTZ_BLOCK)),
+            EBlockType.Slab);
+
+    public static final RegistryObject<StairBlock> SMOOTH_PINK_QUARTZ_STAIRS = registerBlock("smooth_pink_quartz_stairs",
+            () -> new StairBlock(QUARTZ_BLOCK.defaultBlockState(), BlockBehaviour.Properties.copy(QUARTZ_BLOCK)),
+            EBlockType.Stairs);
     
     public static final RegistryObject<Block> STANNIN_ORE = registerBlock("stannin_ore",
             () -> new StanninOreBlock(UniformInt.of(0, 2)), EBlockType.Simple);
@@ -149,6 +188,8 @@ public class ModBlocks {
         Debris,
         Vanilla,
         Rail,
+        Stairs,
+        Slab,
         Custom
     }
 }

@@ -30,6 +30,15 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 ModBlocks.TIN_BLOCK.get(),
                 ModBlocks.RAW_TIN_BLOCK.get(),
                 ModBlocks.TIN_ORE.get(),
+                ModBlocks.PINK_QUARTZ_BRICKS.get(),
+                ModBlocks.PINK_QUARTZ_BLOCK.get(),
+                ModBlocks.PINK_QUARTZ_PILLAR.get(),
+                ModBlocks.CHISELED_PINK_QUARTZ_BLOCK.get(),
+                ModBlocks.SMOOTH_PINK_QUARTZ_SLAB.get(),
+                ModBlocks.SMOOTH_PINK_QUARTZ_STAIRS.get(),
+                ModBlocks.SMOOTH_PINK_QUARTZ.get(),
+                ModBlocks.PINK_QUARTZ_STAIRS.get(),
+                ModBlocks.PINK_QUARTZ_SLAB.get(),
                 ModBlocks.STANNIN_ORE.get()
         );
         
@@ -59,6 +68,15 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 ModBlocks.PINK_QUARTZ_ORE.get(),
                 ModBlocks.STANNIN_ORE.get(),
                 ModBlocks.DEEPSLATE_STANNIN_ORE.get(),
+                ModBlocks.PINK_QUARTZ_BRICKS.get(),
+                ModBlocks.PINK_QUARTZ_BLOCK.get(),
+                ModBlocks.PINK_QUARTZ_PILLAR.get(),
+                ModBlocks.CHISELED_PINK_QUARTZ_BLOCK.get(),
+                ModBlocks.SMOOTH_PINK_QUARTZ_SLAB.get(),
+                ModBlocks.SMOOTH_PINK_QUARTZ_STAIRS.get(),
+                ModBlocks.SMOOTH_PINK_QUARTZ.get(),
+                ModBlocks.PINK_QUARTZ_STAIRS.get(),
+                ModBlocks.PINK_QUARTZ_SLAB.get(),
                 ModBlocks.DRAGON_DEBRIS.get()
         );
 

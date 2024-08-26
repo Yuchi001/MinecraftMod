@@ -61,7 +61,7 @@ public class ModConfiguredFeatures {
         register(context, OVERWORLD_TIN_ORE_KEY, Feature.ORE, new OreConfiguration(overworldTinOres, 9));
         register(context, OVERWORLD_STANNIN_ORE_KEY, Feature.ORE, new OreConfiguration(overworldStanninOres, 9));
         register(context, OVERWORLD_PINK_QUARTZ_ORE_KEY, Feature.ORE, new OreConfiguration(overworldPinkQuartzOres, 14));
-        register(context, END_TIN_ORE, Feature.ORE, new OreConfiguration(endTinOres, 9));
+        register(context, END_TIN_ORE, Feature.ORE, new OreConfiguration(endTinOres, 14));
         register(context, END_DRAGON_DEBRIS_SMALL, Feature.SCATTERED_ORE, new OreConfiguration(endDragonDebrisOres, 2, 1.0f));
         register(context, END_DRAGON_DEBRIS_LARGE, Feature.SCATTERED_ORE, new OreConfiguration(endDragonDebrisOres, 3, 1.0f));
     }

@@ -2,6 +2,10 @@
   "feature": "better_progression:dragon_debris_large",
   "placement": [
     {
+      "type": "minecraft:count",
+      "count": 10
+    },
+    {
       "type": "minecraft:in_square"
     },
     {
@@ -9,10 +13,10 @@
       "height": {
         "type": "minecraft:trapezoid",
         "max_inclusive": {
-          "absolute": 24
+          "absolute": 50
         },
         "min_inclusive": {
-          "absolute": 8
+          "absolute": 20
         }
       }
     },

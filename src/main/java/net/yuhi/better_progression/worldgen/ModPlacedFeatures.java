@@ -16,6 +16,7 @@ import net.yuhi.better_progression.BetterProgression;
 import java.util.List;
 
 import static net.yuhi.better_progression.worldgen.ModOrePlacement.orePlacement;
+import static net.yuhi.better_progression.worldgen.ModOrePlacement.rareOrePlacement;
 
 public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> TIN_ORE_END_PLACED_KEY = registerKey("tin_ore_end_placed");
@@ -30,20 +31,22 @@ public class ModPlacedFeatures {
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        register(context, DRAGON_DEBRIS_END_LARGE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_DRAGON_DEBRIS_LARGE), InSquarePlacement.spread(), HeightRangePlacement.triangle(VerticalAnchor.absolute(8), VerticalAnchor.absolute(24)), BiomeFilter.biome());
-        register(context, DRAGON_DEBRIS_END_SMALL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_DRAGON_DEBRIS_SMALL), InSquarePlacement.spread(), PlacementUtils.RANGE_8_8, BiomeFilter.biome());
+        register(context, DRAGON_DEBRIS_END_LARGE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_DRAGON_DEBRIS_LARGE),
+                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(20), VerticalAnchor.absolute(50))));
+        register(context, DRAGON_DEBRIS_END_SMALL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_DRAGON_DEBRIS_SMALL),
+                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(40), VerticalAnchor.absolute(60))));
         
         register(context, TIN_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_TIN_ORE_KEY),
                 ModOrePlacement.commonOrePlacement(90, HeightRangePlacement.triangle(VerticalAnchor.absolute(80), VerticalAnchor.absolute(384))));
         register(context, TIN_ORE_MIDDLE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_TIN_ORE_KEY),
                 ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(56))));
         register(context, TIN_ORE_END_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_TIN_ORE),
-                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(80))));
+                ModOrePlacement.commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(80))));
         
         register(context, STANNIN_ORE_MIDDLE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_STANNIN_ORE_KEY), 
                 ModOrePlacement.orePlacement(CountPlacement.of(UniformInt.of(0, 1)), HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(-48))));
         register(context, STANNIN_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_STANNIN_ORE_KEY),
-                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(56))));
+                ModOrePlacement.commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(56))));
 
         register(context, PINK_QUARTZ_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_PINK_QUARTZ_ORE_KEY),
                 ModOrePlacement.commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(112))));

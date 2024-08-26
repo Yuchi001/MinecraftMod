@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "better_progression:pink_quartz_block"
+  },
+  "result": "better_progression:pink_quartz_bricks"
+}

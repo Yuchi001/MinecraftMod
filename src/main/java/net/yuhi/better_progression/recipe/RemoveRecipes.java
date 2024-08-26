@@ -55,6 +55,7 @@ public class RemoveRecipes {
             }
         }
         recipesToRemove.add(new ResourceLocation("minecraft", "rail"));
+        recipesToRemove.add(new ResourceLocation("minecraft", "tnt"));
         recipesToRemove.add(new ResourceLocation("minecraft", "powered_rail"));
         recipesToRemove.add(new ResourceLocation("minecraft", "detector_rail"));
         recipesToRemove.add(new ResourceLocation("minecraft", "activator_rail"));

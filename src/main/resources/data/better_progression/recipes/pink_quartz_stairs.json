@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": [
+      {
+        "item": "better_progression:chiseled_pink_quartz_block"
+      },
+      {
+        "item": "better_progression:pink_quartz_block"
+      },
+      {
+        "item": "better_progression:pink_quartz_pillar"
+      }
+    ]
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "better_progression:pink_quartz_stairs"
+  },
+  "show_notification": true
+}

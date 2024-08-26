@@ -9,6 +9,7 @@ import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.BetterProgression;
@@ -477,6 +478,11 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Blocks.TNT)
+                .requires(Blocks.SAND, 2)
+                .requires(Items.GUNPOWDER, 2)
+                .unlockedBy(getHasName(Items.GUNPOWDER), has(Items.GUNPOWDER)).save(pWriter, "better_tnt");
+
         var tinIngot = getItem(EItemCategory.Ingot, EMaterialType.TIN);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TIN_BLOCK.get())
                 .requires(tinIngot, 9)

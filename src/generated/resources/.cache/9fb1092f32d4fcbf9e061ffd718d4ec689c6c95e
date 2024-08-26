@@ -1,4 +1,4 @@
-// 1.19.4	2024-08-24T21:47:17.6089642	Recipes
+// 1.19.4	2024-08-26T16:13:46.2775523	Recipes
 e45d4ecae7114b868649c22bd37160c12dcf54ae data/better_progression/advancements/recipes/misc/pink_quartz_from_blasting_pink_quartz_ore.json
 8fd5b035ff1d6e6ef616931a058a270ae758b0b3 data/better_progression/advancements/recipes/misc/pink_quartz_from_smelting_pink_quartz_ore.json
 78b178e1dc09c75abee556d7876e3b307c1ae03a data/better_progression/advancements/recipes/misc/tin_ingot_from_blasting_deepslate_stannin_ore.json
@@ -63,6 +63,7 @@ f90bad83229240e5f77a9537b8c35c1d44f2b366 data/minecraft/advancements/recipes/com
 a1eb6e72d08ba376757edc0dc47ccbc5b3356c50 data/minecraft/advancements/recipes/combat/steel_helmet.json
 ba7491855180e9ef80bd69139158b63f664a766a data/minecraft/advancements/recipes/combat/steel_leggings.json
 de90d99b89fbcc3a66589448bcc2d3033ce28a4f data/minecraft/advancements/recipes/combat/steel_plate.json
+a757ede2f3b562b400ce8de207b63807471d3535 data/minecraft/advancements/recipes/misc/better_tnt.json
 8eede9ff8859510cc4c7db4395ea0a2233fb5e4e data/minecraft/advancements/recipes/misc/bronze_axe.json
 8aab338e33bbc48c7a298cdfe8c5e30512fefe22 data/minecraft/advancements/recipes/misc/bronze_battleaxe.json
 b0deabd6f1722c2ac5fbed0745e6f2780f7904ae data/minecraft/advancements/recipes/misc/bronze_hoe.json
@@ -116,6 +117,7 @@ dc9680d58f1372a268793e14552e5face7400423 data/minecraft/advancements/recipes/mis
 1ec4b46d6f0b8703730c04728a688007ad9c3c18 data/minecraft/advancements/recipes/misc/steel_pickaxe.json
 bffc1e6fa322c0be5942a6d6d0d30a8bd52bd64e data/minecraft/advancements/recipes/misc/steel_shovel.json
 c3027fc92e526b69c6bd66c8ada9a09091755836 data/minecraft/advancements/recipes/misc/steel_sword.json
+1e0473ae2e07ffde4287ab2e172ad335986fe185 data/minecraft/recipes/better_tnt.json
 d22e40214f1f88a72bc0e1e9c8333110184ee43f data/minecraft/recipes/bronze_axe.json
 1405f91e10872018735cac580237783fbcf8a8c7 data/minecraft/recipes/bronze_battleaxe.json
 a2f20e2fdf12ef077a616efb8539236f038b1bac data/minecraft/recipes/bronze_block_from_ingots.json

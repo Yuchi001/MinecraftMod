@@ -71,6 +71,16 @@ public class TierItemsCreator {
         this.is_upgrade_tier = true;
     }
 
+    public TierItemsCreator(String basis, EMaterialType material_type, EMaterialType sub_material_type, Tier tier, boolean has_default_basis) {
+        this.tier = tier;
+        this.basis = basis;
+        this.material_type = material_type;
+        this.sub_material_type = sub_material_type;
+        this.is_upgrade_tier = true;
+        this.has_default_basis = has_default_basis;
+        this.modId = "minecraft";
+    }
+
     // endregion
 
     public void createToolItem(EItemCategory itemCategory, float damageMod, float attackSpeedMod) {

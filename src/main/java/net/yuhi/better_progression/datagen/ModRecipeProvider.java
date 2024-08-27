@@ -292,6 +292,7 @@ public class ModRecipeProvider extends RecipeProvider {
                     .save(pWriter, recipeId);
         }
     }
+    
     private void KnifeRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         for (var knife : getItemInfosForCraftingRecipes(EItemCategory.Knife)) {
             var mod_id = knife.has_default_basis ? "minecraft" : knife.mod_id;
@@ -313,6 +314,7 @@ public class ModRecipeProvider extends RecipeProvider {
                     .save(pWriter, recipeId);
         }
     }
+    
     private void MacheteRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         for (var machete : getItemInfosForCraftingRecipes(EItemCategory.Machete)) {
             var mod_id = machete.has_default_basis ? "minecraft" : machete.mod_id;
@@ -361,6 +363,44 @@ public class ModRecipeProvider extends RecipeProvider {
                     .save(pWriter, recipeId);
         }
     }
+    
+    private void EndGameArmorRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        var armorCategories = List.of(EItemCategory.Helmet,
+                EItemCategory.Chestplate,
+                EItemCategory.Leggings,
+                EItemCategory.Boots);
+        for (var armorCategory : armorCategories) {
+            for (var armor : getItemInfosForCraftingRecipes(armorCategory, true)) {
+                var basis = armor.basis;
+                var basisIngotResourceLocation = new ResourceLocation(armor.mod_id, basis);
+
+                var basisItem = ForgeRegistries.ITEMS.getValue(basisIngotResourceLocation);
+                if (basisItem == null) continue;
+                
+                var recipeId = armor.material_type.GetName(true) + "_" + 
+                        armor.sub_material_type.GetName() + "_" + 
+                        armor.category.getName().toLowerCase();
+                
+                var armorResourceLocation = ForgeRegistries.ITEMS.getKey((Item)armor.item.get());
+                if(armorResourceLocation == null) continue;
+                
+                var baseMetalArmorResourceLocation = new ResourceLocation(BetterProgression.MOD_ID, armorResourceLocation.getPath().substring(armorResourceLocation.getPath().indexOf("_") + 1));
+                var baseMetalArmor = ForgeRegistries.ITEMS.getValue(baseMetalArmorResourceLocation);
+                if(baseMetalArmor == null) continue;
+
+
+                //noinspection removal
+                LegacyUpgradeRecipeBuilder.smithing(
+                                Ingredient.of(baseMetalArmor),
+                                Ingredient.of(basisItem),
+                                RecipeCategory.COMBAT,
+                                (Item) armor.item.get())
+                        .unlocks(getHasName(basisItem), has(basisItem))
+                        .save(pWriter, recipeId);
+            }
+        }
+    }
+    
     private void BattleAxeRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         for (var battleaxe : getItemInfosForCraftingRecipes(EItemCategory.BattleAxe)) {
             var mod_id = battleaxe.has_default_basis ? "minecraft" : battleaxe.mod_id;
@@ -430,6 +470,7 @@ public class ModRecipeProvider extends RecipeProvider {
             builder.save(pWriter, recipeId);
         }
     }
+
     private void SmeltingRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         oreGeneric(pWriter, List.of(getItem(EItemCategory.RawMaterial, EMaterialType.TIN)), RecipeCategory.MISC, getItem(EItemCategory.Ingot, EMaterialType.TIN), 0.7f, 200, "better_progression");
         oreGeneric(pWriter, List.of(ModBlocks.TIN_ORE.get()), RecipeCategory.MISC, getItem(EItemCategory.Ingot, EMaterialType.TIN), 0.7f, 200, "better_progression");
@@ -478,6 +519,16 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SADDLE)
+                .pattern("sss")
+                .pattern("* *")
+                .pattern("z z")
+                .define('s', Items.LEATHER)
+                .define('*', Items.STRING)
+                .define('z', Items.IRON_INGOT)
+                .unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER))
+                .save(pWriter, "better_saddle");
+        
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Blocks.TNT)
                 .requires(Blocks.SAND, 2)
                 .requires(Items.GUNPOWDER, 2)
@@ -577,6 +628,7 @@ public class ModRecipeProvider extends RecipeProvider {
         MetalRecipesCollectionCreator(pWriter);
         ChainmailRecipeCreator(pWriter);
         PlateRecipeCreator(pWriter);
+        EndGameArmorRecipeCreator(pWriter);
         SmeltingRecipeCreator(pWriter);
     }
     

@@ -34,7 +34,9 @@ public class ThrownWeapon extends AbstractArrow {
     private static final EntityDataAccessor<ItemStack> ID_ITEM = SynchedEntityData.defineId(ThrownWeapon.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Integer> ID_STARTING_ANGLE = SynchedEntityData.defineId(ThrownWeapon.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> ID_SHOULD_ROTATE = SynchedEntityData.defineId(ThrownWeapon.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Float> ID_SCALE = SynchedEntityData.defineId(ThrownWeapon.class, EntityDataSerializers.FLOAT);
     
+    private float scale;
     private float clientSideRotation = 0;
     private boolean counterClockwiseBounce = true;
     public float prevRotationYaw;
@@ -48,17 +50,20 @@ public class ThrownWeapon extends AbstractArrow {
     public ThrownWeapon(EntityType<? extends ThrownWeapon> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
+    
 
-    public ThrownWeapon(Level pLevel, LivingEntity pShooter, ItemStack pStack, EMaterialType pMaterialType, boolean shouldRotate) {
+    public ThrownWeapon(Level pLevel, LivingEntity pShooter, ItemStack pStack, EMaterialType pMaterialType, boolean shouldRotate, float scale) {
         super(ModEntityTypes.THROWN_WEAPON.get(), pShooter, pLevel);
         this.thrownItem = pStack.copy();
         this.shouldRotate = shouldRotate;
         this.materialType = pMaterialType;
+        this.scale = scale;
         this.entityData.set(ID_LOYALTY, (byte) EnchantmentHelper.getLoyalty(pStack));
         this.entityData.set(ID_FOIL, pStack.hasFoil());
         this.entityData.set(ID_ITEM, pStack.copy());
         this.entityData.set(ID_STARTING_ANGLE, new Random(0).nextInt(100 - 1));
         this.entityData.set(ID_SHOULD_ROTATE, this.shouldRotate);
+        this.entityData.set(ID_SCALE, this.scale);
     }
     
     public EMaterialType getMaterialType() {
@@ -73,6 +78,7 @@ public class ThrownWeapon extends AbstractArrow {
         this.entityData.define(ID_ITEM, ItemStack.EMPTY);
         this.entityData.define(ID_STARTING_ANGLE, new Random(0).nextInt(100 - 1));
         this.entityData.define(ID_SHOULD_ROTATE, false);
+        this.entityData.define(ID_SCALE, this.scale);
     }
     
     @Override
@@ -265,5 +271,10 @@ public class ThrownWeapon extends AbstractArrow {
     @OnlyIn(Dist.CLIENT)
     public boolean shouldRotate() {
         return this.entityData.get(ID_SHOULD_ROTATE);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public float getScale() {
+        return this.entityData.get(ID_SCALE);
     }
 }

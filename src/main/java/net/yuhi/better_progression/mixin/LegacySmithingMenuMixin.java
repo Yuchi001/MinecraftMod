@@ -3,8 +3,10 @@ package net.yuhi.better_progression.mixin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.LegacySmithingMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.item.interfaces.LayerableItem;
 import net.yuhi.better_progression.mixin.accessor.ItemCombinerMenuAccessor;
+import net.yuhi.better_progression.mixin.accessor.LegacySmithingMenuAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,13 +20,11 @@ public abstract class LegacySmithingMenuMixin {
     @Shadow
     protected abstract void shrinkStackInSlot(int pSlotIndex);
     
-    @Inject(method = "onTake", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "onTake", at = @At("TAIL"))
     public void onTake(Player pPlayer, ItemStack pStack, CallbackInfo ci) {
-        var inputSlots = ((ItemCombinerMenuAccessor) this).getInputSlots();
-        var additionalSlotItem = inputSlots.getItem(1);
-        var layerItems = LayerableItem.getLayerItems();
+        var selectedRecipe = ((LegacySmithingMenuAccessor) this).getSelectedRecipe();
         
-        if (layerItems.stream().noneMatch(additionalSlotItem::is)) return;
+        if (!selectedRecipe.isSpecial()) return;
         
         for (var i =0; i < 64; i++) {
             shrinkStackInSlot(1);

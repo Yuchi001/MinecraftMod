@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "item": "better_progression:enderite_ingot"
+  },
+  "base": {
+    "item": "better_progression:steel_helmet"
+  },
+  "result": {
+    "item": "better_progression:ender_steel_helmet"
+  }
+}

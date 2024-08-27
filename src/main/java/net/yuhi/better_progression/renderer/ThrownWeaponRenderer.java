@@ -57,7 +57,8 @@ public class ThrownWeaponRenderer extends EntityRenderer<ThrownWeapon> {
             pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.xRotO, pEntity.getXRot()) - 135.0F));
         }
 
-        pPoseStack.scale(0.88F, 0.88F, 0.88F);
+        var scale = pEntity.getScale();
+        pPoseStack.scale(scale, scale, 0.88F);
 
         BakedModel bakedmodel = this.itemModelShaper.getItemModel(pItemStack);
         this.itemRenderer.render(pItemStack, ItemDisplayContext.FIXED, false, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, bakedmodel);

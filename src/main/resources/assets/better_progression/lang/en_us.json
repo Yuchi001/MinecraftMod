@@ -53,6 +53,7 @@
   
   "block.better_progression.enderite_block": "Enderite Block",
   "item.better_progression.enderite_ingot": "Enderite Ingot",
+  "item.better_progression.dragon_remains": "Dragon Remains",
   
   "item.better_progression.copper_sword": "Copper Sword",
   "item.better_progression.copper_pickaxe": "Copper Pickaxe",
@@ -197,12 +198,12 @@
   
   "creativetab.better_progression.title": "Better Progression",
 
-  "tooltip.better_progression.tined_item.tooltip_general": "This item has <v1> tin layer<v2>",
-  "tooltip.better_progression.tined_item.tooltip_additional": "Durability enhanced by <v1>",
+  "tooltip.better_progression.tined_item.tooltip": "Durability: +<v1>",
   "tooltip.better_progression.tined_item_interface_tooltip": "Enhances durability of an item",
 
-  "tooltip.better_progression.golded_item.tooltip_general": "This item has <v1> gold layer<v2>",
-  "tooltip.better_progression.golded_item.tooltip_additional": "Additional enchanting value: <v1>",
+  "tooltip.better_progression.golded_item.tooltip": "Enchanting Value: +<v1>",
+  "tooltip.better_progression.enderited_item.tooltip": "Attack Speed: +<v1>",
+  "tooltip.better_progression.netherited_item.tooltip": "Attack Damage: +<v1>",
   
   "attribute.better_progression.attack_reach": "Attack Reach"
 }

@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 import net.yuhi.better_progression.item.interfaces.LayerableItem;
@@ -32,6 +33,11 @@ public class LayerRecipe extends LegacyUpgradeRecipe {
         base = pBase;
         result = pResult;
     }
+    
+    @Override
+    public boolean isSpecial() {
+        return true;
+    }
 
 
     @Override
@@ -41,31 +47,39 @@ public class LayerRecipe extends LegacyUpgradeRecipe {
 
     @Override
     public boolean matches(Container inv, @NotNull Level world) {
-        return addition.test(inv.getItem(1)) && inv.getItem(0).getTags().anyMatch(t -> t == ModTags.Items.LAYERABLE_TAG);
+        var itemResourceLocation = ForgeRegistries.ITEMS.getKey(inv.getItem(0).getItem());
+        if (itemResourceLocation == null) return false;
+        
+        var itemPath = itemResourceLocation.getPath();
+        var isNetherOrEnder = itemPath.startsWith("nether") || itemPath.startsWith("ender");
+        
+        var netherCheck = !addition.test(new ItemStack(Items.NETHERITE_INGOT)) || isNetherOrEnder;
+        var enderCheck = !addition.test(new ItemStack(getItem(EItemCategory.Ingot, EMaterialType.ENDERITE))) || isNetherOrEnder;
+        
+        return addition.test(inv.getItem(1)) && 
+                inv.getItem(0).getTags().anyMatch(t -> t == ModTags.Items.LAYERABLE_TAG) && 
+                netherCheck && 
+                enderCheck;
     }
 
     @Override
     public @NotNull ItemStack assemble(Container inv, @NotNull RegistryAccess pRegistryAccess) {
         var tin_ingot = getItem(EItemCategory.Ingot, EMaterialType.TIN);
+        var enderite_ingot = getItem(EItemCategory.Ingot, EMaterialType.ENDERITE);
+        
         ItemStack item = inv.getItem(0).copy();
+        
         int tinCount = inv.countItem(tin_ingot);
         int goldCount = inv.countItem(Items.GOLD_INGOT);
-        
+        int netheriteCount = inv.countItem(Items.NETHERITE_INGOT);
+        int enderiteCount = inv.countItem(enderite_ingot);
 
         LayerableItem.addTinCount(item, tinCount);
         LayerableItem.addGoldCount(item, goldCount);
+        LayerableItem.addNetheriteCount(item, netheriteCount);
+        LayerableItem.addEnderiteCount(item, enderiteCount);
 
         return item;
-    }
-
-    @Override
-    public @NotNull NonNullList<ItemStack> getRemainingItems(Container pContainer) {
-        var tin_ingot = getItem(EItemCategory.Ingot, EMaterialType.TIN);
-        for (var i = 0; i < pContainer.getContainerSize(); i++) {
-            if(pContainer.getItem(i).is(tin_ingot)) pContainer.removeItem(i, pContainer.countItem(tin_ingot));
-            if(pContainer.getItem(i).is(Items.GOLD_INGOT)) pContainer.removeItem(i, pContainer.countItem(Items.GOLD_INGOT));
-        }
-        return NonNullList.withSize(pContainer.getContainerSize(), ItemStack.EMPTY);
     }
 
     @Override

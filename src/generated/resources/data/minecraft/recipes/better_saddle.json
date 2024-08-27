@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "*": {
+      "item": "minecraft:string"
+    },
+    "s": {
+      "item": "minecraft:leather"
+    },
+    "z": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "sss",
+    "* *",
+    "z z"
+  ],
+  "result": {
+    "item": "minecraft:saddle"
+  },
+  "show_notification": true
+}

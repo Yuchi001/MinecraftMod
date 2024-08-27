@@ -127,7 +127,7 @@ public class ModItems {
         var enderiteSupplier = new TierItemsCreator("enderite_ingot", EMaterialType.ENDERITE, ModTiers.ENDGAMESTEEL);
         enderiteSupplier.createBasicItem(EItemCategory.Ingot);
 
-        var netherSteelSupplier = new TierItemsCreator("netherite_ingot", EMaterialType.NETHERITE, EMaterialType.STEEL, ModTiers.ENDGAMESTEEL);
+        var netherSteelSupplier = new TierItemsCreator("netherite_ingot", EMaterialType.NETHERITE, EMaterialType.STEEL, ModTiers.ENDGAMESTEEL, true);
         netherSteelSupplier.createToolItem(EItemCategory.Axe, 6.5f, -3.1F);
         netherSteelSupplier.createToolItem(EItemCategory.PickAxe, 1.5f, -2.8f);
         netherSteelSupplier.createToolItem(EItemCategory.Sword, 3.5f, -2.4F);
@@ -140,13 +140,13 @@ public class ModItems {
         netherSteelSupplier.createArmorSet();
         netherSteelSupplier.createChainmailArmorSet();
 
-        var netherBronzeSupplier = new TierItemsCreator("netherite_ingot", EMaterialType.NETHERITE, EMaterialType.BRONZE, ModTiers.ENDGAMEBRONZE);
+        var netherBronzeSupplier = new TierItemsCreator("netherite_ingot", EMaterialType.NETHERITE, EMaterialType.BRONZE, ModTiers.ENDGAMEBRONZE, true);
         netherBronzeSupplier.createToolItem(EItemCategory.Axe, 7.0F, -3.1F);
         netherBronzeSupplier.createToolItem(EItemCategory.PickAxe, 2.0f, -2.8f);
         netherBronzeSupplier.createToolItem(EItemCategory.Sword, 4.0f, -2.4F);
         netherBronzeSupplier.createToolItem(EItemCategory.Shovel, 2.5F, -3.0F);
         netherBronzeSupplier.createToolItem(EItemCategory.Hoe, -1.0f, -1.0F);
-        //netherBronzeSupplier.createToolItem(EItemCategory.Knife, 2.0f, -1.4F);
+        //netherBronzeSupplier.createToolItem(EItemCategory.Knife, 2.0f, -1.4F); 
         netherBronzeSupplier.createToolItem(EItemCategory.Machete, 2.0F, -1.4F);
         netherBronzeSupplier.createBigToolItem(EItemCategory.BattleAxe, 8.5f, -3.6F, 1.5D);
         netherBronzeSupplier.createBigToolItem(EItemCategory.LongSword, 5.5f, -2.9F, 1.5D);

@@ -25,6 +25,7 @@ import net.yuhi.better_progression.item.enums.EMaterialType;
 public abstract class ThrowableItem extends SwordItem implements Vanishable {
     private final int useTime;
     private final boolean shouldRotate;
+    private float scale = 0.88f;
 
     @Override
     public int getMaxStackSize(ItemStack stack) {
@@ -35,6 +36,13 @@ public abstract class ThrowableItem extends SwordItem implements Vanishable {
         super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
         this.useTime = useTime;
         this.shouldRotate = shouldRotate;
+    }
+
+    public ThrowableItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, int useTime, boolean shouldRotate, float scale, Properties pProperties) {
+        super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
+        this.useTime = useTime;
+        this.shouldRotate = shouldRotate;
+        this.scale = scale;
     }
 
     public boolean canAttackBlock(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer) {
@@ -69,7 +77,7 @@ public abstract class ThrowableItem extends SwordItem implements Vanishable {
                 p_43388_.broadcastBreakEvent(pEntityLiving.getUsedItemHand());
             });
             
-            var thrownDagger = new ThrownWeapon(pLevel, player, pStack, EMaterialType.GetMaterialType(pStack), shouldRotate);
+            var thrownDagger = new ThrownWeapon(pLevel, player, pStack, EMaterialType.GetMaterialType(pStack), shouldRotate, scale);
             thrownDagger.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F, 1.0F);
             if (player.getAbilities().instabuild) {
                 thrownDagger.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;

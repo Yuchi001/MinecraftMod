@@ -42,6 +42,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.SMOOTH_PINK_QUARTZ.get());
         this.dropSelf(ModBlocks.SMOOTH_PINK_QUARTZ_STAIRS.get());
         this.dropSelf(ModBlocks.SMOOTH_PINK_QUARTZ_SLAB.get());
+        this.dropSelf(ModBlocks.END_STONE_GRASS_BLOCK.get());
         
         this.dropSelf(ModBlocks.STANNIN_ORE.get());
         this.dropSelf(ModBlocks.DEEPSLATE_STANNIN_ORE.get());

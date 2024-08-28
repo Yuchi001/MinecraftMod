@@ -7,8 +7,11 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.yuhi.better_progression.BetterProgression;
@@ -27,7 +30,9 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> PINK_QUARTZ_ORE_PLACED_KEY = registerKey("pink_quartz_ore_placed");
     public static final ResourceKey<PlacedFeature> DRAGON_DEBRIS_END_SMALL_PLACED_KEY = registerKey("dragon_debris_small_end_placed");
     public static final ResourceKey<PlacedFeature> DRAGON_DEBRIS_END_LARGE_PLACED_KEY = registerKey("dragon_debris_large_end_placed");
-    
+    public static final ResourceKey<PlacedFeature> END_STONE_GRASS_DISK = registerKey("end_stone_grass_disk");
+
+
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
@@ -50,6 +55,9 @@ public class ModPlacedFeatures {
 
         register(context, PINK_QUARTZ_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_PINK_QUARTZ_ORE_KEY),
                 ModOrePlacement.commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(112))));
+    
+        register(context, END_STONE_GRASS_DISK, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_STONE_GRASS),
+                CountPlacement.of(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, RandomOffsetPlacement.vertical(ConstantInt.of(-1)), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.END_STONE)), BiomeFilter.biome());
     }
     
     private static ResourceKey<PlacedFeature> registerKey(String name) {

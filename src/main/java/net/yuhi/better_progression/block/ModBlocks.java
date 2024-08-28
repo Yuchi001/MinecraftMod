@@ -51,6 +51,10 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK).strength(50.0F, 1200.0F)),
             EBlockType.Simple);
 
+    public static final RegistryObject<Block> END_STONE_GRASS_BLOCK = registerBlock("end_stone_grass_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.END_STONE).strength(3.0F, 9.0F)),
+            EBlockType.Custom);
+
     public static final RegistryObject<Block> RAW_TIN_BLOCK = registerBlock("raw_tin_block",
             () -> new Block(
                     BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)

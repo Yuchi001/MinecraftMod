@@ -18,6 +18,7 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_PINK_QUARTZ_ORE = registerKey("add_pink_quartz_ore");
     public static final ResourceKey<BiomeModifier> ADD_END_TIN_ORE = registerKey("add_end_tin_ore");
     public static final ResourceKey<BiomeModifier> ADD_END_DRAGON_DEBRIS = registerKey("add_end_dragon_debris");
+    public static final ResourceKey<BiomeModifier> ADD_END_STONE_GRASS = registerKey("add_end_stone_grass");
     
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -60,6 +61,12 @@ public class ModBiomeModifiers {
                         placedFeatures.getOrThrow(ModPlacedFeatures.DRAGON_DEBRIS_END_SMALL_PLACED_KEY)
                 ),
                 GenerationStep.Decoration.UNDERGROUND_ORES
+        ));
+        
+        context.register(ADD_END_STONE_GRASS, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(BiomeTags.IS_END),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.END_STONE_GRASS_DISK)),
+                GenerationStep.Decoration.TOP_LAYER_MODIFICATION
         ));
     }
     

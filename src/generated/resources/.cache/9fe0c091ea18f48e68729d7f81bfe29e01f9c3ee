@@ -1,7 +1,7 @@
-// 1.19.4	2024-08-26T16:30:48.5957287	Tags for minecraft:block mod id better_progression
+// 1.19.4	2024-08-28T02:20:48.2865737	Tags for minecraft:block mod id better_progression
 ad82f3f547aeac155cf8de177516f0a318d707b7 data/better_progression/tags/blocks/ore.json
-e697a7d6332c6425b2c69ec3c52a3ee6c3b3c9a5 data/minecraft/tags/blocks/mineable/pickaxe.json
+d9c4e97281bf7536702f3f8f32802a7f2a278692 data/minecraft/tags/blocks/mineable/pickaxe.json
 79cb812ba54472ad491ae2915e6d29b9f9b0de41 data/minecraft/tags/blocks/needs_diamond_tool.json
-e32b063d4b07d1bda4175b9a0638fdaf6db88428 data/minecraft/tags/blocks/needs_iron_tool.json
+7cca3ed77bb9027c992dc41e4b6a64c99612746e data/minecraft/tags/blocks/needs_iron_tool.json
 67779d2d56de382065fc716fb0c4bfd946e43e09 data/minecraft/tags/blocks/needs_stone_tool.json
 5c383d5cc2db872915841f4b4034d7f4ee0020f1 data/minecraft/tags/blocks/rails.json

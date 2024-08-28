@@ -3,7 +3,6 @@ package net.yuhi.better_progression.datagen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -47,6 +46,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 ModBlocks.DEEPSLATE_TIN_ORE.get(),
                 ModBlocks.DEEPSLATE_STANNIN_ORE.get(),
                 ModBlocks.END_TIN_ORE.get(),
+                ModBlocks.END_STONE_GRASS_BLOCK.get(),
                 ModBlocks.STEEL_BLOCK.get(),
                 ModBlocks.BRONZE_BLOCK.get()
         );
@@ -65,6 +65,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 ModBlocks.TIN_ORE.get(),
                 ModBlocks.DEEPSLATE_TIN_ORE.get(),
                 ModBlocks.END_TIN_ORE.get(),
+                ModBlocks.END_STONE_GRASS_BLOCK.get(),
                 ModBlocks.PINK_QUARTZ_ORE.get(),
                 ModBlocks.STANNIN_ORE.get(),
                 ModBlocks.DEEPSLATE_STANNIN_ORE.get(),

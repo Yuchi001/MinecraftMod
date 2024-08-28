@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_end",
+  "features": "better_progression:end_stone_grass_disk",
+  "step": "top_layer_modification"
+}

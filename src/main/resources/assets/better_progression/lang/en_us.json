@@ -34,6 +34,8 @@
   "item.better_progression.raw_tin": "Raw Tin",
   "item.better_progression.tin_ingot": "Tin Ingot",
   "block.better_progression.tin_ore": "Tin Ore",
+  "block.better_progression.end_tin_ore": "Tin Ore",
+  "block.better_progression.end_stone_grass_block": "End Stone Grass Block",
   "block.better_progression.tin_block": "Tin Block",
   "block.better_progression.raw_tin_block": "Raw Tin Block",
 
@@ -202,8 +204,13 @@
   "tooltip.better_progression.tined_item_interface_tooltip": "Enhances durability of an item",
 
   "tooltip.better_progression.golded_item.tooltip": "Enchanting Value: +<v1>",
+  
   "tooltip.better_progression.enderited_item.tooltip": "Attack Speed: +<v1>",
+  "tooltip.better_progression.enderited_item.tooltip_digger": "Mine Speed: +<v1>",
+  "tooltip.better_progression.enderited_item.tooltip_armor": "Toughness: +<v1>",
+  
   "tooltip.better_progression.netherited_item.tooltip": "Attack Damage: +<v1>",
+  "tooltip.better_progression.netherited_item.tooltip_armor": "Knockback resistance: +<v1>",
   
   "attribute.better_progression.attack_reach": "Attack Reach"
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "better_progression:item/end_oak_sapling"
+  }
+}

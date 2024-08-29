@@ -1,6 +1,7 @@
 package net.yuhi.better_progression.datagen.loot;
 
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -27,25 +28,16 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        this.dropSelf(ModBlocks.STEEL_BLOCK.get());
-        this.dropSelf(ModBlocks.TIN_BLOCK.get());
-        this.dropSelf(ModBlocks.BRONZE_BLOCK.get());
-        this.dropSelf(ModBlocks.ENDERITE_BLOCK.get());
-        this.dropSelf(ModBlocks.RAW_TIN_BLOCK.get());
-        this.dropSelf(ModBlocks.BRAKE_RAIL.get());
-        this.dropSelf(ModBlocks.PINK_QUARTZ_BRICKS.get());
-        this.dropSelf(ModBlocks.PINK_QUARTZ_BLOCK.get());
-        this.dropSelf(ModBlocks.CHISELED_PINK_QUARTZ_BLOCK.get());
-        this.dropSelf(ModBlocks.PINK_QUARTZ_PILLAR.get());
-        this.dropSelf(ModBlocks.PINK_QUARTZ_SLAB.get());
-        this.dropSelf(ModBlocks.PINK_QUARTZ_STAIRS.get());
-        this.dropSelf(ModBlocks.SMOOTH_PINK_QUARTZ.get());
-        this.dropSelf(ModBlocks.SMOOTH_PINK_QUARTZ_STAIRS.get());
-        this.dropSelf(ModBlocks.SMOOTH_PINK_QUARTZ_SLAB.get());
-        this.dropSelf(ModBlocks.END_STONE_GRASS_BLOCK.get());
+        for(var blockData : ModBlocks.BLOCKS_DATA) {
+            if(!blockData.dropSelf) continue;
+            
+            this.dropSelf(blockData.block.get());
+        }
         
-        this.dropSelf(ModBlocks.STANNIN_ORE.get());
-        this.dropSelf(ModBlocks.DEEPSLATE_STANNIN_ORE.get());
+        this.add(ModBlocks.END_GRASS.get(), block -> LootTable.lootTable());
+        this.add(ModBlocks.TALL_END_GRASS.get(), block -> LootTable.lootTable());
+        this.add(ModBlocks.END_GRASS_WITH_FLOWERS.get(), block -> LootTable.lootTable());
+        this.add(ModBlocks.END_OAK_LEAVES.get(), block -> createLeavesDrops(ModBlocks.END_OAK_LEAVES.get(), ModBlocks.END_OAK_SAPLING.get(), 0.05F, 0.0625F, 0.083333336F, 0.1F));
         
         this.add(ModBlocks.PINK_QUARTZ_ORE.get(),
                 block -> createOreDrops(ModBlocks.PINK_QUARTZ_ORE.get(), ModItems.PINK_QUARTZ.get(), 1, 1));

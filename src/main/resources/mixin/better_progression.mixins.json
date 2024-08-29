@@ -12,6 +12,7 @@
     "PlayerMixin",
     "accessor.ArmorItemAccessor",
     "accessor.ArmorMaterialsAccessor",
+    "accessor.BlockAccessor",
     "accessor.DiggerItemAccessor",
     "accessor.ItemCombinerMenuAccessor",
     "accessor.LegacySmithingMenuAccessor",

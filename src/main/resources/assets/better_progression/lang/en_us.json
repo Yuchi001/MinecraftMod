@@ -36,6 +36,9 @@
   "block.better_progression.tin_ore": "Tin Ore",
   "block.better_progression.end_tin_ore": "Tin Ore",
   "block.better_progression.end_stone_grass_block": "End Stone Grass Block",
+  "block.better_progression.end_stone_grass_short": "End Grass",
+  "block.better_progression.end_stone_grass_short_with_flowers": "End Grass With Flowers",
+  "block.better_progression.chiseled_end_stone_bricks": "Chiseled End Stone Bricks",
   "block.better_progression.tin_block": "Tin Block",
   "block.better_progression.raw_tin_block": "Raw Tin Block",
 
@@ -50,6 +53,21 @@
   "block.better_progression.smooth_pink_quartz_stairs": "Smooth Pink Quartz Stairs",
   "block.better_progression.smooth_pink_quartz_slab": "Smooth Pink Quartz Slab",
   "item.better_progression.pink_quartz": "Pink Quartz",
+
+  "block.better_progression.end_oak_door": "End Oak Door",
+  "block.better_progression.end_oak_leaves": "End Oak Leaves",
+  "block.better_progression.end_oak_trapdoor": "End Oak Trapdoor",
+  "block.better_progression.end_oak_log": "End Oak Log",
+  "block.better_progression.stripped_end_oak_log": "Stripped End Oak Log",
+  "block.better_progression.end_oak_wood": "End Oak Wood",
+  "block.better_progression.stripped_end_oak_wood": "Stripped End Oak Wood",
+  "block.better_progression.end_oak_fence": "End Oak Fence",
+  "block.better_progression.end_oak_fence_gate": "End Oak Fence Gate",
+  "block.better_progression.end_oak_planks": "End Oak Planks",
+  "block.better_progression.end_oak_stairs": "End Oak Stairs",
+  "block.better_progression.end_oak_slab": "End Oak Slab",
+  "block.better_progression.end_oak_pressure_plate": "End Oak Pressure Plate",
+  "block.better_progression.end_oak_button": "End Oak Button",
 
   "block.better_progression.stannin_ore": "Stannin Ore",
   

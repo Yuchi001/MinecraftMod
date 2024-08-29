@@ -1,11 +1,6 @@
 {
   "values": [
-    "better_progression:steel_block",
     "better_progression:deepslate_tin_ore",
-    "better_progression:deepslate_stannin_ore",
-    "better_progression:end_tin_ore",
-    "better_progression:end_stone_grass_block",
-    "better_progression:steel_block",
-    "better_progression:bronze_block"
+    "better_progression:deepslate_stannin_ore"
   ]
 }

@@ -1,0 +1,6 @@
+﻿{
+  "parent": "minecraft:block/tinted_cross",
+  "textures": {
+    "cross": "better_progression:block/end_tall_grass_bottom"
+  }
+}

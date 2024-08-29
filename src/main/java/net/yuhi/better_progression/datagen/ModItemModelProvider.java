@@ -6,10 +6,14 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.block.ModBlocks;
+import net.yuhi.better_progression.block.blockdata.BlockDataCreator;
 import net.yuhi.better_progression.item.ModItems;
 
 import java.io.FileWriter;
@@ -36,6 +40,13 @@ public class ModItemModelProvider extends ItemModelProvider {
                 case Spear -> bigSpearItem(item.item);
                 case Armor -> armorItem(item.item);
                 case Chainmail -> armorItem(item.item);
+            }
+        }
+
+        for (var block : ModBlocks.BLOCKS_DATA) {
+            switch (block.textureType) {
+                case CROSS, DOOR -> simpleBlockItem(block);
+                case BUTTON -> buttonBlockItem(block);
             }
         }
     }
@@ -166,6 +177,18 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0", 
                 new ResourceLocation(BetterProgression.MOD_ID, "item/" + item.getId().getPath()));
+    }
+    
+    private ItemModelBuilder simpleBlockItem(BlockDataCreator.BlockData block) {
+        return withExistingParent(block.block.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                block.textureSide);
+    }
+    
+    private ItemModelBuilder buttonBlockItem(BlockDataCreator.BlockData block) {
+        return this.withExistingParent(block.block.getId().getPath(),
+                new ResourceLocation("block/button_inventory")).texture("texture",
+                block.textureSide);
     }
 
     private void armorItem(RegistryObject<Item> item) {

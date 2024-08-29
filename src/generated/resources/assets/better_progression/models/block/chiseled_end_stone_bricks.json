@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "better_progression:block/chiseled_end_stone_bricks",
+    "top": "minecraft:block/end_stone_bricks"
+  }
+}

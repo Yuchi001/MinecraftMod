@@ -5,6 +5,7 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -15,11 +16,9 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.block.ModBlocks;
 
 import java.util.List;
-
-import static net.yuhi.better_progression.worldgen.ModOrePlacement.orePlacement;
-import static net.yuhi.better_progression.worldgen.ModOrePlacement.rareOrePlacement;
 
 public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> TIN_ORE_END_PLACED_KEY = registerKey("tin_ore_end_placed");
@@ -30,7 +29,11 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> PINK_QUARTZ_ORE_PLACED_KEY = registerKey("pink_quartz_ore_placed");
     public static final ResourceKey<PlacedFeature> DRAGON_DEBRIS_END_SMALL_PLACED_KEY = registerKey("dragon_debris_small_end_placed");
     public static final ResourceKey<PlacedFeature> DRAGON_DEBRIS_END_LARGE_PLACED_KEY = registerKey("dragon_debris_large_end_placed");
-    public static final ResourceKey<PlacedFeature> END_STONE_GRASS_DISK = registerKey("end_stone_grass_disk");
+    public static final ResourceKey<PlacedFeature> END_STONE_GRASS = registerKey("end_stone_grass");
+    public static final ResourceKey<PlacedFeature> END_STONE_GRASS_VEGETATION = registerKey("end_stone_grass_vegetation");
+    public static final ResourceKey<PlacedFeature> END_STONE_TALL_GRASS_VEGETATION = registerKey("end_stone_tall_grass_vegetation");
+    public static final ResourceKey<PlacedFeature> END_STONE_GRASS_WITH_FLOWERS_VEGETATION = registerKey("end_stone_grass_with_flowers_vegetation");
+    public static final ResourceKey<PlacedFeature> END_OAK = registerKey("end_oak");
 
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
@@ -55,9 +58,38 @@ public class ModPlacedFeatures {
 
         register(context, PINK_QUARTZ_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_PINK_QUARTZ_ORE_KEY),
                 ModOrePlacement.commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(112))));
-    
-        register(context, END_STONE_GRASS_DISK, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_STONE_GRASS),
-                CountPlacement.of(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, RandomOffsetPlacement.vertical(ConstantInt.of(-1)), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.END_STONE)), BiomeFilter.biome());
+
+        register(context, END_STONE_GRASS, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_STONE_GRASS),
+                CountPlacement.of(10),  // Większa liczba, aby pokryć większą powierzchnię
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                RandomOffsetPlacement.vertical(ConstantInt.of(-1)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
+                        BlockPredicate.matchesBlocks(List.of(Blocks.END_STONE, ModBlocks.END_STONE_GRASS_BLOCK.get()))
+                )),
+                BiomeFilter.biome());
+        
+        register(context, END_STONE_GRASS_VEGETATION, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_STONE_GRASS_VEGETATION),
+                CountPlacement.of(10),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                BiomeFilter.biome());
+
+        register(context, END_STONE_TALL_GRASS_VEGETATION, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_STONE_GRASS_TALL_VEGETATION),
+                CountPlacement.of(5),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                BiomeFilter.biome());
+
+        register(context, END_STONE_GRASS_WITH_FLOWERS_VEGETATION, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_STONE_GRASS_FLOWERS_VEGETATION),
+                CountPlacement.of(5),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                BiomeFilter.biome());
+        
+        register(context, END_OAK, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_OAK),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.05f, 2),
+                        ModBlocks.END_OAK_SAPLING.get()));
     }
     
     private static ResourceKey<PlacedFeature> registerKey(String name) {

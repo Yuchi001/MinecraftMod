@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "better_progression:block/end_oak_slab"
+    },
+    "type=double": {
+      "model": "better_progression:block/end_oak_planks"
+    },
+    "type=top": {
+      "model": "better_progression:block/end_oak_slab_top"
+    }
+  }
+}

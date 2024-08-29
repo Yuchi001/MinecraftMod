@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "better_progression:block/dragon_debris",
+    "top": "better_progression:block/dragon_debris_top"
+  }
+}

@@ -26,6 +26,7 @@ import net.yuhi.better_progression.recipe.ModRecipeType;
 import net.yuhi.better_progression.recipe.ModRecipes;
 import net.yuhi.better_progression.recipe.RemoveRecipes;
 import net.yuhi.better_progression.renderer.ModEntityRenders;
+import net.yuhi.better_progression.worldgen.feature.ModFeatures;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Mixins;
 
@@ -47,10 +48,11 @@ public class BetterProgression
         
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
 
+        ModFeatures.register(modEventBus);
         ModAttributes.register(modEventBus);
         ModEntityTypes.register(modEventBus);
-        ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModItems.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModMenus.register(modEventBus);
         ModRecipes.register(modEventBus);
@@ -89,11 +91,18 @@ public class BetterProgression
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
+        @SuppressWarnings("removal")
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            //noinspection removal
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BRAKE_RAIL.get(), RenderType.cutout());
+            for (var blockData : ModBlocks.BLOCKS_DATA) {
+                switch (blockData.textureType) {
+                    case CROSS, LEAVES -> ItemBlockRenderTypes.setRenderLayer(blockData.block.get(), RenderType.cutout());
+                }
+            }
+
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.TALL_END_GRASS.get(), RenderType.cutout());
         }
     }
 }

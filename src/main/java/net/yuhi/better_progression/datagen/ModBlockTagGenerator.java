@@ -21,66 +21,20 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider pProvider) {
-        this.tag(BlockTags.RAILS).add(
-                ModBlocks.BRAKE_RAIL.get()
-        );
-        
-        this.tag(BlockTags.NEEDS_STONE_TOOL).add(
-                ModBlocks.TIN_BLOCK.get(),
-                ModBlocks.RAW_TIN_BLOCK.get(),
-                ModBlocks.TIN_ORE.get(),
-                ModBlocks.PINK_QUARTZ_BRICKS.get(),
-                ModBlocks.PINK_QUARTZ_BLOCK.get(),
-                ModBlocks.PINK_QUARTZ_PILLAR.get(),
-                ModBlocks.CHISELED_PINK_QUARTZ_BLOCK.get(),
-                ModBlocks.SMOOTH_PINK_QUARTZ_SLAB.get(),
-                ModBlocks.SMOOTH_PINK_QUARTZ_STAIRS.get(),
-                ModBlocks.SMOOTH_PINK_QUARTZ.get(),
-                ModBlocks.PINK_QUARTZ_STAIRS.get(),
-                ModBlocks.PINK_QUARTZ_SLAB.get(),
-                ModBlocks.STANNIN_ORE.get()
-        );
-        
-        this.tag(BlockTags.NEEDS_IRON_TOOL).add(
-                ModBlocks.STEEL_BLOCK.get(),
-                ModBlocks.DEEPSLATE_TIN_ORE.get(),
-                ModBlocks.DEEPSLATE_STANNIN_ORE.get(),
-                ModBlocks.END_TIN_ORE.get(),
-                ModBlocks.END_STONE_GRASS_BLOCK.get(),
-                ModBlocks.STEEL_BLOCK.get(),
-                ModBlocks.BRONZE_BLOCK.get()
-        );
-        
-        this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
-                ModBlocks.ENDERITE_BLOCK.get(),
-                ModBlocks.DRAGON_DEBRIS.get()
-        );
-        
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
-                ModBlocks.STEEL_BLOCK.get(),
-                ModBlocks.TIN_BLOCK.get(),
-                ModBlocks.BRONZE_BLOCK.get(),
-                ModBlocks.ENDERITE_BLOCK.get(),
-                ModBlocks.RAW_TIN_BLOCK.get(),
-                ModBlocks.TIN_ORE.get(),
-                ModBlocks.DEEPSLATE_TIN_ORE.get(),
-                ModBlocks.END_TIN_ORE.get(),
-                ModBlocks.END_STONE_GRASS_BLOCK.get(),
-                ModBlocks.PINK_QUARTZ_ORE.get(),
-                ModBlocks.STANNIN_ORE.get(),
-                ModBlocks.DEEPSLATE_STANNIN_ORE.get(),
-                ModBlocks.PINK_QUARTZ_BRICKS.get(),
-                ModBlocks.PINK_QUARTZ_BLOCK.get(),
-                ModBlocks.PINK_QUARTZ_PILLAR.get(),
-                ModBlocks.CHISELED_PINK_QUARTZ_BLOCK.get(),
-                ModBlocks.SMOOTH_PINK_QUARTZ_SLAB.get(),
-                ModBlocks.SMOOTH_PINK_QUARTZ_STAIRS.get(),
-                ModBlocks.SMOOTH_PINK_QUARTZ.get(),
-                ModBlocks.PINK_QUARTZ_STAIRS.get(),
-                ModBlocks.PINK_QUARTZ_SLAB.get(),
-                ModBlocks.DRAGON_DEBRIS.get()
-        );
+        for(var blockData : ModBlocks.BLOCKS_DATA) {
+            if (blockData.mineableWith.getTag() != null) {
+                this.tag(blockData.mineableWith.getTag()).add(blockData.block.get());
+            }
 
+            if (blockData.requireTier.getTag() != null) {
+                this.tag(blockData.requireTier.getTag()).add(blockData.block.get());
+            }
+            
+            if (blockData.customTag.getTag() != null) {
+                this.tag(blockData.customTag.getTag()).add(blockData.block.get());
+            }
+        }
+        
         this.tag(ModTags.Blocks.ORE_TAG).add(
                 Blocks.IRON_ORE,
                 Blocks.DEEPSLATE_IRON_ORE,
@@ -98,14 +52,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 Blocks.LAPIS_ORE,
                 Blocks.DEEPSLATE_LAPIS_ORE,
                 Blocks.REDSTONE_ORE,
-                Blocks.DEEPSLATE_REDSTONE_ORE,
-                ModBlocks.STANNIN_ORE.get(),
-                ModBlocks.DEEPSLATE_STANNIN_ORE.get(),
-                ModBlocks.TIN_ORE.get(),
-                ModBlocks.DEEPSLATE_TIN_ORE.get(),
-                ModBlocks.END_TIN_ORE.get(),
-                ModBlocks.PINK_QUARTZ_ORE.get(),
-                ModBlocks.DRAGON_DEBRIS.get()
+                Blocks.DEEPSLATE_REDSTONE_ORE
         );
     }
 }

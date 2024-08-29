@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "better_progression:block/end_oak_log",
+    "top": "better_progression:block/end_oak_log_top"
+  }
+}

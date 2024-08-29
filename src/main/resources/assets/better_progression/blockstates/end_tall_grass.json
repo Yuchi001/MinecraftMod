@@ -1,0 +1,10 @@
+﻿{
+  "variants": {
+    "half=lower": {
+      "model": "better_progression:block/end_tall_grass_bottom"
+    },
+    "half=upper": {
+      "model": "better_progression:block/end_tall_grass_top"
+    }
+  }
+}

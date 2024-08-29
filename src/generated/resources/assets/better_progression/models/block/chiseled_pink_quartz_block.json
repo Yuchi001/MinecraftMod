@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "better_progression:block/chiseled_pink_quartz_block",
+    "top": "better_progression:block/chiseled_pink_quartz_block_top"
+  }
+}

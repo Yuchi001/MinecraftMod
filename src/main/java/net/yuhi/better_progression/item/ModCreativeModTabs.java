@@ -31,6 +31,6 @@ public class ModCreativeModTabs {
             event.accept(item.item.get().getDefaultInstance());
 
         for (var block : ModBlocks.BLOCKS_DATA)
-            if (block.blockType != ModBlocks.EBlockType.Vanilla) event.accept(block.block.get().asItem().getDefaultInstance());
+            event.accept(block.block.get().asItem().getDefaultInstance());
     }
 }

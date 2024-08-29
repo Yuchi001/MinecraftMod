@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "better_progression:block/end_stone_grass_block_side",
+    "top": "better_progression:block/end_stone_grass_block_top"
+  }
+}

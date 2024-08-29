@@ -1,12 +1,12 @@
 package net.yuhi.better_progression.block;
 
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -15,185 +15,330 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.BetterBlastFurnace.BetterBlastFurnaceBlock;
-import net.yuhi.better_progression.block.custom.BrakeRail;
-import net.yuhi.better_progression.block.custom.StanninOreBlock;
-import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.block.blockdata.*;
+import net.yuhi.better_progression.block.custom.*;
+import net.yuhi.better_progression.block.grower.EndOakGrower;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
+import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
 import static net.minecraft.world.level.block.Blocks.QUARTZ_BLOCK;
+import static net.yuhi.better_progression.mixin.accessor.BlockAccessor.*;
 
 public class ModBlocks {
-    public static final DeferredRegister<Block> BLOCKS = 
-            DeferredRegister.create(ForgeRegistries.BLOCKS, BetterProgression.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, BetterProgression.MOD_ID);
     
-    public static final DeferredRegister<Block> VANILLA_BLOCKS =
-            DeferredRegister.create(ForgeRegistries.BLOCKS, "minecraft");
+    public static final DeferredRegister<Block> VANILLA_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, "minecraft");
     
-    public static final List<BlockRegistryPair<Block>> BLOCKS_DATA = new ArrayList<>();
+    public static final List<BlockDataCreator.BlockData> BLOCKS_DATA = new ArrayList<>();
     
-    public static final RegistryObject<Block> TIN_BLOCK = registerBlock("tin_block", 
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(4.0F, 6.0F)),
-            EBlockType.Simple);
+    public static final RegistryObject<Block> TIN_BLOCK = new BlockDataCreator("tin_block",
+            () ->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(4.0F, 6.0F)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetCustomTag(ECustomTag.ORE)
+            .Register();
 
-    public static final RegistryObject<Block> STEEL_BLOCK = registerBlock("steel_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(6.0F, 6.0F)),
-            EBlockType.Simple);
+    public static final RegistryObject<Block> STEEL_BLOCK = new BlockDataCreator("steel_block",
+            () ->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(6.0F, 6.0F)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .Register();
 
-    public static final RegistryObject<Block> BRONZE_BLOCK = registerBlock("bronze_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).strength(6.0F, 6.0F)),
-            EBlockType.Simple);
+    public static final RegistryObject<Block> BRONZE_BLOCK = new BlockDataCreator("bronze_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).strength(6.0F, 6.0F)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .Register();
 
-    public static final RegistryObject<Block> ENDERITE_BLOCK = registerBlock("enderite_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK).strength(50.0F, 1200.0F)),
-            EBlockType.Simple);
+    // region END 
 
-    public static final RegistryObject<Block> END_STONE_GRASS_BLOCK = registerBlock("end_stone_grass_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.END_STONE).strength(3.0F, 9.0F)),
-            EBlockType.Custom);
+    public static final RegistryObject<Block> ENDERITE_BLOCK = new BlockDataCreator("enderite_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK).strength(50.0F, 1200.0F)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .Register();
 
-    public static final RegistryObject<Block> RAW_TIN_BLOCK = registerBlock("raw_tin_block",
-            () -> new Block(
-                    BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)
-                            .strength(4.0F, 5.0F)),
-            EBlockType.Simple);
+    public static final RegistryObject<Block> END_STONE_GRASS_BLOCK = new BlockDataCreator("end_stone_grass_block",
+            () -> new EndStoneGrassBlock(BlockBehaviour.Properties.of(Material.GRASS).randomTicks().strength(1.0F, 3.0F)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetTextureType(ETextureType.PILLAR_TOP_BOTTOM)
+            .SetTexture(EBlockSide.BOTTOM, "minecraft", "end_stone")
+            .SetTexture(EBlockSide.TOP, "end_stone_grass_block_top")
+            .SetTexture(EBlockSide.SIDE, "end_stone_grass_block_side")
+            .Register();
 
-    public static final RegistryObject<Block> DRAGON_DEBRIS = registerBlock("dragon_debris",
-            () -> new DropExperienceBlock(
-                    BlockBehaviour.Properties.copy(Blocks.STONE)
-                            .requiresCorrectToolForDrops()
-                            .strength(30.0F, 1200.0F),
-                    UniformInt.of(0, 2)),
-            EBlockType.Debris);
+    public static final RegistryObject<Block> CHISELED_END_STONE_BRICKS = new BlockDataCreator("chiseled_end_stone_bricks",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.SAND).requiresCorrectToolForDrops().strength(3.0F, 9.0F)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetTextureType(ETextureType.PILLAR_TOP)
+            .SetTexture(EBlockSide.TOP, "minecraft", "end_stone_bricks")
+            .SetTexture(EBlockSide.SIDE, "chiseled_end_stone_bricks")
+            .Register();
+
+    public static final RegistryObject<Block> END_TIN_ORE = new BlockDataCreator("end_tin_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F), UniformInt.of(0, 2)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetDropSelf(false)
+            .SetCustomTag(ECustomTag.ORE)
+            .SetRequireTier(ERequireTier.DIAMOND)
+            .Register();
+
+    public static final RegistryObject<Block> TALL_END_GRASS = new BlockDataCreator("end_tall_grass",
+            () -> new EndDoublePlantBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XYZ)))
+            .SetTextureType(ETextureType.CUSTOM)
+            .SetDropSelf(false)
+            .SetCustomTag(ECustomTag.NO_DROP)
+            .SetTexture(EBlockSide.ITEM, "end_tall_grass_top")
+            .SetTexture(EBlockSide.TOP, "end_tall_grass_top")
+            .SetTexture(EBlockSide.BOTTOM, "end_tall_grass_bottom")
+            .Register();
+
+    public static final RegistryObject<Block> END_GRASS = new BlockDataCreator("end_short_grass",
+            () -> new TallEndGrassBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XYZ), true))
+            .SetTextureType(ETextureType.CROSS)
+            .SetDropSelf(false)
+            .SetCustomTag(ECustomTag.NO_DROP)
+            .SetTexture(EBlockSide.ITEM, "end_short_grass")
+            .Register();
+
+    public static final RegistryObject<Block> END_GRASS_WITH_FLOWERS = new BlockDataCreator("end_short_grass_with_flowers",
+            () -> new TallEndGrassBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XYZ), false))
+            .SetTextureType(ETextureType.CROSS)
+            .SetDropSelf(false)
+            .SetCustomTag(ECustomTag.NO_DROP)
+            .SetTexture(EBlockSide.ITEM, "end_short_grass_with_flowers")
+            .Register();
+
+    public static final RegistryObject<Block> END_OAK_SAPLING = new BlockDataCreator("end_oak_sapling",
+            () -> new EndSaplingBlock(new EndOakGrower(), BlockBehaviour.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS)))
+            .SetTextureType(ETextureType.CROSS)
+            .SetTexture(EBlockSide.ITEM, "end_oak_sapling")
+            .Register();
+
+    public static final RegistryObject<Block> END_OAK_LOG = new BlockDataCreator("end_oak_log",
+            () -> log(MaterialColor.WOOD, MaterialColor.PODZOL))
+            .SetMineableWith(EMineableWith.AXE)
+            .SetTextureType(ETextureType.PILLAR_TOP)
+            .SetCustomTag(ECustomTag.LOGS)
+            .SetTexture(EBlockSide.TOP, "end_oak_log_top")
+            .Register();
+
+    public static final RegistryObject<Block> STRIPPED_END_OAK_LOG = new BlockDataCreator("stripped_end_oak_log",
+            () -> log(MaterialColor.WOOD, MaterialColor.PODZOL))
+            .SetMineableWith(EMineableWith.AXE)
+            .SetTextureType(ETextureType.PILLAR_TOP)
+            .SetCustomTag(ECustomTag.LOGS)
+            .SetTexture(EBlockSide.TOP, "stripped_end_oak_log_top")
+            .Register();
+
+    public static final RegistryObject<Block> END_OAK_WOOD = new BlockDataCreator("end_oak_wood",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F).sound(SoundType.WOOD)))
+            .SetTextureType(ETextureType.PILLAR_TOP)
+            .SetTexture(EBlockSide.TOP, "end_oak_log")
+            .SetTexture(EBlockSide.SIDE, "end_oak_log")
+            .SetMineableWith(EMineableWith.AXE)
+            .Register();
+
+    public static final RegistryObject<Block> STRIPPED_END_OAK_WOOD = new BlockDataCreator("stripped_end_oak_wood",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F).sound(SoundType.WOOD)))
+            .SetTextureType(ETextureType.PILLAR_TOP)
+            .SetTexture(EBlockSide.TOP, "stripped_end_oak_log")
+            .SetTexture(EBlockSide.SIDE, "stripped_end_oak_log")
+            .SetMineableWith(EMineableWith.AXE)
+            .Register();
+
+    public static final RegistryObject<Block> END_OAK_PLANKS = new BlockDataCreator("end_oak_planks",
+            () -> log(MaterialColor.WOOD, MaterialColor.PODZOL))
+            .SetMineableWith(EMineableWith.AXE)
+            .Register();
+
+    public static final RegistryObject<Block> END_OAK_LEAVES = new BlockDataCreator("end_oak_leaves",
+            () -> leaves(SoundType.GRASS))
+            .SetDropSelf(false)
+            .SetCustomTag(ECustomTag.LEAVES)
+            .Register();
     
-    public static final RegistryObject<Block> TIN_ORE = registerBlock("tin_ore",
-            () -> new DropExperienceBlock(
-                    BlockBehaviour.Properties.copy(Blocks.STONE)
-                            .requiresCorrectToolForDrops()
-                            .strength(3.0F, 3.0F), 
-                    UniformInt.of(0, 2)),
-                    EBlockType.Simple);
+    public static final RegistryObject<Block> END_OAK_FENCE = new BlockDataCreator("end_oak_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).strength(2.0F, 3.0F).sound(SoundType.WOOD)))
+            .SetTextureType(ETextureType.FENCE)
+            .SetTexture(EBlockSide.ALL, "end_oak_planks")
+            .SetMineableWith(EMineableWith.AXE)
+            .SetCustomTag(ECustomTag.WOODEN_FENCES)
+            .Register();
 
-    public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = registerBlock("deepslate_tin_ore",
-            () -> new DropExperienceBlock(
-                    BlockBehaviour.Properties.copy(Blocks.STONE)
-                            .requiresCorrectToolForDrops()
-                            .strength(3.0F, 3.0F),
-                    UniformInt.of(0, 2)),
-            EBlockType.Simple);
+    public static final RegistryObject<Block> END_OAK_FENCE_GATE = new BlockDataCreator("end_oak_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).strength(2.0F, 3.0F), WoodType.OAK))
+            .SetTextureType(ETextureType.FENCE_GATE)
+            .SetTexture(EBlockSide.ALL, "end_oak_planks")
+            .SetMineableWith(EMineableWith.AXE)
+            .SetCustomTag(ECustomTag.FENCE_GATES)
+            .Register();
 
-    public static final RegistryObject<Block> END_TIN_ORE = registerBlock("end_tin_ore",
-            () -> new DropExperienceBlock(
-                    BlockBehaviour.Properties.copy(Blocks.STONE)
-                            .requiresCorrectToolForDrops()
-                            .strength(3.0F, 3.0F),
-                    UniformInt.of(0, 2)),
-            EBlockType.Simple);
+    public static final RegistryObject<Block> END_OAK_SLAB = new BlockDataCreator("end_oak_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(OAK_PLANKS)))
+            .SetTextureType(ETextureType.SLAB)
+            .SetTexture(EBlockSide.ALL, "end_oak_planks")
+            .SetMineableWith(EMineableWith.AXE)
+            .Register();
 
-    public static final RegistryObject<Block> PINK_QUARTZ_ORE = registerBlock("pink_quartz_ore",
-            () -> new DropExperienceBlock(
-                    BlockBehaviour.Properties.copy(Blocks.STONE)
-                            .requiresCorrectToolForDrops()
-                            .strength(3.0F, 3.0F),
-                    UniformInt.of(0, 2)),
-            EBlockType.Simple);
+    public static final RegistryObject<Block> END_OAK_STAIRS = new BlockDataCreator("end_oak_stairs",
+            () -> new StairBlock(END_OAK_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(QUARTZ_BLOCK)))
+            .SetTextureType(ETextureType.STAIRS)
+            .SetTexture(EBlockSide.ALL, "end_oak_planks")
+            .SetMineableWith(EMineableWith.AXE)
+            .Register();
 
-    public static final RegistryObject<Block> CHISELED_PINK_QUARTZ_BLOCK = registerBlock("chiseled_pink_quartz_block", 
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)),
-            EBlockType.Custom);
+    public static final RegistryObject<Block> END_OAK_PRESSURE_PLATE = new BlockDataCreator("end_oak_pressure_plate",
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).noCollission().strength(0.5F), BlockSetType.OAK))
+            .SetTextureType(ETextureType.PRESSURE_PLATE)
+            .SetTexture(EBlockSide.ALL, "end_oak_planks")
+            .SetMineableWith(EMineableWith.AXE)
+            .Register();
 
-    public static final RegistryObject<Block> PINK_QUARTZ_PILLAR = registerBlock("pink_quartz_pillar",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)),
-            EBlockType.Custom);
+    public static final RegistryObject<Block> END_OAK_BUTTON = new BlockDataCreator("end_oak_button",
+            () -> woodenButton(BlockSetType.OAK))
+            .SetTextureType(ETextureType.BUTTON)
+            .SetTexture(EBlockSide.ALL, "end_oak_planks")
+            .SetMineableWith(EMineableWith.AXE)
+            .Register();
 
-    public static final RegistryObject<Block> PINK_QUARTZ_BLOCK = registerBlock("pink_quartz_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)),
-            EBlockType.Custom);
+    public static final RegistryObject<Block> END_OAK_DOOR = new BlockDataCreator("end_oak_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).strength(3.0F).noOcclusion(), BlockSetType.OAK))
+            .SetTextureType(ETextureType.DOOR)
+            .SetTexture(EBlockSide.TOP, "end_oak_door_top")
+            .SetTexture(EBlockSide.BOTTOM, "end_oak_door_bottom")
+            .SetTexture(EBlockSide.ITEM, "end_oak_door")
+            .SetMineableWith(EMineableWith.AXE)
+            .Register();
 
-    public static final RegistryObject<Block> PINK_QUARTZ_BRICKS = registerBlock("pink_quartz_bricks",
-            () -> new Block(BlockBehaviour.Properties.copy(QUARTZ_BLOCK)),
-            EBlockType.Simple);
+    public static final RegistryObject<Block> END_OAK_TRAPDOOR = new BlockDataCreator("end_oak_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(3.0F).noOcclusion().isValidSpawn((blockState,  blockGetter,  blockPos, type) -> never(blockState, blockGetter, blockPos)), BlockSetType.OAK))
+            .SetTextureType(ETextureType.TRAPDOOR)
+            .SetMineableWith(EMineableWith.AXE)
+            .Register();
 
-    public static final RegistryObject<SlabBlock> PINK_QUARTZ_SLAB = registerBlock("pink_quartz_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.copy(QUARTZ_BLOCK)),
-            EBlockType.Slab);
+    // endregion
 
-    public static final RegistryObject<StairBlock> PINK_QUARTZ_STAIRS = registerBlock("pink_quartz_stairs",
-            () -> new StairBlock(QUARTZ_BLOCK.defaultBlockState(), BlockBehaviour.Properties.copy(QUARTZ_BLOCK)),
-            EBlockType.Stairs);
+    public static final RegistryObject<Block> RAW_TIN_BLOCK = new BlockDataCreator("raw_tin_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK).strength(4.0F, 5.0F)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .Register();
 
-    public static final RegistryObject<Block> SMOOTH_PINK_QUARTZ = registerBlock("smooth_pink_quartz_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)),
-            EBlockType.Custom);
-
-    public static final RegistryObject<SlabBlock> SMOOTH_PINK_QUARTZ_SLAB = registerBlock("smooth_pink_quartz_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.copy(QUARTZ_BLOCK)),
-            EBlockType.Slab);
-
-    public static final RegistryObject<StairBlock> SMOOTH_PINK_QUARTZ_STAIRS = registerBlock("smooth_pink_quartz_stairs",
-            () -> new StairBlock(QUARTZ_BLOCK.defaultBlockState(), BlockBehaviour.Properties.copy(QUARTZ_BLOCK)),
-            EBlockType.Stairs);
+    public static final RegistryObject<Block> DRAGON_DEBRIS = new BlockDataCreator("dragon_debris",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(30.0F, 1200.0F), UniformInt.of(0, 2)))
+            .SetTextureType(ETextureType.PILLAR_TOP)
+            .SetTexture(EBlockSide.TOP, "dragon_debris_top")
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetRequireTier(ERequireTier.DIAMOND)
+            .SetCustomTag(ECustomTag.ORE)
+            .Register();
     
-    public static final RegistryObject<Block> STANNIN_ORE = registerBlock("stannin_ore",
-            () -> new StanninOreBlock(UniformInt.of(0, 2)), EBlockType.Simple);
+    public static final RegistryObject<Block> TIN_ORE = new BlockDataCreator("tin_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F), UniformInt.of(0, 2)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetCustomTag(ECustomTag.ORE)
+            .Register();
 
-    public static final RegistryObject<Block> DEEPSLATE_STANNIN_ORE = registerBlock("deepslate_stannin_ore",
-            () -> new StanninOreBlock(UniformInt.of(0, 2)), EBlockType.Simple);
+    public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = new BlockDataCreator("deepslate_tin_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F), UniformInt.of(0, 2)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetRequireTier(ERequireTier.IRON)
+            .SetCustomTag(ECustomTag.ORE)
+            .Register();
 
-    public static final RegistryObject<Block> BETTER_BLAST_FURNACE = registerVanillaBlock("blast_furnace",
-            () -> new BetterBlastFurnaceBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(litBlockEmission(13))),
-            EBlockType.Vanilla);
+    public static final RegistryObject<Block> PINK_QUARTZ_ORE = new BlockDataCreator("pink_quartz_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F), UniformInt.of(0, 2)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetCustomTag(ECustomTag.ORE)
+            .Register();
 
-    public static final RegistryObject<Block> BRAKE_RAIL = registerBlock("brake_rail",
-            BrakeRail::new,
-            EBlockType.Rail);
+    public static final RegistryObject<Block> CHISELED_PINK_QUARTZ_BLOCK = new BlockDataCreator("chiseled_pink_quartz_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)))
+            .SetTextureType(ETextureType.PILLAR_TOP)
+            .SetTexture(EBlockSide.TOP, "chiseled_pink_quartz_block_top")
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .Register();
 
-    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, EBlockType blockType) {
-        RegistryObject<T> blockObj = BLOCKS.register(name, block);
-        registerBlockItem(name, blockObj);
-        BLOCKS_DATA.add(new BlockRegistryPair(blockObj, blockType));
-        return blockObj;
-    }
+    public static final RegistryObject<Block> PINK_QUARTZ_PILLAR = new BlockDataCreator("pink_quartz_pillar",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)))
+            .SetTextureType(ETextureType.PILLAR_TOP)
+            .SetTexture(EBlockSide.TOP, "pink_quartz_pillar_top")
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .Register();
+
+    public static final RegistryObject<Block> PINK_QUARTZ_BLOCK = new BlockDataCreator("pink_quartz_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .Register();
+
+    public static final RegistryObject<Block> PINK_QUARTZ_BRICKS = new BlockDataCreator("pink_quartz_bricks",
+            () -> new Block(BlockBehaviour.Properties.copy(QUARTZ_BLOCK)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .Register();
+
+    public static final RegistryObject<Block> PINK_QUARTZ_SLAB = new BlockDataCreator("pink_quartz_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(QUARTZ_BLOCK)))
+            .SetTextureType(ETextureType.SLAB)
+            .SetTexture(EBlockSide.ALL, "pink_quartz_block")
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .Register();
+
+    public static final RegistryObject<Block> PINK_QUARTZ_STAIRS = new BlockDataCreator("pink_quartz_stairs",
+            () -> new StairBlock(QUARTZ_BLOCK.defaultBlockState(), BlockBehaviour.Properties.copy(QUARTZ_BLOCK)))
+            .SetTextureType(ETextureType.STAIRS)
+            .SetTexture(EBlockSide.ALL, "pink_quartz_block")
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .Register();
+
+    public static final RegistryObject<Block> SMOOTH_PINK_QUARTZ = new BlockDataCreator("smooth_pink_quartz_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .Register();
+
+    public static final RegistryObject<Block> SMOOTH_PINK_QUARTZ_SLAB = new BlockDataCreator("smooth_pink_quartz_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(QUARTZ_BLOCK)))
+            .SetTextureType(ETextureType.SLAB)
+            .SetTexture(EBlockSide.ALL, "smooth_pink_quartz_block")
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .Register();
+
+    public static final RegistryObject<Block> SMOOTH_PINK_QUARTZ_STAIRS = new BlockDataCreator("smooth_pink_quartz_stairs",
+            () -> new StairBlock(QUARTZ_BLOCK.defaultBlockState(), BlockBehaviour.Properties.copy(QUARTZ_BLOCK)))
+            .SetTextureType(ETextureType.STAIRS)
+            .SetTexture(EBlockSide.ALL, "smooth_pink_quartz_block")
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .Register();
+    
+    public static final RegistryObject<Block> STANNIN_ORE = new BlockDataCreator("stannin_ore",
+            () -> new StanninOreBlock(UniformInt.of(0, 2)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetCustomTag(ECustomTag.ORE)
+            .Register();
+
+    public static final RegistryObject<Block> DEEPSLATE_STANNIN_ORE = new BlockDataCreator("deepslate_stannin_ore",
+            () -> new StanninOreBlock(UniformInt.of(0, 2)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetRequireTier(ERequireTier.IRON)
+            .SetCustomTag(ECustomTag.ORE)
+            .Register();
+
+    public static final RegistryObject<Block> BETTER_BLAST_FURNACE = new BlockDataCreator("blast_furnace",
+            () -> new BetterBlastFurnaceBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(litBlockEmission(13))))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .RegisterVanilla();
+
+    public static final RegistryObject<Block> BRAKE_RAIL = new BlockDataCreator("brake_rail",
+            () -> new BrakeRail())
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetTextureType(ETextureType.CUSTOM)
+            .SetCustomTag(ECustomTag.RAIL)
+            .Register();
 
     private static ToIntFunction<BlockState> litBlockEmission(int pLightValue) {
         return (p_50763_) -> p_50763_.getValue(BlockStateProperties.LIT) ? pLightValue : 0;
     }
 
-    private static <T extends Block> RegistryObject<T> registerVanillaBlock(String name, Supplier<T> block, EBlockType blockType) {
-        RegistryObject<T> blockObj = VANILLA_BLOCKS.register(name, block);
-        registerBlockItem(name, blockObj);
-        return blockObj;
-    }
-    
-    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
-    }
-    
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
         VANILLA_BLOCKS.register(eventBus);
-    }
-
-    public static class BlockRegistryPair<T> {
-        public final RegistryObject<T> block;
-        public final EBlockType blockType;
-
-        public BlockRegistryPair(RegistryObject<T> block, EBlockType blockType) {
-            this.block = block;
-            this.blockType = blockType;
-        }
-    }
-    
-    public enum EBlockType {
-        Simple,
-        Debris,
-        Vanilla,
-        Rail,
-        Stairs,
-        Slab,
-        Custom
     }
 }

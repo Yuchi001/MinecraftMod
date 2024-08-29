@@ -11,6 +11,7 @@ import net.yuhi.better_progression.BetterProgression;
 public class ModTags {
     public static class Blocks {
         public static TagKey<Block> ORE_TAG = tag("ore");
+        public static TagKey<Block> NO_DROP = tag("no_drop");
         
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(BetterProgression.MOD_ID, name));

@@ -528,6 +528,51 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('z', Items.IRON_INGOT)
                 .unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER))
                 .save(pWriter, "better_saddle");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.IRON_AXE)
+                .pattern("** ")
+                .pattern("*# ")
+                .pattern(" # ")
+                .define('*', Items.IRON_INGOT)
+                .define('#', ModItems.HILT.get())
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .save(pWriter, "better_iron_axe");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.IRON_HOE)
+                .pattern("** ")
+                .pattern(" # ")
+                .pattern(" # ")
+                .define('*', Items.IRON_INGOT)
+                .define('#', ModItems.HILT.get())
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .save(pWriter, "better_iron_hoe");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.IRON_SHOVEL)
+                .pattern(" * ")
+                .pattern(" # ")
+                .pattern(" # ")
+                .define('*', Items.IRON_INGOT)
+                .define('#', ModItems.HILT.get())
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .save(pWriter, "better_iron_shovel");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.IRON_SWORD)
+                .pattern(" * ")
+                .pattern(" * ")
+                .pattern(" # ")
+                .define('#', ModItems.HILT.get())
+                .define('*', Items.IRON_INGOT)
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .save(pWriter, "better_iron_sword");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.IRON_PICKAXE)
+                .pattern("***")
+                .pattern(" # ")
+                .pattern(" # ")
+                .define('*', Items.IRON_INGOT)
+                .define('#', ModItems.HILT.get())
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .save(pWriter, "better_iron_pickaxe");
         
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Blocks.TNT)
                 .requires(Blocks.SAND, 2)

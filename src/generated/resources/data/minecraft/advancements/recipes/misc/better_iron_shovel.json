@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:iron_battleaxe"
+        "recipe": "minecraft:better_iron_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:iron_battleaxe"
+      "minecraft:better_iron_shovel"
     ]
   }
 }

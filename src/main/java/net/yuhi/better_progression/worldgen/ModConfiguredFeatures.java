@@ -85,7 +85,7 @@ public class ModConfiguredFeatures {
                         new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.TALL_END_GRASS.get())))));
         
         register(context, END_STONE_GRASS, ModFeatures.END_STONE_GRASS_REPLACER, FeatureConfiguration.NONE);
-        register(context, END_OAK, Feature.TREE, createFancyOak().build());
+        register(context, END_OAK, Feature.TREE, createFancyOak().dirt(BlockStateProvider.simple(Blocks.END_STONE)).build());
         register(context, OVERWORLD_TIN_ORE_KEY, Feature.ORE, new OreConfiguration(overworldTinOres, 9));
         register(context, OVERWORLD_STANNIN_ORE_KEY, Feature.ORE, new OreConfiguration(overworldStanninOres, 9));
         register(context, OVERWORLD_PINK_QUARTZ_ORE_KEY, Feature.ORE, new OreConfiguration(overworldPinkQuartzOres, 14));

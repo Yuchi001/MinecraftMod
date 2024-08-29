@@ -3,19 +3,19 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:iron_ingot"
+      "item": "better_progression:hilt"
     },
     "*": {
-      "item": "better_progression:hilt"
+      "item": "minecraft:iron_ingot"
     }
   },
   "pattern": [
-    "  #",
+    " * ",
     " # ",
-    "*  "
+    " # "
   ],
   "result": {
-    "item": "better_progression:iron_machete"
+    "item": "minecraft:iron_shovel"
   },
   "show_notification": true
 }

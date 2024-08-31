@@ -3,6 +3,7 @@ package net.yuhi.better_progression.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -17,10 +18,14 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.block.BetterBlastFurnace.BetterBlastFurnaceBlock;
+import net.yuhi.better_progression.block.custom.BetterBlastFurnaceBlock;
 import net.yuhi.better_progression.block.blockdata.*;
 import net.yuhi.better_progression.block.custom.*;
 import net.yuhi.better_progression.block.grower.EndOakGrower;
+import net.yuhi.better_progression.block.utils.ModWoodTypes;
+import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.EMaterialType;
 import net.yuhi.better_progression.mixin.accessor.BlockAccessor;
 
 import java.util.ArrayList;
@@ -28,6 +33,7 @@ import java.util.List;
 import java.util.function.ToIntFunction;
 
 import static net.minecraft.world.level.block.Blocks.*;
+import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 import static net.yuhi.better_progression.mixin.accessor.BlockAccessor.*;
 
 public class ModBlocks {
@@ -41,16 +47,19 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(4.0F, 6.0F)))
             .SetMineableWith(EMineableWith.PICKAXE)
             .SetCustomTag(ECustomTag.ORE)
+            .AddRecipe(EBlockCraftingRecipeType.BLOCK_SHAPELESS_1, List.of(() -> getItem(EItemCategory.Ingot, EMaterialType.TIN)))
             .Register();
 
     public static final RegistryObject<Block> STEEL_BLOCK = new BlockDataCreator("steel_block",
-            () ->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(6.0F, 6.0F)))
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(6.0F, 6.0F)))
             .SetMineableWith(EMineableWith.PICKAXE)
+            .AddRecipe(EBlockCraftingRecipeType.BLOCK_SHAPELESS_1, List.of(() -> getItem(EItemCategory.Ingot, EMaterialType.STEEL)))
             .Register();
 
     public static final RegistryObject<Block> BRONZE_BLOCK = new BlockDataCreator("bronze_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).strength(6.0F, 6.0F)))
             .SetMineableWith(EMineableWith.PICKAXE)
+            .AddRecipe(EBlockCraftingRecipeType.BLOCK_SHAPELESS_1, List.of(() -> getItem(EItemCategory.Ingot, EMaterialType.BRONZE)))
             .Register();
 
     // region END 
@@ -58,6 +67,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> ENDERITE_BLOCK = new BlockDataCreator("enderite_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK).strength(50.0F, 1200.0F)))
             .SetMineableWith(EMineableWith.PICKAXE)
+            .AddRecipe(EBlockCraftingRecipeType.BLOCK_SHAPELESS_1, List.of(() -> getItem(EItemCategory.Ingot, EMaterialType.ENDERITE)))
             .Register();
 
     public static final RegistryObject<Block> END_STONE_GRASS_BLOCK = new BlockDataCreator("end_stone_grass_block",
@@ -75,6 +85,7 @@ public class ModBlocks {
             .SetTextureType(ETextureType.PILLAR_TOP)
             .SetTexture(EBlockSide.TOP, "minecraft", "end_stone_bricks")
             .SetTexture(EBlockSide.SIDE, "chiseled_end_stone_bricks")
+            .AddRecipe(EBlockCraftingRecipeType.BLOCK_FROM_2_1, List.of(() -> END_STONE_BRICK_SLAB))
             .Register();
 
     public static final RegistryObject<Block> END_TIN_ORE = new BlockDataCreator("end_tin_ore",
@@ -141,7 +152,7 @@ public class ModBlocks {
             .SetTexture(EBlockSide.SIDE, "stripped_end_oak_log")
             .SetCustomTag(ECustomTag.LOGS_THAT_BURN)
             .SetMineableWith(EMineableWith.AXE)
-            .SetCraftingRecipe(EBlockCraftingRecipeType.WOOD, List.of(STRIPPED_END_OAK_LOG::get))
+            .AddRecipe(EBlockCraftingRecipeType.WOOD_3, List.of(STRIPPED_END_OAK_LOG::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_WOOD = new BlockDataCreator("end_oak_wood",
@@ -152,7 +163,7 @@ public class ModBlocks {
             .SetTexture(EBlockSide.SIDE, "end_oak_log")
             .SetMineableWith(EMineableWith.AXE)
             .SetCustomTag(ECustomTag.LOGS_THAT_BURN)
-            .SetCraftingRecipe(EBlockCraftingRecipeType.WOOD, List.of(END_OAK_LOG::get))
+            .AddRecipe(EBlockCraftingRecipeType.WOOD_3, List.of(END_OAK_LOG::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_PLANKS = new BlockDataCreator("end_oak_planks",
@@ -173,6 +184,10 @@ public class ModBlocks {
                 }
             })
             .SetMineableWith(EMineableWith.AXE)
+            .AddRecipe(EBlockCraftingRecipeType.PLANKS_4, List.of(END_OAK_LOG::get))
+            .AddRecipe(EBlockCraftingRecipeType.PLANKS_4, List.of(STRIPPED_END_OAK_LOG::get))
+            .AddRecipe(EBlockCraftingRecipeType.PLANKS_4, List.of(END_OAK_WOOD::get))
+            .AddRecipe(EBlockCraftingRecipeType.PLANKS_4, List.of(STRIPPED_END_OAK_WOOD::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_LEAVES = new BlockDataCreator("end_oak_leaves",
@@ -193,6 +208,7 @@ public class ModBlocks {
                 }
             })
             .SetDropSelf(false)
+            .AddRecipe(EBlockCraftingRecipeType.STICK_4, List.of(END_OAK_PLANKS::get))
             .SetCustomTag(ECustomTag.LEAVES)
             .Register();
     
@@ -202,16 +218,32 @@ public class ModBlocks {
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
             .SetCustomTag(ECustomTag.WOODEN_FENCES)
-            .SetCraftingRecipe(EBlockCraftingRecipeType.WOODEN_FENCE, List.of(END_OAK_PLANKS::get))
+            .AddRecipe(EBlockCraftingRecipeType.WOODEN_FENCE_3, List.of(END_OAK_PLANKS::get))
             .Register();
 
+    public static final RegistryObject<Block> END_OAK_WALL_SIGN = new BlockDataCreator("end_oak_wall_sign",
+            () -> new ModWallSignBlock(BlockBehaviour.Properties.copy(OAK_WALL_SIGN), ModWoodTypes.END_OAK))
+            .SetTextureType(ETextureType.CUSTOM)
+            .SetMineableWith(EMineableWith.AXE)
+            .RegisterWithoutItem();
+
+    public static final RegistryObject<Block> END_OAK_SIGN = new BlockDataCreator("end_oak_sign",
+            () -> new ModStandingSignBlock(BlockBehaviour.Properties.copy(OAK_SIGN), ModWoodTypes.END_OAK))
+            .SetTextureType(ETextureType.SIGN)
+            .SetTexture(EBlockSide.SIDE, "end_oak_planks")
+            .SetTexture(EBlockSide.ITEM, "end_oak_sign")
+            .SetTwinBlockSupplier(END_OAK_WALL_SIGN::get)
+            .SetMineableWith(EMineableWith.AXE)
+            .AddRecipe(EBlockCraftingRecipeType.SIGN_3, List.of(END_OAK_PLANKS::get))
+            .RegisterWithoutItem();
+
     public static final RegistryObject<Block> END_OAK_FENCE_GATE = new BlockDataCreator("end_oak_fence_gate",
-            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), WoodType.OAK))
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), ModWoodTypes.END_OAK))
             .SetTextureType(ETextureType.FENCE_GATE)
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
             .SetCustomTag(ECustomTag.FENCE_GATES)
-            .SetCraftingRecipe(EBlockCraftingRecipeType.WOODEN_FENCE_GATE, List.of(END_OAK_PLANKS::get))
+            .AddRecipe(EBlockCraftingRecipeType.WOODEN_FENCE_GATE_1, List.of(END_OAK_PLANKS::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_SLAB = new BlockDataCreator("end_oak_slab",
@@ -219,7 +251,7 @@ public class ModBlocks {
             .SetTextureType(ETextureType.SLAB)
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
-            .SetCraftingRecipe(EBlockCraftingRecipeType.SLAB, List.of(END_OAK_PLANKS::get))
+            .AddRecipe(EBlockCraftingRecipeType.SLAB_6, List.of(END_OAK_PLANKS::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_STAIRS = new BlockDataCreator("end_oak_stairs",
@@ -227,7 +259,7 @@ public class ModBlocks {
             .SetTextureType(ETextureType.STAIRS)
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
-            .SetCraftingRecipe(EBlockCraftingRecipeType.STAIRS, List.of(END_OAK_PLANKS::get))
+            .AddRecipe(EBlockCraftingRecipeType.STAIRS_4, List.of(END_OAK_PLANKS::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_PRESSURE_PLATE = new BlockDataCreator("end_oak_pressure_plate",
@@ -235,7 +267,7 @@ public class ModBlocks {
             .SetTextureType(ETextureType.PRESSURE_PLATE)
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
-            .SetCraftingRecipe(EBlockCraftingRecipeType.PRESSURE_PLATE, List.of(END_OAK_PLANKS::get))
+            .AddRecipe(EBlockCraftingRecipeType.PRESSURE_PLATE_1, List.of(END_OAK_PLANKS::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_BUTTON = new BlockDataCreator("end_oak_button",
@@ -243,7 +275,7 @@ public class ModBlocks {
             .SetTextureType(ETextureType.BUTTON)
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
-            .SetCraftingRecipe(EBlockCraftingRecipeType.BUTTON, List.of(END_OAK_PLANKS::get))
+            .AddRecipe(EBlockCraftingRecipeType.BUTTON_1, List.of(END_OAK_PLANKS::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_DOOR = new BlockDataCreator("end_oak_door",
@@ -253,14 +285,14 @@ public class ModBlocks {
             .SetTexture(EBlockSide.BOTTOM, "end_oak_door_bottom")
             .SetTexture(EBlockSide.ITEM, "end_oak_door")
             .SetMineableWith(EMineableWith.AXE)
-            .SetCraftingRecipe(EBlockCraftingRecipeType.DOOR, List.of(END_OAK_PLANKS::get))
+            .AddRecipe(EBlockCraftingRecipeType.DOOR_3, List.of(END_OAK_PLANKS::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_TRAPDOOR = new BlockDataCreator("end_oak_trapdoor",
             () -> new TrapDoorBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(3.0F).noOcclusion().isValidSpawn((blockState,  blockGetter,  blockPos, type) -> never(blockState, blockGetter, blockPos)), BlockSetType.OAK))
             .SetTextureType(ETextureType.TRAPDOOR)
             .SetMineableWith(EMineableWith.AXE)
-            .SetCraftingRecipe(EBlockCraftingRecipeType.TRAPDOOR, List.of(END_OAK_PLANKS::get))
+            .AddRecipe(EBlockCraftingRecipeType.TRAPDOOR_2, List.of(END_OAK_PLANKS::get))
             .Register();
 
     // endregion
@@ -268,6 +300,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> RAW_TIN_BLOCK = new BlockDataCreator("raw_tin_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK).strength(4.0F, 5.0F)))
             .SetMineableWith(EMineableWith.PICKAXE)
+            .AddRecipe(EBlockCraftingRecipeType.BLOCK_SHAPELESS_1, List.of(() -> getItem(EItemCategory.RawMaterial, EMaterialType.TIN)))
             .Register();
 
     public static final RegistryObject<Block> DRAGON_DEBRIS = new BlockDataCreator("dragon_debris",
@@ -298,11 +331,10 @@ public class ModBlocks {
             .SetCustomTag(ECustomTag.ORE)
             .Register();
 
-    public static final RegistryObject<Block> CHISELED_PINK_QUARTZ_BLOCK = new BlockDataCreator("chiseled_pink_quartz_block",
+    public static final RegistryObject<Block> PINK_QUARTZ_BLOCK = new BlockDataCreator("pink_quartz_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)))
-            .SetTextureType(ETextureType.PILLAR_TOP)
-            .SetTexture(EBlockSide.TOP, "chiseled_pink_quartz_block_top")
             .SetMineableWith(EMineableWith.PICKAXE)
+            .AddRecipe(EBlockCraftingRecipeType.BLOCK_FROM_4_4, List.of(ModItems.PINK_QUARTZ::get), 1)
             .Register();
 
     public static final RegistryObject<Block> PINK_QUARTZ_PILLAR = new BlockDataCreator("pink_quartz_pillar",
@@ -310,16 +342,13 @@ public class ModBlocks {
             .SetTextureType(ETextureType.LOG)
             .SetTexture(EBlockSide.TOP, "pink_quartz_pillar_top")
             .SetMineableWith(EMineableWith.PICKAXE)
-            .Register();
-
-    public static final RegistryObject<Block> PINK_QUARTZ_BLOCK = new BlockDataCreator("pink_quartz_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)))
-            .SetMineableWith(EMineableWith.PICKAXE)
+            .AddRecipe(EBlockCraftingRecipeType.BLOCK_FROM_2_1, List.of(PINK_QUARTZ_BLOCK::get), 2)
             .Register();
 
     public static final RegistryObject<Block> PINK_QUARTZ_BRICKS = new BlockDataCreator("pink_quartz_bricks",
             () -> new Block(BlockBehaviour.Properties.copy(QUARTZ_BLOCK)))
             .SetMineableWith(EMineableWith.PICKAXE)
+            .AddRecipe(EBlockCraftingRecipeType.BLOCK_FROM_4_4, List.of(PINK_QUARTZ_BLOCK::get))
             .Register();
 
     public static final RegistryObject<Block> PINK_QUARTZ_SLAB = new BlockDataCreator("pink_quartz_slab",
@@ -327,16 +356,29 @@ public class ModBlocks {
             .SetTextureType(ETextureType.SLAB)
             .SetTexture(EBlockSide.ALL, "pink_quartz_block")
             .SetMineableWith(EMineableWith.PICKAXE)
+            .AddRecipe(EBlockCraftingRecipeType.SLAB_6, List.of(PINK_QUARTZ_BLOCK::get))
             .Register();
+
+    public static final RegistryObject<Block> CHISELED_PINK_QUARTZ_BLOCK = new BlockDataCreator("chiseled_pink_quartz_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)))
+            .SetTextureType(ETextureType.PILLAR_TOP)
+            .SetTexture(EBlockSide.TOP, "chiseled_pink_quartz_block_top")
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .AddRecipe(EBlockCraftingRecipeType.BLOCK_FROM_2_1, List.of(PINK_QUARTZ_SLAB::get))
+            .Register();
+    
 
     public static final RegistryObject<Block> PINK_QUARTZ_STAIRS = new BlockDataCreator("pink_quartz_stairs",
             () -> new StairBlock(QUARTZ_BLOCK.defaultBlockState(), BlockBehaviour.Properties.copy(QUARTZ_BLOCK)))
             .SetTextureType(ETextureType.STAIRS)
             .SetTexture(EBlockSide.ALL, "pink_quartz_block")
             .SetMineableWith(EMineableWith.PICKAXE)
+            .AddRecipe(EBlockCraftingRecipeType.STAIRS_4, List.of(PINK_QUARTZ_BLOCK::get))
             .Register();
 
-    public static final RegistryObject<Block> SMOOTH_PINK_QUARTZ = new BlockDataCreator("smooth_pink_quartz_block",
+    
+    //TODO: add smelting recipe
+    public static final RegistryObject<Block> SMOOTH_PINK_QUARTZ_BLOCK = new BlockDataCreator("smooth_pink_quartz_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)))
             .SetMineableWith(EMineableWith.PICKAXE)
             .Register();
@@ -346,6 +388,7 @@ public class ModBlocks {
             .SetTextureType(ETextureType.SLAB)
             .SetTexture(EBlockSide.ALL, "smooth_pink_quartz_block")
             .SetMineableWith(EMineableWith.PICKAXE)
+            .AddRecipe(EBlockCraftingRecipeType.SLAB_6, List.of(SMOOTH_PINK_QUARTZ_BLOCK::get))
             .Register();
 
     public static final RegistryObject<Block> SMOOTH_PINK_QUARTZ_STAIRS = new BlockDataCreator("smooth_pink_quartz_stairs",
@@ -353,6 +396,7 @@ public class ModBlocks {
             .SetTextureType(ETextureType.STAIRS)
             .SetTexture(EBlockSide.ALL, "smooth_pink_quartz_block")
             .SetMineableWith(EMineableWith.PICKAXE)
+            .AddRecipe(EBlockCraftingRecipeType.STAIRS_4, List.of(SMOOTH_PINK_QUARTZ_BLOCK::get))
             .Register();
     
     public static final RegistryObject<Block> STANNIN_ORE = new BlockDataCreator("stannin_ore",
@@ -378,6 +422,7 @@ public class ModBlocks {
             .SetMineableWith(EMineableWith.PICKAXE)
             .SetTextureType(ETextureType.CUSTOM)
             .SetCustomTag(ECustomTag.RAIL)
+            .AddRecipe(EBlockCraftingRecipeType.RAIL_16, List.of(() -> Items.IRON_INGOT))
             .Register();
 
     private static ToIntFunction<BlockState> litBlockEmission(int pLightValue) {

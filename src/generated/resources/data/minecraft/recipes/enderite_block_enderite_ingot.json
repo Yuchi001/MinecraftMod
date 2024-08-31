@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "better_progression:enderite_ingot"
+    },
+    {
+      "item": "better_progression:enderite_ingot"
+    },
+    {
+      "item": "better_progression:enderite_ingot"
+    },
+    {
+      "item": "better_progression:enderite_ingot"
+    },
+    {
+      "item": "better_progression:enderite_ingot"
+    },
+    {
+      "item": "better_progression:enderite_ingot"
+    },
+    {
+      "item": "better_progression:enderite_ingot"
+    },
+    {
+      "item": "better_progression:enderite_ingot"
+    },
+    {
+      "item": "better_progression:enderite_ingot"
+    }
+  ],
+  "result": {
+    "item": "better_progression:enderite_block"
+  }
+}

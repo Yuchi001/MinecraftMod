@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "better_progression:stripped_end_oak_wood"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "better_progression:end_oak_planks"
+  }
+}

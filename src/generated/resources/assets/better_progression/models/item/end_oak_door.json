@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "better_progression:block/end_oak_door"
+    "layer0": "better_progression:item/end_oak_door"
   }
 }

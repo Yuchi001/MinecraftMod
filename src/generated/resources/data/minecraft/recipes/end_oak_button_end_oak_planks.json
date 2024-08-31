@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "better_progression:end_oak_planks"
+    }
+  ],
+  "result": {
+    "item": "better_progression:end_oak_button"
+  }
+}

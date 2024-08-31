@@ -3,11 +3,9 @@ package net.yuhi.better_progression.menu.BetterFurnaceMenu;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.FurnaceResultSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
-import net.yuhi.better_progression.block.BetterFurnace.AbstractBetterFurnaceBlockEntity;
+import net.yuhi.better_progression.block.entity.AbstractBetterFurnaceBlockEntity;
 
 public class BetterFurnaceResultSlot extends Slot {
     private final Player player;

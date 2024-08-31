@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "s": {
+      "item": "better_progression:pink_quartz_block"
+    }
+  },
+  "pattern": [
+    "   ",
+    "   ",
+    "sss"
+  ],
+  "result": {
+    "count": 6,
+    "item": "better_progression:pink_quartz_slab"
+  },
+  "show_notification": true
+}

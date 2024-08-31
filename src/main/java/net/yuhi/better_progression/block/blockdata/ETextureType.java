@@ -5,6 +5,7 @@ public enum ETextureType {
     PILLAR_TOP,
     LOG,
     AXIS,
+    SIGN,
     PILLAR_TOP_BOTTOM,
     FENCE_GATE,
     FENCE,

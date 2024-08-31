@@ -3,6 +3,8 @@ package net.yuhi.better_progression;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -16,6 +18,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.yuhi.better_progression.attribute.ModAttributes;
 import net.yuhi.better_progression.block.ModBlockEntities;
 import net.yuhi.better_progression.block.ModBlocks;
+import net.yuhi.better_progression.block.utils.ModWoodTypes;
 import net.yuhi.better_progression.entity.ModEntityTypes;
 import net.yuhi.better_progression.events.HeavyItemEventHandler;
 import net.yuhi.better_progression.events.VillagerTradesEventHandler;
@@ -95,6 +98,8 @@ public class BetterProgression
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            Sheets.addWoodType(ModWoodTypes.END_OAK);
+
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.BRAKE_RAIL.get(), RenderType.cutout());
             for (var blockData : ModBlocks.BLOCKS_DATA) {
                 switch (blockData.textureType) {

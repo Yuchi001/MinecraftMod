@@ -32,12 +32,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 case PILLAR_TOP_BOTTOM -> pillarTopBottomWithItem(blockData);
                 case FENCE -> fenceWithItem(blockData);
                 case FENCE_GATE -> fenceGateWithItem(blockData);
+                case SIGN -> sign(blockData);
             }
         }
     }
 
     private void blockWithItem(BlockDataCreator.BlockData blockData) {
         simpleBlockWithItem(blockData.block.get(), cubeAll(blockData.block.get()));
+    }
+    
+    private void sign(BlockDataCreator.BlockData signBlockData) {
+        signBlock((StandingSignBlock) signBlockData.block.get(), (WallSignBlock) signBlockData.twinBlockSupplier.get(), signBlockData.textureSide);
     }
 
     private void fenceWithItem(BlockDataCreator.BlockData blockData) {

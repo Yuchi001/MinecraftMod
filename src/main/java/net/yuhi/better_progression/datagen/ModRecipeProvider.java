@@ -1,6 +1,5 @@
 package net.yuhi.better_progression.datagen;
 
-import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -15,13 +14,11 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.ModBlocks;
-import net.yuhi.better_progression.block.blockdata.BlockDataCreator;
 import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 import net.yuhi.better_progression.item.utils.ItemInfo;
 import net.yuhi.better_progression.item.utils.ItemsUtilsMethods;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -38,7 +35,7 @@ public class ModRecipeProvider extends RecipeProvider {
         for (var plate : getItemInfosForCraftingRecipes(EItemCategory.Plate)) {
             var mod_id = plate.has_default_basis ? "minecraft" : plate.mod_id;
             var ingotRegistryKey = new ResourceLocation(mod_id, plate.basis);
-            var nuggetRegistryKey = new ResourceLocation(mod_id, plate.basis.substring(0, plate.basis.lastIndexOf("_")) + "_nugget");
+            var nuggetRegistryKey = new ResourceLocation(plate.material_type == EMaterialType.COPPER ? BetterProgression.MOD_ID : mod_id, plate.basis.substring(0, plate.basis.lastIndexOf("_")) + "_nugget");
 
             var ingotItem = ForgeRegistries.ITEMS.getValue(ingotRegistryKey);
             var nuggetItem = ForgeRegistries.ITEMS.getValue(nuggetRegistryKey);
@@ -61,7 +58,7 @@ public class ModRecipeProvider extends RecipeProvider {
         for (var chainmail : getItemInfosForCraftingRecipes(EItemCategory.Chainmail)) {
             var mod_id = chainmail.has_default_basis ? "minecraft" : chainmail.mod_id;
             var ingotRegistryKey = new ResourceLocation(mod_id, chainmail.basis);
-            var nuggetRegistryKey = new ResourceLocation(mod_id, chainmail.basis.substring(0, chainmail.basis.lastIndexOf("_")) + "_nugget");
+            var nuggetRegistryKey = new ResourceLocation(chainmail.material_type == EMaterialType.COPPER ? BetterProgression.MOD_ID : mod_id, chainmail.basis.substring(0, chainmail.basis.lastIndexOf("_")) + "_nugget");
 
             var ingotItem = ForgeRegistries.ITEMS.getValue(ingotRegistryKey);
             var nuggetItem = ForgeRegistries.ITEMS.getValue(nuggetRegistryKey);
@@ -176,12 +173,6 @@ public class ModRecipeProvider extends RecipeProvider {
 
             var metalBlock = ForgeRegistries.BLOCKS.getValue(metalBlockRegistryKey);
             if (metalBlock == null) continue;
-
-            var metalBlockRecipeId = tier_name + "_block_from_ingots";
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, metalBlock, 1)
-                    .requires(basisItem, 9)
-                    .unlockedBy(getHasName(basisItem), has(basisItem))
-                    .save(pWriter, metalBlockRecipeId);
 
             var ingotsFromBlockRecipeId = tier_name + "_ingot_from_block";
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, basisItem, 9)
@@ -516,9 +507,7 @@ public class ModRecipeProvider extends RecipeProvider {
     
     private void AutomatedBlocksRecipeCreator(Consumer<FinishedRecipe> pWriter) {
         for (var data : ModBlocks.BLOCKS_DATA) {
-            if (data.craftingRecipeType == null) continue;
-            
-            data.SaveRecipe(pWriter);
+            data.SaveRecipes(pWriter);
         }
     }
 
@@ -624,26 +613,12 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ModItems.HILT.get())
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                 .save(pWriter, "better_iron_pickaxe");
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.BRAKE_RAIL.get())
-                .pattern("* *")
-                .pattern("*#*")
-                .pattern("* *")
-                .define('*', Items.IRON_INGOT)
-                .define('#', Items.STICK)
-                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
-                .save(pWriter, "brake_rail");
         
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Blocks.TNT)
                 .requires(Blocks.SAND, 2)
                 .requires(Items.GUNPOWDER, 2)
                 .unlockedBy(getHasName(Items.GUNPOWDER), has(Items.GUNPOWDER)).save(pWriter, "better_tnt");
-
-        var tinIngot = getItem(EItemCategory.Ingot, EMaterialType.TIN);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TIN_BLOCK.get())
-                .requires(tinIngot, 9)
-                .unlockedBy(getHasName(tinIngot), has(tinIngot)).save(pWriter, "tin_block");
-
+        
         var enderiteIngot = getItem(EItemCategory.Ingot, EMaterialType.ENDERITE);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ENDERITE_BLOCK.get())
                 .requires(enderiteIngot, 9)
@@ -653,6 +628,11 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(ModBlocks.ENDERITE_BLOCK.get())
                 .unlockedBy(getHasName(enderiteIngot), has(ModItems.DRAGON_REMAINS.get())).save(pWriter, "enderite_ingot_from_block");
 
+        var tinIngot = getItem(EItemCategory.Ingot, EMaterialType.TIN);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, tinIngot, 9)
+                .requires(ModBlocks.TIN_BLOCK.get(), 1)
+                .unlockedBy(getHasName(tinIngot), has(tinIngot)).save(pWriter, "tin_ingot_from_block");
+        
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, enderiteIngot)
                 .requires(ModItems.DRAGON_REMAINS.get(), 4)
                 .requires(tinIngot, 4)

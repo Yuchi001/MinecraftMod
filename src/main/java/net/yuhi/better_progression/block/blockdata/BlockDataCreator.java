@@ -11,6 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.item.ModItems;
+import org.openjdk.nashorn.internal.ir.ReturnNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +31,10 @@ public class BlockDataCreator {
     private ResourceLocation textureSide = null;
     private ResourceLocation textureItem = null;
     
+    private Supplier<Block> twinBlockSupplier = null;
+    
     // Crafting recipe type havers only
-    private EBlockCraftingRecipeType craftingRecipeType = null;
-    private List<Supplier<ItemLike>> ingredients = new ArrayList<>();
+    private final List<RecipeData> recipes = new ArrayList<>();
 
     // Log blocks only
     private Supplier<Block> strippedLogBlock = null;
@@ -53,15 +55,26 @@ public class BlockDataCreator {
         this.BlockSupplier = () -> block;
         textureSide = new ResourceLocation(modId, ModelProvider.BLOCK_FOLDER + "/" + name);
     }
-    
-    public BlockDataCreator SetCraftingRecipe(EBlockCraftingRecipeType recipeType, List<Supplier<ItemLike>> ingredients) {
-        this.craftingRecipeType = recipeType;
-        this.ingredients = ingredients;
+
+    public BlockDataCreator AddRecipe(EBlockCraftingRecipeType recipeType, List<Supplier<ItemLike>> ingredientList) {
+        var recipePair = new RecipeData(recipeType, ingredientList, null);
+        this.recipes.add(recipePair);
+        return this;
+    }
+
+    public BlockDataCreator AddRecipe(EBlockCraftingRecipeType recipeType, List<Supplier<ItemLike>> ingredientList, int resultCount) {
+        var recipePair = new RecipeData(recipeType, ingredientList, resultCount);
+        this.recipes.add(recipePair);
         return this;
     }
     
     public BlockDataCreator SetMineableWith(EMineableWith mineableWith) {
         this.mineableWith = mineableWith;
+        return this;
+    }
+    
+    public BlockDataCreator SetTwinBlockSupplier(Supplier<Block> twinBlockSupplier) {
+        this.twinBlockSupplier = twinBlockSupplier;
         return this;
     }
 
@@ -117,12 +130,20 @@ public class BlockDataCreator {
         ModBlocks.BLOCKS_DATA.add(new BlockData(this, blockObj));
         return blockObj;
     }
+
+    public RegistryObject<Block> RegisterWithoutItem() {
+        RegistryObject<Block> blockObj = ModBlocks.BLOCKS.register(name, BlockSupplier);
+        ModBlocks.BLOCKS_DATA.add(new BlockData(this, blockObj));
+        return blockObj;
+    }
     
     public RegistryObject<Block> RegisterVanilla() {
         RegistryObject<Block> blockObj = ModBlocks.VANILLA_BLOCKS.register(name, BlockSupplier);
         ModItems.ITEMS.register(name, () -> new BlockItem(blockObj.get(), new Item.Properties()));
         return blockObj;
     }
+
+    public record RecipeData(EBlockCraftingRecipeType recipeType, List<Supplier<ItemLike>> ingredientList, Integer resultCount) { }
     
     public static class BlockData {
         public final RegistryObject<Block> block;
@@ -138,8 +159,10 @@ public class BlockDataCreator {
         public final ECustomTag customTag;
         
         // crafting recipe type haver only
-        public final EBlockCraftingRecipeType craftingRecipeType;
-        public final List<Supplier<ItemLike>> ingredients;
+        public final List<RecipeData> recipes;
+        
+        // for now only signs use this feature
+        public final Supplier<Block> twinBlockSupplier;
 
         // Log blocks only
         public final Supplier<Block> strippedLogBlock;
@@ -159,12 +182,19 @@ public class BlockDataCreator {
             this.customTag = blockDataCreator.tag;
             this.isLog = blockDataCreator.isLog;
             this.strippedLogBlock = blockDataCreator.strippedLogBlock;
-            this.craftingRecipeType = blockDataCreator.craftingRecipeType;
-            this.ingredients = blockDataCreator.ingredients;
+            this.recipes = blockDataCreator.recipes;
+            this.twinBlockSupplier = blockDataCreator.twinBlockSupplier;
         }
         
-        public void SaveRecipe(Consumer<FinishedRecipe> writer) {
-            craftingRecipeType.SaveRecipe(writer, () -> block.get().asItem(), ingredients);
+        public void SaveRecipes(Consumer<FinishedRecipe> writer) {
+            for (var recipe : recipes) {
+                try {
+                    recipe.recipeType.SaveRecipe(writer, () -> block.get().asItem(), recipe.resultCount, recipe.ingredientList);
+                } catch (Exception ex) {
+                    System.err.println("Exception caught when saving recipe for " + name);
+                    System.err.println(ex.getMessage());
+                }
+            }
         }
     }
 }

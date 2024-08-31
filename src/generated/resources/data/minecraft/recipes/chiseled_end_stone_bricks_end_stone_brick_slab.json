@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "s": {
+      "item": "minecraft:end_stone_brick_slab"
+    }
+  },
+  "pattern": [
+    "   ",
+    "s  ",
+    "s  "
+  ],
+  "result": {
+    "item": "better_progression:chiseled_end_stone_bricks"
+  },
+  "show_notification": true
+}

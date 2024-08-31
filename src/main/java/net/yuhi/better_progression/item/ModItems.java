@@ -8,6 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.item.custom.*;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EItemType;
@@ -22,11 +23,9 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class ModItems {
-    public static final DeferredRegister<Item> ITEMS = 
-            DeferredRegister.create(ForgeRegistries.ITEMS, BetterProgression.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BetterProgression.MOD_ID);
 
-    public static final DeferredRegister<Item> VANILLA_ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, "minecraft");
+    public static final DeferredRegister<Item> VANILLA_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "minecraft");
     
     public static final List<ItemInfo<Item>>  REGISTERED_ITEMS = new ArrayList<>();
 
@@ -35,6 +34,8 @@ public class ModItems {
     public static final RegistryObject<Item> DRAGON_REMAINS = register("dragon_remains", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PURE_DIAMOND = register("pure_diamond", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PINK_QUARTZ = register("pink_quartz", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> END_OAK_SIGN = register("end_oak_sign", () -> new SignItem(new Item.Properties().stacksTo(16), 
+            ModBlocks.END_OAK_SIGN.get(), ModBlocks.END_OAK_WALL_SIGN.get()));
     
     private static RegistryObject<Item> register(String name, Supplier<Item> item) {
         var toReturn = ITEMS.register(name, item);

@@ -5,7 +5,9 @@
     "#": {
       "item": "minecraft:copper_ingot"
     },
-    "*": []
+    "*": {
+      "item": "better_progression:copper_nugget"
+    }
   },
   "pattern": [
     " * ",

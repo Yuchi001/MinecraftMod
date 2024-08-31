@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "m": {
+      "item": "minecraft:iron_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "m m",
+    "msm",
+    "m m"
+  ],
+  "result": {
+    "count": 3,
+    "item": "better_progression:brake_rail"
+  },
+  "show_notification": true
+}

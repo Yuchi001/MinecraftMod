@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "better_progression:block/end_short_grass_with_flowers"
+    "layer0": "better_progression:item/end_short_grass_with_flowers"
   }
 }

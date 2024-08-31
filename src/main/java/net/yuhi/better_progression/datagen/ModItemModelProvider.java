@@ -45,7 +45,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         for (var block : ModBlocks.BLOCKS_DATA) {
             switch (block.textureType) {
-                case CROSS, DOOR -> simpleBlockItem(block);
+                case CROSS, DOOR, SIGN -> simpleBlockItem(block);
                 case BUTTON -> buttonBlockItem(block);
             }
         }
@@ -182,7 +182,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     private ItemModelBuilder simpleBlockItem(BlockDataCreator.BlockData block) {
         return withExistingParent(block.block.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                block.textureSide);
+                block.textureItem);
     }
     
     private ItemModelBuilder buttonBlockItem(BlockDataCreator.BlockData block) {

@@ -6,7 +6,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.block.BetterBlastFurnace.BetterBlastFurnaceBlockEntity;
+import net.yuhi.better_progression.block.entity.BetterBlastFurnaceBlockEntity;
+import net.yuhi.better_progression.block.entity.ModSignBlockEntity;
 
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = 
@@ -19,6 +20,12 @@ public class ModBlockEntities {
             VANILLA_BLOCK_ENTITIES.register("blast_furnace", () ->
                     BlockEntityType.Builder.of(BetterBlastFurnaceBlockEntity::new,
                             ModBlocks.BETTER_BLAST_FURNACE.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<ModSignBlockEntity>> MOD_SIGN =
+            BLOCK_ENTITIES.register("mod_sign", () ->
+                    BlockEntityType.Builder.of(ModSignBlockEntity::new,
+                            ModBlocks.END_OAK_WALL_SIGN.get(),
+                            ModBlocks.END_OAK_SIGN.get()).build(null));
     
     public static void register(IEventBus bus) {
         BLOCK_ENTITIES.register(bus);

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "s": {
+      "item": "better_progression:end_oak_planks"
+    }
+  },
+  "pattern": [
+    "ss ",
+    "ss ",
+    "ss "
+  ],
+  "result": {
+    "count": 3,
+    "item": "better_progression:end_oak_door"
+  },
+  "show_notification": true
+}

@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_top",
+  "parent": "minecraft:block/cube_column",
   "textures": {
+    "end": "better_progression:block/pink_quartz_pillar_top",
     "side": "better_progression:block/pink_quartz_pillar",
     "top": "better_progression:block/pink_quartz_pillar_top"
   }

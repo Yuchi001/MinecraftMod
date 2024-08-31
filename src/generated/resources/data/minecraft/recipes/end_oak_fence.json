@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "p": {
+      "item": "better_progression:end_oak_planks"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "   ",
+    "psp",
+    "psp"
+  ],
+  "result": {
+    "count": 3,
+    "item": "better_progression:end_oak_fence"
+  },
+  "show_notification": true
+}

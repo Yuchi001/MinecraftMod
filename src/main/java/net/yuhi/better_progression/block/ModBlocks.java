@@ -1,6 +1,9 @@
 package net.yuhi.better_progression.block;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,13 +21,13 @@ import net.yuhi.better_progression.block.BetterBlastFurnace.BetterBlastFurnaceBl
 import net.yuhi.better_progression.block.blockdata.*;
 import net.yuhi.better_progression.block.custom.*;
 import net.yuhi.better_progression.block.grower.EndOakGrower;
+import net.yuhi.better_progression.mixin.accessor.BlockAccessor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-import static net.minecraft.world.level.block.Blocks.OAK_PLANKS;
-import static net.minecraft.world.level.block.Blocks.QUARTZ_BLOCK;
+import static net.minecraft.world.level.block.Blocks.*;
 import static net.yuhi.better_progression.mixin.accessor.BlockAccessor.*;
 
 public class ModBlocks {
@@ -35,7 +38,7 @@ public class ModBlocks {
     public static final List<BlockDataCreator.BlockData> BLOCKS_DATA = new ArrayList<>();
     
     public static final RegistryObject<Block> TIN_BLOCK = new BlockDataCreator("tin_block",
-            () ->new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(4.0F, 6.0F)))
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(4.0F, 6.0F)))
             .SetMineableWith(EMineableWith.PICKAXE)
             .SetCustomTag(ECustomTag.ORE)
             .Register();
@@ -114,77 +117,117 @@ public class ModBlocks {
             .SetTexture(EBlockSide.ITEM, "end_oak_sapling")
             .Register();
 
-    public static final RegistryObject<Block> END_OAK_LOG = new BlockDataCreator("end_oak_log",
-            () -> log(MaterialColor.WOOD, MaterialColor.PODZOL))
-            .SetMineableWith(EMineableWith.AXE)
-            .SetTextureType(ETextureType.PILLAR_TOP)
-            .SetCustomTag(ECustomTag.LOGS)
-            .SetTexture(EBlockSide.TOP, "end_oak_log_top")
-            .Register();
-
     public static final RegistryObject<Block> STRIPPED_END_OAK_LOG = new BlockDataCreator("stripped_end_oak_log",
-            () -> log(MaterialColor.WOOD, MaterialColor.PODZOL))
+            () -> new ModFlammableRotatePillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)))
             .SetMineableWith(EMineableWith.AXE)
-            .SetTextureType(ETextureType.PILLAR_TOP)
-            .SetCustomTag(ECustomTag.LOGS)
+            .SetTextureType(ETextureType.LOG)
+            .SetCustomTag(ECustomTag.LOGS_THAT_BURN)
             .SetTexture(EBlockSide.TOP, "stripped_end_oak_log_top")
             .Register();
 
-    public static final RegistryObject<Block> END_OAK_WOOD = new BlockDataCreator("end_oak_wood",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F).sound(SoundType.WOOD)))
-            .SetTextureType(ETextureType.PILLAR_TOP)
-            .SetTexture(EBlockSide.TOP, "end_oak_log")
-            .SetTexture(EBlockSide.SIDE, "end_oak_log")
+    public static final RegistryObject<Block> END_OAK_LOG = new BlockDataCreator("end_oak_log",
+            () -> new ModFlammableRotatePillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)))
             .SetMineableWith(EMineableWith.AXE)
+            .SetLogProperties(STRIPPED_END_OAK_LOG::get)
+            .SetTextureType(ETextureType.LOG)
+            .SetCustomTag(ECustomTag.LOGS_THAT_BURN)
+            .SetTexture(EBlockSide.TOP, "end_oak_log_top")
             .Register();
 
     public static final RegistryObject<Block> STRIPPED_END_OAK_WOOD = new BlockDataCreator("stripped_end_oak_wood",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F).sound(SoundType.WOOD)))
-            .SetTextureType(ETextureType.PILLAR_TOP)
+            () -> new ModFlammableRotatePillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)))
+            .SetTextureType(ETextureType.AXIS)
             .SetTexture(EBlockSide.TOP, "stripped_end_oak_log")
             .SetTexture(EBlockSide.SIDE, "stripped_end_oak_log")
+            .SetCustomTag(ECustomTag.LOGS_THAT_BURN)
             .SetMineableWith(EMineableWith.AXE)
+            .SetCraftingRecipe(EBlockCraftingRecipeType.WOOD, List.of(STRIPPED_END_OAK_LOG::get))
+            .Register();
+
+    public static final RegistryObject<Block> END_OAK_WOOD = new BlockDataCreator("end_oak_wood",
+            () -> new ModFlammableRotatePillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)))
+            .SetTextureType(ETextureType.AXIS)
+            .SetLogProperties(STRIPPED_END_OAK_WOOD::get)
+            .SetTexture(EBlockSide.TOP, "end_oak_log")
+            .SetTexture(EBlockSide.SIDE, "end_oak_log")
+            .SetMineableWith(EMineableWith.AXE)
+            .SetCustomTag(ECustomTag.LOGS_THAT_BURN)
+            .SetCraftingRecipe(EBlockCraftingRecipeType.WOOD, List.of(END_OAK_LOG::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_PLANKS = new BlockDataCreator("end_oak_planks",
-            () -> log(MaterialColor.WOOD, MaterialColor.PODZOL))
+            () -> new Block(BlockBehaviour.Properties.copy(OAK_PLANKS)){
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+            })
             .SetMineableWith(EMineableWith.AXE)
             .Register();
 
     public static final RegistryObject<Block> END_OAK_LEAVES = new BlockDataCreator("end_oak_leaves",
-            () -> leaves(SoundType.GRASS))
+            () -> new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(BlockAccessor::ocelotOrParrot).isSuffocating(BlockAccessor::never).isViewBlocking(BlockAccessor::never)){
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+        
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+        
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 60;
+                }
+            })
             .SetDropSelf(false)
             .SetCustomTag(ECustomTag.LEAVES)
             .Register();
     
     public static final RegistryObject<Block> END_OAK_FENCE = new BlockDataCreator("end_oak_fence",
-            () -> new FenceBlock(BlockBehaviour.Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).strength(2.0F, 3.0F).sound(SoundType.WOOD)))
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE)))
             .SetTextureType(ETextureType.FENCE)
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
             .SetCustomTag(ECustomTag.WOODEN_FENCES)
+            .SetCraftingRecipe(EBlockCraftingRecipeType.WOODEN_FENCE, List.of(END_OAK_PLANKS::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_FENCE_GATE = new BlockDataCreator("end_oak_fence_gate",
-            () -> new FenceGateBlock(BlockBehaviour.Properties.of(Material.WOOD, OAK_PLANKS.defaultMaterialColor()).strength(2.0F, 3.0F), WoodType.OAK))
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE), WoodType.OAK))
             .SetTextureType(ETextureType.FENCE_GATE)
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
             .SetCustomTag(ECustomTag.FENCE_GATES)
+            .SetCraftingRecipe(EBlockCraftingRecipeType.WOODEN_FENCE_GATE, List.of(END_OAK_PLANKS::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_SLAB = new BlockDataCreator("end_oak_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.copy(OAK_PLANKS)))
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(OAK_SLAB)))
             .SetTextureType(ETextureType.SLAB)
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
+            .SetCraftingRecipe(EBlockCraftingRecipeType.SLAB, List.of(END_OAK_PLANKS::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_STAIRS = new BlockDataCreator("end_oak_stairs",
-            () -> new StairBlock(END_OAK_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(QUARTZ_BLOCK)))
+            () -> new StairBlock(END_OAK_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(OAK_STAIRS)))
             .SetTextureType(ETextureType.STAIRS)
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
+            .SetCraftingRecipe(EBlockCraftingRecipeType.STAIRS, List.of(END_OAK_PLANKS::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_PRESSURE_PLATE = new BlockDataCreator("end_oak_pressure_plate",
@@ -192,6 +235,7 @@ public class ModBlocks {
             .SetTextureType(ETextureType.PRESSURE_PLATE)
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
+            .SetCraftingRecipe(EBlockCraftingRecipeType.PRESSURE_PLATE, List.of(END_OAK_PLANKS::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_BUTTON = new BlockDataCreator("end_oak_button",
@@ -199,6 +243,7 @@ public class ModBlocks {
             .SetTextureType(ETextureType.BUTTON)
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
+            .SetCraftingRecipe(EBlockCraftingRecipeType.BUTTON, List.of(END_OAK_PLANKS::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_DOOR = new BlockDataCreator("end_oak_door",
@@ -208,12 +253,14 @@ public class ModBlocks {
             .SetTexture(EBlockSide.BOTTOM, "end_oak_door_bottom")
             .SetTexture(EBlockSide.ITEM, "end_oak_door")
             .SetMineableWith(EMineableWith.AXE)
+            .SetCraftingRecipe(EBlockCraftingRecipeType.DOOR, List.of(END_OAK_PLANKS::get))
             .Register();
 
     public static final RegistryObject<Block> END_OAK_TRAPDOOR = new BlockDataCreator("end_oak_trapdoor",
             () -> new TrapDoorBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(3.0F).noOcclusion().isValidSpawn((blockState,  blockGetter,  blockPos, type) -> never(blockState, blockGetter, blockPos)), BlockSetType.OAK))
             .SetTextureType(ETextureType.TRAPDOOR)
             .SetMineableWith(EMineableWith.AXE)
+            .SetCraftingRecipe(EBlockCraftingRecipeType.TRAPDOOR, List.of(END_OAK_PLANKS::get))
             .Register();
 
     // endregion
@@ -260,7 +307,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PINK_QUARTZ_PILLAR = new BlockDataCreator("pink_quartz_pillar",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)))
-            .SetTextureType(ETextureType.PILLAR_TOP)
+            .SetTextureType(ETextureType.LOG)
             .SetTexture(EBlockSide.TOP, "pink_quartz_pillar_top")
             .SetMineableWith(EMineableWith.PICKAXE)
             .Register();

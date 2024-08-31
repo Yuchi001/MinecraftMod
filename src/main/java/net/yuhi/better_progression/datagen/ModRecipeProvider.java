@@ -1,5 +1,6 @@
 package net.yuhi.better_progression.datagen;
 
+import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -14,11 +15,13 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.ModBlocks;
+import net.yuhi.better_progression.block.blockdata.BlockDataCreator;
 import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 import net.yuhi.better_progression.item.utils.ItemInfo;
 import net.yuhi.better_progression.item.utils.ItemsUtilsMethods;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -90,7 +93,8 @@ public class ModRecipeProvider extends RecipeProvider {
 
         for(var armorCategory : armorCategories) {
             for (var armor : getItemInfosForCraftingRecipes(armorCategory)) {
-                var registryKey = new ResourceLocation(armor.mod_id, armor.basis);
+                var mod_id = armor.has_default_basis ? "minecraft" : armor.mod_id;
+                var registryKey = new ResourceLocation(mod_id, armor.basis);
 
                 var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
                 if (basisItem == null) continue;
@@ -122,7 +126,8 @@ public class ModRecipeProvider extends RecipeProvider {
         
         for(var armorCategory : armorCategories) {
             for (var armor : getItemInfosForCraftingRecipes(armorCategory)) {
-                var registryKey = new ResourceLocation(armor.mod_id, armor.basis);
+                var mod_id = armor.has_default_basis ? "minecraft" : armor.mod_id;
+                var registryKey = new ResourceLocation(mod_id, armor.basis);
 
                 var basisItem = ForgeRegistries.ITEMS.getValue(registryKey);
                 if (basisItem == null) continue;
@@ -372,7 +377,8 @@ public class ModRecipeProvider extends RecipeProvider {
         for (var armorCategory : armorCategories) {
             for (var armor : getItemInfosForCraftingRecipes(armorCategory, true)) {
                 var basis = armor.basis;
-                var basisIngotResourceLocation = new ResourceLocation(armor.mod_id, basis);
+                var mod_id = armor.has_default_basis ? "minecraft" : armor.mod_id;
+                var basisIngotResourceLocation = new ResourceLocation(mod_id, basis);
 
                 var basisItem = ForgeRegistries.ITEMS.getValue(basisIngotResourceLocation);
                 if (basisItem == null) continue;
@@ -395,6 +401,43 @@ public class ModRecipeProvider extends RecipeProvider {
                                 Ingredient.of(basisItem),
                                 RecipeCategory.COMBAT,
                                 (Item) armor.item.get())
+                        .unlocks(getHasName(basisItem), has(basisItem))
+                        .save(pWriter, recipeId);
+            }
+        }
+    }
+
+    private void EndGameChainmailRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        var armorCategories = List.of(EItemCategory.ChainmailHelmet,
+                EItemCategory.ChainmailChestplate,
+                EItemCategory.ChainmailLeggings,
+                EItemCategory.ChainmailBoots);
+        for (var chainmailCategory : armorCategories) {
+            for (var chainmail : getItemInfosForCraftingRecipes(chainmailCategory, true)) {
+                var basis = chainmail.basis;
+                var mod_id = chainmail.has_default_basis ? "minecraft" : chainmail.mod_id;
+                var basisIngotResourceLocation = new ResourceLocation(mod_id, basis);
+
+                var basisItem = ForgeRegistries.ITEMS.getValue(basisIngotResourceLocation);
+                if (basisItem == null) continue;
+
+                var recipeId = chainmail.material_type.GetName(true) + "_" +
+                        chainmail.sub_material_type.GetName() + "_" +
+                        chainmail.category.getName().toLowerCase();
+
+                var armorResourceLocation = ForgeRegistries.ITEMS.getKey((Item)chainmail.item.get());
+                if(armorResourceLocation == null) continue;
+
+                var baseMetalArmorResourceLocation = new ResourceLocation(BetterProgression.MOD_ID, armorResourceLocation.getPath().substring(armorResourceLocation.getPath().indexOf("_") + 1));
+                var baseMetalArmor = ForgeRegistries.ITEMS.getValue(baseMetalArmorResourceLocation);
+                if(baseMetalArmor == null) continue;
+
+                //noinspection removal
+                LegacyUpgradeRecipeBuilder.smithing(
+                                Ingredient.of(baseMetalArmor),
+                                Ingredient.of(basisItem),
+                                RecipeCategory.COMBAT,
+                                (Item) chainmail.item.get())
                         .unlocks(getHasName(basisItem), has(basisItem))
                         .save(pWriter, recipeId);
             }
@@ -468,6 +511,14 @@ public class ModRecipeProvider extends RecipeProvider {
             if(recipeId.isEmpty()) continue;
 
             builder.save(pWriter, recipeId);
+        }
+    }
+    
+    private void AutomatedBlocksRecipeCreator(Consumer<FinishedRecipe> pWriter) {
+        for (var data : ModBlocks.BLOCKS_DATA) {
+            if (data.craftingRecipeType == null) continue;
+            
+            data.SaveRecipe(pWriter);
         }
     }
 
@@ -573,6 +624,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ModItems.HILT.get())
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                 .save(pWriter, "better_iron_pickaxe");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.BRAKE_RAIL.get())
+                .pattern("* *")
+                .pattern("*#*")
+                .pattern("* *")
+                .define('*', Items.IRON_INGOT)
+                .define('#', Items.STICK)
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .save(pWriter, "brake_rail");
         
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Blocks.TNT)
                 .requires(Blocks.SAND, 2)
@@ -674,7 +734,9 @@ public class ModRecipeProvider extends RecipeProvider {
         ChainmailRecipeCreator(pWriter);
         PlateRecipeCreator(pWriter);
         EndGameArmorRecipeCreator(pWriter);
+        EndGameChainmailRecipeCreator(pWriter);
         SmeltingRecipeCreator(pWriter);
+        AutomatedBlocksRecipeCreator(pWriter);
     }
     
     protected static void oreGeneric(Consumer<FinishedRecipe> pWriter, List<ItemLike> items, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme, String pGroup) {

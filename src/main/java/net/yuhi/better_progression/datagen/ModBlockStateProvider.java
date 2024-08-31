@@ -26,8 +26,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 case BUTTON -> button(blockData);
                 case TRAPDOOR -> trapdoorWithItem(blockData);
                 case DOOR -> door(blockData);
-                case PILLAR_TOP -> logWithItem(blockData);
-                case PILLAR_TOP_BOTTOM -> logWithItem(blockData);
+                case PILLAR_TOP -> pillarWithItem(blockData);
+                case LOG -> logWithItem(blockData);
+                case AXIS -> axisBlockWithItem(blockData);
+                case PILLAR_TOP_BOTTOM -> pillarTopBottomWithItem(blockData);
                 case FENCE -> fenceWithItem(blockData);
                 case FENCE_GATE -> fenceGateWithItem(blockData);
             }
@@ -76,9 +78,26 @@ public class ModBlockStateProvider extends BlockStateProvider {
         slabBlock((SlabBlock) blockData.block.get(), blockData.textureSide, blockData.textureSide);
     }
 
-    private void logWithItem(BlockDataCreator.BlockData blockData) {
+    private void pillarWithItem(BlockDataCreator.BlockData blockData) {
         var logModel = models().cubeTop(blockData.name, blockData.textureSide, blockData.textureTop);
         simpleBlockWithItem(blockData.block.get(), logModel);
+    }
+
+    private void pillarTopBottomWithItem(BlockDataCreator.BlockData blockData) {
+        var pillarTopBottom = models().cubeBottomTop(blockData.name, blockData.textureSide, blockData.textureBottom, blockData.textureTop);
+        simpleBlockWithItem(blockData.block.get(), pillarTopBottom);
+    }
+    
+    private void logWithItem(BlockDataCreator.BlockData blockData) {
+        var logModel = models().cubeTop(blockData.name, blockData.textureSide, blockData.textureTop);
+        logBlock((RotatedPillarBlock) blockData.block.get());
+        simpleBlockItem(blockData.block.get(), logModel);
+    }
+
+    private void axisBlockWithItem(BlockDataCreator.BlockData blockData) {
+        var logModel = models().cubeTop(blockData.name, blockData.textureSide, blockData.textureTop);
+        axisBlock((RotatedPillarBlock) blockData.block.get(), blockData.textureSide, blockData.textureSide);
+        simpleBlockItem(blockData.block.get(), logModel);    
     }
 
     private void door(BlockDataCreator.BlockData blockData) {

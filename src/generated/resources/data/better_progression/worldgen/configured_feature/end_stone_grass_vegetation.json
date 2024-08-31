@@ -6,10 +6,30 @@
         "type": "minecraft:simple_block",
         "config": {
           "to_place": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "better_progression:end_short_grass"
-            }
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "better_progression:end_short_grass"
+                },
+                "weight": 7
+              },
+              {
+                "data": {
+                  "Name": "better_progression:end_tall_grass",
+                  "Properties": {
+                    "half": "lower"
+                  }
+                },
+                "weight": 2
+              },
+              {
+                "data": {
+                  "Name": "better_progression:end_short_grass_with_flowers"
+                },
+                "weight": 1
+              }
+            ]
           }
         }
       },

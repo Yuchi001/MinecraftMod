@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_top",
+  "parent": "minecraft:block/cube_column",
   "textures": {
+    "end": "better_progression:block/end_oak_log_top",
     "side": "better_progression:block/end_oak_log",
     "top": "better_progression:block/end_oak_log_top"
   }

@@ -1,8 +1,10 @@
 package net.yuhi.better_progression.block.blockdata;
 
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.registries.RegistryObject;
@@ -10,6 +12,9 @@ import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.item.ModItems;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class BlockDataCreator {
@@ -25,6 +30,14 @@ public class BlockDataCreator {
     private ResourceLocation textureSide = null;
     private ResourceLocation textureItem = null;
     
+    // Crafting recipe type havers only
+    private EBlockCraftingRecipeType craftingRecipeType = null;
+    private List<Supplier<ItemLike>> ingredients = new ArrayList<>();
+
+    // Log blocks only
+    private Supplier<Block> strippedLogBlock = null;
+    private boolean isLog = false;
+
     public BlockDataCreator(String name, Supplier<Block> block) {
         this.name = name;
         this.BlockSupplier = block;
@@ -41,6 +54,12 @@ public class BlockDataCreator {
         textureSide = new ResourceLocation(modId, ModelProvider.BLOCK_FOLDER + "/" + name);
     }
     
+    public BlockDataCreator SetCraftingRecipe(EBlockCraftingRecipeType recipeType, List<Supplier<ItemLike>> ingredients) {
+        this.craftingRecipeType = recipeType;
+        this.ingredients = ingredients;
+        return this;
+    }
+    
     public BlockDataCreator SetMineableWith(EMineableWith mineableWith) {
         this.mineableWith = mineableWith;
         return this;
@@ -48,6 +67,12 @@ public class BlockDataCreator {
 
     public BlockDataCreator SetTextureType(ETextureType textureType) {
         this.textureType = textureType;
+        return this;
+    }
+    
+    public BlockDataCreator SetLogProperties(Supplier<Block> strippedLogBlock) {
+        this.strippedLogBlock = strippedLogBlock;
+        this.isLog = true;
         return this;
     }
 
@@ -112,6 +137,14 @@ public class BlockDataCreator {
         public final ResourceLocation textureItem;
         public final ECustomTag customTag;
         
+        // crafting recipe type haver only
+        public final EBlockCraftingRecipeType craftingRecipeType;
+        public final List<Supplier<ItemLike>> ingredients;
+
+        // Log blocks only
+        public final Supplier<Block> strippedLogBlock;
+        public final boolean isLog;
+
         BlockData(BlockDataCreator blockDataCreator, RegistryObject<Block> block) {
             this.block = block;
             this.name = blockDataCreator.name;
@@ -124,6 +157,14 @@ public class BlockDataCreator {
             this.textureSide = blockDataCreator.textureSide;
             this.textureItem = blockDataCreator.textureItem;
             this.customTag = blockDataCreator.tag;
+            this.isLog = blockDataCreator.isLog;
+            this.strippedLogBlock = blockDataCreator.strippedLogBlock;
+            this.craftingRecipeType = blockDataCreator.craftingRecipeType;
+            this.ingredients = blockDataCreator.ingredients;
+        }
+        
+        public void SaveRecipe(Consumer<FinishedRecipe> writer) {
+            craftingRecipeType.SaveRecipe(writer, () -> block.get().asItem(), ingredients);
         }
     }
 }

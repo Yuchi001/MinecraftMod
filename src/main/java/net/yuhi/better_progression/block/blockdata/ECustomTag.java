@@ -10,6 +10,7 @@ public enum ECustomTag {
     LEAVES(BlockTags.LEAVES),
     FLOWERS(BlockTags.FLOWERS),
     LOGS(BlockTags.LOGS),
+    LOGS_THAT_BURN(BlockTags.LOGS_THAT_BURN),
     ORE(ModTags.Blocks.ORE_TAG),
     WOODEN_FENCES(BlockTags.WOODEN_FENCES),
     FENCE_GATES(BlockTags.FENCE_GATES),

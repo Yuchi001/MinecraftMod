@@ -31,8 +31,6 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> DRAGON_DEBRIS_END_LARGE_PLACED_KEY = registerKey("dragon_debris_large_end_placed");
     public static final ResourceKey<PlacedFeature> END_STONE_GRASS = registerKey("end_stone_grass");
     public static final ResourceKey<PlacedFeature> END_STONE_GRASS_VEGETATION = registerKey("end_stone_grass_vegetation");
-    public static final ResourceKey<PlacedFeature> END_STONE_TALL_GRASS_VEGETATION = registerKey("end_stone_tall_grass_vegetation");
-    public static final ResourceKey<PlacedFeature> END_STONE_GRASS_WITH_FLOWERS_VEGETATION = registerKey("end_stone_grass_with_flowers_vegetation");
     public static final ResourceKey<PlacedFeature> END_OAK = registerKey("end_oak");
 
 
@@ -60,7 +58,7 @@ public class ModPlacedFeatures {
                 ModOrePlacement.commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(112))));
 
         register(context, END_STONE_GRASS, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_STONE_GRASS),
-                CountPlacement.of(10),  // Większa liczba, aby pokryć większą powierzchnię
+                CountPlacement.of(15),  // Większa liczba, aby pokryć większą powierzchnię
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP_TOP_SOLID,
                 RandomOffsetPlacement.vertical(ConstantInt.of(-1)),
@@ -70,19 +68,7 @@ public class ModPlacedFeatures {
                 BiomeFilter.biome());
         
         register(context, END_STONE_GRASS_VEGETATION, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_STONE_GRASS_VEGETATION),
-                CountPlacement.of(10),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP_TOP_SOLID,
-                BiomeFilter.biome());
-
-        register(context, END_STONE_TALL_GRASS_VEGETATION, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_STONE_GRASS_TALL_VEGETATION),
-                CountPlacement.of(5),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP_TOP_SOLID,
-                BiomeFilter.biome());
-
-        register(context, END_STONE_GRASS_WITH_FLOWERS_VEGETATION, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_STONE_GRASS_FLOWERS_VEGETATION),
-                CountPlacement.of(5),
+                CountPlacement.of(15),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP_TOP_SOLID,
                 BiomeFilter.biome());

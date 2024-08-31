@@ -6,14 +6,17 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
@@ -25,6 +28,7 @@ import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.worldgen.feature.ModFeatures;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
 
@@ -38,8 +42,6 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> END_TIN_ORE = registerKey("end_tin_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> END_STONE_GRASS = registerKey("end_stone_grass"); 
     public static final ResourceKey<ConfiguredFeature<?, ?>> END_STONE_GRASS_VEGETATION = registerKey("end_stone_grass_vegetation"); 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> END_STONE_GRASS_FLOWERS_VEGETATION = registerKey("end_stone_grass_flowers_vegetation"); 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> END_STONE_GRASS_TALL_VEGETATION = registerKey("end_stone_grass_tall_vegetation"); 
     public static final ResourceKey<ConfiguredFeature<?, ?>> END_OAK = registerKey("end_oak");
 
     private static TreeConfiguration.TreeConfigurationBuilder createFancyOak() {
@@ -76,13 +78,22 @@ public class ModConfiguredFeatures {
 
         register(context, END_STONE_GRASS_VEGETATION, Feature.RANDOM_PATCH, new RandomPatchConfiguration(64, 6, 2,
                 PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.END_GRASS.get())))));
-        register(context, END_STONE_GRASS_FLOWERS_VEGETATION, Feature.RANDOM_PATCH, new RandomPatchConfiguration(16, 3, 2,
+                        new SimpleBlockConfiguration(
+                                new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                                        .add(ModBlocks.END_GRASS.get().defaultBlockState(), 7)  // Szansa na END_GRASS (5/10)
+                                        .add(ModBlocks.TALL_END_GRASS.get().defaultBlockState(), 2)  // Szansa na END_TALL_GRASS (3/10)
+                                        .add(ModBlocks.END_GRASS_WITH_FLOWERS.get().defaultBlockState(), 1)  // Szansa na END_GRASS_FLOWERS (2/10)
+                                        .build()
+                                )
+                        )
+                )
+        ));
+        /*register(context, END_STONE_GRASS_FLOWERS_VEGETATION, Feature.RANDOM_PATCH, new RandomPatchConfiguration(16, 3, 2,
                 PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.END_GRASS_WITH_FLOWERS.get())))));
         register(context, END_STONE_GRASS_TALL_VEGETATION, Feature.RANDOM_PATCH, new RandomPatchConfiguration(8, 3, 2,
                 PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.TALL_END_GRASS.get())))));
+                        new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.TALL_END_GRASS.get())))));*/
         
         register(context, END_STONE_GRASS, ModFeatures.END_STONE_GRASS_REPLACER, FeatureConfiguration.NONE);
         register(context, END_OAK, Feature.TREE, createFancyOak().dirt(BlockStateProvider.simple(Blocks.END_STONE)).build());

@@ -34,7 +34,22 @@ public interface BlockAccessor {
     
     @Invoker("leaves")
     static LeavesBlock leaves(SoundType pType) {
-        return new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(pType).noOcclusion().isValidSpawn(BlockAccessor::ocelotOrParrot).isSuffocating(BlockAccessor::never).isViewBlocking(BlockAccessor::never));
+        return new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(pType).noOcclusion().isValidSpawn(BlockAccessor::ocelotOrParrot).isSuffocating(BlockAccessor::never).isViewBlocking(BlockAccessor::never)){
+            @Override
+            public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                return true;
+            }
+
+            @Override
+            public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                return 20;
+            }
+
+            @Override
+            public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                return 60;
+            }
+        };
     }
     
     @Invoker("woodenButton")

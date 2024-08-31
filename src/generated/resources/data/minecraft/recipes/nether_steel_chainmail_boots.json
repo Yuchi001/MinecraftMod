@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "base": {
+    "item": "better_progression:steel_chainmail_boots"
+  },
+  "result": {
+    "item": "better_progression:nether_steel_chainmail_boots"
+  }
+}

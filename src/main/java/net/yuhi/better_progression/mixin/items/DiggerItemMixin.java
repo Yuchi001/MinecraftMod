@@ -32,24 +32,6 @@ import static net.yuhi.better_progression.attribute.ModAttributes.ATTACK_REACH_U
 
 @Mixin(DiggerItem.class)
 public class DiggerItemMixin {
-    @Inject(method = "hurtEnemy", at = @At("HEAD"), cancellable = true)
-    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfoReturnable<Boolean> cir) {
-        System.out.println(stack.getDamageValue() + " = " + stack.getMaxDamage());
-        if (stack.getDamageValue() >= stack.getMaxDamage()) {
-            System.out.println("dupa");
-            cir.setReturnValue(false);
-        }
-    }
-
-    @Inject(method = "mineBlock", at = @At("HEAD"), cancellable = true)
-    public void mineBlock(ItemStack stack, Level pLevel, BlockState pState, BlockPos pPos, LivingEntity pEntityLiving, CallbackInfoReturnable<Boolean> cir) {
-        System.out.println(stack.getDamageValue() + " = " + stack.getMaxDamage());
-        if (stack.getDamageValue() >= stack.getMaxDamage() - 1) {
-            System.out.println("dupa");
-            cir.setReturnValue(false);
-        }
-    }
-    
     @Inject(method = "getDefaultAttributeModifiers", at = @At("HEAD"), cancellable = true)
     public void getAttributeModifiers(EquipmentSlot pSlot, CallbackInfoReturnable<Multimap<Attribute, AttributeModifier>> cir) {
         try {

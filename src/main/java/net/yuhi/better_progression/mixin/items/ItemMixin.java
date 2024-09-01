@@ -25,35 +25,6 @@ import java.util.List;
 
 @Mixin(Item.class)
 public abstract class ItemMixin {
-    @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    public void use(Level pLevel, Player pPlayer, InteractionHand pUsedHand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
-        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-        System.out.println(stack.getDamageValue() + " = " + stack.getMaxDamage());
-        if (stack.getDamageValue() >= stack.getMaxDamage()) {
-            System.out.println("dupa");
-            cir.setReturnValue(InteractionResultHolder.fail(stack));
-        }
-    }
-
-    @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
-    public void useOn(UseOnContext pContext, CallbackInfoReturnable<InteractionResult> cir) {
-        ItemStack stack = pContext.getItemInHand();
-        System.out.println(stack.getDamageValue() + " = " + stack.getMaxDamage());
-        if (stack.getDamageValue() >= stack.getMaxDamage()) {
-            System.out.println("dupa");
-            cir.setReturnValue(InteractionResult.FAIL);
-        }
-    }
-
-    @Inject(method = "hurtEnemy", at = @At("HEAD"), cancellable = true)
-    public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfoReturnable<Boolean> cir) {
-        System.out.println(stack.getDamageValue() + " = " + stack.getMaxDamage());
-        if (stack.getDamageValue() >= stack.getMaxDamage()) {
-            System.out.println("dupa");
-            cir.setReturnValue(false);
-        }
-    }
-    
     @Inject(method = "appendHoverText", at = @At("HEAD"))
     public void injectAppendHoverTextHead(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag, CallbackInfo ci) {
         var item = (Object)stack.getItem();

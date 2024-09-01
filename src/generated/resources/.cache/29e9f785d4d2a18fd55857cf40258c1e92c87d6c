@@ -1,4 +1,5 @@
-// 1.19.4	2024-08-31T18:18:09.0949141	Item Models: better_progression
+// 1.19.4	2024-09-01T01:41:14.0824316	Item Models: better_progression
+53328232342720c1776597ecaf073913a44860ef assets/better_progression/models/item/bear_meat.json
 070e97230f9570aed29526e5fe4de47f33a09376 assets/better_progression/models/item/bronze_axe.json
 301b9fe194d1ab50bb530df36dbeb266db3b7e1d assets/better_progression/models/item/bronze_boots.json
 78194bc229a8ac2e9f8825377a5e7602a46f3ad4 assets/better_progression/models/item/bronze_chainmail.json
@@ -17,6 +18,7 @@ bc6a7cb2c404c99f3abb1b4da19cb8cc51f9b9c5 assets/better_progression/models/item/b
 38569852cac26c01413cfe8828063e2be1fe11f8 assets/better_progression/models/item/bronze_plate.json
 1031d2aff334cc02a97f80c816975735db1a205e assets/better_progression/models/item/bronze_shovel.json
 a93d5f6ee94e9def990d1fd031fb20109e9172e5 assets/better_progression/models/item/bronze_sword.json
+c10186188b61e48e778984c0352f4e1ec7f71124 assets/better_progression/models/item/cooked_bear_meat.json
 8b445cc0ad08f8e5b747c2192afd1464eaf87b00 assets/better_progression/models/item/copper_axe.json
 1879c91db186d3f9ce445012f8d2baac35995041 assets/better_progression/models/item/copper_boots.json
 4f1f40070f73cbe37da679bf320853ee6ea35f01 assets/better_progression/models/item/copper_chainmail.json

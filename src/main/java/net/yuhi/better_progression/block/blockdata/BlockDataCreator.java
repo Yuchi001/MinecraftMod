@@ -31,6 +31,7 @@ public class BlockDataCreator {
     private ResourceLocation textureSide = null;
     private ResourceLocation textureItem = null;
     
+    // For now only signs use this feature
     private Supplier<Block> twinBlockSupplier = null;
     
     // Crafting recipe type havers only

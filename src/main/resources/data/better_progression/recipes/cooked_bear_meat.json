@@ -1,0 +1,10 @@
+﻿{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 400,
+  "experience": 0.7,
+  "ingredient": {
+    "item": "better_progression:bear_meat"
+  },
+  "result": "better_progression:cooked_bear_meat"
+}

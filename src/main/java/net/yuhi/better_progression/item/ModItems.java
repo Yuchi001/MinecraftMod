@@ -14,6 +14,7 @@ import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EItemType;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 import net.yuhi.better_progression.item.enums.EModArmorMaterial;
+import net.yuhi.better_progression.item.food.ModFoods;
 import net.yuhi.better_progression.item.utils.ItemInfo;
 import net.yuhi.better_progression.item.utils.TierItemsCreator;
 
@@ -34,8 +35,10 @@ public class ModItems {
     public static final RegistryObject<Item> DRAGON_REMAINS = register("dragon_remains", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PURE_DIAMOND = register("pure_diamond", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PINK_QUARTZ = register("pink_quartz", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> END_OAK_SIGN = register("end_oak_sign", () -> new SignItem(new Item.Properties().stacksTo(16), 
+    public static final RegistryObject<Item> END_OAK_SIGN = register("end_oak_sign", () -> new SignItem(new Item.Properties().stacksTo(16),
             ModBlocks.END_OAK_SIGN.get(), ModBlocks.END_OAK_WALL_SIGN.get()));
+    public static final RegistryObject<Item> BEAR_MEAT = register("bear_meat", () -> new Item(new Item.Properties().food(ModFoods.BEAR_MEAT)));
+    public static final RegistryObject<Item> COOKED_BEAR_MEAT = register("cooked_bear_meat", () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
     
     private static RegistryObject<Item> register(String name, Supplier<Item> item) {
         var toReturn = ITEMS.register(name, item);

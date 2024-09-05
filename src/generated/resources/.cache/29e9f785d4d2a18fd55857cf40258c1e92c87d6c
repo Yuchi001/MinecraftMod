@@ -1,4 +1,4 @@
-// 1.19.4	2024-09-04T14:24:53.4298858	Item Models: better_progression
+// 1.19.4	2024-09-06T00:21:01.1024824	Item Models: better_progression
 53328232342720c1776597ecaf073913a44860ef assets/better_progression/models/item/bear_meat.json
 070e97230f9570aed29526e5fe4de47f33a09376 assets/better_progression/models/item/bronze_axe.json
 301b9fe194d1ab50bb530df36dbeb266db3b7e1d assets/better_progression/models/item/bronze_boots.json
@@ -69,7 +69,9 @@ a634799440555f76c5eec694789775657b9757c3 assets/better_progression/models/item/e
 9536e4d13bb4fd7f53347ced83d29487cd3dbf4b assets/better_progression/models/item/ender_steel_shovel.json
 8642d4ee8a37d7a3668263e7fb0a702c47a2a4ce assets/better_progression/models/item/ender_steel_sword.json
 ec46d968393928cb03b294cbc4a848c08a3c37cc assets/better_progression/models/item/end_black_tulip.json
+e02717dffd242a436b02b5ea0ac802ba565c9a74 assets/better_progression/models/item/end_oak_boat.json
 b5fdb07206fb806be9c9eea82ff40ca1fbb2ba2c assets/better_progression/models/item/end_oak_button.json
+b6e5d01bae32eccf15a48dbfafdf2ccc8795ab85 assets/better_progression/models/item/end_oak_chest_boat.json
 741cf7054798f593745e2a1a0edd026fd64d2f3e assets/better_progression/models/item/end_oak_door.json
 0d96b204bf7e0b7573ebec1a42d583381951af35 assets/better_progression/models/item/end_oak_sapling.json
 51617831a2b0e00728e778cc7bda24025cba1ed6 assets/better_progression/models/item/end_oak_sign.json

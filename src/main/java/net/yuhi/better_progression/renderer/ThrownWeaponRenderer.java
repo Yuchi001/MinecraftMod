@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.entity.ThrownWeapon;
+import net.yuhi.better_progression.entity.custom.ThrownWeapon;
 import org.joml.Quaternionf;
 
 @OnlyIn(Dist.CLIENT)

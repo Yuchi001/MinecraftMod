@@ -80,6 +80,7 @@
   "block.better_progression.end_oak_button": "End Oak Button",
   "block.better_progression.end_oak_sign": "End Oak Sign",
   "item.better_progression.end_oak_boat": "End Oak Boat",
+  "item.better_progression.end_oak_chest_boat": "End Oak Chest Boat",
 
   "block.better_progression.stannin_ore": "Stannin Ore",
   "block.better_progression.deepslate_stannin_ore": "Deepslate Stannin Ore",
@@ -257,6 +258,8 @@
   "tooltip.better_progression.netherited_item.tooltip_armor": "Knockback resistance: +<v1>",
   
   "attribute.better_progression.attack_reach": "Attack Reach",
+  
+  "entity.better_progression.mod_chest_boat": "Boat with Chest",
   
   "block.better_progression.bed_message_no_sleep": "You can't sleep without dream catcher totem...",
   "block.better_progression.totem_message_sleep_well": "Sleep well... This time at least..."

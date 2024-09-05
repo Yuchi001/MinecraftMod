@@ -12,7 +12,7 @@
                 "data": {
                   "Name": "better_progression:end_short_grass"
                 },
-                "weight": 7
+                "weight": 70
               },
               {
                 "data": {
@@ -21,13 +21,25 @@
                     "half": "lower"
                   }
                 },
-                "weight": 2
+                "weight": 20
               },
               {
                 "data": {
                   "Name": "better_progression:end_short_grass_with_flowers"
                 },
+                "weight": 10
+              },
+              {
+                "data": {
+                  "Name": "better_progression:end_white_tulip"
+                },
                 "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "better_progression:end_black_tulip"
+                },
+                "weight": 9
               }
             ]
           }

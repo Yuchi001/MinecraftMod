@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 2.0,
+  "group": "pink_quartz",
+  "ingredient": {
+    "item": "better_progression:pink_quartz_ore"
+  },
+  "result": "better_progression:pink_quartz"
+}

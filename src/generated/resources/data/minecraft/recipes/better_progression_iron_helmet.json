@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "better_progression:iron_plate"
+    },
+    "*": {
+      "item": "minecraft:leather_helmet"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#*#",
+    " # "
+  ],
+  "result": {
+    "item": "minecraft:iron_helmet"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 2.0,
+  "group": "netherite_scrap",
+  "ingredient": {
+    "item": "better_progression:nether_steel_machete"
+  },
+  "result": "minecraft:netherite_scrap"
+}

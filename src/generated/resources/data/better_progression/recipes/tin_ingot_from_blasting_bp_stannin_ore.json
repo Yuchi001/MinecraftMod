@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 2.0,
+  "group": "tin_ingot",
+  "ingredient": {
+    "item": "better_progression:stannin_ore"
+  },
+  "result": "better_progression:tin_ingot"
+}

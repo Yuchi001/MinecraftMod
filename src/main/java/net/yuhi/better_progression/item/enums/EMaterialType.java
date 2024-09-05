@@ -5,27 +5,46 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public enum EMaterialType {
-    NETHERITE("netherite"),
-    ENDERITE("enderite"),
-    TIN("tin"),
-    GOLD("golden"),
-    BRONZE("bronze"),
-    STEEL("steel"),
-    COPPER("copper"),
-    IRON("iron"),
-    DIAMOND("diamond"),
-    OBSIDIAN("obsidian"),
-    STONE("stone"),
-    WOOD("wooden");
-    private String name;
-    EMaterialType(String name) {
+    NETHERITE("netherite", true),
+    ENDERITE("enderite", false),
+    TIN("tin", false),
+    GOLD("golden", true),
+    BRONZE("bronze", false),
+    STEEL("steel", false),
+    COPPER("copper", true),
+    IRON("iron", true),
+    DIAMOND("diamond", true),
+    OBSIDIAN("obsidian", true),
+    STONE("stone", true, true),
+    WOOD("wooden", true, true);
+    private final String name;
+    private final boolean is_vanilla;
+    private final boolean is_tag;
+    
+    EMaterialType(String name, boolean is_vanilla) {
         this.name = name;
+        this.is_vanilla = is_vanilla;
+        this.is_tag = false;
+    }
+
+    EMaterialType(String name, boolean is_vanilla, boolean is_tag) {
+        this.name = name;
+        this.is_vanilla = is_vanilla;
+        this.is_tag = is_tag;
     }
 
     public String GetName() {
         return name;
     }
+    
+    public boolean IsVanilla() {
+        return is_vanilla;
+    }
 
+    public boolean IsTag() {
+        return is_tag;
+    }
+    
     public String GetName(boolean get_prefix) {
         if(!get_prefix) return name;
 

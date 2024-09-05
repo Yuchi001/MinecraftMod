@@ -14,6 +14,7 @@ public enum ECustomTag {
     ORE(ModTags.Blocks.ORE_TAG),
     WOODEN_FENCES(BlockTags.WOODEN_FENCES),
     FENCE_GATES(BlockTags.FENCE_GATES),
+    SOUL_FIRE_BASE_BLOCK(BlockTags.SOUL_FIRE_BASE_BLOCKS),
     NO_DROP(ModTags.Blocks.NO_DROP),
     RAIL(BlockTags.RAILS);
     

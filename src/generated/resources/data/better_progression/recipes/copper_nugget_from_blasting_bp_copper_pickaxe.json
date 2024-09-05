@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 2.0,
+  "group": "copper_nugget",
+  "ingredient": {
+    "item": "better_progression:copper_pickaxe"
+  },
+  "result": "better_progression:copper_nugget"
+}

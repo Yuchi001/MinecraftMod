@@ -22,10 +22,10 @@ public class TallEndGrassBlock extends BushBlock implements BonemealableBlock, n
         super(pProperties);
         this.isTall = isTall;
     }
-    
+
     @Override
     protected boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return pState.is(ModBlocks.END_STONE_GRASS_BLOCK.get());
+        return pState.is(BlockTags.DIRT) || pState.is(Blocks.FARMLAND) || pState.is(ModBlocks.END_STONE_GRASS_BLOCK.get());
     }
     
     @Override

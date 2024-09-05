@@ -3,16 +3,16 @@
   "category": "equipment",
   "key": {
     "#": {
-      "item": "minecraft:leather_leggings"
+      "item": "better_progression:steel_plate"
     },
     "*": {
-      "item": "better_progression:steel_plate"
+      "item": "minecraft:leather_leggings"
     }
   },
   "pattern": [
-    " * ",
-    "*#*",
-    " * "
+    " # ",
+    "#*#",
+    " # "
   ],
   "result": {
     "item": "better_progression:steel_leggings"

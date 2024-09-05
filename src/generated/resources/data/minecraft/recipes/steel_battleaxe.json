@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "equipment",
   "key": {
     "#": {
       "item": "better_progression:hilt"
@@ -9,7 +9,7 @@
       "item": "better_progression:steel_ingot"
     },
     "S": {
-      "item": "better_progression:steel_battleaxe"
+      "item": "better_progression:steel_axe"
     }
   },
   "pattern": [

@@ -37,9 +37,12 @@
   "item.better_progression.raw_tin": "Raw Tin",
   "item.better_progression.tin_ingot": "Tin Ingot",
   "block.better_progression.tin_ore": "Tin Ore",
+  "block.better_progression.deepslate_tin_ore": "Deepslate Tin Ore",
   "block.better_progression.end_tin_ore": "Tin Ore",
   "block.better_progression.end_stone_grass_block": "End Stone Grass Block",
   "block.better_progression.end_stone_grass_short": "End Grass",
+  "block.better_progression.end_white_tulip": "End White Tulip",
+  "block.better_progression.end_black_tulip": "End Black Tulip",
   "block.better_progression.end_stone_grass_short_with_flowers": "End Grass With Flowers",
   "block.better_progression.chiseled_end_stone_bricks": "Chiseled End Stone Bricks",
   "block.better_progression.tin_block": "Tin Block",
@@ -59,6 +62,9 @@
 
   "block.better_progression.end_oak_door": "End Oak Door",
   "block.better_progression.end_oak_sapling": "End Oak Sapling",
+  "block.better_progression.end_tall_grass": "End Tall grass",
+  "block.better_progression.end_short_grass": "End Short Grass",
+  "block.better_progression.end_short_grass_with_flowers": "End Short Grass With Flowers",
   "block.better_progression.end_oak_leaves": "End Oak Leaves",
   "block.better_progression.end_oak_trapdoor": "End Oak Trapdoor",
   "block.better_progression.end_oak_log": "End Oak Log",
@@ -76,10 +82,23 @@
   "item.better_progression.end_oak_boat": "End Oak Boat",
 
   "block.better_progression.stannin_ore": "Stannin Ore",
+  "block.better_progression.deepslate_stannin_ore": "Deepslate Stannin Ore",
+  
+  "block.better_progression.charged_soul_sand": "Charged Soul Sand",
   
   "block.better_progression.enderite_block": "Enderite Block",
+  "block.better_progression.enderite_debris": "Dragon Debris",
   "item.better_progression.enderite_ingot": "Enderite Ingot",
   "item.better_progression.dragon_remains": "Dragon Remains",
+  
+  "item.better_progression.zombie_essence": "Zombie Essence",
+  "item.better_progression.ghast_essence": "Ghast Essence",
+  "item.better_progression.spider_essence": "Spider Essence",
+  "item.better_progression.skeleton_essence": "Skeleton Essence",
+  "item.better_progression.slime_essence": "Slime Essence",
+  "item.better_progression.enderman_essence": "Enderman Essence",
+  "item.better_progression.creeper_essence": "Creeper Essence",
+  "item.better_progression.phantom_essence": "Phantom Essence",
   
   "item.better_progression.copper_sword": "Copper Sword",
   "item.better_progression.copper_pickaxe": "Copper Pickaxe",
@@ -237,5 +256,8 @@
   "tooltip.better_progression.netherited_item.tooltip": "Attack Damage: +<v1>",
   "tooltip.better_progression.netherited_item.tooltip_armor": "Knockback resistance: +<v1>",
   
-  "attribute.better_progression.attack_reach": "Attack Reach"
+  "attribute.better_progression.attack_reach": "Attack Reach",
+  
+  "block.better_progression.bed_message_no_sleep": "You can't sleep without dream catcher totem...",
+  "block.better_progression.totem_message_sleep_well": "Sleep well... This time at least..."
 }

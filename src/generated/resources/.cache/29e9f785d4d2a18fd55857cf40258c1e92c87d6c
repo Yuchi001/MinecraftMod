@@ -1,4 +1,4 @@
-// 1.19.4	2024-09-01T01:41:14.0824316	Item Models: better_progression
+// 1.19.4	2024-09-04T14:24:53.4298858	Item Models: better_progression
 53328232342720c1776597ecaf073913a44860ef assets/better_progression/models/item/bear_meat.json
 070e97230f9570aed29526e5fe4de47f33a09376 assets/better_progression/models/item/bronze_axe.json
 301b9fe194d1ab50bb530df36dbeb266db3b7e1d assets/better_progression/models/item/bronze_boots.json
@@ -68,12 +68,14 @@ f23c583a4ec846f4af6591adcea9df5b2d78ebfc assets/better_progression/models/item/e
 a634799440555f76c5eec694789775657b9757c3 assets/better_progression/models/item/ender_steel_pickaxe.json
 9536e4d13bb4fd7f53347ced83d29487cd3dbf4b assets/better_progression/models/item/ender_steel_shovel.json
 8642d4ee8a37d7a3668263e7fb0a702c47a2a4ce assets/better_progression/models/item/ender_steel_sword.json
+ec46d968393928cb03b294cbc4a848c08a3c37cc assets/better_progression/models/item/end_black_tulip.json
 b5fdb07206fb806be9c9eea82ff40ca1fbb2ba2c assets/better_progression/models/item/end_oak_button.json
 741cf7054798f593745e2a1a0edd026fd64d2f3e assets/better_progression/models/item/end_oak_door.json
 0d96b204bf7e0b7573ebec1a42d583381951af35 assets/better_progression/models/item/end_oak_sapling.json
 51617831a2b0e00728e778cc7bda24025cba1ed6 assets/better_progression/models/item/end_oak_sign.json
 5ccb40867c4a9228d0558e2964379a1b8a31ad3f assets/better_progression/models/item/end_short_grass.json
 3b3c4d28d62d0c578456189303919878964ef3f5 assets/better_progression/models/item/end_short_grass_with_flowers.json
+686f34ddcc387c0dd7b51983f756b364eefa5afb assets/better_progression/models/item/end_white_tulip.json
 abe15169a3245ee9b46d6c460c37b49b84baa97c assets/better_progression/models/item/hilt.json
 ade8ed53ab9b17849081239b2ec0426cbaaa6dab assets/better_progression/models/item/iron_chainmail.json
 4e895a79025cbf9c4835f0f8dd46f2c3f69f2d19 assets/better_progression/models/item/iron_machete.json
@@ -134,3 +136,4 @@ fd23a21305403ea2aa233e0e2e2427a723a7407a assets/better_progression/models/item/s
 c9e657cd9c72be8ace230271fef10b81371d0d09 assets/better_progression/models/item/tin_ingot.json
 398df70ea8c9012eabae1bd943e98562eb8d6c41 assets/better_progression/models/item/tin_item_interface.json
 b616267654ce491d0ed8859fbf9c31dce8151c3c assets/better_progression/models/item/wooden_club.json
+9845f02e2ecec001c6952361526bbde72bb023eb assets/better_progression/models/item/zombie_essence.json

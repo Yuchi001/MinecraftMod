@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "better_progression:steel_chainmail"
+    },
+    "*": {
+      "item": "minecraft:leather_chestplate"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#*#",
+    " # "
+  ],
+  "result": {
+    "item": "better_progression:steel_chainmail_chestplate"
+  },
+  "show_notification": true
+}

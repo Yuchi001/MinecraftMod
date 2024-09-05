@@ -5,6 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ArmorMaterials;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -12,8 +13,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.item.enums.EMaterialType;
+import net.yuhi.better_progression.recipe.utils.ESmeltingRecipeType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getVanillaTools;
 
@@ -54,6 +57,17 @@ public class RemoveRecipes {
                 recipesToRemove.add(new ResourceLocation("minecraft", recipeName));
             }
         }
+
+        String[] ironItems = {
+                "iron_pickaxe", "iron_axe", "iron_shovel", "iron_hoe", "iron_sword",
+                "iron_helmet", "iron_chestplate", "iron_leggings", "iron_boots"
+        };
+
+        for (String itemName : ironItems) {
+            recipesToRemove.add(new ResourceLocation("minecraft", itemName + "_from_smelting"));
+            recipesToRemove.add(new ResourceLocation("minecraft", itemName + "_from_blasting"));
+        }
+        
         recipesToRemove.add(new ResourceLocation("minecraft", "rail"));
         recipesToRemove.add(new ResourceLocation("minecraft", "tnt"));
         recipesToRemove.add(new ResourceLocation("minecraft", "powered_rail"));
@@ -64,6 +78,7 @@ public class RemoveRecipes {
         for (ResourceLocation recipeId : recipesToRemove) {
             recipes.removeIf(recipe -> recipe.getId().equals(recipeId));
         }
+        
         recipeManager.replaceRecipes(recipes);
     }
 }

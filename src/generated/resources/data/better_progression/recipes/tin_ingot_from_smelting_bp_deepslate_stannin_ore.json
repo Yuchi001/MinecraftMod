@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 2.0,
+  "group": "tin_ingot",
+  "ingredient": {
+    "item": "better_progression:deepslate_stannin_ore"
+  },
+  "result": "better_progression:tin_ingot"
+}

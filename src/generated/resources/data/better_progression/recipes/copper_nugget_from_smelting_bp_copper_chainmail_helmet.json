@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 2.0,
+  "group": "copper_nugget",
+  "ingredient": {
+    "item": "better_progression:copper_chainmail_helmet"
+  },
+  "result": "better_progression:copper_nugget"
+}

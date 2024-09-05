@@ -1,12 +1,15 @@
-// 1.19.4	2024-08-31T18:02:27.961602	Tags for minecraft:block mod id better_progression
+// 1.19.4	2024-09-04T18:20:42.0559422	Tags for minecraft:block mod id better_progression
 4839f9421c08a953b499d46825c51e2cfbc17944 data/better_progression/tags/blocks/no_drop.json
 d030b82304ed0b343222b7bb93be48300273ed48 data/better_progression/tags/blocks/ore.json
 52855057f697c44b06c3eaecac195ddebec5aed0 data/minecraft/tags/blocks/fence_gates.json
 a2e53c10992d3591eb791c6a042b521e67ee0701 data/minecraft/tags/blocks/leaves.json
 c5bfe9a65ee5695903d506889156e3393fe74ef3 data/minecraft/tags/blocks/logs_that_burn.json
 afba40f96f21e53cd6c8926c26422d0f277163dc data/minecraft/tags/blocks/mineable/axe.json
-7bd9ae51fd1fdd8ec9c84df4c8b32f70bb7045db data/minecraft/tags/blocks/mineable/pickaxe.json
+6631deb37fe89f3e32e381a83f71aa217d71fd09 data/minecraft/tags/blocks/mineable/pickaxe.json
+cd21298f5e5c33a5420bc87bb650a97cc132c6b8 data/minecraft/tags/blocks/mineable/shovel.json
 bb914c79b0720946ccf4e67510fc9677ef28f600 data/minecraft/tags/blocks/needs_diamond_tool.json
 9b848335e5e8098b650cf5df78cc22bf8a8e1be4 data/minecraft/tags/blocks/needs_iron_tool.json
 5c383d5cc2db872915841f4b4034d7f4ee0020f1 data/minecraft/tags/blocks/rails.json
+9f6f1621f4695086fc0c8e33e0fad77ac9ef2434 data/minecraft/tags/blocks/small_flowers.json
+cd21298f5e5c33a5420bc87bb650a97cc132c6b8 data/minecraft/tags/blocks/soul_fire_base_blocks.json
 1eb4edac7cab59101a713d4d15b758a597f41c6a data/minecraft/tags/blocks/wooden_fences.json

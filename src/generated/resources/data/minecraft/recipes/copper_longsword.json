@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "equipment",
   "key": {
     "#": {
       "item": "better_progression:hilt"
@@ -8,7 +8,9 @@
     "*": {
       "item": "minecraft:copper_ingot"
     },
-    "S": []
+    "S": {
+      "item": "better_progression:copper_sword"
+    }
   },
   "pattern": [
     "  *",

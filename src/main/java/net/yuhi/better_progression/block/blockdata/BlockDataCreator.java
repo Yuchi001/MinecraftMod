@@ -2,6 +2,7 @@ package net.yuhi.better_progression.block.blockdata;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -11,7 +12,8 @@ import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.item.ModItems;
-import org.openjdk.nashorn.internal.ir.ReturnNode;
+import net.yuhi.better_progression.recipe.utils.EBlockCraftingRecipeType;
+import net.yuhi.better_progression.recipe.utils.ESmeltingRecipeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +21,9 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class BlockDataCreator {
-    private final Supplier<Block> BlockSupplier;
+    private final Supplier<Block> blockSupplier;
     private final String name;
+    private Supplier<Block> dropSupplier;
     private EMineableWith mineableWith = EMineableWith.NONE;
     private ERequireTier requireTier = ERequireTier.NONE;
     private ETextureType textureType = ETextureType.CUBE_ALL;
@@ -30,6 +33,11 @@ public class BlockDataCreator {
     private ResourceLocation textureBottom = null;
     private ResourceLocation textureSide = null;
     private ResourceLocation textureItem = null;
+    
+    private List<TagKey<Item>> itemTags = new ArrayList<>();
+    private List<TagKey<Block>> blockTags = new ArrayList<>();
+    
+    private SmeltingRecipeData smeltingRecipeData;
     
     // For now only signs use this feature
     private Supplier<Block> twinBlockSupplier = null;
@@ -43,7 +51,8 @@ public class BlockDataCreator {
 
     public BlockDataCreator(String name, Supplier<Block> block) {
         this.name = name;
-        this.BlockSupplier = block;
+        this.blockSupplier = block;
+        //this.dropSupplier = block;
 
          try {
              textureSide = new ResourceLocation(BetterProgression.MOD_ID, ModelProvider.BLOCK_FOLDER + "/" + name);
@@ -53,7 +62,7 @@ public class BlockDataCreator {
     
     public BlockDataCreator(String name, Block block, String modId) {
         this.name = name;
-        this.BlockSupplier = () -> block;
+        this.blockSupplier = () -> block;
         textureSide = new ResourceLocation(modId, ModelProvider.BLOCK_FOLDER + "/" + name);
     }
 
@@ -66,6 +75,11 @@ public class BlockDataCreator {
     public BlockDataCreator AddRecipe(EBlockCraftingRecipeType recipeType, List<Supplier<ItemLike>> ingredientList, int resultCount) {
         var recipePair = new RecipeData(recipeType, ingredientList, resultCount);
         this.recipes.add(recipePair);
+        return this;
+    }
+    
+    public BlockDataCreator AddSmeltingRecipe(ESmeltingRecipeType recipeType, Supplier<ItemLike> output) {
+        this.smeltingRecipeData = new SmeltingRecipeData(recipeType, output);
         return this;
     }
     
@@ -100,8 +114,18 @@ public class BlockDataCreator {
         return this;
     }
     
-    public BlockDataCreator SetCustomTag(ECustomTag tag) {
+    public BlockDataCreator SetSpecialTag(ECustomTag tag) {
         this.tag = tag;
+        return this;
+    }
+    
+    public BlockDataCreator AddBlockTag(TagKey<Block> blockTag) {
+        this.blockTags.add(blockTag);
+        return this;
+    }
+    
+    public BlockDataCreator AddItemTag(TagKey<Item> itemTag) {
+        this.itemTags.add(itemTag);
         return this;
     }
 
@@ -120,34 +144,43 @@ public class BlockDataCreator {
         return this;
     }
     
-    public BlockDataCreator SetDropSelf(boolean dropSelf) {
-        this.dropSelf = dropSelf;
+    public BlockDataCreator DontDropSelf() {
+        this.dropSelf = false;
+        this.dropSupplier = null;
+        return this;
+    }
+
+    public BlockDataCreator SetCustomDrop(Supplier<Block> drop) {
+        this.dropSupplier = drop;
+        this.dropSelf = false;
         return this;
     }
     
     public RegistryObject<Block> Register() {
-        RegistryObject<Block> blockObj = ModBlocks.BLOCKS.register(name, BlockSupplier);
+        RegistryObject<Block> blockObj = ModBlocks.BLOCKS.register(name, blockSupplier);
         ModItems.ITEMS.register(name, () -> new BlockItem(blockObj.get(), new Item.Properties()));
         ModBlocks.BLOCKS_DATA.add(new BlockData(this, blockObj));
         return blockObj;
     }
 
     public RegistryObject<Block> RegisterWithoutItem() {
-        RegistryObject<Block> blockObj = ModBlocks.BLOCKS.register(name, BlockSupplier);
+        RegistryObject<Block> blockObj = ModBlocks.BLOCKS.register(name, blockSupplier);
         ModBlocks.BLOCKS_DATA.add(new BlockData(this, blockObj));
         return blockObj;
     }
     
     public RegistryObject<Block> RegisterVanilla() {
-        RegistryObject<Block> blockObj = ModBlocks.VANILLA_BLOCKS.register(name, BlockSupplier);
+        RegistryObject<Block> blockObj = ModBlocks.VANILLA_BLOCKS.register(name, blockSupplier);
         ModItems.ITEMS.register(name, () -> new BlockItem(blockObj.get(), new Item.Properties()));
         return blockObj;
     }
 
+    public record SmeltingRecipeData(ESmeltingRecipeType recipeType, Supplier<ItemLike> output) { }
     public record RecipeData(EBlockCraftingRecipeType recipeType, List<Supplier<ItemLike>> ingredientList, Integer resultCount) { }
     
     public static class BlockData {
         public final RegistryObject<Block> block;
+        public final Supplier<Block> drop;
         public final String name;
         public final EMineableWith mineableWith;
         public final ETextureType textureType;
@@ -158,6 +191,11 @@ public class BlockDataCreator {
         public final ResourceLocation textureSide;
         public final ResourceLocation textureItem;
         public final ECustomTag customTag;
+        public final List<TagKey<Item>> itemTags;
+        public final List<TagKey<Block>> blockTags;
+        
+        // smelting recipe haver only
+        public final SmeltingRecipeData smeltingRecipeData;
         
         // crafting recipe type haver only
         public final List<RecipeData> recipes;
@@ -185,6 +223,10 @@ public class BlockDataCreator {
             this.strippedLogBlock = blockDataCreator.strippedLogBlock;
             this.recipes = blockDataCreator.recipes;
             this.twinBlockSupplier = blockDataCreator.twinBlockSupplier;
+            this.smeltingRecipeData = blockDataCreator.smeltingRecipeData;
+            this.drop = blockDataCreator.dropSupplier;
+            this.itemTags = blockDataCreator.itemTags;
+            this.blockTags = blockDataCreator.blockTags;
         }
         
         public void SaveRecipes(Consumer<FinishedRecipe> writer) {
@@ -196,6 +238,9 @@ public class BlockDataCreator {
                     System.err.println(ex.getMessage());
                 }
             }
+            
+            if (smeltingRecipeData != null) 
+                smeltingRecipeData.recipeType.SaveRecipes(writer, block::get, smeltingRecipeData.output);
         }
     }
 }

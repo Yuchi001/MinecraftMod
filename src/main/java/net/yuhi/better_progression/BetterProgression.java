@@ -20,6 +20,7 @@ import net.yuhi.better_progression.block.ModBlockEntities;
 import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.block.utils.ModWoodTypes;
 import net.yuhi.better_progression.entity.ModEntityTypes;
+import net.yuhi.better_progression.events.BlockInteractionHandler;
 import net.yuhi.better_progression.events.HeavyItemEventHandler;
 import net.yuhi.better_progression.events.VillagerTradesEventHandler;
 import net.yuhi.better_progression.item.ModCreativeModTabs;
@@ -68,6 +69,7 @@ public class BetterProgression
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(HeavyItemEventHandler.class);
         MinecraftForge.EVENT_BUS.register(VillagerTradesEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(BlockInteractionHandler.class);
         MinecraftForge.EVENT_BUS.register(RemoveRecipes.class);
         MinecraftForge.EVENT_BUS.register(ModEntityRenders.class);
         

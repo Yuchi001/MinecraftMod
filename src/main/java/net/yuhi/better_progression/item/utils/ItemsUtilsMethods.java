@@ -48,6 +48,16 @@ public final class ItemsUtilsMethods {
         }
         return vanillaLayeredItems;
     }
+    
+    public static Item getLeatherArmorItem(EItemCategory category) {
+        return switch(category) {
+            case Helmet, ChainmailHelmet -> Items.LEATHER_HELMET;
+            case Chestplate, ChainmailChestplate -> Items.LEATHER_CHESTPLATE;
+            case Leggings, ChainmailLeggings -> Items.LEATHER_LEGGINGS;
+            case Boots, ChainmailBoots -> Items.LEATHER_BOOTS;
+            default -> Items.AIR;
+        };
+    }
 
     public static List<Item> getSmeltableItems() {
         var smeltableMaterials = new ArrayList<EMaterialType>(List.of(
@@ -60,15 +70,19 @@ public final class ItemsUtilsMethods {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && i.material_type == materialType).findFirst().get().item.get();
     }
 
+    public static Item getItem(EItemCategory itemCategory, EMaterialType materialType, EMaterialType subMaterialType) {
+        return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && i.material_type == materialType && i.sub_material_type == subMaterialType).findFirst().get().item.get();
+    }
+    
     public static List<Item> getItems(EItemCategory itemCategory) {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory).map(i -> i.item.get()).collect(Collectors.toList());
     }
 
-    public static List<ItemInfo> getItemInfosForCraftingRecipes(EItemCategory itemCategory) {
+    public static List<TierItemsCreator.ItemInfo> getItemInfosForCraftingRecipes(EItemCategory itemCategory) {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && !i.is_upgrade).collect(Collectors.toList());
     }
 
-    public static List<ItemInfo> getItemInfosForCraftingRecipes(EItemCategory itemCategory, boolean isUpgrade) {
+    public static List<TierItemsCreator.ItemInfo> getItemInfosForCraftingRecipes(EItemCategory itemCategory, boolean isUpgrade) {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && i.is_upgrade == isUpgrade).collect(Collectors.toList());
     }
 
@@ -106,24 +120,55 @@ public final class ItemsUtilsMethods {
         }
         return null;
     }
-
-    public static EItemCategory armorTypeToItemCategory(ArmorItem.Type armorType) {
-        switch (armorType) {
-            case HELMET -> {
-                return EItemCategory.Helmet;
-            }
-            case BOOTS -> {
-                return EItemCategory.Boots;
-            }
-            case CHESTPLATE -> {
-                return EItemCategory.Chestplate;
-            }
-            case LEGGINGS -> {
-                return EItemCategory.Leggings;
-            }
-        }
-        return null;
+    
+    public static List<EItemCategory> getToolCategories(boolean countWeapons){
+        var toReturn = new ArrayList<>(List.of(EItemCategory.Axe,
+                EItemCategory.PickAxe,
+                EItemCategory.Hoe,
+                EItemCategory.Shovel));
+        if(!countWeapons) return toReturn;
+        
+        toReturn.addAll(List.of(EItemCategory.Sword,
+                EItemCategory.LongSword,
+                EItemCategory.BattleAxe,
+                EItemCategory.Machete));
+        
+        return toReturn;
     }
+    
+    public static List<EItemCategory> getToolArmorCategories(boolean countArmorIngredients){
+        var toRet = getToolCategories(true);
+        toRet.addAll(getAllArmorCategories());
+        if (!countArmorIngredients) return toRet;
+        toRet.addAll(List.of(EItemCategory.Plate, EItemCategory.Chainmail));
+        return toRet;
+    }
+    
+    public static List<EItemCategory> getHeavyArmorCategories(){
+        return List.of(EItemCategory.Helmet, 
+                EItemCategory.Chestplate, 
+                EItemCategory.Leggings, 
+                EItemCategory.Boots);
+    }
+
+    public static List<EItemCategory> getAllArmorCategories() {
+        return List.of(EItemCategory.Helmet,
+                EItemCategory.Chestplate,
+                EItemCategory.Leggings,
+                EItemCategory.Boots,
+                EItemCategory.ChainmailHelmet,
+                EItemCategory.ChainmailChestplate,
+                EItemCategory.ChainmailLeggings,
+                EItemCategory.ChainmailBoots);
+    }
+
+    public static List<EItemCategory> getChainmailCategories() {
+        return List.of(EItemCategory.ChainmailHelmet,
+                EItemCategory.ChainmailChestplate,
+                EItemCategory.ChainmailLeggings,
+                EItemCategory.ChainmailBoots);
+    }
+    
 
     public static int getCount(int defaultCount, SwordItem sword){
         class DropTuple {

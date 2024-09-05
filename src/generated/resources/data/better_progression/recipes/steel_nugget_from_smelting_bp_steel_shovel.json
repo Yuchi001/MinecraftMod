@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 2.0,
+  "group": "steel_nugget",
+  "ingredient": {
+    "item": "better_progression:steel_shovel"
+  },
+  "result": "better_progression:steel_nugget"
+}

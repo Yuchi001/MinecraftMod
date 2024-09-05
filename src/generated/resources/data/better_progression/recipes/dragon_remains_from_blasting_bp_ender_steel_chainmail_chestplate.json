@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 2.0,
+  "group": "dragon_remains",
+  "ingredient": {
+    "item": "better_progression:ender_steel_chainmail_chestplate"
+  },
+  "result": "better_progression:dragon_remains"
+}

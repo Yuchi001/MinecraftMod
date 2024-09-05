@@ -22,6 +22,10 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider pProvider) {
         for(var blockData : ModBlocks.BLOCKS_DATA) {
+            for (var tag : blockData.blockTags) {
+                this.tag(tag).add(blockData.block.get());
+            }
+            
             if (blockData.mineableWith.getTag() != null) {
                 this.tag(blockData.mineableWith.getTag()).add(blockData.block.get());
             }

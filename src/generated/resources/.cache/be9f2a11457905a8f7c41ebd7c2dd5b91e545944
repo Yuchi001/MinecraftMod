@@ -1,5 +1,12 @@
-// 1.19.4	2024-08-22T22:35:11.3607033	Tags for minecraft:item mod id better_progression
+// 1.19.4	2024-09-04T18:20:42.0590353	Tags for minecraft:item mod id better_progression
 c19ef66bb742734e3b7aa2be43478c3c049fb380 data/better_progression/tags/items/armor.json
+051dec7dac8c4c120fbb6623763d772fa3f39159 data/better_progression/tags/items/bronze_tools_armor.json
+7182f9bad39e19e2fd26fa22e9b0c8a93fcbfbe2 data/better_progression/tags/items/copper_tools_armor.json
+3ce81cced2347ce1aa832e552ad06d36e642c2c3 data/better_progression/tags/items/custom_iron_toools.json
 b2cfb3d827a81e025e26314f09b3bd7e0f3829d4 data/better_progression/tags/items/enderite_armor.json
+a45a40e9c45f5b45f6ad49f7a9b36cbe3b5f61ae data/better_progression/tags/items/enderite_tools_armor.json
 210b18abb13ce9e3594fec080361196f63211244 data/better_progression/tags/items/layerable.json
 01911e8c90052336fe941824510a102686840b22 data/better_progression/tags/items/netherite_armor.json
+ffe7828c7dfe6856464b1e92bc6599d318f76e03 data/better_progression/tags/items/netherite_tools_armor.json
+0e480e82d595a6eca1e48d07fb9bdae0c97ea8b5 data/better_progression/tags/items/steel_tools_armor.json
+9f6f1621f4695086fc0c8e33e0fad77ac9ef2434 data/minecraft/tags/items/small_flowers.json

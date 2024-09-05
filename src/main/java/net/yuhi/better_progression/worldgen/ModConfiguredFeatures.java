@@ -80,20 +80,16 @@ public class ModConfiguredFeatures {
                 PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(
                                 new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
-                                        .add(ModBlocks.END_GRASS.get().defaultBlockState(), 7)  // Szansa na END_GRASS (5/10)
-                                        .add(ModBlocks.TALL_END_GRASS.get().defaultBlockState(), 2)  // Szansa na END_TALL_GRASS (3/10)
-                                        .add(ModBlocks.END_GRASS_WITH_FLOWERS.get().defaultBlockState(), 1)  // Szansa na END_GRASS_FLOWERS (2/10)
+                                        .add(ModBlocks.END_GRASS.get().defaultBlockState(), 70)
+                                        .add(ModBlocks.TALL_END_GRASS.get().defaultBlockState(), 20)
+                                        .add(ModBlocks.END_GRASS_WITH_FLOWERS.get().defaultBlockState(), 10)
+                                        .add(ModBlocks.END_WHITE_TULIP.get().defaultBlockState(), 1)
+                                        .add(ModBlocks.END_BLACK_TULIP.get().defaultBlockState(), 9)
                                         .build()
                                 )
                         )
                 )
         ));
-        /*register(context, END_STONE_GRASS_FLOWERS_VEGETATION, Feature.RANDOM_PATCH, new RandomPatchConfiguration(16, 3, 2,
-                PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.END_GRASS_WITH_FLOWERS.get())))));
-        register(context, END_STONE_GRASS_TALL_VEGETATION, Feature.RANDOM_PATCH, new RandomPatchConfiguration(8, 3, 2,
-                PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.TALL_END_GRASS.get())))));*/
         
         register(context, END_STONE_GRASS, ModFeatures.END_STONE_GRASS_REPLACER, FeatureConfiguration.NONE);
         register(context, END_OAK, Feature.TREE, createFancyOak().dirt(BlockStateProvider.simple(Blocks.END_STONE)).build());

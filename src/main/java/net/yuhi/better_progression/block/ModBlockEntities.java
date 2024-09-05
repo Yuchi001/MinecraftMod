@@ -7,6 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.entity.BetterBlastFurnaceBlockEntity;
+import net.yuhi.better_progression.block.entity.ChargedSoulSandBlockEntity;
 import net.yuhi.better_progression.block.entity.ModSignBlockEntity;
 
 public class ModBlockEntities {
@@ -26,6 +27,9 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(ModSignBlockEntity::new,
                             ModBlocks.END_OAK_WALL_SIGN.get(),
                             ModBlocks.END_OAK_SIGN.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<ChargedSoulSandBlockEntity>> CHARGED_SOUL_SAND_BLOCK_ENTITY = BLOCK_ENTITIES.register("charged_soul_sand_block_entity",
+            () -> BlockEntityType.Builder.of(ChargedSoulSandBlockEntity::new, ModBlocks.CHARGED_SOUL_SAND.get()).build(null));
     
     public static void register(IEventBus bus) {
         BLOCK_ENTITIES.register(bus);

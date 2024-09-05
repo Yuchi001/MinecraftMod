@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 2.0,
+  "group": "bronze_nugget",
+  "ingredient": {
+    "item": "better_progression:bronze_helmet"
+  },
+  "result": "better_progression:bronze_nugget"
+}

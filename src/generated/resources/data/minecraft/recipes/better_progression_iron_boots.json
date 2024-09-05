@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "better_progression:iron_plate"
+    },
+    "*": {
+      "item": "minecraft:leather_boots"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#*#",
+    " # "
+  ],
+  "result": {
+    "item": "minecraft:iron_boots"
+  },
+  "show_notification": true
+}

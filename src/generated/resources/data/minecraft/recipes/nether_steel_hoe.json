@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "base": {
+    "item": "better_progression:steel_hoe"
+  },
+  "result": {
+    "item": "better_progression:nether_steel_hoe"
+  }
+}

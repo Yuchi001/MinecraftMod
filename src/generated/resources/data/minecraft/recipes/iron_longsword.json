@@ -1,21 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "category": "equipment",
   "key": {
-    "h": {
+    "#": {
       "item": "better_progression:hilt"
     },
-    "m": {
-      "item": "minecraft:iron_sword"
-    },
-    "s": {
+    "*": {
       "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "item": "minecraft:iron_sword"
     }
   },
   "pattern": [
-    "  s",
-    "sm ",
-    "hs "
+    "  *",
+    "*S ",
+    "#* "
   ],
   "result": {
     "item": "better_progression:iron_longsword"

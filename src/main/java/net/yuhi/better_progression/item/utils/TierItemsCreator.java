@@ -1,8 +1,7 @@
 package net.yuhi.better_progression.item.utils;
 
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.*;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
@@ -11,77 +10,79 @@ import net.yuhi.better_progression.item.custom.*;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EItemType;
 import net.yuhi.better_progression.item.enums.EMaterialType;
-import net.yuhi.better_progression.item.interfaces.Lootable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class TierItemsCreator {
+    private final EMaterialType material_type;
+    private Tier tier;
+    private String basis;
     private String modId = BetterProgression.MOD_ID;
-    private EMaterialType material_type;
     private EMaterialType sub_material_type;
-    private Tier tier = null;
-    private TagKey<Item> tag = null;
-    private String basis = "";
+    private TagKey<Item> basis_tag = null;
+    private List<ItemTagPair> tags = new ArrayList<>();
     private boolean has_default_basis = false;
     private boolean is_upgrade_tier = false;
-
-    // region constructors
+    
+    public record ItemTagPair(EItemCategory category, TagKey<Item> tag) {}
+    
+    public static RegistryObject<Item> RegisterSimpleItem(RegistryObject<Item> supplier) {
+        var itemInfo = new ItemInfo(supplier);
+        ModItems.REGISTERED_ITEMS.add(itemInfo);
+        return supplier;
+    }
+    
     public TierItemsCreator(EMaterialType material_type) {
-        this.modId = BetterProgression.MOD_ID;
-        this.material_type = material_type;
-    }
-
-    public TierItemsCreator(String mod_id, EMaterialType material_type) {
-        this.modId = mod_id;
-        this.material_type = material_type;
-    }
-
-    public TierItemsCreator(String modId, String basis, EMaterialType material_type, Tier tier) {
-        this.modId = modId;
-        this.basis = basis;
-        this.tier = tier;
         this.material_type = material_type;
     }
 
     public TierItemsCreator(String basis, EMaterialType material_type, Tier tier) {
-        this.tier = tier;
         this.basis = basis;
+        this.tier = tier;
         this.material_type = material_type;
     }
 
-    public TierItemsCreator(TagKey<Item> tag, EMaterialType material_type, Tier tier) {
+    public TierItemsCreator(TagKey<Item> basis_tag, EMaterialType material_type, Tier tier) {
+        this.basis_tag = basis_tag;
         this.tier = tier;
-        this.basis = tag.location().getPath().toLowerCase();
-        this.tag = tag;
         this.material_type = material_type;
     }
-
-    public TierItemsCreator(String basis, EMaterialType material_type, Tier tier, boolean has_default_basis) {
-        this.tier = tier;
-        this.has_default_basis = has_default_basis;
-        this.basis = basis;
-        this.material_type = material_type;
+    
+    public TierItemsCreator SetModId(String modId) {
+        this.modId = modId;
+        return this;
     }
-
-    public TierItemsCreator(String basis, EMaterialType material_type, EMaterialType sub_material_type, Tier tier) {
-        this.tier = tier;
-        this.basis = basis;
-        this.material_type = material_type;
+    
+    public TierItemsCreator SetSubMaterialType(EMaterialType sub_material_type) {
         this.sub_material_type = sub_material_type;
-        this.is_upgrade_tier = true;
+        is_upgrade_tier = true;
+        return this;
+    }
+    
+    public TierItemsCreator SetHasDefaultBasis() {
+        has_default_basis = true;
+        return this;
+    }
+    
+    public TierItemsCreator AddTag(EItemCategory category, TagKey<Item> tag) {
+        this.tags.add(new ItemTagPair(category, tag));
+        return this;
     }
 
-    public TierItemsCreator(String basis, EMaterialType material_type, EMaterialType sub_material_type, Tier tier, boolean has_default_basis) {
-        this.tier = tier;
-        this.basis = basis;
-        this.material_type = material_type;
-        this.sub_material_type = sub_material_type;
-        this.is_upgrade_tier = true;
-        this.has_default_basis = has_default_basis;
-        this.modId = "minecraft";
+    public TierItemsCreator AddTag(List<EItemCategory> categories, TagKey<Item> tag) {
+        for(EItemCategory category : categories) {
+            this.tags.add(new ItemTagPair(category, tag));
+        }
+        return this;
     }
-
-    // endregion
+    
+    private String getItemName(EItemCategory category) {
+        return is_upgrade_tier ? category.getFullName(material_type, sub_material_type) : category.getFullName(material_type);
+    }
 
     public void createToolItem(EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
         Supplier<Item> itemSupplier = () -> switch (itemCategory) {
@@ -90,15 +91,13 @@ public class TierItemsCreator {
             case PickAxe -> new PickaxeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
             case Hoe -> new HoeItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
             case Shovel -> new ShovelItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-            //case Knife -> new Lootable<>(tier, (int) damageMod, attackSpeedMod, new Item.Properties(), Animal.class);
             case Machete -> new MacheteItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
             default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
         };
-
-        var itemName = is_upgrade_tier ? itemCategory.getFullName(material_type, sub_material_type) : itemCategory.getFullName(material_type);
+        
+        var itemName = getItemName(itemCategory);
         RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemName, itemSupplier);
-        var itemInfo = is_upgrade_tier ? new ItemInfo<>(registryItem, itemCategory, EItemType.HandHeld, modId, basis, tag, material_type, sub_material_type, tier, has_default_basis)
-                : new ItemInfo<>(registryItem, itemCategory, EItemType.HandHeld, modId, basis, tag, material_type, tier, has_default_basis);
+        var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, this);
         ModItems.REGISTERED_ITEMS.add(itemInfo);
     }
 
@@ -109,10 +108,9 @@ public class TierItemsCreator {
             default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
         };
 
-        var itemName = is_upgrade_tier ? itemCategory.getFullName(material_type, sub_material_type) : itemCategory.getFullName(material_type);
+        var itemName = getItemName(itemCategory);
         RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemName, itemSupplier);
-        var itemInfo = is_upgrade_tier ? new ItemInfo<>(registryItem, itemCategory, EItemType.HandHeldBig, modId, basis, tag, material_type, sub_material_type, tier, has_default_basis)
-                : new ItemInfo<>(registryItem, itemCategory, EItemType.HandHeldBig, modId, basis, tag, material_type, tier, has_default_basis);
+        var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeldBig, this);
         ModItems.REGISTERED_ITEMS.add(itemInfo);
     }
 
@@ -121,8 +119,7 @@ public class TierItemsCreator {
         var itemName = is_upgrade_tier ? itemCategory.getFullName(material_type, sub_material_type) : itemCategory.getFullName(material_type);
         RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemName, () ->
                 new SpearItem(tier, (int)damageMod, attackSpeedMod, attackReach, new Item.Properties()));
-        var itemInfo = is_upgrade_tier ? new ItemInfo<>(registryItem, itemCategory, EItemType.Spear, modId, basis, tag, material_type, sub_material_type, tier, has_default_basis)
-                : new ItemInfo<>(registryItem, itemCategory, EItemType.Spear, modId, basis, tag, material_type, tier, has_default_basis);
+        var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.Spear, this);
         ModItems.REGISTERED_ITEMS.add(itemInfo);
     }
 
@@ -133,10 +130,9 @@ public class TierItemsCreator {
             default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
         };
 
-        var itemName = is_upgrade_tier ? itemCategory.getFullName(material_type, sub_material_type) : itemCategory.getFullName(material_type);
+        var itemName = getItemName(itemCategory);        
         RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemName, itemSupplier);
-        var itemInfo = is_upgrade_tier ? new ItemInfo<>(registryItem, itemCategory, EItemType.HandHeld, modId, basis, tag, material_type, sub_material_type, tier, has_default_basis)
-                : new ItemInfo<>(registryItem, itemCategory, EItemType.HandHeld, modId, basis, tag, material_type, tier, has_default_basis);
+        var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, this);
         ModItems.REGISTERED_ITEMS.add(itemInfo);
     }
     
@@ -157,10 +153,9 @@ public class TierItemsCreator {
 
     public void createArmorSet() {
         java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerArmorItem = (item, category) -> {
-            var itemName = is_upgrade_tier ? category.getFullName(material_type, sub_material_type) : category.getFullName(material_type);
+            var itemName = getItemName(category);
             RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemName, item);
-            var itemInfo = is_upgrade_tier ? new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, sub_material_type, tier, has_default_basis)
-                    : new ItemInfo<>(registryItem, category, EItemType.Armor, modId, basis, tag, material_type, tier, has_default_basis);            
+            var itemInfo = new ItemInfo(registryItem, category, EItemType.Armor, this);  
             ModItems.REGISTERED_ITEMS.add(itemInfo);
         };
         
@@ -169,10 +164,9 @@ public class TierItemsCreator {
 
     public void createChainmailArmorSet() {
         java.util.function.BiConsumer<Supplier<ArmorItem>, EItemCategory> registerArmorItem = (item, category) -> {
-            var itemName = is_upgrade_tier ? category.getFullName(material_type, sub_material_type) : category.getFullName(material_type);
+            var itemName = getItemName(category);   
             RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemName, item);
-            var itemInfo = is_upgrade_tier ? new ItemInfo<>(registryItem, category, EItemType.Chainmail, modId, basis, tag, material_type, sub_material_type, tier, has_default_basis)
-                    : new ItemInfo<>(registryItem, category, EItemType.Chainmail, modId, basis, tag, material_type, tier, has_default_basis);
+            var itemInfo = new ItemInfo(registryItem, category, EItemType.Chainmail, this);
             ModItems.REGISTERED_ITEMS.add(itemInfo);
         };
 
@@ -185,7 +179,62 @@ public class TierItemsCreator {
         };
 
         RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemCategory.getFullName(material_type), itemSupplier);
-        var itemInfo = new ItemInfo<>(registryItem, itemCategory, EItemType.Simple, modId, basis, tag, material_type, tier, has_default_basis);
+        var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.Simple, this);
         ModItems.REGISTERED_ITEMS.add(itemInfo);
+    }
+
+    @SuppressWarnings("removal")
+    public static final class ItemInfo {
+        public final RegistryObject<Item> item;
+        public final EItemCategory category;
+        public final EItemType type;
+        public final String mod_id;
+        public final String basis;
+        public final EMaterialType material_type;
+        public final EMaterialType sub_material_type;
+        private final ETieredItemCraftingCategory crafting_category;
+        public final Tier tier;
+        public final TagKey<Item> basis_tag;
+        public final List<TagKey<Item>> tags;
+        public final boolean has_default_basis;
+        public final boolean is_upgrade;
+
+        public ItemInfo(RegistryObject<Item> item, EItemCategory category, EItemType itemType, TierItemsCreator creator) {
+            this.item = item;
+            this.category = category;
+            this.type = itemType;
+            this.mod_id = creator.modId;
+            this.material_type = creator.material_type;
+            this.sub_material_type = creator.sub_material_type;
+            this.basis = creator.basis;
+            this.tier = creator.tier;
+            this.basis_tag = creator.basis_tag;
+            this.has_default_basis = creator.has_default_basis;
+            this.is_upgrade = creator.is_upgrade_tier;
+            this.tags = creator.tags.stream().filter(e -> e.category == category).map(e -> e.tag).toList();
+            this.crafting_category = Arrays.stream(ETieredItemCraftingCategory.values()).filter(c -> c.IsValidRecipeForItem(this)).findFirst().orElse(null);
+        }
+
+        public ItemInfo(RegistryObject<Item> item) {
+            this.item = item;
+            this.category = null;
+            this.type = EItemType.Simple;
+            this.mod_id = BetterProgression.MOD_ID;
+            this.basis =  null;
+            this.tier = null;
+            this.basis_tag =  null;
+            this.material_type =  null;
+            this.sub_material_type = null;
+            this.has_default_basis = false;
+            this.is_upgrade = false;
+            this.crafting_category = null;
+            this.tags = new ArrayList<>();
+        }
+        
+        public void SaveRecipes(Consumer<FinishedRecipe> pWriter) {
+            if (crafting_category == null) return;
+
+            crafting_category.SaveRecipes(pWriter, this);
+        }
     }
 }

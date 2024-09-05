@@ -2,7 +2,10 @@ package net.yuhi.better_progression.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
@@ -10,7 +13,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -27,6 +29,8 @@ import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 import net.yuhi.better_progression.mixin.accessor.BlockAccessor;
+import net.yuhi.better_progression.recipe.utils.EBlockCraftingRecipeType;
+import net.yuhi.better_progression.recipe.utils.ESmeltingRecipeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +50,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> TIN_BLOCK = new BlockDataCreator("tin_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(4.0F, 6.0F)))
             .SetMineableWith(EMineableWith.PICKAXE)
-            .SetCustomTag(ECustomTag.ORE)
+            .SetSpecialTag(ECustomTag.ORE)
             .AddRecipe(EBlockCraftingRecipeType.BLOCK_SHAPELESS_1, List.of(() -> getItem(EItemCategory.Ingot, EMaterialType.TIN)))
             .Register();
 
@@ -91,16 +95,17 @@ public class ModBlocks {
     public static final RegistryObject<Block> END_TIN_ORE = new BlockDataCreator("end_tin_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F), UniformInt.of(0, 2)))
             .SetMineableWith(EMineableWith.PICKAXE)
-            .SetDropSelf(false)
-            .SetCustomTag(ECustomTag.ORE)
+            .DontDropSelf()
+            .SetSpecialTag(ECustomTag.ORE)
             .SetRequireTier(ERequireTier.DIAMOND)
+            .AddSmeltingRecipe(ESmeltingRecipeType.SMELT_ORE_RARE, () -> getItem(EItemCategory.Ingot, EMaterialType.TIN))
             .Register();
 
     public static final RegistryObject<Block> TALL_END_GRASS = new BlockDataCreator("end_tall_grass",
             () -> new EndDoublePlantBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XYZ)))
             .SetTextureType(ETextureType.CUSTOM)
-            .SetDropSelf(false)
-            .SetCustomTag(ECustomTag.NO_DROP)
+            .DontDropSelf()
+            .SetSpecialTag(ECustomTag.NO_DROP)
             .SetTexture(EBlockSide.ITEM, "end_tall_grass_top")
             .SetTexture(EBlockSide.TOP, "end_tall_grass_top")
             .SetTexture(EBlockSide.BOTTOM, "end_tall_grass_bottom")
@@ -109,16 +114,32 @@ public class ModBlocks {
     public static final RegistryObject<Block> END_GRASS = new BlockDataCreator("end_short_grass",
             () -> new TallEndGrassBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XYZ), true))
             .SetTextureType(ETextureType.CROSS)
-            .SetDropSelf(false)
-            .SetCustomTag(ECustomTag.NO_DROP)
+            .DontDropSelf()
+            .SetSpecialTag(ECustomTag.NO_DROP)
             .SetTexture(EBlockSide.ITEM, "end_short_grass")
+            .Register();
+
+    public static final RegistryObject<Block> END_WHITE_TULIP = new BlockDataCreator("end_white_tulip",
+            () -> new EndFlowerBlock(() -> MobEffects.POISON, 9, BlockBehaviour.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ)))
+            .SetTextureType(ETextureType.CROSS)
+            .SetTexture(EBlockSide.ITEM, "end_white_tulip")
+            .AddItemTag(ItemTags.SMALL_FLOWERS)
+            .AddBlockTag(BlockTags.SMALL_FLOWERS)
+            .Register();
+
+    public static final RegistryObject<Block> END_BLACK_TULIP = new BlockDataCreator("end_black_tulip",
+            () -> new EndFlowerBlock(() -> MobEffects.DAMAGE_RESISTANCE, 9, BlockBehaviour.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ)))
+            .SetTextureType(ETextureType.CROSS)
+            .SetTexture(EBlockSide.ITEM, "end_black_tulip")
+            .AddItemTag(ItemTags.SMALL_FLOWERS)
+            .AddBlockTag(BlockTags.SMALL_FLOWERS)
             .Register();
 
     public static final RegistryObject<Block> END_GRASS_WITH_FLOWERS = new BlockDataCreator("end_short_grass_with_flowers",
             () -> new TallEndGrassBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XYZ), false))
             .SetTextureType(ETextureType.CROSS)
-            .SetDropSelf(false)
-            .SetCustomTag(ECustomTag.NO_DROP)
+            .DontDropSelf()
+            .SetSpecialTag(ECustomTag.NO_DROP)
             .SetTexture(EBlockSide.ITEM, "end_short_grass_with_flowers")
             .Register();
 
@@ -132,7 +153,7 @@ public class ModBlocks {
             () -> new ModFlammableRotatePillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)))
             .SetMineableWith(EMineableWith.AXE)
             .SetTextureType(ETextureType.LOG)
-            .SetCustomTag(ECustomTag.LOGS_THAT_BURN)
+            .SetSpecialTag(ECustomTag.LOGS_THAT_BURN)
             .SetTexture(EBlockSide.TOP, "stripped_end_oak_log_top")
             .Register();
 
@@ -141,7 +162,7 @@ public class ModBlocks {
             .SetMineableWith(EMineableWith.AXE)
             .SetLogProperties(STRIPPED_END_OAK_LOG::get)
             .SetTextureType(ETextureType.LOG)
-            .SetCustomTag(ECustomTag.LOGS_THAT_BURN)
+            .SetSpecialTag(ECustomTag.LOGS_THAT_BURN)
             .SetTexture(EBlockSide.TOP, "end_oak_log_top")
             .Register();
 
@@ -150,7 +171,7 @@ public class ModBlocks {
             .SetTextureType(ETextureType.AXIS)
             .SetTexture(EBlockSide.TOP, "stripped_end_oak_log")
             .SetTexture(EBlockSide.SIDE, "stripped_end_oak_log")
-            .SetCustomTag(ECustomTag.LOGS_THAT_BURN)
+            .SetSpecialTag(ECustomTag.LOGS_THAT_BURN)
             .SetMineableWith(EMineableWith.AXE)
             .AddRecipe(EBlockCraftingRecipeType.WOOD_3, List.of(STRIPPED_END_OAK_LOG::get))
             .Register();
@@ -162,7 +183,7 @@ public class ModBlocks {
             .SetTexture(EBlockSide.TOP, "end_oak_log")
             .SetTexture(EBlockSide.SIDE, "end_oak_log")
             .SetMineableWith(EMineableWith.AXE)
-            .SetCustomTag(ECustomTag.LOGS_THAT_BURN)
+            .SetSpecialTag(ECustomTag.LOGS_THAT_BURN)
             .AddRecipe(EBlockCraftingRecipeType.WOOD_3, List.of(END_OAK_LOG::get))
             .Register();
 
@@ -207,9 +228,9 @@ public class ModBlocks {
                     return 60;
                 }
             })
-            .SetDropSelf(false)
+            .DontDropSelf()
             .AddRecipe(EBlockCraftingRecipeType.STICK_4, List.of(END_OAK_PLANKS::get))
-            .SetCustomTag(ECustomTag.LEAVES)
+            .SetSpecialTag(ECustomTag.LEAVES)
             .Register();
     
     public static final RegistryObject<Block> END_OAK_FENCE = new BlockDataCreator("end_oak_fence",
@@ -217,7 +238,7 @@ public class ModBlocks {
             .SetTextureType(ETextureType.FENCE)
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
-            .SetCustomTag(ECustomTag.WOODEN_FENCES)
+            .SetSpecialTag(ECustomTag.WOODEN_FENCES)
             .AddRecipe(EBlockCraftingRecipeType.WOODEN_FENCE_3, List.of(END_OAK_PLANKS::get))
             .Register();
 
@@ -242,7 +263,7 @@ public class ModBlocks {
             .SetTextureType(ETextureType.FENCE_GATE)
             .SetTexture(EBlockSide.ALL, "end_oak_planks")
             .SetMineableWith(EMineableWith.AXE)
-            .SetCustomTag(ECustomTag.FENCE_GATES)
+            .SetSpecialTag(ECustomTag.FENCE_GATES)
             .AddRecipe(EBlockCraftingRecipeType.WOODEN_FENCE_GATE_1, List.of(END_OAK_PLANKS::get))
             .Register();
 
@@ -309,32 +330,41 @@ public class ModBlocks {
             .SetTexture(EBlockSide.TOP, "dragon_debris_top")
             .SetMineableWith(EMineableWith.PICKAXE)
             .SetRequireTier(ERequireTier.DIAMOND)
-            .SetCustomTag(ECustomTag.ORE)
+            .SetSpecialTag(ECustomTag.ORE)
             .Register();
     
     public static final RegistryObject<Block> TIN_ORE = new BlockDataCreator("tin_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F), UniformInt.of(0, 2)))
             .SetMineableWith(EMineableWith.PICKAXE)
-            .SetCustomTag(ECustomTag.ORE)
+            .SetSpecialTag(ECustomTag.ORE)
+            .AddSmeltingRecipe(ESmeltingRecipeType.SMELT_ORE_COMMON, () -> getItem(EItemCategory.Ingot, EMaterialType.TIN))
             .Register();
 
     public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = new BlockDataCreator("deepslate_tin_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F), UniformInt.of(0, 2)))
             .SetMineableWith(EMineableWith.PICKAXE)
             .SetRequireTier(ERequireTier.IRON)
-            .SetCustomTag(ECustomTag.ORE)
+            .SetSpecialTag(ECustomTag.ORE)
+            .AddSmeltingRecipe(ESmeltingRecipeType.SMELT_ORE_COMMON, () -> getItem(EItemCategory.Ingot, EMaterialType.TIN))
             .Register();
 
     public static final RegistryObject<Block> PINK_QUARTZ_ORE = new BlockDataCreator("pink_quartz_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F), UniformInt.of(0, 2)))
             .SetMineableWith(EMineableWith.PICKAXE)
-            .SetCustomTag(ECustomTag.ORE)
+            .SetSpecialTag(ECustomTag.ORE)
+            .AddSmeltingRecipe(ESmeltingRecipeType.SMELT_ORE_RARE, ModItems.PINK_QUARTZ::get)
+            .Register();
+
+    public static final RegistryObject<Block> SMOOTH_PINK_QUARTZ_BLOCK = new BlockDataCreator("smooth_pink_quartz_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)))
+            .SetMineableWith(EMineableWith.PICKAXE)
             .Register();
 
     public static final RegistryObject<Block> PINK_QUARTZ_BLOCK = new BlockDataCreator("pink_quartz_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)))
             .SetMineableWith(EMineableWith.PICKAXE)
             .AddRecipe(EBlockCraftingRecipeType.BLOCK_FROM_4_4, List.of(ModItems.PINK_QUARTZ::get), 1)
+            .AddSmeltingRecipe(ESmeltingRecipeType.SMELT_BLOCK, ModBlocks.SMOOTH_PINK_QUARTZ_BLOCK::get)
             .Register();
 
     public static final RegistryObject<Block> PINK_QUARTZ_PILLAR = new BlockDataCreator("pink_quartz_pillar",
@@ -376,13 +406,6 @@ public class ModBlocks {
             .AddRecipe(EBlockCraftingRecipeType.STAIRS_4, List.of(PINK_QUARTZ_BLOCK::get))
             .Register();
 
-    
-    //TODO: add smelting recipe
-    public static final RegistryObject<Block> SMOOTH_PINK_QUARTZ_BLOCK = new BlockDataCreator("smooth_pink_quartz_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.QUARTZ).requiresCorrectToolForDrops().strength(0.8F)))
-            .SetMineableWith(EMineableWith.PICKAXE)
-            .Register();
-
     public static final RegistryObject<Block> SMOOTH_PINK_QUARTZ_SLAB = new BlockDataCreator("smooth_pink_quartz_slab",
             () -> new SlabBlock(BlockBehaviour.Properties.copy(QUARTZ_BLOCK)))
             .SetTextureType(ETextureType.SLAB)
@@ -402,14 +425,16 @@ public class ModBlocks {
     public static final RegistryObject<Block> STANNIN_ORE = new BlockDataCreator("stannin_ore",
             () -> new StanninOreBlock(UniformInt.of(0, 2)))
             .SetMineableWith(EMineableWith.PICKAXE)
-            .SetCustomTag(ECustomTag.ORE)
+            .SetSpecialTag(ECustomTag.ORE)
+            .AddSmeltingRecipe(ESmeltingRecipeType.SMELT_ORE_RARE, () -> getItem(EItemCategory.Ingot, EMaterialType.TIN))
             .Register();
 
     public static final RegistryObject<Block> DEEPSLATE_STANNIN_ORE = new BlockDataCreator("deepslate_stannin_ore",
             () -> new StanninOreBlock(UniformInt.of(0, 2)))
             .SetMineableWith(EMineableWith.PICKAXE)
             .SetRequireTier(ERequireTier.IRON)
-            .SetCustomTag(ECustomTag.ORE)
+            .SetSpecialTag(ECustomTag.ORE)
+            .AddSmeltingRecipe(ESmeltingRecipeType.SMELT_ORE_RARE, () -> getItem(EItemCategory.Ingot, EMaterialType.TIN))
             .Register();
 
     public static final RegistryObject<Block> BETTER_BLAST_FURNACE = new BlockDataCreator("blast_furnace",
@@ -421,9 +446,18 @@ public class ModBlocks {
             () -> new BrakeRail())
             .SetMineableWith(EMineableWith.PICKAXE)
             .SetTextureType(ETextureType.CUSTOM)
-            .SetCustomTag(ECustomTag.RAIL)
+            .SetSpecialTag(ECustomTag.RAIL)
             .AddRecipe(EBlockCraftingRecipeType.RAIL_16, List.of(() -> Items.IRON_INGOT))
             .Register();
+    
+    public static final RegistryObject<Block> CHARGED_SOUL_SAND = new BlockDataCreator("charged_soul_sand",
+            () -> new ChargedSoulSandBlock(BlockBehaviour.Properties.copy(SOUL_SAND)))
+            .SetCustomDrop(() -> SOUL_SAND)
+            .SetMineableWith(EMineableWith.SHOVEL)
+            .SetTextureType(ETextureType.CUBE_ALL)
+            .SetTexture(EBlockSide.ALL, "charged_soul_sand")
+            .SetSpecialTag(ECustomTag.SOUL_FIRE_BASE_BLOCK)
+            .Register(); 
 
     private static ToIntFunction<BlockState> litBlockEmission(int pLightValue) {
         return (p_50763_) -> p_50763_.getValue(BlockStateProperties.LIT) ? pLightValue : 0;

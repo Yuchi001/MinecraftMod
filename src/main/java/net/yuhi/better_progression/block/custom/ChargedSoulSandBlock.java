@@ -5,6 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -20,6 +21,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.InteractionResult;
@@ -31,8 +34,16 @@ import org.jetbrains.annotations.Nullable;
 import static net.yuhi.better_progression.block.entity.ChargedSoulSandBlockEntity.createChargedSoulSandBlockTicker;
 
 public class ChargedSoulSandBlock extends SoulSandBlock implements EntityBlock {
+    public static final IntegerProperty CHARGES = IntegerProperty.create("charges", 0, 5);
+    
     public ChargedSoulSandBlock(Properties pProperties) {
         super(pProperties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(CHARGES, 0));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(CHARGES);
     }
     
     public static boolean isBuildCorrectly(Level pLevel, BlockPos pPos) {
@@ -75,19 +86,33 @@ public class ChargedSoulSandBlock extends SoulSandBlock implements EntityBlock {
     }
     
     public void addCharges(ChargedSoulSandBlockEntity chargedSoulSandBlockEntity, MobEssenceItem essenceItem, ItemStack heldItem, Level pLevel, BlockPos pPos, Player pPlayer) {
+        if (pLevel.isClientSide) {
+            BlockState state = pLevel.getBlockState(pPos);
+            int charges = state.getValue(ChargedSoulSandBlock.CHARGES);
+            System.out.println(charges);
+            pLevel.playSound(pPlayer, pPos, charges + 1 >= ChargedSoulSandBlockEntity.MINIMUM_CHARGES_TO_ACTIVATE ?  SoundEvents.END_PORTAL_SPAWN : SoundEvents.SOUL_SAND_PLACE, SoundSource.BLOCKS, 1.0F, pLevel.getRandom().nextFloat() * 0.1F + 0.9F);
+            return;
+        }
+        
         var wasCharged = chargedSoulSandBlockEntity.addCharges(essenceItem.getStacks());
+
+        BlockState currentState = pLevel.getBlockState(pPos);
+        pLevel.setBlock(pPos, currentState.setValue(ChargedSoulSandBlock.CHARGES, chargedSoulSandBlockEntity.getCharges()), 3);
+        
         heldItem.shrink(1);
-        if (!wasCharged) pLevel.playSound(pPlayer, pPos, SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 1.0F, pLevel.getRandom().nextFloat() * 0.1F + 0.9F);
-        else {
-            activateTotem(pLevel, pPos, pPlayer);
-            pLevel.playSound(pPlayer, pPos, SoundEvents.SOUL_SAND_PLACE, SoundSource.BLOCKS, 1.0F, pLevel.getRandom().nextFloat() * 0.1F + 0.9F);
+        if (wasCharged) activateTotem(pLevel, pPos, pPlayer);
+    }
+
+    @Override
+    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
+        BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+        if (blockEntity instanceof ChargedSoulSandBlockEntity chargedSoulSand) {
+            reduceStacksOverTime(chargedSoulSand, pLevel, pPos);
         }
     }
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (pLevel.isClientSide) return InteractionResult.CONSUME;
-        
         if (pPlayer.getItemInHand(pHand).is(Items.FLINT_AND_STEEL)) return InteractionResult.PASS;
         
         BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
@@ -97,7 +122,7 @@ public class ChargedSoulSandBlock extends SoulSandBlock implements EntityBlock {
             ItemStack heldItem = pPlayer.getMainHandItem();
             if (heldItem.getItem() instanceof MobEssenceItem essenceItem) {
                 var isBuildCorrectly = isBuildCorrectly(pLevel, pPos);
-                chargedSoulSand.setCorrectlyBuilt(isBuildCorrectly);
+                if (!pLevel.isClientSide) chargedSoulSand.setCorrectlyBuilt(isBuildCorrectly);
                 if (isBuildCorrectly) {
                     addCharges(chargedSoulSand, essenceItem, heldItem, pLevel, pPos, pPlayer);
                     return InteractionResult.SUCCESS;
@@ -125,7 +150,30 @@ public class ChargedSoulSandBlock extends SoulSandBlock implements EntityBlock {
     
     @Override
     public float getShadeBrightness(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return 0.6F;
+        BlockState state = pLevel.getBlockState(pPos);
+        int charges = state.getValue(ChargedSoulSandBlock.CHARGES);
+        return 0.6F * charges;
+    }
+
+    public void reduceStacksOverTime(ChargedSoulSandBlockEntity chargedSoulSandBlockEntity, Level pLevel, BlockPos pPos) {
+        if (pLevel.isClientSide()) return;
+
+        int currentStacks = chargedSoulSandBlockEntity.getCharges();
+
+        if (currentStacks <= 0) {
+            pLevel.setBlock(pPos, Blocks.SOUL_SAND.defaultBlockState(), 3);
+            return;
+        }
+
+        int ticksInADay = 24000;
+        int minTicks = 7 * ticksInADay;  // 7 dni
+        int maxTicks = 14 * ticksInADay; // 14 dni
+
+        int randomTickInterval = pLevel.getRandom().nextInt(maxTicks - minTicks + 1) + minTicks;
+
+        if (pLevel.getGameTime() % randomTickInterval == 0) {
+            chargedSoulSandBlockEntity.addCharges(-1);
+        }
     }
 
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {

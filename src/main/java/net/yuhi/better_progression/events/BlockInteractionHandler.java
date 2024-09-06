@@ -31,8 +31,6 @@ public class BlockInteractionHandler {
         BlockPos pos = event.getPos();
         BlockState state = world.getBlockState(pos);
 
-        if (world.isClientSide) return;
-
         if (!state.getBlock().getClass().equals(SoulSandBlock.class)) return;
 
         ItemStack heldItem = player.getItemInHand(event.getHand());
@@ -40,15 +38,11 @@ public class BlockInteractionHandler {
 
         if(!ChargedSoulSandBlock.isBuildCorrectly(world, pos)) return;
 
-        world.setBlock(pos, ModBlocks.CHARGED_SOUL_SAND.get().defaultBlockState(), 3);
-        var entity = world.getBlockEntity(pos);
-        if (!(entity instanceof ChargedSoulSandBlockEntity chargedSoulSandBlockEntity)) return;
-
-        var block = world.getBlockState(pos).getBlock();
-        if (!(block instanceof ChargedSoulSandBlock chargedSoulSandBlock)) return;
-        chargedSoulSandBlock.addCharges(chargedSoulSandBlockEntity, mobEssenceItem, heldItem, world, pos, player);
-        event.setCancellationResult(InteractionResult.SUCCESS);
+        if (world.isClientSide) {
+            world.playSound(player, pos, SoundEvents.SOUL_SAND_BREAK, SoundSource.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.1F + 0.9F);
+            return;
+        }
         
-        world.playSound(player, pos, SoundEvents.SOUL_SAND_BREAK, SoundSource.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.1F + 0.9F);
+        world.setBlock(pos, ModBlocks.CHARGED_SOUL_SAND.get().defaultBlockState(), 3);
     }
 }

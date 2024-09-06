@@ -19,6 +19,7 @@ import net.yuhi.better_progression.attribute.ModAttributes;
 import net.yuhi.better_progression.block.ModBlockEntities;
 import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.block.utils.ModWoodTypes;
+import net.yuhi.better_progression.effect.ModEffects;
 import net.yuhi.better_progression.entity.ModEntityTypes;
 import net.yuhi.better_progression.events.BlockInteractionHandler;
 import net.yuhi.better_progression.events.HeavyItemEventHandler;
@@ -57,6 +58,7 @@ public class BetterProgression
         ModEntityTypes.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
+        ModEffects.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModMenus.register(modEventBus);
         ModRecipes.register(modEventBus);

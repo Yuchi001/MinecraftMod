@@ -29,13 +29,13 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ThrownWeapon extends AbstractArrow {
-    private static final EntityDataAccessor<Byte> ID_LOYALTY = SynchedEntityData.defineId(ThrownWeapon.class, EntityDataSerializers.BYTE);
-    private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ThrownWeapon.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<ItemStack> ID_ITEM = SynchedEntityData.defineId(ThrownWeapon.class, EntityDataSerializers.ITEM_STACK);
-    private static final EntityDataAccessor<Integer> ID_STARTING_ANGLE = SynchedEntityData.defineId(ThrownWeapon.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> ID_SHOULD_ROTATE = SynchedEntityData.defineId(ThrownWeapon.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Float> ID_SCALE = SynchedEntityData.defineId(ThrownWeapon.class, EntityDataSerializers.FLOAT);
+public class ThrownWeaponEntity extends AbstractArrow {
+    private static final EntityDataAccessor<Byte> ID_LOYALTY = SynchedEntityData.defineId(ThrownWeaponEntity.class, EntityDataSerializers.BYTE);
+    private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ThrownWeaponEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<ItemStack> ID_ITEM = SynchedEntityData.defineId(ThrownWeaponEntity.class, EntityDataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<Integer> ID_STARTING_ANGLE = SynchedEntityData.defineId(ThrownWeaponEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> ID_SHOULD_ROTATE = SynchedEntityData.defineId(ThrownWeaponEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Float> ID_SCALE = SynchedEntityData.defineId(ThrownWeaponEntity.class, EntityDataSerializers.FLOAT);
     
     private float scale;
     private float clientSideRotation = 0;
@@ -48,12 +48,12 @@ public class ThrownWeapon extends AbstractArrow {
     private EMaterialType materialType;
     private ItemStack thrownItem = new ItemStack(ItemsUtilsMethods.getItem(EItemCategory.Dagger, EMaterialType.DIAMOND));
     
-    public ThrownWeapon(EntityType<? extends ThrownWeapon> pEntityType, Level pLevel) {
+    public ThrownWeaponEntity(EntityType<? extends ThrownWeaponEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
     
 
-    public ThrownWeapon(Level pLevel, LivingEntity pShooter, ItemStack pStack, EMaterialType pMaterialType, boolean shouldRotate, float scale) {
+    public ThrownWeaponEntity(Level pLevel, LivingEntity pShooter, ItemStack pStack, EMaterialType pMaterialType, boolean shouldRotate, float scale) {
         super(ModEntityTypes.THROWN_WEAPON.get(), pShooter, pLevel);
         this.thrownItem = pStack.copy();
         this.shouldRotate = shouldRotate;

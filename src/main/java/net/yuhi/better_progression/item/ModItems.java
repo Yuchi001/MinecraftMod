@@ -37,6 +37,7 @@ public class ModItems {
     public static final RegistryObject<Item> DRAGON_REMAINS = register("dragon_remains", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PURE_DIAMOND = register("pure_diamond", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PINK_QUARTZ = register("pink_quartz", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_PINK_QUARTZ = register("polished_pink_quartz", () -> new PolishedPinkQuartz(new Item.Properties()));
     public static final RegistryObject<Item> END_OAK_SIGN = register("end_oak_sign", () -> new SignItem(new Item.Properties().stacksTo(16),
             ModBlocks.END_OAK_SIGN.get(), ModBlocks.END_OAK_WALL_SIGN.get()));
     public static final RegistryObject<Item> BEAR_MEAT = register("bear_meat", () -> new Item(new Item.Properties().food(ModFoods.BEAR_MEAT)));

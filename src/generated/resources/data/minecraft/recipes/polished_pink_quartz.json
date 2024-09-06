@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "better_progression:pink_quartz"
+    },
+    {
+      "item": "better_progression:pink_quartz"
+    }
+  ],
+  "result": {
+    "item": "better_progression:polished_pink_quartz"
+  }
+}

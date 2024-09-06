@@ -6,6 +6,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -93,6 +94,17 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, tinIngot, 9)
                 .requires(ModBlocks.TIN_BLOCK.get(), 1)
                 .unlockedBy(getHasName(tinIngot), has(tinIngot)).save(pWriter, "tin_ingot_from_block");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.POLISHED_PINK_QUARTZ.get(), 1)
+                .requires(ModItems.PINK_QUARTZ.get(), 2)
+                .unlockedBy(getHasName(ModItems.PINK_QUARTZ.get()), has(tinIngot)).save(pWriter, "polished_pink_quartz");
+        
+        SingleItemRecipeBuilder.stonecutting(
+                Ingredient.of(ModBlocks.PINK_QUARTZ_BLOCK.get()),
+                RecipeCategory.COMBAT,
+                ModItems.POLISHED_PINK_QUARTZ.get(),
+                4
+        ).unlockedBy(getHasName(ModItems.PINK_QUARTZ.get()), has(ModItems.PINK_QUARTZ.get())).save(pWriter, "polished_pink_quartz_from_stonecutting");
         
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, enderiteIngot)
                 .requires(ModItems.DRAGON_REMAINS.get(), 4)
@@ -168,11 +180,11 @@ public class ModRecipeProvider extends RecipeProvider {
 
             for (var tag : itemInfo.tags) {
                 if (tag == ModTags.Items.COPPER_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> getItem(EItemCategory.Nugget, EMaterialType.COPPER));
-                if (tag == ModTags.Items.CUSTOM_IRON_TOOLS) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> Items.IRON_NUGGET);
-                if (tag == ModTags.Items.BRONZE_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> getItem(EItemCategory.Nugget, EMaterialType.BRONZE));
-                if (tag == ModTags.Items.STEEL_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> getItem(EItemCategory.Nugget, EMaterialType.STEEL));
-                if (tag == ModTags.Items.NETHERITE_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> Items.NETHERITE_SCRAP);
-                if (tag == ModTags.Items.ENDERITE_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, ModItems.DRAGON_REMAINS::get);
+                else if (tag == ModTags.Items.CUSTOM_IRON_TOOLS) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> Items.IRON_NUGGET);
+                else if (tag == ModTags.Items.BRONZE_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> getItem(EItemCategory.Nugget, EMaterialType.BRONZE));
+                else if (tag == ModTags.Items.STEEL_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> getItem(EItemCategory.Nugget, EMaterialType.STEEL));
+                else if (tag == ModTags.Items.NETHERITE_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> Items.NETHERITE_SCRAP);
+                else if (tag == ModTags.Items.ENDERITE_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, ModItems.DRAGON_REMAINS::get);
             }
         }
 

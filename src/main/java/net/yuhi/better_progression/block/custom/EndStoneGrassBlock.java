@@ -49,19 +49,18 @@ public class EndStoneGrassBlock extends Block implements BonemealableBlock {
     @Override
     public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
         if (!canBeGrass(pState, pLevel, pPos)) {
-            if (!pLevel.isAreaLoaded(pPos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
+            if (!pLevel.isAreaLoaded(pPos, 1)) return; 
             pLevel.setBlockAndUpdate(pPos, Blocks.END_STONE.defaultBlockState());
             return;
         }
 
-        if (!pLevel.isAreaLoaded(pPos, 1)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
+        if (!pLevel.isAreaLoaded(pPos, 1)) return;
 
-        // Collect blocks within range that are END_STONE and have air above them
         List<BlockPos> endStoneBlocks = new ArrayList<>();
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
                 for (int z = -1; z <= 1; z++) {
-                    if (x == 0 && y == 0 && z == 0) continue; // Skip the center block
+                    if (x == 0 && y == 0 && z == 0) continue; 
                     BlockPos neighborPos = pPos.offset(x, y, z);
                     if (pLevel.getBlockState(neighborPos).is(Blocks.END_STONE) && pLevel.isEmptyBlock(neighborPos.above())) {
                         endStoneBlocks.add(neighborPos);
@@ -75,10 +74,8 @@ public class EndStoneGrassBlock extends Block implements BonemealableBlock {
 
             Collections.shuffle(endStoneBlocks, random);
 
-            // Determine how many blocks to convert, between 1 and 3 or up to the size of the list
             int numberOfBlocksToConvert = pRandom.nextInt(Math.min(3, endStoneBlocks.size())) + 1;
 
-            // Convert the selected blocks
             for (int i = 0; i < numberOfBlocksToConvert; i++) {
                 BlockPos posToConvert = endStoneBlocks.get(i);
                 pLevel.setBlockAndUpdate(posToConvert, ModBlocks.END_STONE_GRASS_BLOCK.get().defaultBlockState());

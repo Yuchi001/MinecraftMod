@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 public class ChargedSoulSandBlockEntity extends BlockEntity {
-    private static final int MINIMUM_CHARGES_TO_ACTIVATE = 5;
+    public static final int MINIMUM_CHARGES_TO_ACTIVATE = 5;
     
     private static final String CHARGES_KEY = "charges";
     private static final String IS_CORRECTLY_BUILT_KEY = "isCorrectlyBuilt";
@@ -57,7 +57,6 @@ public class ChargedSoulSandBlockEntity extends BlockEntity {
     public boolean addCharges(int charges) {
         this.charges += charges;
         this.isCharged = this.charges >= MINIMUM_CHARGES_TO_ACTIVATE;
-        if (this.isCharged) this.charges -= MINIMUM_CHARGES_TO_ACTIVATE;
         setChanged();
         return this.isCharged;
     }

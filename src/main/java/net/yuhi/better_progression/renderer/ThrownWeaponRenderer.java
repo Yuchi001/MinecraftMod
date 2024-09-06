@@ -13,11 +13,11 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.entity.custom.ThrownWeapon;
+import net.yuhi.better_progression.entity.custom.ThrownWeaponEntity;
 import org.joml.Quaternionf;
 
 @OnlyIn(Dist.CLIENT)
-public class ThrownWeaponRenderer extends EntityRenderer<ThrownWeapon> {
+public class ThrownWeaponRenderer extends EntityRenderer<ThrownWeaponEntity> {
     private final ItemRenderer itemRenderer;
     private final ItemModelShaper itemModelShaper;
     
@@ -30,12 +30,12 @@ public class ThrownWeaponRenderer extends EntityRenderer<ThrownWeapon> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ThrownWeapon pEntity) {
+    public ResourceLocation getTextureLocation(ThrownWeaponEntity pEntity) {
         return new ResourceLocation(BetterProgression.MOD_ID, "textures/item/" + pEntity.getMaterialType() + "_dagger.png");
     }
 
     @Override
-    public void render(ThrownWeapon pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
+    public void render(ThrownWeaponEntity pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
         var pItemStack = pEntity.getItem();
         if (pItemStack.isEmpty()) return;
         

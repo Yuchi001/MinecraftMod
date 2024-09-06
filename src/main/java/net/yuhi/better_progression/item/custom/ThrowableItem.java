@@ -13,7 +13,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.yuhi.better_progression.entity.custom.ThrownWeapon;
+import net.yuhi.better_progression.entity.custom.ThrownWeaponEntity;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 
 
@@ -72,7 +72,7 @@ public abstract class ThrowableItem extends SwordItem implements Vanishable {
                 p_43388_.broadcastBreakEvent(pEntityLiving.getUsedItemHand());
             });
             
-            var thrownDagger = new ThrownWeapon(pLevel, player, pStack, EMaterialType.GetMaterialType(pStack), shouldRotate, scale);
+            var thrownDagger = new ThrownWeaponEntity(pLevel, player, pStack, EMaterialType.GetMaterialType(pStack), shouldRotate, scale);
             thrownDagger.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F, 1.0F);
             if (player.getAbilities().instabuild) {
                 thrownDagger.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;

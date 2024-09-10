@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.block.ModBlocks;
+import net.yuhi.better_progression.item.custom.MobEssenceItem;
 import net.yuhi.better_progression.recipe.utils.ESmeltingRecipeType;
 import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.item.enums.EItemCategory;
@@ -177,10 +178,12 @@ public class ModRecipeProvider extends RecipeProvider {
         
         for (var itemInfo : ModItems.REGISTERED_ITEMS) {
             itemInfo.SaveRecipes(pWriter);
+            if(itemInfo.item.get() instanceof MobEssenceItem item) item.SaveRecipe(pWriter); 
 
             for (var tag : itemInfo.tags) {
                 if (tag == ModTags.Items.COPPER_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> getItem(EItemCategory.Nugget, EMaterialType.COPPER));
                 else if (tag == ModTags.Items.CUSTOM_IRON_TOOLS) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> Items.IRON_NUGGET);
+                else if (tag == ModTags.Items.CUSTOM_GOLD_TOOLS) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> Items.GOLD_NUGGET);
                 else if (tag == ModTags.Items.BRONZE_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> getItem(EItemCategory.Nugget, EMaterialType.BRONZE));
                 else if (tag == ModTags.Items.STEEL_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> getItem(EItemCategory.Nugget, EMaterialType.STEEL));
                 else if (tag == ModTags.Items.NETHERITE_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> Items.NETHERITE_SCRAP);
@@ -188,31 +191,40 @@ public class ModRecipeProvider extends RecipeProvider {
             }
         }
 
-        var ironTools = List.of(Items.IRON_SWORD,
+        var vanillaTools = List.of(Items.IRON_SWORD,
                 Items.IRON_AXE, Items.IRON_PICKAXE,
                 Items.IRON_HOE, Items.IRON_SHOVEL,
                 Items.IRON_HELMET, Items.IRON_CHESTPLATE, Items.IRON_LEGGINGS, Items.IRON_BOOTS,
-                Items.CHAINMAIL_HELMET, Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_BOOTS);
-        for (var item: ironTools) {
+                Items.CHAINMAIL_HELMET, Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_BOOTS,
+                Items.GOLDEN_SWORD,
+                Items.GOLDEN_AXE, Items.GOLDEN_PICKAXE,
+                Items.GOLDEN_HOE, Items.GOLDEN_SHOVEL,
+                Items.GOLDEN_HELMET, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_LEGGINGS, Items.GOLDEN_BOOTS);
+        for (var item: vanillaTools) {
             ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, () -> item, () -> Items.IRON_NUGGET);
         }
+        
+        ESmeltingRecipeType.SMELT_FOOD.SaveRecipes(pWriter, () -> Items.WHEAT, () -> Items.BREAD);
 
         ESmeltingRecipeType.SMELT_ORE_COMMON.SaveRecipes(pWriter, () -> getItem(EItemCategory.RawMaterial, EMaterialType.TIN), () -> getItem(EItemCategory.Ingot, EMaterialType.TIN));
 
-        ETieredItemCraftingCategory.CHAINMAIL_BOOTS.SaveShapedRecipe(pWriter, EMaterialType.IRON);
-        ETieredItemCraftingCategory.CHAINMAIL_LEGGINGS.SaveShapedRecipe(pWriter, EMaterialType.IRON);
-        ETieredItemCraftingCategory.CHAINMAIL_CHESTPLATE.SaveShapedRecipe(pWriter, EMaterialType.IRON);
-        ETieredItemCraftingCategory.CHAINMAIL_HELMET.SaveShapedRecipe(pWriter, EMaterialType.IRON);
+        var vanilla_materials = List.of(EMaterialType.GOLD, EMaterialType.IRON);
+        for (var material: vanilla_materials) {
+            ETieredItemCraftingCategory.CHAINMAIL_BOOTS.SaveShapedRecipe(pWriter, material);
+            ETieredItemCraftingCategory.CHAINMAIL_LEGGINGS.SaveShapedRecipe(pWriter, material);
+            ETieredItemCraftingCategory.CHAINMAIL_CHESTPLATE.SaveShapedRecipe(pWriter, material);
+            ETieredItemCraftingCategory.CHAINMAIL_HELMET.SaveShapedRecipe(pWriter, material);
 
-        ETieredItemCraftingCategory.BOOTS.SaveShapedRecipe(pWriter, EMaterialType.IRON);
-        ETieredItemCraftingCategory.LEGGINGS.SaveShapedRecipe(pWriter, EMaterialType.IRON);
-        ETieredItemCraftingCategory.CHESTPLATE.SaveShapedRecipe(pWriter, EMaterialType.IRON);
-        ETieredItemCraftingCategory.HELMET.SaveShapedRecipe(pWriter, EMaterialType.IRON);
-        
-        ETieredItemCraftingCategory.SWORD.SaveShapedRecipe(pWriter, EMaterialType.IRON);
-        ETieredItemCraftingCategory.AXE.SaveShapedRecipe(pWriter, EMaterialType.IRON);
-        ETieredItemCraftingCategory.PICKAXE.SaveShapedRecipe(pWriter, EMaterialType.IRON);
-        ETieredItemCraftingCategory.SHOVEL.SaveShapedRecipe(pWriter, EMaterialType.IRON);
-        ETieredItemCraftingCategory.HOE.SaveShapedRecipe(pWriter, EMaterialType.IRON);
+            ETieredItemCraftingCategory.BOOTS.SaveShapedRecipe(pWriter, material);
+            ETieredItemCraftingCategory.LEGGINGS.SaveShapedRecipe(pWriter, material);
+            ETieredItemCraftingCategory.CHESTPLATE.SaveShapedRecipe(pWriter, material);
+            ETieredItemCraftingCategory.HELMET.SaveShapedRecipe(pWriter, material);
+
+            ETieredItemCraftingCategory.SWORD.SaveShapedRecipe(pWriter, material);
+            ETieredItemCraftingCategory.AXE.SaveShapedRecipe(pWriter, material);
+            ETieredItemCraftingCategory.PICKAXE.SaveShapedRecipe(pWriter, material);
+            ETieredItemCraftingCategory.SHOVEL.SaveShapedRecipe(pWriter, material);
+            ETieredItemCraftingCategory.HOE.SaveShapedRecipe(pWriter, material);
+        }
     }
 }

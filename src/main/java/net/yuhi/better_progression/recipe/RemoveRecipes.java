@@ -35,6 +35,7 @@ public class RemoveRecipes {
                 EMaterialType.IRON,
                 EMaterialType.STONE,
                 EMaterialType.WOOD,
+                EMaterialType.GOLD,
                 EMaterialType.DIAMOND
         };
         
@@ -67,12 +68,23 @@ public class RemoveRecipes {
             recipesToRemove.add(new ResourceLocation("minecraft", itemName + "_from_smelting"));
             recipesToRemove.add(new ResourceLocation("minecraft", itemName + "_from_blasting"));
         }
+
+        String[] goldItems = {
+                "golden_pickaxe", "golden_axe", "golden_shovel", "golden_hoe", "golden_sword",
+                "golden_helmet", "golden_chestplate", "golden_leggings", "golden_boots"
+        };
+
+        for (String itemName : goldItems) {
+            recipesToRemove.add(new ResourceLocation("minecraft", itemName + "_from_smelting"));
+            recipesToRemove.add(new ResourceLocation("minecraft", itemName + "_from_blasting"));
+        }
         
         recipesToRemove.add(new ResourceLocation("minecraft", "rail"));
         recipesToRemove.add(new ResourceLocation("minecraft", "tnt"));
         recipesToRemove.add(new ResourceLocation("minecraft", "powered_rail"));
         recipesToRemove.add(new ResourceLocation("minecraft", "detector_rail"));
         recipesToRemove.add(new ResourceLocation("minecraft", "activator_rail"));
+        recipesToRemove.add(new ResourceLocation("minecraft", "bread"));
 
         var recipes = recipeManager.getRecipes();
         for (ResourceLocation recipeId : recipesToRemove) {

@@ -4,7 +4,6 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -21,9 +20,7 @@ import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.block.utils.ModWoodTypes;
 import net.yuhi.better_progression.effect.ModEffects;
 import net.yuhi.better_progression.entity.ModEntityTypes;
-import net.yuhi.better_progression.events.BlockInteractionHandler;
-import net.yuhi.better_progression.events.HeavyItemEventHandler;
-import net.yuhi.better_progression.events.VillagerTradesEventHandler;
+import net.yuhi.better_progression.events.*;
 import net.yuhi.better_progression.item.ModCreativeModTabs;
 import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.menu.ModMenus;
@@ -35,13 +32,10 @@ import net.yuhi.better_progression.worldgen.feature.ModFeatures;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Mixins;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(BetterProgression.MOD_ID)
 public class BetterProgression
 {
-    // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "better_progression";
-    // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
     
 
@@ -74,6 +68,10 @@ public class BetterProgression
         MinecraftForge.EVENT_BUS.register(BlockInteractionHandler.class);
         MinecraftForge.EVENT_BUS.register(RemoveRecipes.class);
         MinecraftForge.EVENT_BUS.register(ModEntityRenders.class);
+        MinecraftForge.EVENT_BUS.register(ArmorChangeEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(PlayerTickHandler.class);
+        MinecraftForge.EVENT_BUS.register(HungerBarRenderHandler.class);
+        MinecraftForge.EVENT_BUS.register(PlayerSleepHandler.class);
         
         modEventBus.addListener(this::addCreative);
     }

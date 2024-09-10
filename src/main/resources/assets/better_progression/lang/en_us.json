@@ -8,6 +8,17 @@
   "item.minecraft.chainmail_helmet": "Iron Chainmail Helmet",
   "item.better_progression.iron_plate": "Iron Plate",
   "item.better_progression.iron_chainmail": "Iron Chainmail",
+
+  "item.better_progression.golden_chainmail_boots": "Golden Chainmail Boots",
+  "item.better_progression.golden_chainmail_chestplate": "Golden Chainmail Chestplate",
+  "item.better_progression.golden_chainmail_leggings": "Golden Chainmail Leggings",
+  "item.better_progression.golden_chainmail_helmet": "Golden Chainmail Helmet",
+  "item.better_progression.golden_plate": "Golden Plate",
+  "item.better_progression.golden_chainmail": "Golden Chainmail",
+  "item.better_progression.golden_machete": "Golden Machete",
+  "item.better_progression.golden_knife": "Golden Knife",
+  "item.better_progression.golden_battleaxe": "Golden Battleaxe",
+  "item.better_progression.golden_longsword": "Golden Longsword",
   
   "item.better_progression.hilt": "Hilt",
   "item.better_progression.pure_diamond": "Pure Diamond",
@@ -100,6 +111,7 @@
   "item.better_progression.slime_essence": "Slime Essence",
   "item.better_progression.enderman_essence": "Enderman Essence",
   "item.better_progression.creeper_essence": "Creeper Essence",
+  "item.better_progression.blaze_essence": "Blaze Essence",
   "item.better_progression.phantom_essence": "Phantom Essence",
   
   "item.better_progression.copper_sword": "Copper Sword",

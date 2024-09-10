@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "better_progression:golden_chainmail"
+    },
+    "*": {
+      "item": "minecraft:leather_leggings"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#*#",
+    " # "
+  ],
+  "result": {
+    "item": "minecraft:chainmail_leggings"
+  },
+  "show_notification": true
+}

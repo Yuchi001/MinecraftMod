@@ -17,6 +17,10 @@ import java.util.function.Supplier;
 import static net.yuhi.better_progression.recipe.utils.EBlockCraftingRecipeType.*;
 
 public enum ESmeltingRecipeType {
+    SMELT_FOOD(List.of(
+            new RecipeBuilderPair("_from_smelting_bp", (Supplier<ItemLike> input, Supplier<ItemLike> output) -> SimpleCookingRecipeBuilder.generic(Ingredient.of(input.get()), RecipeCategory.FOOD, output.get(), 0.35f, 200, RecipeSerializer.SMELTING_RECIPE).group(GetGroup(output)).unlockedBy(getHasName(input.get()), has(input.get()))),
+            new RecipeBuilderPair("_from_smoking_bp", (Supplier<ItemLike> input, Supplier<ItemLike> output) -> SimpleCookingRecipeBuilder.generic(Ingredient.of(input.get()), RecipeCategory.FOOD, output.get(), 0.35f, 100, RecipeSerializer.SMOKING_RECIPE).group(GetGroup(output)).unlockedBy(getHasName(input.get()), has(input.get())))
+    )),
     SMELT_BLOCK("_from_smelting_bp", (Supplier<ItemLike> input, Supplier<ItemLike> output) -> SimpleCookingRecipeBuilder.generic(Ingredient.of(input.get()), RecipeCategory.BUILDING_BLOCKS, output.get(), 0.1f, 200, RecipeSerializer.SMELTING_RECIPE).group(GetGroup(output)).unlockedBy(getHasName(input.get()), has(input.get()))),
     SMELT_ORE_COMMON(List.of(
             new RecipeBuilderPair("_from_smelting_bp", (Supplier<ItemLike> input, Supplier<ItemLike> output) -> SimpleCookingRecipeBuilder.generic(Ingredient.of(input.get()), RecipeCategory.MISC, output.get(), 0.7f, 200, RecipeSerializer.SMELTING_RECIPE).group(GetGroup(output)).unlockedBy(getHasName(input.get()), has(input.get()))),

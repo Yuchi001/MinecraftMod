@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "better_progression:golden_plate"
+    },
+    "*": {
+      "item": "minecraft:leather_boots"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#*#",
+    " # "
+  ],
+  "result": {
+    "item": "minecraft:golden_boots"
+  },
+  "show_notification": true
+}

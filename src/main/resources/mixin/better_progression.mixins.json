@@ -15,6 +15,7 @@
     "accessor.ArmorMaterialsAccessor",
     "accessor.BlockAccessor",
     "accessor.DiggerItemAccessor",
+    "accessor.ItemAccessor",
     "accessor.ItemCombinerMenuAccessor",
     "accessor.LegacySmithingMenuAccessor",
     "accessor.SwordItemAccessor",
@@ -23,11 +24,15 @@
     "items.DiggerItemMixin",
     "items.HoeItemMixin",
     "items.ItemMixin",
+    "items.LivingEntityMixin",
+    "items.MixinFoodStats",
     "items.PickAxeItemMixin",
     "items.ShovelItemMixin",
     "items.SwordItemMixin"
   ],
-  "client": [],
+  "client": [
+    "GuiMixin"
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1

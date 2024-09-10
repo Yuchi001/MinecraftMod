@@ -29,7 +29,14 @@ public class ModItems {
     
     public static final List<TierItemsCreator.ItemInfo> REGISTERED_ITEMS = new ArrayList<>();
 
-    public static final RegistryObject<Item> ZOMBIE_ESSENCE = register("zombie_essence", () -> new MobEssenceItem(1, new Item.Properties()));
+    public static final RegistryObject<Item> ZOMBIE_ESSENCE = register("zombie_essence", () -> new MobEssenceItem("zombie", 1, () -> Items.ROTTEN_FLESH, new Item.Properties()));
+    public static final RegistryObject<Item> SKELETON_ESSENCE = register("skeleton_essence", () -> new MobEssenceItem("skeleton", 2, () -> Items.BONE, new Item.Properties()));
+    public static final RegistryObject<Item> SLIME_ESSENCE = register("slime_essence", () -> new MobEssenceItem("slime", 1, () -> Items.SLIME_BALL, new Item.Properties()));
+    public static final RegistryObject<Item> ENDERMAN_ESSENCE = register("enderman_essence", () -> new MobEssenceItem("enderman", 5, () -> Items.ENDER_EYE, new Item.Properties()));
+    public static final RegistryObject<Item> BLAZE_ESSENCE = register("blaze_essence", () -> new MobEssenceItem("blaze", 4, () -> Items.BLAZE_ROD, new Item.Properties()));
+    public static final RegistryObject<Item> CREEPER_ESSENCE = register("creeper_essence", () -> new MobEssenceItem("creeper", 2, () -> Items.GUNPOWDER, new Item.Properties()));
+    public static final RegistryObject<Item> SPIDER_ESSENCE = register("spider_essence", () -> new MobEssenceItem("spider", 3, () -> Items.SPIDER_EYE, new Item.Properties()));
+    public static final RegistryObject<Item> PHANTOM_ESSENCE = register("phantom_essence", () -> new MobEssenceItem("phantom", 4, () -> Items.PHANTOM_MEMBRANE, new Item.Properties()));
     public static final RegistryObject<Item> END_OAK_BOAT = register("end_oak_boat", () -> new ModBoatItem(false, ModBoatEntity.Type.END_OAK, new Item.Properties()));
     public static final RegistryObject<Item> END_OAK_CHEST_BOAT = register("end_oak_chest_boat", () -> new ModBoatItem(true, ModBoatEntity.Type.END_OAK, new Item.Properties()));
     public static final RegistryObject<Item> TIN_ITEM_INTERFACE = ITEMS.register("tin_item_interface", TinnedItemRecipeInterface::new);
@@ -129,6 +136,16 @@ public class ModItems {
         ironSupplier.createBigToolItem(EItemCategory.LongSword, 4.0f, -2.9F, 1.5D);
         ironSupplier.createBasicItem(EItemCategory.Plate);
         ironSupplier.createBasicItem(EItemCategory.Chainmail);
+
+        var goldSupplier = new TierItemsCreator("gold_ingot", EMaterialType.GOLD, Tiers.GOLD)
+                .SetHasDefaultBasis()
+                .AddTag(ItemsUtilsMethods.getToolArmorCategories(true), ModTags.Items.CUSTOM_GOLD_TOOLS);
+        goldSupplier.createToolItem(EItemCategory.Machete, 1.0F, -1.4F);
+        goldSupplier.createBigToolItem(EItemCategory.BattleAxe, 7.0f, -3.6F, 1.5D);
+        goldSupplier.createBigToolItem(EItemCategory.LongSword, 4.0f, -2.9F, 1.5D);
+        goldSupplier.createBasicItem(EItemCategory.Plate);
+        goldSupplier.createBasicItem(EItemCategory.Chainmail);
+        goldSupplier.createChainmailArmorSet();
         
         var tinSupplier = new TierItemsCreator(EMaterialType.TIN);
         tinSupplier.createBasicItem(EItemCategory.Ingot);

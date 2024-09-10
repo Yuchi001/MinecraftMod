@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "better_progression:hilt"
+    },
+    "*": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "  *",
+    " * ",
+    "#  "
+  ],
+  "result": {
+    "item": "better_progression:golden_machete"
+  },
+  "show_notification": true
+}

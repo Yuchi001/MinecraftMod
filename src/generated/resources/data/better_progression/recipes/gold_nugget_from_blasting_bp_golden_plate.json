@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 2.0,
+  "group": "gold_nugget",
+  "ingredient": {
+    "item": "better_progression:golden_plate"
+  },
+  "result": "minecraft:gold_nugget"
+}

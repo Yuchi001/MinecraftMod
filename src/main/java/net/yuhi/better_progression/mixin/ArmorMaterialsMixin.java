@@ -55,6 +55,17 @@ public class ArmorMaterialsMixin implements BetterArmorMaterial {
                 
                 this.betterProgression$lifeMod = new int[]{ 2, 4, 3, 1 };
             }
+            case "gold" -> {
+                pProtectionFunctionForType.put(ArmorItem.Type.HELMET, 3);
+                pProtectionFunctionForType.put(ArmorItem.Type.CHESTPLATE, 8);
+                pProtectionFunctionForType.put(ArmorItem.Type.LEGGINGS, 6);
+                pProtectionFunctionForType.put(ArmorItem.Type.BOOTS, 3);
+
+                accessor.setToughness(2.0f);
+                accessor.setKnockbackResistance(0.3f);
+
+                this.betterProgression$lifeMod = new int[]{ 3, 5, 4, 2 };
+            }
         }
     }
 

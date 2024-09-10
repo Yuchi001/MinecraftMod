@@ -15,6 +15,13 @@ import java.util.function.Supplier;
 import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
 public enum EModArmorMaterial implements ArmorMaterial, StringRepresentable, BetterArmorMaterial {
+    GOLDEN_CHAINMAIL("golden_chainmail",
+            7,
+            new int[]{ 3, 4, 4, 3 },
+            25, SoundEvents.ARMOR_EQUIP_CHAIN,
+            0,
+            0, () -> Ingredient.of(Items.GOLD_INGOT),
+            new int[]{ 2, 3, 3, 2 }),
     NETHER_BRONZE("nether_bronze",
             22,
             new int[]{ 2, 6, 4, 2 },

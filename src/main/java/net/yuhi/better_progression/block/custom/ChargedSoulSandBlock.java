@@ -89,8 +89,7 @@ public class ChargedSoulSandBlock extends SoulSandBlock implements EntityBlock {
         if (pLevel.isClientSide) {
             BlockState state = pLevel.getBlockState(pPos);
             int charges = state.getValue(ChargedSoulSandBlock.CHARGES);
-            System.out.println(charges);
-            pLevel.playSound(pPlayer, pPos, charges + 1 >= ChargedSoulSandBlockEntity.MINIMUM_CHARGES_TO_ACTIVATE ?  SoundEvents.END_PORTAL_SPAWN : SoundEvents.SOUL_SAND_PLACE, SoundSource.BLOCKS, 1.0F, pLevel.getRandom().nextFloat() * 0.1F + 0.9F);
+            pLevel.playSound(pPlayer, pPos, charges + essenceItem.getStacks() >= ChargedSoulSandBlockEntity.MINIMUM_CHARGES_TO_ACTIVATE ?  SoundEvents.END_PORTAL_SPAWN : SoundEvents.SOUL_SAND_PLACE, SoundSource.BLOCKS, 1.0F, pLevel.getRandom().nextFloat() * 0.1F + 0.9F);
             return;
         }
         
@@ -113,11 +112,12 @@ public class ChargedSoulSandBlock extends SoulSandBlock implements EntityBlock {
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (pPlayer.getItemInHand(pHand).is(Items.FLINT_AND_STEEL)) return InteractionResult.PASS;
+        if (pPlayer.getItemInHand(pHand).is(Items.FLINT_AND_STEEL)) return InteractionResult.FAIL;
         
         BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
         if (blockEntity instanceof ChargedSoulSandBlockEntity chargedSoulSand) {
-            if (chargedSoulSand.isActive()) return InteractionResult.PASS;
+            System.out.println(chargedSoulSand.isActive());
+            if (chargedSoulSand.isActive()) return InteractionResult.FAIL;
             
             ItemStack heldItem = pPlayer.getMainHandItem();
             if (heldItem.getItem() instanceof MobEssenceItem essenceItem) {
@@ -129,7 +129,7 @@ public class ChargedSoulSandBlock extends SoulSandBlock implements EntityBlock {
                 }
             }
         }
-        return InteractionResult.PASS;
+        return InteractionResult.FAIL;
     }
 
     public int countGoldBlocksInRange(Level level, BlockPos center, int radius) {

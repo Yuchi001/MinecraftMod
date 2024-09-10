@@ -13,6 +13,7 @@ import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -296,6 +297,7 @@ public enum ETieredItemCraftingCategory {
     private static Item GetBase(EMaterialType materialType) {
         return switch (materialType) {
             case IRON -> Items.IRON_INGOT;
+            case GOLD -> Items.GOLD_INGOT;
             case COPPER -> Items.COPPER_INGOT;
             case OBSIDIAN -> Items.OBSIDIAN;
             case DIAMOND -> Items.DIAMOND;
@@ -310,31 +312,34 @@ public enum ETieredItemCraftingCategory {
     }
     
     private static Item GetTool(EItemCategory itemCategory, EMaterialType materialType) {
-        if(materialType != EMaterialType.IRON) return ItemsUtilsMethods.getItem(itemCategory, materialType);
+        if(!List.of(EMaterialType.GOLD, EMaterialType.IRON).contains(materialType)) 
+            return ItemsUtilsMethods.getItem(itemCategory, materialType);
         
         return switch (itemCategory) {
-            case Axe -> Items.IRON_AXE;
-            case Shovel -> Items.IRON_SHOVEL;
-            case PickAxe -> Items.IRON_PICKAXE;
-            case Hoe -> Items.IRON_HOE;
-            case Sword -> Items.IRON_SWORD;
+            case Axe -> materialType == EMaterialType.IRON ? Items.IRON_AXE : Items.GOLDEN_AXE;
+            case Shovel -> materialType == EMaterialType.IRON ? Items.IRON_SHOVEL : Items.GOLDEN_SHOVEL;
+            case PickAxe -> materialType == EMaterialType.IRON ? Items.IRON_PICKAXE : Items.GOLDEN_PICKAXE;
+            case Hoe -> materialType == EMaterialType.IRON ? Items.IRON_HOE : Items.GOLDEN_HOE;
+            case Sword -> materialType == EMaterialType.IRON ? Items.IRON_SWORD : Items.GOLDEN_SWORD;
             default -> ItemsUtilsMethods.getItem(itemCategory, materialType);
         };
     }
 
     private static Item GetNugget(EMaterialType materialType) {
-        if(materialType != EMaterialType.IRON) return ItemsUtilsMethods.getItem(EItemCategory.Nugget, materialType);
-        return Items.IRON_NUGGET;
+        if(!List.of(EMaterialType.GOLD, EMaterialType.IRON).contains(materialType)) 
+            return ItemsUtilsMethods.getItem(EItemCategory.Nugget, materialType);
+        return materialType == EMaterialType.IRON ? Items.IRON_NUGGET : Items.GOLD_NUGGET;
     }
 
     private static Item GetArmor(EItemCategory itemCategory, EMaterialType materialType) {
-        if(materialType != EMaterialType.IRON) return ItemsUtilsMethods.getItem(itemCategory, materialType);
+        if(!List.of(EMaterialType.GOLD, EMaterialType.IRON).contains(materialType)) 
+            return ItemsUtilsMethods.getItem(itemCategory, materialType);
 
         return switch (itemCategory) {
-            case Helmet -> Items.IRON_HELMET;
-            case Chestplate -> Items.IRON_CHESTPLATE;
-            case Leggings -> Items.IRON_LEGGINGS;
-            case Boots -> Items.IRON_BOOTS;
+            case Helmet -> materialType == EMaterialType.IRON ? Items.IRON_HELMET : Items.GOLDEN_HELMET;
+            case Chestplate -> materialType == EMaterialType.IRON ? Items.IRON_CHESTPLATE : Items.GOLDEN_CHESTPLATE;
+            case Leggings -> materialType == EMaterialType.IRON ? Items.IRON_LEGGINGS : Items.GOLDEN_LEGGINGS;
+            case Boots -> materialType == EMaterialType.IRON ? Items.IRON_BOOTS : Items.GOLDEN_BOOTS;
             case ChainmailHelmet -> Items.CHAINMAIL_HELMET;
             case ChainmailChestplate -> Items.CHAINMAIL_CHESTPLATE;
             case ChainmailLeggings -> Items.CHAINMAIL_LEGGINGS;

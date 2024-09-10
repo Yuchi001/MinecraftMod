@@ -4,6 +4,11 @@
     "better_progression:iron_battleaxe",
     "better_progression:iron_longsword",
     "better_progression:iron_plate",
-    "better_progression:iron_chainmail"
+    "better_progression:iron_chainmail",
+    "better_progression:golden_machete",
+    "better_progression:golden_battleaxe",
+    "better_progression:golden_longsword",
+    "better_progression:golden_plate",
+    "better_progression:golden_chainmail"
   ]
 }

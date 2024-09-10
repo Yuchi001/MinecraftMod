@@ -86,7 +86,7 @@ public final class ItemsUtilsMethods {
         return REGISTERED_ITEMS.stream().filter(i -> i.category == itemCategory && i.is_upgrade == isUpgrade).collect(Collectors.toList());
     }
 
-    public static EModArmorMaterial materialToArmorMaterial(EMaterialType materialType, boolean chainmail) {
+    public static ArmorMaterial materialToArmorMaterial(EMaterialType materialType, boolean chainmail) {
         switch (materialType) {
             case BRONZE -> {
                 return chainmail ? EModArmorMaterial.BRONZE_CHAINMAIL : EModArmorMaterial.BRONZE;
@@ -96,6 +96,9 @@ public final class ItemsUtilsMethods {
             }
             case COPPER -> {
                 return chainmail ? EModArmorMaterial.COPPER_CHAINMAIL : EModArmorMaterial.COPPER;
+            }
+            case GOLD -> {
+                return chainmail ? EModArmorMaterial.GOLDEN_CHAINMAIL : ArmorMaterials.GOLD;
             }
         }
         return null;

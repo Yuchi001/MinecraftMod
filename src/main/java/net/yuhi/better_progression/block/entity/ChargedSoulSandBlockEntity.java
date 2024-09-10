@@ -56,7 +56,8 @@ public class ChargedSoulSandBlockEntity extends BlockEntity {
 
     public boolean addCharges(int charges) {
         this.charges += charges;
-        this.isCharged = this.charges >= MINIMUM_CHARGES_TO_ACTIVATE;
+        if (this.charges > MINIMUM_CHARGES_TO_ACTIVATE) this.charges = MINIMUM_CHARGES_TO_ACTIVATE;
+        this.isCharged = this.charges == MINIMUM_CHARGES_TO_ACTIVATE;
         setChanged();
         return this.isCharged;
     }

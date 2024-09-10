@@ -1,4 +1,4 @@
-// 1.19.4	2024-09-09T20:35:13.2477629	Item Models: better_progression
+// 1.19.4	2024-09-11T01:33:07.1729659	Item Models: better_progression
 53328232342720c1776597ecaf073913a44860ef assets/better_progression/models/item/bear_meat.json
 91b3e1bc515443a0ea042ddc933eeb30cda269a7 assets/better_progression/models/item/blaze_essence.json
 070e97230f9570aed29526e5fe4de47f33a09376 assets/better_progression/models/item/bronze_axe.json
@@ -92,6 +92,7 @@ abe15169a3245ee9b46d6c460c37b49b84baa97c assets/better_progression/models/item/h
 ade8ed53ab9b17849081239b2ec0426cbaaa6dab assets/better_progression/models/item/iron_chainmail.json
 4e895a79025cbf9c4835f0f8dd46f2c3f69f2d19 assets/better_progression/models/item/iron_machete.json
 d3c479920bd16d7c6ba0e64ab09abdbea13c1d77 assets/better_progression/models/item/iron_plate.json
+427929bc3d803b8e8c4f35323fb2cad69ce58ba0 assets/better_progression/models/item/magma_cube_essence.json
 a423e073a95b9407a1f2cba5e005f93dfa31e0b8 assets/better_progression/models/item/nether_bronze_axe.json
 fa9b346e1b126dcd3940de05d6c8fa4ed3ed0cf3 assets/better_progression/models/item/nether_bronze_boots.json
 6cf1f5b7bfbadd9f540a5c35b57860b7976efe46 assets/better_progression/models/item/nether_bronze_chainmail_boots.json
@@ -125,6 +126,7 @@ a8bbc1a5b0e3468be1259b11da01ea9710b0570f assets/better_progression/models/item/n
 d163088c342ec7dedfeb7ae98ee72a25d3ed3481 assets/better_progression/models/item/phantom_essence.json
 f83cc90fb8ca2d93d887d77f357a8778227a2141 assets/better_progression/models/item/pink_quartz.json
 dfd44173a6804440ca9e86b63c2ff5c7243fd53a assets/better_progression/models/item/polished_pink_quartz.json
+5fa2d6864537e717993a9a733cec14a66daf572e assets/better_progression/models/item/polished_quartz.json
 fd3a67dedeb5dbece5549114914448524eb21c39 assets/better_progression/models/item/pure_diamond.json
 5e4c683ba5497f235bfb93bb7771e6cca563798a assets/better_progression/models/item/raw_tin.json
 5581364695a91f2df4c7257f7e1e2667eec1c4d2 assets/better_progression/models/item/skeleton_essence.json

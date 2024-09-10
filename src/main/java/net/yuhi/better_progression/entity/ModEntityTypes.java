@@ -10,7 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.entity.custom.ModBoatEntity;
 import net.yuhi.better_progression.entity.custom.ModChestBoatEntity;
-import net.yuhi.better_progression.entity.custom.ThrownPolishedPinkQuartzEntity;
+import net.yuhi.better_progression.entity.custom.ThrownPolishedQuartzEntity;
 import net.yuhi.better_progression.entity.custom.ThrownWeaponEntity;
 
 
@@ -24,8 +24,8 @@ public class ModEntityTypes {
                     .updateInterval(20)
                     .build(new ResourceLocation(BetterProgression.MOD_ID, "thrown_weapon").toString()));
 
-    public static final RegistryObject<EntityType<ThrownPolishedPinkQuartzEntity>> POLISHED_PINK_QUARTZ = ENTITY_TYPES.register("thrown_pink_quartz",
-            () -> EntityType.Builder.<ThrownPolishedPinkQuartzEntity>of(ThrownPolishedPinkQuartzEntity::new, MobCategory.MISC)
+    public static final RegistryObject<EntityType<ThrownPolishedQuartzEntity>> POLISHED_PINK_QUARTZ = ENTITY_TYPES.register("thrown_pink_quartz",
+            () -> EntityType.Builder.<ThrownPolishedQuartzEntity>of(ThrownPolishedQuartzEntity::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F)
                     .clientTrackingRange(4)
                     .updateInterval(10).build("thrown_polished_pink_quartz"));

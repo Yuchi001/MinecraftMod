@@ -44,5 +44,12 @@ public class BlockInteractionHandler {
         }
         
         world.setBlock(pos, ModBlocks.CHARGED_SOUL_SAND.get().defaultBlockState(), 3);
+        
+        var entity = world.getBlockEntity(pos);
+        var block = world.getBlockState(pos);
+        if (!(block.getBlock() instanceof ChargedSoulSandBlock chargedSoulSandBlock)) return;
+        if (!(entity instanceof ChargedSoulSandBlockEntity chargedSoulSandBlockEntity)) return;
+        
+        chargedSoulSandBlock.addCharges(chargedSoulSandBlockEntity, mobEssenceItem, heldItem, world, pos, player);
     }
 }

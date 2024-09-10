@@ -71,6 +71,7 @@
   "block.better_progression.smooth_pink_quartz_slab": "Smooth Rose Quartz Slab",
   "item.better_progression.pink_quartz": "Rose Quartz",
   "item.better_progression.polished_pink_quartz": "Polished Rose Quartz",
+  "item.better_progression.polished_quartz": "Polished Quartz",
 
   "block.better_progression.end_oak_door": "End Oak Door",
   "block.better_progression.end_oak_sapling": "End Oak Sapling",
@@ -105,6 +106,7 @@
   "item.better_progression.dragon_remains": "Dragon Remains",
   
   "item.better_progression.zombie_essence": "Zombie Essence",
+  "item.better_progression.magma_cube_essence": "Magma Cube Essence",
   "item.better_progression.ghast_essence": "Ghast Essence",
   "item.better_progression.spider_essence": "Spider Essence",
   "item.better_progression.skeleton_essence": "Skeleton Essence",

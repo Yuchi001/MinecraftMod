@@ -19,6 +19,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         for (var blockData : ModBlocks.BLOCKS_DATA) {
             switch (blockData.textureType) {
                 case CUBE_ALL -> blockWithItem(blockData);
+                case CUBE_ALL_ONLY_ITEM -> blockItem(blockData);
                 case STAIRS -> stairsWithItem(blockData);
                 case SLAB -> slabWithItem(blockData);
                 case CROSS -> crossBlockWithItem(blockData);
@@ -39,6 +40,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void blockWithItem(BlockDataCreator.BlockData blockData) {
         simpleBlockWithItem(blockData.block.get(), cubeAll(blockData.block.get()));
+    }
+
+    private void blockItem(BlockDataCreator.BlockData blockData) {
+        simpleBlockItem(blockData.block.get(), cubeAll(blockData.block.get()));
     }
     
     private void sign(BlockDataCreator.BlockData signBlockData) {

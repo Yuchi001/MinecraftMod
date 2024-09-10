@@ -98,14 +98,29 @@ public class ModRecipeProvider extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.POLISHED_PINK_QUARTZ.get(), 1)
                 .requires(ModItems.PINK_QUARTZ.get(), 2)
-                .unlockedBy(getHasName(ModItems.PINK_QUARTZ.get()), has(tinIngot)).save(pWriter, "polished_pink_quartz");
+                .unlockedBy(getHasName(ModItems.PINK_QUARTZ.get()), has(ModItems.PINK_QUARTZ.get()))
+                .save(pWriter, "polished_pink_quartz");
         
         SingleItemRecipeBuilder.stonecutting(
                 Ingredient.of(ModBlocks.PINK_QUARTZ_BLOCK.get()),
                 RecipeCategory.COMBAT,
                 ModItems.POLISHED_PINK_QUARTZ.get(),
                 4
-        ).unlockedBy(getHasName(ModItems.PINK_QUARTZ.get()), has(ModItems.PINK_QUARTZ.get())).save(pWriter, "polished_pink_quartz_from_stonecutting");
+        ).unlockedBy(getHasName(ModItems.PINK_QUARTZ.get()), has(ModItems.PINK_QUARTZ.get()))
+                .save(pWriter, "polished_pink_quartz_from_stonecutting");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.POLISHED_QUARTZ.get(), 1)
+                .requires(Items.QUARTZ, 2)
+                .unlockedBy(getHasName(Items.QUARTZ), has(Items.QUARTZ))
+                .save(pWriter, "polished_quartz");
+
+        SingleItemRecipeBuilder.stonecutting(
+                Ingredient.of(Blocks.QUARTZ_BLOCK),
+                RecipeCategory.COMBAT,
+                ModItems.POLISHED_QUARTZ.get(),
+                4
+        ).unlockedBy(getHasName(Blocks.QUARTZ_BLOCK), has(Blocks.QUARTZ_BLOCK))
+                .save(pWriter, "polished_quartz_from_stonecutting");
         
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, enderiteIngot)
                 .requires(ModItems.DRAGON_REMAINS.get(), 4)

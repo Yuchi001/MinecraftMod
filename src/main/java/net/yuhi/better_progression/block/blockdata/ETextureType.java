@@ -2,6 +2,7 @@ package net.yuhi.better_progression.block.blockdata;
 
 public enum ETextureType {
     CUBE_ALL,
+    CUBE_ALL_ONLY_ITEM,
     PILLAR_TOP,
     LOG,
     AXIS,

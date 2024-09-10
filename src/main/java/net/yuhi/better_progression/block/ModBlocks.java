@@ -454,7 +454,7 @@ public class ModBlocks {
             () -> new ChargedSoulSandBlock(BlockBehaviour.Properties.copy(SOUL_SAND)))
             .SetCustomDrop(() -> SOUL_SAND)
             .SetMineableWith(EMineableWith.SHOVEL)
-            .SetTextureType(ETextureType.CUSTOM)
+            .SetTextureType(ETextureType.CUBE_ALL_ONLY_ITEM)
             .SetSpecialTag(ECustomTag.SOUL_FIRE_BASE_BLOCK)
             .Register(); 
 

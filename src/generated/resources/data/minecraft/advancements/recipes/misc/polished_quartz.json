@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_pink_quartz": {
+    "has_quartz": {
       "conditions": {
         "items": [
           {
             "items": [
-              "better_progression:pink_quartz"
+              "minecraft:quartz"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:polished_pink_quartz"
+        "recipe": "minecraft:polished_quartz"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_pink_quartz",
+      "has_quartz",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:polished_pink_quartz"
+      "minecraft:polished_quartz"
     ]
   }
 }

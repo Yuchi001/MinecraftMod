@@ -30,6 +30,7 @@ public class ModItems {
     public static final List<TierItemsCreator.ItemInfo> REGISTERED_ITEMS = new ArrayList<>();
 
     public static final RegistryObject<Item> ZOMBIE_ESSENCE = register("zombie_essence", () -> new MobEssenceItem("zombie", 1, () -> Items.ROTTEN_FLESH, new Item.Properties()));
+    public static final RegistryObject<Item> MAGMA_CUBE_ESSENCE = register("magma_cube_essence", () -> new MobEssenceItem("magma_cube", 4, () -> Items.MAGMA_CREAM, new Item.Properties()));
     public static final RegistryObject<Item> SKELETON_ESSENCE = register("skeleton_essence", () -> new MobEssenceItem("skeleton", 2, () -> Items.BONE, new Item.Properties()));
     public static final RegistryObject<Item> SLIME_ESSENCE = register("slime_essence", () -> new MobEssenceItem("slime", 1, () -> Items.SLIME_BALL, new Item.Properties()));
     public static final RegistryObject<Item> ENDERMAN_ESSENCE = register("enderman_essence", () -> new MobEssenceItem("enderman", 5, () -> Items.ENDER_EYE, new Item.Properties()));
@@ -44,7 +45,8 @@ public class ModItems {
     public static final RegistryObject<Item> DRAGON_REMAINS = register("dragon_remains", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PURE_DIAMOND = register("pure_diamond", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PINK_QUARTZ = register("pink_quartz", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> POLISHED_PINK_QUARTZ = register("polished_pink_quartz", () -> new PolishedPinkQuartz(new Item.Properties()));
+    public static final RegistryObject<Item> POLISHED_PINK_QUARTZ = register("polished_pink_quartz", () -> new PolishedQuartz(new Item.Properties(), PolishedQuartz.Type.PINK));
+    public static final RegistryObject<Item> POLISHED_QUARTZ = register("polished_quartz", () -> new PolishedQuartz(new Item.Properties(), PolishedQuartz.Type.NETHER));
     public static final RegistryObject<Item> END_OAK_SIGN = register("end_oak_sign", () -> new SignItem(new Item.Properties().stacksTo(16),
             ModBlocks.END_OAK_SIGN.get(), ModBlocks.END_OAK_WALL_SIGN.get()));
     public static final RegistryObject<Item> BEAR_MEAT = register("bear_meat", () -> new Item(new Item.Properties().food(ModFoods.BEAR_MEAT)));

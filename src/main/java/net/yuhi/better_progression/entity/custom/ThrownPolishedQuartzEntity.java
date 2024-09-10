@@ -13,21 +13,27 @@ import net.minecraft.world.phys.HitResult;
 import net.yuhi.better_progression.effect.ModEffects;
 import net.yuhi.better_progression.entity.ModEntityTypes;
 import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.item.custom.PolishedQuartz;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ThrownPolishedPinkQuartzEntity extends ThrowableItemProjectile {
-    public ThrownPolishedPinkQuartzEntity(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
+public class ThrownPolishedQuartzEntity extends ThrowableItemProjectile {
+    private final PolishedQuartz.Type type;
+    
+    public ThrownPolishedQuartzEntity(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        this.type = PolishedQuartz.Type.PINK;
     }
     
-    public ThrownPolishedPinkQuartzEntity(Level pLevel) {
+    public ThrownPolishedQuartzEntity(Level pLevel) {
         super(ModEntityTypes.POLISHED_PINK_QUARTZ.get(), pLevel);
+        this.type = PolishedQuartz.Type.PINK;
     }
 
-    public ThrownPolishedPinkQuartzEntity(Level pLevel, LivingEntity livingEntity) {
+    public ThrownPolishedQuartzEntity(Level pLevel, LivingEntity livingEntity, PolishedQuartz.Type pType) {
         super(ModEntityTypes.POLISHED_PINK_QUARTZ.get(), livingEntity, pLevel);
+        this.type = pType;
     }
 
     @Override
@@ -45,7 +51,7 @@ public class ThrownPolishedPinkQuartzEntity extends ThrowableItemProjectile {
         if (!this.level.isClientSide) {
             this.applySplash(pResult.getType() == HitResult.Type.ENTITY ? ((EntityHitResult)pResult).getEntity() : null);
 
-            this.level.levelEvent(2007, this.blockPosition(), 14725307);
+            this.level.levelEvent(2007, this.blockPosition(), type.getColor());
             this.discard();
         }
     }
@@ -66,7 +72,7 @@ public class ThrownPolishedPinkQuartzEntity extends ThrowableItemProjectile {
                         }
 
                         MobEffect mobeffect = ModEffects.SMALL_HEAL.get();
-                        mobeffect.applyInstantenousEffect(this, this.getOwner(), livingentity, 1, d1);
+                        mobeffect.applyInstantenousEffect(this, this.getOwner(), livingentity, type.getAmplifier(), d1);
                     }
                 }
             }

@@ -10,6 +10,7 @@
     "LegacySmithingMenuMixin",
     "MinecartMixin",
     "PlayerMixin",
+    "RaidMixin",
     "ServerPlayerMixin",
     "accessor.ArmorItemAccessor",
     "accessor.ArmorMaterialsAccessor",

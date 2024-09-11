@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "black_dye",
+  "ingredients": [
+    {
+      "item": "better_progression:end_black_tulip"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "minecraft:black_dye"
+  }
+}

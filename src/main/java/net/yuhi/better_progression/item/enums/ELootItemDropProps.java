@@ -8,6 +8,7 @@ public enum ELootItemDropProps {
     STONE(Tiers.STONE, 1),
     IRON(Tiers.IRON, 2),
     DIAMOND(Tiers.DIAMOND, 5),
+    OBSIDIAN(ModTiers.OBSIDIAN, 8),
     COPPER(ModTiers.COPPER, 2),
     STEEL(ModTiers.STEEL, 4),
     BRONZE(ModTiers.BRONZE, 6);

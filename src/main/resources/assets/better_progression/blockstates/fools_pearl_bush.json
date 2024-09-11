@@ -1,0 +1,10 @@
+﻿{
+  "variants": {
+    "half=lower": {
+      "model": "better_progression:block/fools_pearl_bush_bottom"
+    },
+    "half=upper": {
+      "model": "better_progression:block/fools_pearl_bush_top"
+    }
+  }
+}

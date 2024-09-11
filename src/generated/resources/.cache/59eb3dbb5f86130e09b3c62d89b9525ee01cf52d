@@ -1,4 +1,4 @@
-// 1.19.4	2024-09-04T15:01:18.0480378	Loot Tables
+// 1.19.4	2024-09-11T14:36:02.0676047	Loot Tables
 4354079df0e4b323d5f377c422ca1f892e699781 data/better_progression/loot_tables/blocks/brake_rail.json
 5e1ed6e403ec6a139e9b98880bd1bc775df5bffe data/better_progression/loot_tables/blocks/bronze_block.json
 2c1d6d11b9079867d1f5fe73c0a57b6b095bedaa data/better_progression/loot_tables/blocks/charged_soul_sand.json
@@ -30,6 +30,7 @@ b5f7c602429684c5726cb04507d74cd4f676de01 data/better_progression/loot_tables/blo
 1d4929d7d6176f60e5ea991a577527ed251ef375 data/better_progression/loot_tables/blocks/end_tall_grass.json
 7e610bab99f6c971bc3db4eedb469e0db3c31ce3 data/better_progression/loot_tables/blocks/end_tin_ore.json
 e6a2bf6a683415568a1fc1fe0dd97b5fe36800f3 data/better_progression/loot_tables/blocks/end_white_tulip.json
+1d4929d7d6176f60e5ea991a577527ed251ef375 data/better_progression/loot_tables/blocks/fools_pearl_bush.json
 1421ca7a023da53f7ea0331b134a8b75c57a5a0c data/better_progression/loot_tables/blocks/pink_quartz_block.json
 a18681a7cc04ab0f55a0011e983bdda844b09bfb data/better_progression/loot_tables/blocks/pink_quartz_bricks.json
 28b6fea8b259a6cf0935f2b2e50ea84d6e9187d7 data/better_progression/loot_tables/blocks/pink_quartz_ore.json

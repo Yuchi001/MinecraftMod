@@ -135,6 +135,16 @@ public class ModBlocks {
             .AddBlockTag(BlockTags.SMALL_FLOWERS)
             .Register();
 
+    public static final RegistryObject<Block> FOOLS_PEARL_BUSH = new BlockDataCreator("fools_pearl_bush",
+            () -> new TallEndFlowerBlock((BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ))))
+            .SetTextureType(ETextureType.CUSTOM)
+            .DontDropSelf()
+            .SetSpecialTag(ECustomTag.NO_DROP)
+            .SetTexture(EBlockSide.ITEM, "fools_pearl_bush_top")
+            .SetTexture(EBlockSide.TOP, "fools_pearl_bush_top")
+            .SetTexture(EBlockSide.BOTTOM, "fools_pearl_bush_bottom")
+            .Register();
+
     public static final RegistryObject<Block> END_GRASS_WITH_FLOWERS = new BlockDataCreator("end_short_grass_with_flowers",
             () -> new TallEndGrassBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XYZ), false))
             .SetTextureType(ETextureType.CROSS)

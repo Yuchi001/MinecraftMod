@@ -110,6 +110,7 @@ public class BetterProgression
             }
 
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.TALL_END_GRASS.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.FOOLS_PEARL_BUSH.get(), RenderType.cutout());
         }
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.item.interfaces.LayerableItem;
 import net.yuhi.better_progression.tag.ModTags;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,6 +25,14 @@ public abstract class ItemMixin {
     public void getMaxStackSize(CallbackInfoReturnable<Integer> cir) { 
         if (((Item)(Object)this) instanceof PotionItem) {
             cir.setReturnValue(16);
+            cir.cancel();
+        }
+    }
+    
+    @Inject(method = "getRarity", at = @At("HEAD"), cancellable = true)
+    public void getRarity(ItemStack pStack, CallbackInfoReturnable<Rarity> cir) {
+        if (ForgeRegistries.ITEMS.getKey(pStack.getItem()).getPath().toLowerCase().contains("totem_of_undying")) {
+            cir.setReturnValue(Rarity.RARE);
             cir.cancel();
         }
     }

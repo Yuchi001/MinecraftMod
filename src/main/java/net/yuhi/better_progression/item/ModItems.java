@@ -42,6 +42,7 @@ public class ModItems {
     public static final RegistryObject<Item> END_OAK_CHEST_BOAT = register("end_oak_chest_boat", () -> new ModBoatItem(true, ModBoatEntity.Type.END_OAK, new Item.Properties()));
     public static final RegistryObject<Item> TIN_ITEM_INTERFACE = ITEMS.register("tin_item_interface", TinnedItemRecipeInterface::new);
     public static final RegistryObject<Item> HILT = register("hilt", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BROKEN_TOTEM_OF_UNDYING = register("broken_totem_of_undying", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> DRAGON_REMAINS = register("dragon_remains", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PURE_DIAMOND = register("pure_diamond", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PINK_QUARTZ = register("pink_quartz", () -> new Item(new Item.Properties()));

@@ -80,6 +80,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('z', Items.IRON_INGOT)
                 .unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER))
                 .save(pWriter, "better_saddle");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.TOTEM_OF_UNDYING)
+                .requires(ModItems.BROKEN_TOTEM_OF_UNDYING.get())
+                .requires(Items.GOLD_INGOT, 3)
+                .requires(Items.EMERALD, 2)
+                .requires(Items.GHAST_TEAR, 2)
+                .requires(Items.NETHER_STAR)
+                .unlockedBy(getHasName(ModItems.BROKEN_TOTEM_OF_UNDYING.get()), has(ModItems.BROKEN_TOTEM_OF_UNDYING.get()))
+                .save(pWriter, "totem_of_undying_from_broken_totem_of_undying");
         
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Blocks.TNT)
                 .requires(Blocks.SAND, 2)

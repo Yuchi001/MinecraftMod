@@ -46,4 +46,9 @@ public abstract class ItemStackMixin {
             pOnBroken.accept(pEntity);
         }
     }
+
+    @Inject(method = "setRepairCost", at = @At("HEAD"), cancellable = true)
+    private void resetRepairCost(int repairCost, CallbackInfo ci) {
+        ci.cancel();
+    }
 }

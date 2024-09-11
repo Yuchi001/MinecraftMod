@@ -72,6 +72,8 @@ public class BetterProgression
         MinecraftForge.EVENT_BUS.register(PlayerTickHandler.class);
         MinecraftForge.EVENT_BUS.register(HungerBarRenderHandler.class);
         MinecraftForge.EVENT_BUS.register(PlayerSleepHandler.class);
+        MinecraftForge.EVENT_BUS.register(AnvilRepairHandler.class);
+        MinecraftForge.EVENT_BUS.register(TotemUseHandler.class);
         
         modEventBus.addListener(this::addCreative);
     }

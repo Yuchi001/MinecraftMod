@@ -1,6 +1,7 @@
 package net.yuhi.better_progression.item.utils;
 
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
 import net.minecraftforge.registries.RegistryObject;
@@ -133,6 +134,15 @@ public class TierItemsCreator {
         var itemName = getItemName(itemCategory);        
         RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemName, itemSupplier);
         var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.HandHeld, this);
+        ModItems.REGISTERED_ITEMS.add(itemInfo);
+    }
+    
+    public void createHorseArmor(int protection) {
+        var armorResourceLocation = new ResourceLocation(BetterProgression.MOD_ID, "textures/entity/horse/armor/horse_armor_" + material_type.GetName() + ".png");
+        Supplier<Item> itemSupplier = () -> new HorseArmorItem(protection, armorResourceLocation, new Item.Properties());
+        var itemName = getItemName(EItemCategory.HorseArmor);
+        RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemName, itemSupplier);
+        var itemInfo = new ItemInfo(registryItem, EItemCategory.HorseArmor, EItemType.Simple, this);
         ModItems.REGISTERED_ITEMS.add(itemInfo);
     }
     

@@ -1,4 +1,4 @@
-// 1.19.4	2024-09-11T21:22:59.6433587	Item Models: better_progression
+// 1.19.4	2024-09-12T16:52:27.6420621	Item Models: better_progression
 53328232342720c1776597ecaf073913a44860ef assets/better_progression/models/item/bear_meat.json
 91b3e1bc515443a0ea042ddc933eeb30cda269a7 assets/better_progression/models/item/blaze_essence.json
 adc7bc7dc8792c03d8b69b86f4a70e7c7bda0778 assets/better_progression/models/item/broken_totem_of_undying.json
@@ -12,6 +12,7 @@ adc7bc7dc8792c03d8b69b86f4a70e7c7bda0778 assets/better_progression/models/item/b
 53c0f17aec0c6888bc6ae590751c665b6000158f assets/better_progression/models/item/bronze_chestplate.json
 ec4a53e017abc8ab0e6d55871c3971bab6cebd5d assets/better_progression/models/item/bronze_helmet.json
 0b466e7f5b0f99d843404f9d9f4efb6c20b0901d assets/better_progression/models/item/bronze_hoe.json
+41ca768bc19af56add6426900bceeffce885eb5e assets/better_progression/models/item/bronze_horse_armor.json
 f71943125fb15142eb94fcbf6aa2cfe32f297f44 assets/better_progression/models/item/bronze_ingot.json
 5447b2e82abcf21de8273e2fb96ea9e8aabc501b assets/better_progression/models/item/bronze_leggings.json
 881c4ad3451cd4b1b94f17a2f39c0fcc28b964ab assets/better_progression/models/item/bronze_machete.json
@@ -31,6 +32,7 @@ cea22feab1b4ecdee24de15c190ea9673563051c assets/better_progression/models/item/c
 4c854414fbe4ad2fc48fe07562ddbcd3597a4e78 assets/better_progression/models/item/copper_chestplate.json
 c3cfdf967e2821a3e73a5ce4cea79ef6b76b544f assets/better_progression/models/item/copper_helmet.json
 c90a2da02ebc81ce159b7b07db2a686c2196ab2b assets/better_progression/models/item/copper_hoe.json
+6b6680eba9b3835f7da6a2398e8931dc6e3aa6d5 assets/better_progression/models/item/copper_horse_armor.json
 cd1e0540eb963a6f64e724ec40e819f31a2c5db6 assets/better_progression/models/item/copper_leggings.json
 bbec77831d63c49a75b694fd6a98847f1ab77e2f assets/better_progression/models/item/copper_machete.json
 74bcf355313432eeabe4cdccebaaf5f2107a45ba assets/better_progression/models/item/copper_nugget.json
@@ -143,6 +145,7 @@ b43ee6bd876779b490b71d3dc0d83c2560899603 assets/better_progression/models/item/s
 a9a3f87bb5d8ec7e91e824e0a8d975fbd886b906 assets/better_progression/models/item/steel_chestplate.json
 09d8b74866de03a84d13d79cca6cb57851a46952 assets/better_progression/models/item/steel_helmet.json
 025ab100cad75584587a945f1bfe7d2e39a257f1 assets/better_progression/models/item/steel_hoe.json
+4c214b17446d4db23afb550fb5e9dff19322f94a assets/better_progression/models/item/steel_horse_armor.json
 4a9e60762fb07560f34863f8c53d8ed31ab732ed assets/better_progression/models/item/steel_ingot.json
 b37a46601e7e8bd89546c7ef76567bda3bf7da7b assets/better_progression/models/item/steel_leggings.json
 37c623c762f9572cef1be00dff32efd248109d24 assets/better_progression/models/item/steel_machete.json

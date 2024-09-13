@@ -2,6 +2,7 @@ package net.yuhi.better_progression.item.enums;
 
 public enum EItemCategory {
     Plate("plate"),
+    HorseArmor("horse_armor"),
     Nugget("nugget"),
     Chainmail("chainmail"),
     RawMaterial("raw", true),

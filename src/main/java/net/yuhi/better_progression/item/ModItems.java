@@ -93,6 +93,7 @@ public class ModItems {
         copperSupplier.createBasicItem(EItemCategory.Chainmail);
         copperSupplier.createBasicItem(EItemCategory.Nugget);
         copperSupplier.createArmorSet();
+        copperSupplier.createHorseArmor(5);
         copperSupplier.createChainmailArmorSet();
 
         var bronzeSupplier = new TierItemsCreator("bronze_ingot", EMaterialType.BRONZE, ModTiers.BRONZE)
@@ -111,6 +112,7 @@ public class ModItems {
         bronzeSupplier.createBasicItem(EItemCategory.Plate);
         bronzeSupplier.createBasicItem(EItemCategory.Nugget);
         bronzeSupplier.createArmorSet();
+        bronzeSupplier.createHorseArmor(7);
         bronzeSupplier.createChainmailArmorSet();
 
         var steelSupplier = new TierItemsCreator("steel_ingot", EMaterialType.STEEL, ModTiers.STEEL)
@@ -128,6 +130,7 @@ public class ModItems {
         steelSupplier.createBasicItem(EItemCategory.Chainmail);
         steelSupplier.createBasicItem(EItemCategory.Plate);
         steelSupplier.createBasicItem(EItemCategory.Nugget);
+        steelSupplier.createHorseArmor(7);
         steelSupplier.createArmorSet();
         steelSupplier.createChainmailArmorSet();
         

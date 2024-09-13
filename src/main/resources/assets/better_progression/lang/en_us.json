@@ -138,6 +138,7 @@
   "item.better_progression.copper_plate": "Copper Plate",
   "item.better_progression.copper_chainmail": "Copper Chainmail",
   "item.better_progression.copper_nugget": "Copper Nugget",
+  "item.better_progression.copper_horse_armor": "Copper Horse Armor",
 
   "item.better_progression.nether_bronze_pickaxe": "Nether Bronze Pickaxe",
   "item.better_progression.nether_bronze_axe": "Nether Bronze Axe",
@@ -180,6 +181,7 @@
   "item.better_progression.steel_plate": "Steel Plate",
   "item.better_progression.steel_chainmail": "Steel Chainmail",
   "item.better_progression.steel_nugget": "Steel Nugget",
+  "item.better_progression.steel_horse_armor": "Steel Horse Armor",
 
   "block.better_progression.nether_steel_block": "Nether Steel Block",
   "item.better_progression.nether_steel_sword": "Nether Steel Sword",
@@ -259,6 +261,7 @@
   "item.better_progression.bronze_plate": "Bronze Plate",
   "item.better_progression.bronze_chainmail": "Bronze Chainmail",
   "item.better_progression.bronze_nugget": "Bronze Nugget",
+  "item.better_progression.bronze_horse_armor": "Bronze Horse Armor",
   
   "creativetab.better_progression.title": "Better Progression",
 

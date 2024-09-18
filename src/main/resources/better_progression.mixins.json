@@ -6,6 +6,8 @@
   "refmap": "better_progression.mixins.refmap.json",
   "mixins": [
     "ArmorMaterialsMixin",
+    "EnchantmentHelperMixin",
+    "EnchantmentMixin",
     "ItemInHandRendererMixin",
     "ItemStackMixin",
     "LegacySmithingMenuMixin",
@@ -13,6 +15,7 @@
     "PlayerMixin",
     "RaidMixin",
     "ServerPlayerMixin",
+    "SpawnEggItemMixin",
     "accessor.ArmorItemAccessor",
     "accessor.ArmorMaterialsAccessor",
     "accessor.BlockAccessor",

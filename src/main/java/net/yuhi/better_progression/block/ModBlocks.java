@@ -46,6 +46,16 @@ public class ModBlocks {
     public static final DeferredRegister<Block> VANILLA_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, "minecraft");
     
     public static final List<BlockDataCreator.BlockData> BLOCKS_DATA = new ArrayList<>();
+
+    public static final RegistryObject<Block> ESSENCE_SPAWNER = new BlockDataCreator("essence_spawner",
+            () -> new EssenceSpawnerBlock(BlockBehaviour.Properties.copy(SPAWNER).strength(4.0F, 6.0F)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetTextureType(ETextureType.PILLAR_TOP_BOTTOM)
+            .SetTexture(EBlockSide.TOP, "essence_spawner_top")
+            .SetTexture(EBlockSide.SIDE, "essence_spawner")
+            .SetTexture(EBlockSide.BOTTOM, "essence_spawner")
+            .AddRecipe(EBlockCraftingRecipeType.ESSENCE_SPAWNER_1, List.of(() -> Items.STICK))
+            .Register();
     
     public static final RegistryObject<Block> TIN_BLOCK = new BlockDataCreator("tin_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(4.0F, 6.0F)))

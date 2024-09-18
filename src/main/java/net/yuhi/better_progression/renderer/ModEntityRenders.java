@@ -3,6 +3,7 @@ package net.yuhi.better_progression.renderer;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.client.renderer.blockentity.SpawnerRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -10,6 +11,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.ModBlockEntities;
+import net.yuhi.better_progression.block.entity.EssenceSpawnerBlockEntity;
 import net.yuhi.better_progression.entity.ModEntityTypes;
 import net.yuhi.better_progression.entity.ModModelLayers;
 
@@ -28,6 +30,7 @@ public class ModEntityRenders {
         event.registerEntityRenderer(ModEntityTypes.MOD_BOAT.get(), pContext -> new ModBoatRenderer(pContext, false));
         event.registerEntityRenderer(ModEntityTypes.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer(pContext, true));
         event.registerBlockEntityRenderer(ModBlockEntities.MOD_SIGN.get(), SignRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.ESSENCE_SPAWNER.get(), EssenceSpawnerRenderer::new);
     }
 }
  

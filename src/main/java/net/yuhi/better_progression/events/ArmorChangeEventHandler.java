@@ -39,8 +39,6 @@ public class ArmorChangeEventHandler {
                         additionalHealth += material.getLifeMod(armorItem.getType());
                     }
                     
-                    System.out.println(currentHealth);
-                    System.out.println(additionalHealth);
                     if (currentHealth > 6 + additionalHealth ) {
                         player.setHealth(6 + additionalHealth);
                     }

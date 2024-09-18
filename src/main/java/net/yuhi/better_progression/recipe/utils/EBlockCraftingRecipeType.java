@@ -10,6 +10,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.EMaterialType;
+import net.yuhi.better_progression.item.utils.ItemsUtilsMethods;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.List;
@@ -23,6 +26,18 @@ public enum EBlockCraftingRecipeType {
                     .requires(ingredients.get(0).get(), 9)
                     .unlockedBy(getHasName(ingredients.get(0).get()), has(ingredients.get(0).get())), false),
 
+    ESSENCE_SPAWNER_1((Supplier<ItemLike> result, Integer resultCount, List<Supplier<ItemLike>> ingredients) ->
+            ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), Objects.requireNonNullElse(resultCount, 1))
+                    .pattern("dld")
+                    .pattern("sgs")
+                    .pattern("sss")
+                    .define('s', ItemsUtilsMethods.getItem(EItemCategory.Ingot, EMaterialType.STEEL))
+                    .define('g', Items.GHAST_TEAR)
+                    .define('d', Items.DIAMOND)
+                    .define('l', Items.LAPIS_LAZULI)
+                    .unlockedBy(getHasName(ItemsUtilsMethods.getItem(EItemCategory.Ingot, EMaterialType.STEEL)), 
+                            has(ItemsUtilsMethods.getItem(EItemCategory.Ingot, EMaterialType.STEEL)))),
+    
     BLOCK_FROM_4_4((Supplier<ItemLike> result, Integer resultCount, List<Supplier<ItemLike>> ingredients) ->
             ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), Objects.requireNonNullElse(resultCount, 4))
                     .pattern("   ")

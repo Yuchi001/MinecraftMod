@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "g": {
+      "item": "minecraft:ghast_tear"
+    },
+    "l": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "s": {
+      "item": "better_progression:steel_ingot"
+    }
+  },
+  "pattern": [
+    "dld",
+    "sgs",
+    "sss"
+  ],
+  "result": {
+    "item": "better_progression:essence_spawner"
+  },
+  "show_notification": true
+}

@@ -40,6 +40,7 @@ public class BlockInteractionHandler {
 
         if (world.isClientSide) {
             world.playSound(player, pos, SoundEvents.SOUL_SAND_BREAK, SoundSource.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.1F + 0.9F);
+            event.setCancellationResult(InteractionResult.SUCCESS);
             return;
         }
         
@@ -51,5 +52,6 @@ public class BlockInteractionHandler {
         if (!(entity instanceof ChargedSoulSandBlockEntity chargedSoulSandBlockEntity)) return;
         
         chargedSoulSandBlock.addCharges(chargedSoulSandBlockEntity, mobEssenceItem, heldItem, world, pos, player);
+        event.setCancellationResult(InteractionResult.CONSUME);
     }
 }

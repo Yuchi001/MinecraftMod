@@ -8,6 +8,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.entity.BetterBlastFurnaceBlockEntity;
 import net.yuhi.better_progression.block.entity.ChargedSoulSandBlockEntity;
+import net.yuhi.better_progression.block.entity.EssenceSpawnerBlockEntity;
 import net.yuhi.better_progression.block.entity.ModSignBlockEntity;
 
 public class ModBlockEntities {
@@ -21,6 +22,11 @@ public class ModBlockEntities {
             VANILLA_BLOCK_ENTITIES.register("blast_furnace", () ->
                     BlockEntityType.Builder.of(BetterBlastFurnaceBlockEntity::new,
                             ModBlocks.BETTER_BLAST_FURNACE.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<EssenceSpawnerBlockEntity>> ESSENCE_SPAWNER =
+            BLOCK_ENTITIES.register("essence_spawner", () ->
+                    BlockEntityType.Builder.of(EssenceSpawnerBlockEntity::new,
+                            ModBlocks.ESSENCE_SPAWNER.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<ModSignBlockEntity>> MOD_SIGN =
             BLOCK_ENTITIES.register("mod_sign", () ->

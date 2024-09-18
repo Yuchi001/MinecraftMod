@@ -66,7 +66,7 @@ public abstract class MinecartMixin {
         };
     }
 
-    @Inject(method = "getMaxSpeedWithRail", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getMaxSpeedWithRail", at = @At("HEAD"), cancellable = true, remap = false)
     private void getMaxSpeedWithRail(CallbackInfoReturnable<Double> cir) {
         double newMaxSpeed = isBraking ? 0.4 : 1.1;
         cir.setReturnValue(newMaxSpeed);

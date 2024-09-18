@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "net.yuhi.better_progression.mixin",
   "compatibilityLevel": "JAVA_17",
+  "refmap": "better_progression.mixins.refmap.json",
   "mixins": [
     "ArmorMaterialsMixin",
     "ItemInHandRendererMixin",

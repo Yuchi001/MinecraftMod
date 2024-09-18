@@ -80,7 +80,7 @@ public class BetterProgression
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        Mixins.addConfiguration("mixin/better_progression.mixins.json");
+        Mixins.addConfiguration("better_progression.mixins.json");
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {

@@ -1,11 +1,11 @@
-package net.yuhi.better_progression.menu.BetterBlastFurnaceMenu;
+package net.yuhi.better_progression.menu.custom;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.RecipeBookType;
-import net.yuhi.better_progression.menu.BetterFurnaceMenu.AbstractBetterFurnaceMenu;
+import net.yuhi.better_progression.menu.custom.better_furnace_menu.AbstractBetterFurnaceMenu;
 import net.yuhi.better_progression.menu.ModMenus;
 import net.yuhi.better_progression.recipe.ModRecipeType;
 

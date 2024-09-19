@@ -1,6 +1,5 @@
-package net.yuhi.better_progression.menu.BetterFurnaceMenu;
+package net.yuhi.better_progression.menu.custom.better_furnace_menu;
 
-import net.minecraft.client.gui.screens.recipebook.AbstractFurnaceRecipeBookComponent;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;

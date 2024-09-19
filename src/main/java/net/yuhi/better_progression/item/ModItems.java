@@ -1,6 +1,7 @@
 package net.yuhi.better_progression.item;
 
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,6 +20,7 @@ import net.yuhi.better_progression.item.utils.TierItemsCreator;
 import net.yuhi.better_progression.tag.ModTags;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -29,15 +31,15 @@ public class ModItems {
     
     public static final List<TierItemsCreator.ItemInfo> REGISTERED_ITEMS = new ArrayList<>();
 
-    public static final RegistryObject<Item> ZOMBIE_ESSENCE = register("zombie_essence", () -> new MobEssenceItem("zombie", 1, () -> Items.ROTTEN_FLESH, new Item.Properties()));
-    public static final RegistryObject<Item> MAGMA_CUBE_ESSENCE = register("magma_cube_essence", () -> new MobEssenceItem("magma_cube", 4, () -> Items.MAGMA_CREAM, new Item.Properties()));
-    public static final RegistryObject<Item> SKELETON_ESSENCE = register("skeleton_essence", () -> new MobEssenceItem("skeleton", 2, () -> Items.BONE, new Item.Properties()));
-    public static final RegistryObject<Item> SLIME_ESSENCE = register("slime_essence", () -> new MobEssenceItem("slime", 1, () -> Items.SLIME_BALL, new Item.Properties()));
-    public static final RegistryObject<Item> ENDERMAN_ESSENCE = register("enderman_essence", () -> new MobEssenceItem("enderman", 5, () -> Items.ENDER_EYE, new Item.Properties()));
-    public static final RegistryObject<Item> BLAZE_ESSENCE = register("blaze_essence", () -> new MobEssenceItem("blaze", 4, () -> Items.BLAZE_ROD, new Item.Properties()));
-    public static final RegistryObject<Item> CREEPER_ESSENCE = register("creeper_essence", () -> new MobEssenceItem("creeper", 2, () -> Items.GUNPOWDER, new Item.Properties()));
-    public static final RegistryObject<Item> SPIDER_ESSENCE = register("spider_essence", () -> new MobEssenceItem("spider", 3, () -> Items.SPIDER_EYE, new Item.Properties()));
-    public static final RegistryObject<Item> PHANTOM_ESSENCE = register("phantom_essence", () -> new MobEssenceItem("phantom", 4, () -> Items.PHANTOM_MEMBRANE, new Item.Properties()));
+    public static final RegistryObject<Item> ZOMBIE_ESSENCE = register("zombie_essence", () -> new MobEssenceItem("zombie", 1, () -> Items.ROTTEN_FLESH, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> MAGMA_CUBE_ESSENCE = register("magma_cube_essence", () -> new MobEssenceItem("magma_cube", 4, () -> Items.MAGMA_CREAM, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> SKELETON_ESSENCE = register("skeleton_essence", () -> new MobEssenceItem("skeleton", 2, () -> Items.BONE, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> SLIME_ESSENCE = register("slime_essence", () -> new MobEssenceItem("slime", 1, () -> Items.SLIME_BALL, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> ENDERMAN_ESSENCE = register("enderman_essence", () -> new MobEssenceItem("enderman", 5, () -> Items.ENDER_EYE, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> BLAZE_ESSENCE = register("blaze_essence", () -> new MobEssenceItem("blaze", 4, () -> Items.BLAZE_ROD, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> CREEPER_ESSENCE = register("creeper_essence", () -> new MobEssenceItem("creeper", 2, () -> Items.GUNPOWDER, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> SPIDER_ESSENCE = register("spider_essence", () -> new MobEssenceItem("spider", 3, () -> Items.SPIDER_EYE, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> PHANTOM_ESSENCE = register("phantom_essence", () -> new MobEssenceItem("phantom", 4, () -> Items.PHANTOM_MEMBRANE, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
     public static final RegistryObject<Item> END_OAK_BOAT = register("end_oak_boat", () -> new ModBoatItem(false, ModBoatEntity.Type.END_OAK, new Item.Properties()));
     public static final RegistryObject<Item> END_OAK_CHEST_BOAT = register("end_oak_chest_boat", () -> new ModBoatItem(true, ModBoatEntity.Type.END_OAK, new Item.Properties()));
     public static final RegistryObject<Item> TIN_ITEM_INTERFACE = ITEMS.register("tin_item_interface", TinnedItemRecipeInterface::new);
@@ -56,6 +58,11 @@ public class ModItems {
     private static RegistryObject<Item> register(String name, Supplier<Item> item) {
         var toReturn = ITEMS.register(name, item);
         return TierItemsCreator.RegisterSimpleItem(toReturn);
+    }
+
+    private static RegistryObject<Item> register(String name, Supplier<Item> item, TagKey<Item>... tags) {
+        var toReturn = ITEMS.register(name, item);
+        return TierItemsCreator.RegisterSimpleItem(toReturn, Arrays.stream(tags).toList());
     }
 
     public static void createItems() {

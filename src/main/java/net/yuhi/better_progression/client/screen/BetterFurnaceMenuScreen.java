@@ -4,7 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.menu.BetterFurnaceMenu.AbstractBetterFurnaceMenu;
+import net.yuhi.better_progression.menu.custom.better_furnace_menu.AbstractBetterFurnaceMenu;
 import net.yuhi.better_progression.recipe.BetterSmeltingRecipeBookComponent;
 
 public class BetterFurnaceMenuScreen extends AbstractBetterFurnaceScreen<AbstractBetterFurnaceMenu> {

@@ -53,7 +53,7 @@ public class ModBlocks {
             .SetTextureType(ETextureType.PILLAR_TOP_BOTTOM)
             .SetTexture(EBlockSide.TOP, "essence_spawner_top")
             .SetTexture(EBlockSide.SIDE, "essence_spawner")
-            .SetTexture(EBlockSide.BOTTOM, "essence_spawner")
+            .SetTexture(EBlockSide.BOTTOM, "essence_spawner_bottom")
             .AddRecipe(EBlockCraftingRecipeType.ESSENCE_SPAWNER_1, List.of(() -> Items.STICK))
             .Register();
     

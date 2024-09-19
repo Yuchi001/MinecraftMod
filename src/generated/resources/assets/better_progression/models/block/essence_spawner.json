@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "bottom": "better_progression:block/essence_spawner",
+    "bottom": "better_progression:block/essence_spawner_bottom",
     "side": "better_progression:block/essence_spawner",
     "top": "better_progression:block/essence_spawner_top"
   }

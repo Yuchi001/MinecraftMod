@@ -53,7 +53,6 @@ public class SpawnEggItemMixin {
             BlockEntity blockentity = level.getBlockEntity(blockpos);
             if (blockentity instanceof EssenceSpawnerBlockEntity essenceSpawnerBlockEntity) {
                 EntityType<?> entitytype = ((SpawnEggItem) (Object) this).getType(itemstack.getTag());
-                System.out.println("Dupa2");
                 essenceSpawnerBlockEntity.setEntityId(entitytype, level.getRandom());
                 blockentity.setChanged();
                 level.sendBlockUpdated(blockpos, blockstate, blockstate, 3);

@@ -1,4 +1,4 @@
-package net.yuhi.better_progression.menu.BetterFurnaceMenu;
+package net.yuhi.better_progression.menu.custom.better_furnace_menu;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;

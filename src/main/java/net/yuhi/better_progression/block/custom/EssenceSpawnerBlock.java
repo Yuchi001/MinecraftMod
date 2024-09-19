@@ -8,24 +8,31 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SpawnerBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.yuhi.better_progression.block.ModBlockEntities;
 import net.yuhi.better_progression.block.entity.EssenceSpawnerBlockEntity;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.io.Console;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,11 +53,6 @@ public class EssenceSpawnerBlock extends BaseEntityBlock {
     public void spawnAfterBreak(BlockState pState, ServerLevel pLevel, BlockPos pPos, ItemStack pStack, boolean pDropExperience) {
         super.spawnAfterBreak(pState, pLevel, pPos, pStack, pDropExperience);
 
-    }
-
-    @Override
-    public int getExpDrop(BlockState state, net.minecraft.world.level.LevelReader world, net.minecraft.util.RandomSource randomSource, BlockPos pos, int fortune, int silktouch) {
-        return 15 + randomSource.nextInt(15) + randomSource.nextInt(15);
     }
 
     public RenderShape getRenderShape(BlockState pState) {
@@ -83,5 +85,39 @@ public class EssenceSpawnerBlock extends BaseEntityBlock {
         }
 
         return Optional.empty();
+    }
+    
+    @Override
+    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+        if (pPlayer.getItemInHand(pHand).getItem() instanceof SpawnEggItem) return InteractionResult.PASS;
+        
+        BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+        if (blockentity instanceof EssenceSpawnerBlockEntity essenceSpawnerBlockEntity) {
+            if(!essenceSpawnerBlockEntity.hasMob()) return InteractionResult.PASS;
+
+            if (pLevel.isClientSide) {
+                return InteractionResult.SUCCESS;
+            } else {
+                pPlayer.openMenu((MenuProvider)blockentity);
+                return InteractionResult.CONSUME;
+            }
+        }
+        return InteractionResult.PASS;
+    }
+
+    @Override
+    public void onRemove(BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (pState.is(pNewState.getBlock())) return;
+
+        var blockentity = pLevel.getBlockEntity(pPos);
+        if (blockentity instanceof EssenceSpawnerBlockEntity) {
+            if (pLevel instanceof ServerLevel) {
+                Containers.dropContents(pLevel, pPos, (EssenceSpawnerBlockEntity)blockentity);
+            }
+
+            pLevel.updateNeighbourForOutputSignal(pPos, this);
+        }
+
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 }

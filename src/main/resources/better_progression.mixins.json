@@ -18,6 +18,7 @@
     "SpawnEggItemMixin",
     "accessor.ArmorItemAccessor",
     "accessor.ArmorMaterialsAccessor",
+    "accessor.BaseSpawnerAccessor",
     "accessor.BlockAccessor",
     "accessor.DiggerItemAccessor",
     "accessor.ItemAccessor",

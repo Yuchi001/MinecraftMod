@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "better_progression:dragon_remains_from_smelting_bp_zombie_essence"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_zombie_essence": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "better_progression:zombie_essence"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_zombie_essence",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "better_progression:dragon_remains_from_smelting_bp_zombie_essence"
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-// 1.19.4	2024-09-19T00:25:58.0149	Block States: better_progression
+// 1.19.4	2024-09-19T16:44:39.712717	Block States: better_progression
 dd05354572d7ea1a4c8eadb3a13572300471153a assets/better_progression/blockstates/bronze_block.json
 e41bc821e54b8495c0e0771b0d626af7e5694e18 assets/better_progression/blockstates/chiseled_end_stone_bricks.json
 30ef999350784896cca9b22e89b73d1b1a23195d assets/better_progression/blockstates/chiseled_pink_quartz_block.json
@@ -94,7 +94,7 @@ dddedd2209f7fa4a58d73d5a1efb02f87279d73f assets/better_progression/models/block/
 1befabca4e60d9edade5e71382683ec85bd9f130 assets/better_progression/models/block/end_stone_grass_block.json
 addbe00ca463e0c5fb6bfd805fe7a0216df35841 assets/better_progression/models/block/end_tin_ore.json
 20a75344a1a91970285335e3d62c358fd4b2b117 assets/better_progression/models/block/end_white_tulip.json
-1cdbbdbc9ebc618f399aef4fff15bb468b619cb4 assets/better_progression/models/block/essence_spawner.json
+f855ae16edaabd1ce21fe28a0824d63f38678231 assets/better_progression/models/block/essence_spawner.json
 60a0eb102925e8024e62ed0b8ae3b4b4aa0123ba assets/better_progression/models/block/pink_quartz_block.json
 238c4c0a496d2c2e37ef9b890b58a68acecfcd10 assets/better_progression/models/block/pink_quartz_bricks.json
 fb7c8e0a17a948d8d0d47ee1f12aaf7627b9ee32 assets/better_progression/models/block/pink_quartz_ore.json

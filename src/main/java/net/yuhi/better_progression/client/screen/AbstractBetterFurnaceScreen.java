@@ -15,7 +15,7 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.yuhi.better_progression.menu.BetterFurnaceMenu.AbstractBetterFurnaceMenu;
+import net.yuhi.better_progression.menu.custom.better_furnace_menu.AbstractBetterFurnaceMenu;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)

@@ -36,6 +36,13 @@ public class TierItemsCreator {
         ModItems.REGISTERED_ITEMS.add(itemInfo);
         return supplier;
     }
+
+    public static RegistryObject<Item> RegisterSimpleItem(RegistryObject<Item> supplier, List<TagKey<Item>> tags) {
+        var itemInfo = new ItemInfo(supplier);
+        itemInfo.tags.addAll(tags);
+        ModItems.REGISTERED_ITEMS.add(itemInfo);
+        return supplier;
+    }
     
     public TierItemsCreator(EMaterialType material_type) {
         this.material_type = material_type;

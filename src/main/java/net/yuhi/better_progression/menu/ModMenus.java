@@ -7,7 +7,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.menu.BetterBlastFurnaceMenu.BetterBlastFurnaceMenu;
+import net.yuhi.better_progression.menu.custom.BetterBlastFurnaceMenu;
+import net.yuhi.better_progression.menu.custom.EssenceSpawnerMenu;
 
 public class ModMenus {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES =
@@ -18,6 +19,10 @@ public class ModMenus {
     public static final RegistryObject<MenuType<BetterBlastFurnaceMenu>> BLAST_FURNACE =
             VANILLA_MENU_TYPES.register("blast_furnace", () ->
                     IForgeMenuType.create(BetterBlastFurnaceMenu::new));
+
+    public static final RegistryObject<MenuType<EssenceSpawnerMenu>> ESSENCE_SPAWNER =
+            MENU_TYPES.register("essence_spawner", () ->
+                    IForgeMenuType.create(EssenceSpawnerMenu::new));
 
 
     public static void register(IEventBus bus) {

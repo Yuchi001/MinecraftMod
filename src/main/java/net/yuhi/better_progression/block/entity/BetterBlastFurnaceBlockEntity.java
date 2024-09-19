@@ -7,7 +7,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.yuhi.better_progression.block.ModBlockEntities;
-import net.yuhi.better_progression.menu.BetterBlastFurnaceMenu.BetterBlastFurnaceMenu;
+import net.yuhi.better_progression.menu.custom.BetterBlastFurnaceMenu;
 import net.yuhi.better_progression.recipe.ModRecipeType;
 import org.jetbrains.annotations.NotNull;
 

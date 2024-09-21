@@ -94,6 +94,10 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(Blocks.SAND, 2)
                 .requires(Items.GUNPOWDER, 2)
                 .unlockedBy(getHasName(Items.GUNPOWDER), has(Items.GUNPOWDER)).save(pWriter, "better_tnt");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.EMERALD_COIN.get(), 6)
+                .requires(Items.EMERALD)
+                .unlockedBy(getHasName(Items.EMERALD), has(Items.EMERALD)).save(pWriter, "emerald_coin");
         
         var enderiteIngot = getItem(EItemCategory.Ingot, EMaterialType.ENDERITE);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, enderiteIngot, 9)
@@ -102,8 +106,13 @@ public class ModRecipeProvider extends RecipeProvider {
 
         var tinIngot = getItem(EItemCategory.Ingot, EMaterialType.TIN);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, tinIngot, 9)
-                .requires(ModBlocks.TIN_BLOCK.get(), 1)
+                .requires(ModBlocks.TIN_BLOCK.get())
                 .unlockedBy(getHasName(tinIngot), has(tinIngot)).save(pWriter, "tin_ingot_from_block");
+
+        var rawTin = getItem(EItemCategory.RawMaterial, EMaterialType.TIN);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, rawTin, 9)
+                .requires(ModBlocks.RAW_TIN_BLOCK.get())
+                .unlockedBy(getHasName(rawTin), has(rawTin)).save(pWriter, "raw_tin_from_block");
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.POLISHED_PINK_QUARTZ.get(), 1)
                 .requires(ModItems.PINK_QUARTZ.get(), 2)
@@ -184,15 +193,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('r', Items.REDSTONE)
                 .unlockedBy(getHasName(Items.COPPER_INGOT), has(Items.COPPER_INGOT))
                 .save(pWriter, "copper_powered_rail");
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PURE_DIAMOND.get())
-                .pattern("***")
-                .pattern("*d*")
-                .pattern("***")
-                .define('*', Items.LAPIS_LAZULI)
-                .define('d', Items.DIAMOND)
-                .unlockedBy(getHasName(Items.DIAMOND), has(Items.DIAMOND))
-                .save(pWriter, "pure_diamond");
         
         MetalRecipesCollectionCreator(pWriter);
         

@@ -257,6 +257,11 @@ public class EssenceSpawnerBlockEntity extends BaseContainerBlockEntity implemen
     }
 
     public class EssenceSpawner extends BaseSpawner {
+        public EssenceSpawner() {
+            ((BaseSpawnerAccessor)this).setMinSpawnDelay(100);
+            ((BaseSpawnerAccessor)this).setMaxSpawnDelay(200);
+        }
+
         public void broadcastEvent(Level pLevel, @NotNull BlockPos pPos, int p_155769_) {
             pLevel.blockEvent(pPos, Blocks.SPAWNER, p_155769_, 0);
         }
@@ -279,4 +284,5 @@ public class EssenceSpawnerBlockEntity extends BaseContainerBlockEntity implemen
 
         public net.minecraft.world.level.block.entity.@NotNull BlockEntity getSpawnerBlockEntity(){ return EssenceSpawnerBlockEntity.this; }
     }
+
 }

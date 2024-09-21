@@ -1,7 +1,9 @@
 package net.yuhi.better_progression.mixin.accessor;
 
 import net.minecraft.world.item.Item;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.UUID;
@@ -17,4 +19,9 @@ public interface ItemAccessor {
     static UUID BASE_ATTACH_SPEED_UUID() {
         return UUID.fromString("FA233E1C-4180-4865-B01B-BCCE9785ACA3");
     }
+    
+    @Final
+    @Mutable
+    @Accessor("maxStackSize")
+    void setMaxStackSize(int stackSize);
 }

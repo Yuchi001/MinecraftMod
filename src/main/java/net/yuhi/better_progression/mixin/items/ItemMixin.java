@@ -19,14 +19,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static net.yuhi.better_progression.utils.ItemStackUtils.applyStackSizeToItem;
+
+
 @Mixin(Item.class)
 public abstract class ItemMixin {
-    @Inject(method = "getMaxStackSize", at = @At("HEAD"), cancellable = true)
-    public void getMaxStackSize(CallbackInfoReturnable<Integer> cir) { 
-        if (((Item)(Object)this) instanceof PotionItem) {
-            cir.setReturnValue(16);
-            cir.cancel();
-        }
+
+    @Inject(method = "getMaxStackSize", at = @At("RETURN"), cancellable = true)
+    private void increaseStackLimit(CallbackInfoReturnable<Integer> returnInfo)
+    {
+        @SuppressWarnings("ConstantConditions") var itemstack = ((Item) (Object) this).getDefaultInstance();
+        var item = itemstack.getItem();
+
+        applyStackSizeToItem(returnInfo, itemstack, item);
     }
     
     @Inject(method = "getRarity", at = @At("HEAD"), cancellable = true)

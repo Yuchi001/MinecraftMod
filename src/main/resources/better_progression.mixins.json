@@ -11,6 +11,7 @@
     "ItemInHandRendererMixin",
     "ItemStackMixin",
     "LegacySmithingMenuMixin",
+    "LlamaMixin",
     "MinecartMixin",
     "PlayerMixin",
     "RaidMixin",

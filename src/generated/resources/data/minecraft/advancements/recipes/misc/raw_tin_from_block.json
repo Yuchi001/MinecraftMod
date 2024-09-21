@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_diamond": {
+    "has_raw_tin": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:diamond"
+              "better_progression:raw_tin"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:pure_diamond"
+        "recipe": "minecraft:raw_tin_from_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_diamond",
+      "has_raw_tin",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:pure_diamond"
+      "minecraft:raw_tin_from_block"
     ]
   }
 }

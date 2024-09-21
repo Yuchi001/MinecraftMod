@@ -31,29 +31,29 @@ public class ModItems {
     
     public static final List<TierItemsCreator.ItemInfo> REGISTERED_ITEMS = new ArrayList<>();
 
-    public static final RegistryObject<Item> ZOMBIE_ESSENCE = register("zombie_essence", () -> new MobEssenceItem("zombie", 1, () -> Items.ROTTEN_FLESH, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> MAGMA_CUBE_ESSENCE = register("magma_cube_essence", () -> new MobEssenceItem("magma_cube", 4, () -> Items.MAGMA_CREAM, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> SKELETON_ESSENCE = register("skeleton_essence", () -> new MobEssenceItem("skeleton", 2, () -> Items.BONE, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> SLIME_ESSENCE = register("slime_essence", () -> new MobEssenceItem("slime", 1, () -> Items.SLIME_BALL, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> ENDERMAN_ESSENCE = register("enderman_essence", () -> new MobEssenceItem("enderman", 5, () -> Items.ENDER_EYE, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> BLAZE_ESSENCE = register("blaze_essence", () -> new MobEssenceItem("blaze", 4, () -> Items.BLAZE_ROD, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> CREEPER_ESSENCE = register("creeper_essence", () -> new MobEssenceItem("creeper", 2, () -> Items.GUNPOWDER, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> SPIDER_ESSENCE = register("spider_essence", () -> new MobEssenceItem("spider", 3, () -> Items.SPIDER_EYE, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> PHANTOM_ESSENCE = register("phantom_essence", () -> new MobEssenceItem("phantom", 4, () -> Items.PHANTOM_MEMBRANE, new Item.Properties()), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> ZOMBIE_ESSENCE = register("zombie_essence", () -> new MobEssenceItem("zombie", 1, () -> Items.ROTTEN_FLESH, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> MAGMA_CUBE_ESSENCE = register("magma_cube_essence", () -> new MobEssenceItem("magma_cube", 4, () -> Items.MAGMA_CREAM, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> SKELETON_ESSENCE = register("skeleton_essence", () -> new MobEssenceItem("skeleton", 2, () -> Items.BONE, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> SLIME_ESSENCE = register("slime_essence", () -> new MobEssenceItem("slime", 1, () -> Items.SLIME_BALL, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> ENDERMAN_ESSENCE = register("enderman_essence", () -> new MobEssenceItem("enderman", 5, () -> Items.ENDER_EYE, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> BLAZE_ESSENCE = register("blaze_essence", () -> new MobEssenceItem("blaze", 4, () -> Items.BLAZE_ROD, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> CREEPER_ESSENCE = register("creeper_essence", () -> new MobEssenceItem("creeper", 2, () -> Items.GUNPOWDER, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> SPIDER_ESSENCE = register("spider_essence", () -> new MobEssenceItem("spider", 3, () -> Items.SPIDER_EYE, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> PHANTOM_ESSENCE = register("phantom_essence", () -> new MobEssenceItem("phantom", 4, () -> Items.PHANTOM_MEMBRANE, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
     public static final RegistryObject<Item> END_OAK_BOAT = register("end_oak_boat", () -> new ModBoatItem(false, ModBoatEntity.Type.END_OAK, new Item.Properties()));
     public static final RegistryObject<Item> END_OAK_CHEST_BOAT = register("end_oak_chest_boat", () -> new ModBoatItem(true, ModBoatEntity.Type.END_OAK, new Item.Properties()));
     public static final RegistryObject<Item> TIN_ITEM_INTERFACE = ITEMS.register("tin_item_interface", TinnedItemRecipeInterface::new);
     public static final RegistryObject<Item> HILT = register("hilt", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> EMERALD_COIN = register("emerald_coin", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(16)));
     public static final RegistryObject<Item> BROKEN_TOTEM_OF_UNDYING = register("broken_totem_of_undying", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> DRAGON_REMAINS = register("dragon_remains", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> PURE_DIAMOND = register("pure_diamond", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> PINK_QUARTZ = register("pink_quartz", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> POLISHED_PINK_QUARTZ = register("polished_pink_quartz", () -> new PolishedQuartz(new Item.Properties(), PolishedQuartz.Type.PINK));
-    public static final RegistryObject<Item> POLISHED_QUARTZ = register("polished_quartz", () -> new PolishedQuartz(new Item.Properties(), PolishedQuartz.Type.NETHER));
+    public static final RegistryObject<Item> PINK_QUARTZ = register("pink_quartz", () -> new Item(new Item.Properties().stacksTo(256)));
+    public static final RegistryObject<Item> POLISHED_PINK_QUARTZ = register("polished_pink_quartz", () -> new PolishedQuartz(new Item.Properties().stacksTo(16), PolishedQuartz.Type.PINK));
+    public static final RegistryObject<Item> POLISHED_QUARTZ = register("polished_quartz", () -> new PolishedQuartz(new Item.Properties().stacksTo(16), PolishedQuartz.Type.NETHER));
     public static final RegistryObject<Item> END_OAK_SIGN = register("end_oak_sign", () -> new SignItem(new Item.Properties().stacksTo(16),
             ModBlocks.END_OAK_SIGN.get(), ModBlocks.END_OAK_WALL_SIGN.get()));
-    public static final RegistryObject<Item> BEAR_MEAT = register("bear_meat", () -> new Item(new Item.Properties().food(ModFoods.BEAR_MEAT)));
-    public static final RegistryObject<Item> COOKED_BEAR_MEAT = register("cooked_bear_meat", () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT)));
+    public static final RegistryObject<Item> BEAR_MEAT = register("bear_meat", () -> new Item(new Item.Properties().food(ModFoods.BEAR_MEAT).stacksTo(16)));
+    public static final RegistryObject<Item> COOKED_BEAR_MEAT = register("cooked_bear_meat", () -> new Item(new Item.Properties().food(ModFoods.COOKED_BEAR_MEAT).stacksTo(16)));
     
     private static RegistryObject<Item> register(String name, Supplier<Item> item) {
         var toReturn = ITEMS.register(name, item);

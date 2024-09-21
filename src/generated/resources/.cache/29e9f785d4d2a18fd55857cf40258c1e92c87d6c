@@ -1,4 +1,4 @@
-// 1.19.4	2024-09-12T16:52:27.6420621	Item Models: better_progression
+// 1.19.4	2024-09-21T02:42:16.8870438	Item Models: better_progression
 53328232342720c1776597ecaf073913a44860ef assets/better_progression/models/item/bear_meat.json
 91b3e1bc515443a0ea042ddc933eeb30cda269a7 assets/better_progression/models/item/blaze_essence.json
 adc7bc7dc8792c03d8b69b86f4a70e7c7bda0778 assets/better_progression/models/item/broken_totem_of_undying.json
@@ -44,6 +44,7 @@ c0c5addb7f29ff26c733a4bdc3dc1bca79afbcf3 assets/better_progression/models/item/c
 c786b14fe517913d5bec9b130c425bd1aa28455e assets/better_progression/models/item/diamond_club.json
 55d65db43b81f49feb2c62182d37d096aa444190 assets/better_progression/models/item/diamond_dagger.json
 bd02fd6de0838c45ed41d68883b20c964454882f assets/better_progression/models/item/dragon_remains.json
+959e153dfc246054e9131383a8dcd811b6c34bc9 assets/better_progression/models/item/emerald_coin.json
 3c04d385350a8787597005ba2f020435a90573a7 assets/better_progression/models/item/enderite_ingot.json
 909fa0af2ef2e9947297c424ce794058383facfe assets/better_progression/models/item/enderman_essence.json
 bf003a5119b7fbc48c60d2bc6c240f17c4832959 assets/better_progression/models/item/ender_bronze_axe.json
@@ -130,7 +131,6 @@ d163088c342ec7dedfeb7ae98ee72a25d3ed3481 assets/better_progression/models/item/p
 f83cc90fb8ca2d93d887d77f357a8778227a2141 assets/better_progression/models/item/pink_quartz.json
 dfd44173a6804440ca9e86b63c2ff5c7243fd53a assets/better_progression/models/item/polished_pink_quartz.json
 5fa2d6864537e717993a9a733cec14a66daf572e assets/better_progression/models/item/polished_quartz.json
-fd3a67dedeb5dbece5549114914448524eb21c39 assets/better_progression/models/item/pure_diamond.json
 5e4c683ba5497f235bfb93bb7771e6cca563798a assets/better_progression/models/item/raw_tin.json
 5581364695a91f2df4c7257f7e1e2667eec1c4d2 assets/better_progression/models/item/skeleton_essence.json
 b720eb5690fa77b5d765fec4e0c8c06f875b82c7 assets/better_progression/models/item/slime_essence.json

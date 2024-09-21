@@ -11,8 +11,12 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.Consumer;
+
+import static net.yuhi.better_progression.utils.ItemStackUtils.applyStackSizeToItem;
+
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
@@ -22,6 +26,15 @@ public abstract class ItemStackMixin {
     @Shadow public abstract Item getItem();
 
     @Shadow public abstract boolean isDamageableItem();
+
+    @Inject(method = "getMaxStackSize", at = @At("RETURN"), cancellable = true)
+    private void increaseStackLimit(CallbackInfoReturnable<Integer> returnInfo)
+    {
+        @SuppressWarnings("ConstantConditions") var itemstack = ((ItemStack) (Object) this);
+        var item = itemstack.getItem();
+
+        applyStackSizeToItem(returnInfo, itemstack, item);
+    }
 
     @Inject(method = "hurtAndBreak", at = @At("HEAD"), cancellable = true)
     public <T extends LivingEntity> void hurtAndBreak(int pAmount, T pEntity, Consumer<T> pOnBroken, CallbackInfo ci) {

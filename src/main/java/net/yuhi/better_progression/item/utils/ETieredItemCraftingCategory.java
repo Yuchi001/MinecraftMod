@@ -70,6 +70,8 @@ public enum ETieredItemCraftingCategory {
     LEGGINGS(EItemCategory.Leggings, (EMaterialType materialType) -> ArmorRecipe(EItemCategory.Leggings, materialType, EItemCategory.Plate)),
     BOOTS(EItemCategory.Boots, (EMaterialType materialType) -> ArmorRecipe(EItemCategory.Boots, materialType, EItemCategory.Plate)),
     
+    HORSE_ARMOR(EItemCategory.HorseArmor, ETieredItemCraftingCategory::HorseArmorRecipe),
+    
     PLATE(EItemCategory.Plate, (EMaterialType materialType) -> {
         var ingot = GetBase(materialType);
         var nugget = GetNugget(materialType);
@@ -259,6 +261,18 @@ public enum ETieredItemCraftingCategory {
                 .unlockedBy(getHasName(ingot), has(ingot));
     }
 
+    private static ShapedRecipeBuilder HorseArmorRecipe(EMaterialType materialType) {
+        var ingot = GetBase(materialType);
+        var base = ItemsUtilsMethods.getItem(EItemCategory.Plate, materialType);
+        return ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, GetHorseArmor(materialType))
+                .pattern(" # ")
+                .pattern("#*#")
+                .pattern(" # ")
+                .define('*', Items.LEATHER_HORSE_ARMOR)
+                .define('#', base)
+                .unlockedBy(getHasName(ingot), has(ingot));
+    }
+
     private static LegacyUpgradeRecipeBuilder UpgradeRecipe(EItemCategory category, EMaterialType base, EMaterialType upgrade) {
         var baseItem = ItemsUtilsMethods.getItem(category, base);
         var ingot = GetBase(upgrade);
@@ -346,5 +360,12 @@ public enum ETieredItemCraftingCategory {
             case ChainmailBoots -> Items.CHAINMAIL_BOOTS;
             default -> ItemsUtilsMethods.getItem(itemCategory, materialType);
         };
+    }
+
+    private static Item GetHorseArmor(EMaterialType materialType) {
+        if(!List.of(EMaterialType.GOLD, EMaterialType.IRON).contains(materialType))
+            return ItemsUtilsMethods.getItem(EItemCategory.HorseArmor, materialType);
+
+        return materialType == EMaterialType.IRON ? Items.IRON_HORSE_ARMOR : Items.GOLDEN_HORSE_ARMOR;
     }
 }

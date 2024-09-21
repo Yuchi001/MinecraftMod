@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "better_progression:bronze_plate"
+    },
+    "*": {
+      "item": "minecraft:leather_horse_armor"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#*#",
+    " # "
+  ],
+  "result": {
+    "item": "better_progression:bronze_horse_armor"
+  },
+  "show_notification": true
+}

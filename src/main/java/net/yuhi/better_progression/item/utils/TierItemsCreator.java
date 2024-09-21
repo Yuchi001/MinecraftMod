@@ -146,7 +146,7 @@ public class TierItemsCreator {
     
     public void createHorseArmor(int protection) {
         var armorResourceLocation = new ResourceLocation(BetterProgression.MOD_ID, "textures/entity/horse/armor/horse_armor_" + material_type.GetName() + ".png");
-        Supplier<Item> itemSupplier = () -> new HorseArmorItem(protection, armorResourceLocation, new Item.Properties());
+        Supplier<Item> itemSupplier = () -> new HorseArmorItem(protection, armorResourceLocation, new Item.Properties().stacksTo(1));
         var itemName = getItemName(EItemCategory.HorseArmor);
         RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemName, itemSupplier);
         var itemInfo = new ItemInfo(registryItem, EItemCategory.HorseArmor, EItemType.Simple, this);

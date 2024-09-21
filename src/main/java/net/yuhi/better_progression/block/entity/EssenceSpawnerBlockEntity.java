@@ -37,10 +37,10 @@ import javax.annotation.Nullable;
 public class EssenceSpawnerBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, StackedContentsCompatible {
     private int spawnerCharges = 0;
     private boolean hasMob = false;
-    public final static int MAX_CHARGES = 3600;
-    public final static int ESSENCE_CHARGE_VALUE = 360;
+    public final static int MAX_CHARGES = 18000;
+    public final static int ESSENCE_STACK_VALUE = MAX_CHARGES / 10;
     private float getChargeProgress() {
-        return (float)spawnerCharges / (float)ESSENCE_CHARGE_VALUE;
+        return (float)spawnerCharges / (float) ESSENCE_STACK_VALUE;
     }
     private NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY);
     
@@ -124,7 +124,7 @@ public class EssenceSpawnerBlockEntity extends BaseContainerBlockEntity implemen
 
             if (!stack.isEmpty() && stack.getItem() instanceof MobEssenceItem essenceItem) {
                 int chargeValue = essenceItem.getStacks();
-                int chargeToAdd = chargeValue * ESSENCE_CHARGE_VALUE;
+                int chargeToAdd = chargeValue * ESSENCE_STACK_VALUE;
 
                 if (this.spawnerCharges + chargeToAdd <= MAX_CHARGES) {
                     int stacks = 0;

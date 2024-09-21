@@ -1,30 +1,30 @@
-[21wrz2024 14:16:04.479] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 3, --assetsDir, C:\Users\PC\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 45.3.0, --fml.mcVersion, 1.19.4, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230314.122934, --mod, better_progression, --all, --output, C:\Users\PC\MinecraftMod\src\generated\resources, --existing, C:\Users\PC\MinecraftMod\src\main\resources]
-[21wrz2024 14:16:04.486] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.11 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
-[21wrz2024 14:16:04.628] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/PC/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23126!/ Service=ModLauncher Env=CLIENT
-[21wrz2024 14:16:04.948] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\PC\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.19.4-45.3.0\764616c79ed3e3def47acb8261877a186744247c\javafmllanguage-1.19.4-45.3.0.jar is missing mods.toml file
-[21wrz2024 14:16:04.953] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\PC\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.19.4-45.3.0\dcba60f8ba0b45885b77bc379d111d768df0bd66\lowcodelanguage-1.19.4-45.3.0.jar is missing mods.toml file
-[21wrz2024 14:16:04.956] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\PC\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.19.4-45.3.0\36d85cf4dae773f11faae7b34aaab4c5636510b0\mclanguage-1.19.4-45.3.0.jar is missing mods.toml file
-[21wrz2024 14:16:04.959] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\PC\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.19.4-45.3.0\13aeea5b95ae0928109f9b64e181651441820d2e\fmlcore-1.19.4-45.3.0.jar is missing mods.toml file
-[21wrz2024 14:16:05.036] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
-[21wrz2024 14:16:06.350] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\PC\.gradle\caches\forge_gradle\assets, --assetIndex, 3, --mod, better_progression, --all, --output, C:\Users\PC\MinecraftMod\src\generated\resources, --existing, C:\Users\PC\MinecraftMod\src\main\resources]
-[21wrz2024 14:16:06.552] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [better_progression]
-[21wrz2024 14:16:10.023] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 45.3.0, for MC 1.19.4 with MCP 20230314.122934
-[21wrz2024 14:16:10.027] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v45.3.0 Initialized
-[21wrz2024 14:16:10.504] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/PC/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.19.4-45.3.0_mapped_parchment_2023.06.26-1.19.4/forge-1.19.4-45.3.0_mapped_parchment_2023.06.26-1.19.4-recomp.jar%23189!/assets/.mcassetsroot' uses unexpected schema
-[21wrz2024 14:16:10.506] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/PC/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.19.4-45.3.0_mapped_parchment_2023.06.26-1.19.4/forge-1.19.4-45.3.0_mapped_parchment_2023.06.26-1.19.4-recomp.jar%23189!/data/.mcassetsroot' uses unexpected schema
-[21wrz2024 14:16:10.716] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
-[21wrz2024 14:16:10.772] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 56 ms
-[21wrz2024 14:16:10.772] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: better_progression
-[21wrz2024 14:16:10.994] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: better_progression finished after 221 ms
-[21wrz2024 14:16:10.994] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: better_progression
-[21wrz2024 14:16:11.079] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: better_progression finished after 83 ms
-[21wrz2024 14:16:11.079] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:block mod id better_progression
-[21wrz2024 14:16:11.092] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:block mod id better_progression finished after 14 ms
-[21wrz2024 14:16:11.093] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:item mod id better_progression
-[21wrz2024 14:16:11.096] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:item mod id better_progression finished after 3 ms
-[21wrz2024 14:16:11.096] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
-[21wrz2024 14:16:11.182] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 85 ms
-[21wrz2024 14:16:11.182] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Registries
-[21wrz2024 14:16:11.208] [main/INFO] [net.minecraft.data.DataGenerator/]: Registries finished after 24 ms
-[21wrz2024 14:16:11.208] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 492 ms
-[21wrz2024 14:16:11.270] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 1597, old count: 1597, new count: 1598, removed stale: 0, written: 0
+[21wrz2024 17:17:04.801] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 3, --assetsDir, C:\Users\PC\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 45.3.0, --fml.mcVersion, 1.19.4, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230314.122934, --mod, better_progression, --all, --output, C:\Users\PC\MinecraftMod\src\generated\resources, --existing, C:\Users\PC\MinecraftMod\src\main\resources]
+[21wrz2024 17:17:04.806] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.11 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[21wrz2024 17:17:04.927] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/PC/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23126!/ Service=ModLauncher Env=CLIENT
+[21wrz2024 17:17:05.183] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\PC\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.19.4-45.3.0\764616c79ed3e3def47acb8261877a186744247c\javafmllanguage-1.19.4-45.3.0.jar is missing mods.toml file
+[21wrz2024 17:17:05.185] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\PC\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.19.4-45.3.0\dcba60f8ba0b45885b77bc379d111d768df0bd66\lowcodelanguage-1.19.4-45.3.0.jar is missing mods.toml file
+[21wrz2024 17:17:05.187] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\PC\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.19.4-45.3.0\36d85cf4dae773f11faae7b34aaab4c5636510b0\mclanguage-1.19.4-45.3.0.jar is missing mods.toml file
+[21wrz2024 17:17:05.189] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\PC\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.19.4-45.3.0\13aeea5b95ae0928109f9b64e181651441820d2e\fmlcore-1.19.4-45.3.0.jar is missing mods.toml file
+[21wrz2024 17:17:05.245] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[21wrz2024 17:17:06.381] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\PC\.gradle\caches\forge_gradle\assets, --assetIndex, 3, --mod, better_progression, --all, --output, C:\Users\PC\MinecraftMod\src\generated\resources, --existing, C:\Users\PC\MinecraftMod\src\main\resources]
+[21wrz2024 17:17:06.578] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [better_progression]
+[21wrz2024 17:17:09.910] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 45.3.0, for MC 1.19.4 with MCP 20230314.122934
+[21wrz2024 17:17:09.912] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v45.3.0 Initialized
+[21wrz2024 17:17:10.351] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/PC/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.19.4-45.3.0_mapped_parchment_2023.06.26-1.19.4/forge-1.19.4-45.3.0_mapped_parchment_2023.06.26-1.19.4-recomp.jar%23189!/assets/.mcassetsroot' uses unexpected schema
+[21wrz2024 17:17:10.351] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/PC/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.19.4-45.3.0_mapped_parchment_2023.06.26-1.19.4/forge-1.19.4-45.3.0_mapped_parchment_2023.06.26-1.19.4-recomp.jar%23189!/data/.mcassetsroot' uses unexpected schema
+[21wrz2024 17:17:10.484] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
+[21wrz2024 17:17:10.525] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 41 ms
+[21wrz2024 17:17:10.526] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: better_progression
+[21wrz2024 17:17:10.710] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: better_progression finished after 183 ms
+[21wrz2024 17:17:10.710] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: better_progression
+[21wrz2024 17:17:10.781] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: better_progression finished after 71 ms
+[21wrz2024 17:17:10.782] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:block mod id better_progression
+[21wrz2024 17:17:10.795] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:block mod id better_progression finished after 13 ms
+[21wrz2024 17:17:10.795] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:item mod id better_progression
+[21wrz2024 17:17:10.799] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:item mod id better_progression finished after 3 ms
+[21wrz2024 17:17:10.799] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
+[21wrz2024 17:17:10.862] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 62 ms
+[21wrz2024 17:17:10.862] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Registries
+[21wrz2024 17:17:10.879] [main/INFO] [net.minecraft.data.DataGenerator/]: Registries finished after 16 ms
+[21wrz2024 17:17:10.879] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 396 ms
+[21wrz2024 17:17:10.929] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 1607, old count: 1607, new count: 1608, removed stale: 0, written: 0

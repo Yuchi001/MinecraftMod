@@ -249,6 +249,8 @@ public class ModRecipeProvider extends RecipeProvider {
             ETieredItemCraftingCategory.PICKAXE.SaveShapedRecipe(pWriter, material);
             ETieredItemCraftingCategory.SHOVEL.SaveShapedRecipe(pWriter, material);
             ETieredItemCraftingCategory.HOE.SaveShapedRecipe(pWriter, material);
+            
+            ETieredItemCraftingCategory.HORSE_ARMOR.SaveShapedRecipe(pWriter, material);
         }
     }
 }

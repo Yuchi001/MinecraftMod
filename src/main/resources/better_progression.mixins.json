@@ -8,6 +8,8 @@
     "ArmorMaterialsMixin",
     "EnchantmentHelperMixin",
     "EnchantmentMixin",
+    "HorseArmorItemMixin",
+    "HorseMixin",
     "ItemInHandRendererMixin",
     "ItemStackMixin",
     "LegacySmithingMenuMixin",

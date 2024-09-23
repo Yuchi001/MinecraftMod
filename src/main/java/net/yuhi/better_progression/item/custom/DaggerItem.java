@@ -5,6 +5,8 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.yuhi.better_progression.item.interfaces.Lootable;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,5 +34,14 @@ public class DaggerItem extends ThrowableItem implements Lootable<Animal> {
     @Override
     public SwordItem getSwordItem() {
         return this;
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        if (enchantment == Enchantments.LOYALTY) {
+            return true;
+        }
+
+        return super.canApplyAtEnchantingTable(stack, enchantment);
     }
 }

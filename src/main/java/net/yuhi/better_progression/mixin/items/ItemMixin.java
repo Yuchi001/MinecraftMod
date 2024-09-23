@@ -6,11 +6,13 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.item.interfaces.LayerableItem;
 import net.yuhi.better_progression.tag.ModTags;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -24,7 +26,6 @@ import static net.yuhi.better_progression.utils.ItemStackUtils.applyStackSizeToI
 
 @Mixin(Item.class)
 public abstract class ItemMixin {
-
     @Inject(method = "getMaxStackSize", at = @At("RETURN"), cancellable = true)
     private void increaseStackLimit(CallbackInfoReturnable<Integer> returnInfo)
     {
@@ -56,8 +57,8 @@ public abstract class ItemMixin {
     public void onArmorTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected, CallbackInfo ci) {
         if (!(pEntity instanceof Player player)) return;
         
-        onNetheriteArmorTick(player);
-        onEnderiteArmorTick(player);
+        betterProgression$onNetheriteArmorTick(player);
+        betterProgression$onEnderiteArmorTick(player);
         
         int heavy_armor_weight = 0;
         
@@ -71,7 +72,8 @@ public abstract class ItemMixin {
         player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, (heavy_armor_weight - 1) / 2, false, false, true));
     }
     
-    public void onNetheriteArmorTick(Player player) {
+    @Unique
+    public void betterProgression$onNetheriteArmorTick(Player player) {
         int netherite_armor_count = 0;
 
         for (var slot : player.getArmorSlots()) {
@@ -84,7 +86,8 @@ public abstract class ItemMixin {
         player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 10, (netherite_armor_count - 1) / 2, false, false, true));
     }
 
-    public void onEnderiteArmorTick(Player player) {
+    @Unique
+    public void betterProgression$onEnderiteArmorTick(Player player) {
         int enderite_armor_count = 0;
 
         for (var slot : player.getArmorSlots()) {

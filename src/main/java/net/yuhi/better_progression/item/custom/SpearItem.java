@@ -13,6 +13,11 @@ public class SpearItem extends ThrowableItem implements ReachItem {
     }
 
     @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
     public double getReach(ItemStack stack) {
         return this.attack_reach;
     }

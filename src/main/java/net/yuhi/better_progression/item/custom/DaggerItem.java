@@ -10,6 +10,8 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.yuhi.better_progression.item.interfaces.Lootable;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 
 public class DaggerItem extends ThrowableItem implements Lootable<Animal> {
     public DaggerItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
@@ -37,11 +39,21 @@ public class DaggerItem extends ThrowableItem implements Lootable<Animal> {
     }
 
     @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         if (enchantment == Enchantments.LOYALTY) {
             return true;
         }
 
         return super.canApplyAtEnchantingTable(stack, enchantment);
+    }
+
+    @Override
+    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+        return true;
     }
 }

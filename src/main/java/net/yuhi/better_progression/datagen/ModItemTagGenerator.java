@@ -22,8 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItems;
-import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getLayerableTools;
+import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.*;
 
 public class ModItemTagGenerator extends ItemTagsProvider {
     public ModItemTagGenerator(PackOutput p_275343_, CompletableFuture<HolderLookup.Provider> p_275729_, CompletableFuture<TagLookup<Block>> p_275322_, @Nullable ExistingFileHelper existingFileHelper) {

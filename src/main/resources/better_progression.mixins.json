@@ -6,7 +6,6 @@
   "refmap": "better_progression.mixins.refmap.json",
   "mixins": [
     "ArmorMaterialsMixin",
-    "EnchantmentHelperMixin",
     "EnchantmentMixin",
     "HorseArmorItemMixin",
     "HorseMixin",

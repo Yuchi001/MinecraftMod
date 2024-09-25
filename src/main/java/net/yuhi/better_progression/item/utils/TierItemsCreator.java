@@ -124,7 +124,7 @@ public class TierItemsCreator {
 
     public void createSpearItem(float damageMod, float attackSpeedMod, double attackReach) {
         var itemCategory = EItemCategory.Spear;
-        var itemName = is_upgrade_tier ? itemCategory.getFullName(material_type, sub_material_type) : itemCategory.getFullName(material_type);
+        var itemName = itemCategory.getFullName(material_type);
         RegistryObject<Item> registryItem = ModItems.ITEMS.register(itemName, () ->
                 new SpearItem(tier, (int)damageMod, attackSpeedMod, attackReach, new Item.Properties()));
         var itemInfo = new ItemInfo(registryItem, itemCategory, EItemType.Spear, this);
@@ -134,7 +134,7 @@ public class TierItemsCreator {
     public void createSimpleToolItem(EItemCategory itemCategory, float damageMod, float attackSpeedMod) {
         Supplier<Item> itemSupplier = () -> switch (itemCategory) {
             case Club -> new ClubItem(tier, damageMod, attackSpeedMod, new Item.Properties());
-            case Dagger -> new DaggerItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties());
+            case Dagger -> new DaggerItem(tier, (int) damageMod, attackSpeedMod, new Item.Properties().stacksTo(1));
             default -> throw new IllegalArgumentException("Invalid item category: " + itemCategory);
         };
 

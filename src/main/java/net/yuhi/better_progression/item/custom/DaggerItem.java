@@ -2,20 +2,29 @@ package net.yuhi.better_progression.item.custom;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.yuhi.better_progression.item.interfaces.Lootable;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.io.Console;
+import java.util.List;
 
 
 public class DaggerItem extends ThrowableItem implements Lootable<Animal> {
+    public static List<Enchantment> POSSIBLE_ENCHANTMENTS = List.of(Enchantments.LOYALTY,
+            Enchantments.FIRE_ASPECT,
+            Enchantments.MENDING,
+            Enchantments.SHARPNESS,
+            Enchantments.BANE_OF_ARTHROPODS,
+            Enchantments.UNBREAKING,
+            Enchantments.MOB_LOOTING,
+            Enchantments.SMITE);
+    
     public DaggerItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, Properties pProperties) {
-        super(pTier, pAttackDamageModifier, pAttackSpeedModifier, 1, true, pProperties);
+        super(pTier, pAttackDamageModifier, pAttackSpeedModifier, 1, true, pProperties.stacksTo(1));
     }
 
     @Override
@@ -45,15 +54,15 @@ public class DaggerItem extends ThrowableItem implements Lootable<Animal> {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        if (enchantment == Enchantments.LOYALTY) {
-            return true;
-        }
-
-        return super.canApplyAtEnchantingTable(stack, enchantment);
+        if (enchantment == Enchantments.SWEEPING_EDGE) return false;
+        return POSSIBLE_ENCHANTMENTS.contains(enchantment) || super.canApplyAtEnchantingTable(stack, enchantment);
     }
 
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        return true;
+        for (var set : EnchantmentHelper.getEnchantments(book).entrySet()) {
+            if (POSSIBLE_ENCHANTMENTS.contains(set.getKey())) return true;
+        }
+        return super.isBookEnchantable(stack, book);
     }
 }

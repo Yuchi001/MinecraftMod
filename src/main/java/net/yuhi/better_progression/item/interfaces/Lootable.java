@@ -11,6 +11,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.yuhi.better_progression.item.enums.ELootItemDropProps;
 import org.jetbrains.annotations.NotNull;
 
 import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getCount;
@@ -39,7 +40,8 @@ public interface Lootable<T extends LivingEntity> {
         for (ItemStack drop : drops) {
             int baseCount = drop.getCount();
             int lootingEnchantmentValue = getSwordItem().getEnchantmentLevel(stack, Enchantments.MOB_LOOTING);
-            drop.setCount(getCount(baseCount, getSwordItem()) + getCount(lootingEnchantmentValue, getSwordItem()));
+            var maxCount = ELootItemDropProps.getTierDrop(getSwordItem().getTier());
+            drop.setCount(getCount(baseCount, maxCount) + getCount(lootingEnchantmentValue, maxCount));
         }
 
         for (var drop : drops) {

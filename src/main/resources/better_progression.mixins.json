@@ -6,6 +6,7 @@
   "refmap": "better_progression.mixins.refmap.json",
   "mixins": [
     "ArmorMaterialsMixin",
+    "BlockMixin",
     "EnchantmentMixin",
     "HorseArmorItemMixin",
     "HorseMixin",
@@ -26,6 +27,7 @@
     "accessor.ItemAccessor",
     "accessor.ItemCombinerMenuAccessor",
     "accessor.LegacySmithingMenuAccessor",
+    "accessor.LootPoolAccessor",
     "accessor.SwordItemAccessor",
     "items.ArmorItemMixin",
     "items.AxeItemMixin",
@@ -34,9 +36,10 @@
     "items.ItemMixin",
     "items.LivingEntityMixin",
     "items.MixinFoodStats",
-    "items.PickAxeItemMixin",
+    "items.PickaxeItemMixin",
     "items.ShovelItemMixin",
-    "items.SwordItemMixin"
+    "items.SwordItemMixin",
+    "items.TridentItemMixin"
   ],
   "client": [
     "GuiMixin"

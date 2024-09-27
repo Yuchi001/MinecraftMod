@@ -1,21 +1,29 @@
 package net.yuhi.better_progression.mixin;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.extensions.IForgeItem;
-import net.yuhi.better_progression.mixin.accessor.ItemAccessor;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
 
 @Mixin(HorseArmorItem.class)
 public class HorseArmorItemMixin implements IForgeItem {
+    @Unique
+    private static List<Enchantment> POSSIBLE_ENCHANTMENTS = List.of(Enchantments.UNBREAKING,
+            Enchantments.PROJECTILE_PROTECTION,
+            Enchantments.BLAST_PROTECTION,
+            Enchantments.MENDING,
+            Enchantments.THORNS,
+            Enchantments.FIRE_PROTECTION,
+            Enchantments.ALL_DAMAGE_PROTECTION);
 
     @ModifyArg(
             method = "<init>*",
@@ -31,13 +39,19 @@ public class HorseArmorItemMixin implements IForgeItem {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment == Enchantments.UNBREAKING || enchantment == Enchantments.PROJECTILE_PROTECTION ||
-                enchantment == Enchantments.BLAST_PROTECTION || enchantment == Enchantments.FIRE_PROTECTION ||
-                enchantment == Enchantments.ALL_DAMAGE_PROTECTION;
+        return POSSIBLE_ENCHANTMENTS.contains(enchantment);
     }
 
     @Override
     public boolean isRepairable(ItemStack stack) {
         return true;
+    }
+
+    @Override
+    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+        for (var set : EnchantmentHelper.getEnchantments(book).entrySet()) {
+            if (POSSIBLE_ENCHANTMENTS.contains(set.getKey())) return true;
+        }
+        return false;
     }
 }

@@ -4,8 +4,6 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -21,6 +19,7 @@ import net.yuhi.better_progression.block.ModBlockEntities;
 import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.block.utils.ModWoodTypes;
 import net.yuhi.better_progression.effect.ModEffects;
+import net.yuhi.better_progression.enchantment.ModEnchantments;
 import net.yuhi.better_progression.entity.ModEntityTypes;
 import net.yuhi.better_progression.events.*;
 import net.yuhi.better_progression.item.ModCreativeModTabs;
@@ -59,6 +58,7 @@ public class BetterProgression
         ModMenus.register(modEventBus);
         ModRecipes.register(modEventBus);
         ModRecipeType.register(modEventBus);
+        ModEnchantments.register(modEventBus);
 
         modEventBus.addListener(ModCreativeModTabs::registerCreativeTab);
         
@@ -72,7 +72,6 @@ public class BetterProgression
         MinecraftForge.EVENT_BUS.register(ModEntityRenders.class);
         MinecraftForge.EVENT_BUS.register(ArmorChangeEventHandler.class);
         MinecraftForge.EVENT_BUS.register(PlayerTickHandler.class);
-        MinecraftForge.EVENT_BUS.register(HungerBarRenderHandler.class);
         MinecraftForge.EVENT_BUS.register(PlayerSleepHandler.class);
         MinecraftForge.EVENT_BUS.register(AnvilRepairHandler.class);
         MinecraftForge.EVENT_BUS.register(TotemUseHandler.class);

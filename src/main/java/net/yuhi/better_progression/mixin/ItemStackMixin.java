@@ -2,6 +2,7 @@ package net.yuhi.better_progression.mixin;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.yuhi.better_progression.item.interfaces.LayerableItem;
@@ -26,7 +27,7 @@ public abstract class ItemStackMixin {
     @Shadow public abstract Item getItem();
 
     @Shadow public abstract boolean isDamageableItem();
-
+    
     @Inject(method = "getMaxStackSize", at = @At("RETURN"), cancellable = true)
     private void increaseStackLimit(CallbackInfoReturnable<Integer> returnInfo)
     {

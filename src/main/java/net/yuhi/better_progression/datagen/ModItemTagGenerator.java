@@ -34,7 +34,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         tag(ModTags.Items.STACKS_TO_16).add(Items.POTION, Items.LINGERING_POTION, Items.SPLASH_POTION, Items.GOLDEN_APPLE, Items.GOLDEN_CARROT, Items.BEETROOT_SOUP, Items.MUSHROOM_STEW, Items.RABBIT_STEW);
         tag(ModTags.Items.STACKS_TO_32).add(Items.BEEF, Items.COOKED_BEEF, Items.PORKCHOP, Items.COOKED_PORKCHOP, Items.COOKED_MUTTON, Items.MUTTON, Items.RABBIT, Items.COOKED_RABBIT);
         tag(ModTags.Items.NO_STACKING).add(Items.ENCHANTED_GOLDEN_APPLE);
-        
+
         for (var tool : getLayerableTools()) {
             tag(ModTags.Items.LAYERABLE_TAG).add(tool);
         }

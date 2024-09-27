@@ -22,11 +22,6 @@ public abstract class ThrowableItem extends SwordItem implements Vanishable {
     private final boolean shouldRotate;
     private float scale = 0.88f;
 
-    @Override
-    public int getMaxStackSize(ItemStack stack) {
-        return 16;
-    }
-
     public ThrowableItem(Tier pTier, int pAttackDamageModifier, float pAttackSpeedModifier, int useTime, boolean shouldRotate, Properties pProperties) {
         super(pTier, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
         this.useTime = useTime;

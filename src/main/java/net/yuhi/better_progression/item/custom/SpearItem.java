@@ -11,14 +11,22 @@ import net.yuhi.better_progression.item.interfaces.ReachItem;
 import java.util.List;
 
 public class SpearItem extends ThrowableItem implements ReachItem {
-    public static List<Enchantment> POSSIBLE_ENCHANTMENTS = List.of(Enchantments.LOYALTY,
+    private static final List<Enchantment> UNIQUE_ENCHANTMENTS = List.of(Enchantments.LOYALTY);
+
+    private static final List<Enchantment> DEFAULT_ENCHANTMENTS = List.of(Enchantments.UNBREAKING,
+            Enchantments.BLOCK_EFFICIENCY,
+            Enchantments.BLOCK_FORTUNE,
             Enchantments.FIRE_ASPECT,
-            Enchantments.MENDING,
             Enchantments.SHARPNESS,
             Enchantments.BANE_OF_ARTHROPODS,
-            Enchantments.UNBREAKING,
             Enchantments.MOB_LOOTING,
             Enchantments.SMITE);
+
+    private static List<Enchantment> getPossibleEnchantments(boolean book) {
+        var enchantments = UNIQUE_ENCHANTMENTS;
+        if (book) enchantments.addAll(DEFAULT_ENCHANTMENTS);
+        return enchantments;
+    }
     
     private final double attack_reach;
     
@@ -40,13 +48,13 @@ public class SpearItem extends ThrowableItem implements ReachItem {
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         if (enchantment == Enchantments.SWEEPING_EDGE) return false;
-        return POSSIBLE_ENCHANTMENTS.contains(enchantment) || super.canApplyAtEnchantingTable(stack, enchantment);
+        return getPossibleEnchantments(false).contains(enchantment) || super.canApplyAtEnchantingTable(stack, enchantment);
     }
 
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
         for (var set : EnchantmentHelper.getEnchantments(book).entrySet()) {
-            if (POSSIBLE_ENCHANTMENTS.contains(set.getKey())) return true;
+            if (getPossibleEnchantments(true).contains(set.getKey())) return true;
         }
         return super.isBookEnchantable(stack, book);
     }

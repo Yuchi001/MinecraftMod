@@ -99,4 +99,20 @@ public abstract class ItemMixin {
 
         player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 10, (enderite_armor_count - 1) / 2, false, false, true));
     }
+
+    @Inject(method = "isEnchantable", at = @At("HEAD"), cancellable = true)
+    public void isEnchantable(ItemStack pStack, CallbackInfoReturnable<Boolean> cir) {
+        if(pStack.getItem() instanceof HorseArmorItem) {
+            cir.setReturnValue(true);
+            cir.cancel();
+        }
+    }
+    
+    @Inject(method = "getEnchantmentValue", at = @At("HEAD"), cancellable = true)
+    public void getEnchantmentValue(CallbackInfoReturnable<Integer> cir) {
+        if((Item)(Object)this instanceof HorseArmorItem) {
+            cir.setReturnValue(15);
+            cir.cancel();
+        }
+    }
 }

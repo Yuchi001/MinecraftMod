@@ -5,13 +5,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.item.custom.BattleAxeItem;
 import net.yuhi.better_progression.item.custom.LongSwordItem;
 import net.yuhi.better_progression.item.enums.EItemCategory;
-import net.yuhi.better_progression.item.enums.ELootItemDropProps;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 import net.yuhi.better_progression.item.enums.EModArmorMaterial;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -173,7 +173,7 @@ public final class ItemsUtilsMethods {
     }
     
 
-    public static int getCount(int defaultCount, SwordItem sword){
+    public static int getCount(int defaultCount, int maxCount){
         class DropTuple {
             public final int count;
             public final float weight;
@@ -184,7 +184,6 @@ public final class ItemsUtilsMethods {
         }
 
         var dropList = new ArrayList<DropTuple>();
-        var maxCount = ELootItemDropProps.getTierDrop(sword.getTier());
         var weightSum = 0.0f;
         var baseWeight = 100.0f;
         for (var i = 0; i <= maxCount; i++) {

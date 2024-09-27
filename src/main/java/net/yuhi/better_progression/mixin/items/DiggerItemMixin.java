@@ -73,35 +73,31 @@ public class DiggerItemMixin {
     public void mineBlock(ItemStack pStack, Level pLevel, BlockState pState, BlockPos pPos, LivingEntity pEntityLiving, CallbackInfoReturnable<Boolean> cir) {
         Player player = (Player) pEntityLiving;
 
-        if (pStack.getItem() instanceof DiggerItem && EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.HAMMER.get(), pStack) > 0) {
-
+        if (!pLevel.isClientSide && pStack.getItem() instanceof DiggerItem && EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.HAMMER.get(), pStack) > 0) {
+            
             int level = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.HAMMER.get(), pStack);
             int depth = Math.min(level, 3);
 
             BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
+            
+            int destroyedBlocks = 0;
 
             for (int z = 0; z < depth; z++) {
                 for (int x = -1; x <= 1; x++) {
                     for (int y = -1; y <= 1; y++) {
-                        if (pPos.getY() < player.getY()) {
-                            mutablePos.set(pPos.offset(x, -z, y));
-                            pLevel.setBlock(mutablePos, Blocks.AIR.defaultBlockState(), 3);
-                        }
-                        else if (pPos.getY() > player.getY() + 1.62) {
-                            mutablePos.set(pPos.offset(x, z, y));
-                            pLevel.setBlock(mutablePos, Blocks.AIR.defaultBlockState(), 3);
-                        }
-                        else if (player.getDirection().getAxis() == Direction.Axis.Z) {
-                            mutablePos.set(pPos.offset(x, y, player.getDirection().getAxisDirection() == Direction.AxisDirection.POSITIVE ? z : -z));
-                            pLevel.setBlock(mutablePos, Blocks.AIR.defaultBlockState(), 3);
-                        }
-                        else if (player.getDirection().getAxis() == Direction.Axis.X) {
-                            mutablePos.set(pPos.offset(player.getDirection().getAxisDirection() == Direction.AxisDirection.POSITIVE ? z : -z, y, x));
-                            pLevel.setBlock(mutablePos, Blocks.AIR.defaultBlockState(), 3);
-                        }
+                        if (pPos.getY() < player.getY()) mutablePos.set(pPos.offset(x, -z, y));
+                        else if (pPos.getY() > player.getY() + 1.62) mutablePos.set(pPos.offset(x, z, y));
+                        else if (player.getDirection().getAxis() == Direction.Axis.Z) mutablePos.set(pPos.offset(x, y, player.getDirection().getAxisDirection() == Direction.AxisDirection.POSITIVE ? z : -z));
+                        else if (player.getDirection().getAxis() == Direction.Axis.X) mutablePos.set(pPos.offset(player.getDirection().getAxisDirection() == Direction.AxisDirection.POSITIVE ? z : -z, y, x));
+                    
+                        destroyedBlocks += pLevel.destroyBlock(mutablePos, false) ? 1 : 0;
                     }
                 }
             }
+
+            pStack.hurtAndBreak(destroyedBlocks, pEntityLiving, (p_40992_) -> {
+                p_40992_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
+            });
             
             cir.setReturnValue(true);
             cir.cancel();

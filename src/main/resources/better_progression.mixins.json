@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "better_progression.mixins.refmap.json",
   "mixins": [
+    "AnvilBlockMixin",
     "ArmorMaterialsMixin",
     "BlockMixin",
     "EnchantmentMixin",

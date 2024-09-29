@@ -7,6 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.menu.custom.BetterAnvilMenu;
 import net.yuhi.better_progression.menu.custom.BetterBlastFurnaceMenu;
 import net.yuhi.better_progression.menu.custom.BetterEnchantmentMenu;
 import net.yuhi.better_progression.menu.custom.EssenceSpawnerMenu;
@@ -24,6 +25,10 @@ public class ModMenus {
     public static final RegistryObject<MenuType<BetterEnchantmentMenu>> ENCHANTMENT =
             VANILLA_MENU_TYPES.register("enchantment", () ->
                     IForgeMenuType.create(BetterEnchantmentMenu::new));
+
+    public static final RegistryObject<MenuType<BetterAnvilMenu>> ANVIL =
+            VANILLA_MENU_TYPES.register("anvil", () ->
+                    IForgeMenuType.create(BetterAnvilMenu::new));
 
     public static final RegistryObject<MenuType<EssenceSpawnerMenu>> ESSENCE_SPAWNER =
             MENU_TYPES.register("essence_spawner", () ->

@@ -75,9 +75,8 @@ public class DiggerItemMixin {
             int depth = Math.min(level, 3);
 
             BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
-            
-            int destroyedBlocks = 0;
 
+            var droppedBlock = false;
             for (int z = 0; z < depth; z++) {
                 for (int x = -1; x <= 1; x++) {
                     for (int y = -1; y <= 1; y++) {
@@ -88,12 +87,13 @@ public class DiggerItemMixin {
                     
                         if(!diggerItem.isCorrectToolForDrops(player.getMainHandItem(), pLevel.getBlockState(mutablePos))) continue;
                         
-                        destroyedBlocks += pLevel.destroyBlock(mutablePos, false) ? 1 : 0;
+                        pLevel.destroyBlock(mutablePos, !droppedBlock);
+                        droppedBlock = true;
                     }
                 }
             }
            
-            pStack.hurtAndBreak(destroyedBlocks, pEntityLiving, (p_40992_) -> {
+            pStack.hurtAndBreak(1, pEntityLiving, (p_40992_) -> {
                 p_40992_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
             });
             

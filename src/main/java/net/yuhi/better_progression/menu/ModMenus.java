@@ -7,10 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.menu.custom.BetterAnvilMenu;
-import net.yuhi.better_progression.menu.custom.BetterBlastFurnaceMenu;
-import net.yuhi.better_progression.menu.custom.BetterEnchantmentMenu;
-import net.yuhi.better_progression.menu.custom.EssenceSpawnerMenu;
+import net.yuhi.better_progression.menu.custom.*;
 
 public class ModMenus {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES =

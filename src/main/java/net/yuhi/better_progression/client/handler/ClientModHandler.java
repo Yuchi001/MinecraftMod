@@ -6,10 +6,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.client.screen.BetterAnvilScreen;
-import net.yuhi.better_progression.client.screen.BetterEnchantingScreen;
-import net.yuhi.better_progression.client.screen.BetterFurnaceMenuScreen;
-import net.yuhi.better_progression.client.screen.EssenceSpawnerMenuScreen;
+import net.yuhi.better_progression.client.screen.*;
 import net.yuhi.better_progression.menu.ModMenus;
 
 @Mod.EventBusSubscriber(modid = BetterProgression.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

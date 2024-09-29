@@ -6,6 +6,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.client.screen.BetterEnchantingScreen;
 import net.yuhi.better_progression.client.screen.BetterFurnaceMenuScreen;
 import net.yuhi.better_progression.client.screen.EssenceSpawnerMenuScreen;
 import net.yuhi.better_progression.menu.ModMenus;
@@ -17,6 +18,7 @@ public class ClientModHandler {
         event.enqueueWork(() -> {
             MenuScreens.register(ModMenus.BLAST_FURNACE.get(), BetterFurnaceMenuScreen::new);
             MenuScreens.register(ModMenus.ESSENCE_SPAWNER.get(), EssenceSpawnerMenuScreen::new);
+            MenuScreens.register(ModMenus.ENCHANTMENT.get(), BetterEnchantingScreen::new);
         });
     }
 }

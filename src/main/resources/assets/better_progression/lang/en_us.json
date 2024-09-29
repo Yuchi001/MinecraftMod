@@ -1,4 +1,8 @@
 ﻿{
+  "container.better_progression.enchantment.common": "Common I-V",
+  "container.better_progression.enchantment.uncommon": "Common/Uncommon III-V",
+  "container.better_progression.enchantment.rare": "All Rarities IV-V",
+  
   "enchantment.better_progression.hammer": "Hammer",
   
   "item.better_progression.bear_meat": "Bear Meat",

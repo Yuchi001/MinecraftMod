@@ -5,36 +5,31 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.yuhi.better_progression.attribute.ModAttributes;
-import net.yuhi.better_progression.block.ModBlocks;
 import net.yuhi.better_progression.enchantment.ModEnchantments;
-import net.yuhi.better_progression.item.enums.EHoeItemDropProps;
 import net.yuhi.better_progression.item.interfaces.ReachItem;
 import net.yuhi.better_progression.mixin.accessor.DiggerItemAccessor;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.yuhi.better_progression.attribute.ModAttributes.ATTACK_REACH_UUID;
 
@@ -75,6 +70,7 @@ public class DiggerItemMixin {
 
         if (!pLevel.isClientSide && pStack.getItem() instanceof DiggerItem && EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.HAMMER.get(), pStack) > 0) {
             
+            var diggerItem = (DiggerItem) pStack.getItem();
             int level = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.HAMMER.get(), pStack);
             int depth = Math.min(level, 3);
 
@@ -90,11 +86,13 @@ public class DiggerItemMixin {
                         else if (player.getDirection().getAxis() == Direction.Axis.Z) mutablePos.set(pPos.offset(x, y, player.getDirection().getAxisDirection() == Direction.AxisDirection.POSITIVE ? z : -z));
                         else if (player.getDirection().getAxis() == Direction.Axis.X) mutablePos.set(pPos.offset(player.getDirection().getAxisDirection() == Direction.AxisDirection.POSITIVE ? z : -z, y, x));
                     
+                        if(!diggerItem.isCorrectToolForDrops(player.getMainHandItem(), pLevel.getBlockState(mutablePos))) continue;
+                        
                         destroyedBlocks += pLevel.destroyBlock(mutablePos, false) ? 1 : 0;
                     }
                 }
             }
-
+           
             pStack.hurtAndBreak(destroyedBlocks, pEntityLiving, (p_40992_) -> {
                 p_40992_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
             });

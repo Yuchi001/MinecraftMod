@@ -8,6 +8,7 @@
     "ArmorMaterialsMixin",
     "BlockMixin",
     "EnchantmentMixin",
+    "EnchantmentTableBlockMixin",
     "HorseArmorItemMixin",
     "HorseMixin",
     "ItemInHandRendererMixin",

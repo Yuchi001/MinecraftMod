@@ -67,8 +67,8 @@ public class BetterSimpleCookingSerializer<T extends AbstractBetterCookingRecipe
         pBuffer.writeFloat(pRecipe.getExperience());
         pBuffer.writeVarInt(pRecipe.getCookingTime());
         
-        pBuffer.writeInt(pRecipe.getIngredientCount(0));
-        pBuffer.writeInt(pRecipe.getIngredientCount(1));
+        pBuffer.writeVarInt(pRecipe.getIngredientCount(0));
+        pBuffer.writeVarInt(pRecipe.getIngredientCount(1));
     }
 
     interface CookieBaker<T extends AbstractBetterCookingRecipe> {

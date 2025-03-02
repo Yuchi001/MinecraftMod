@@ -9,6 +9,8 @@ import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.entity.custom.ModBoatEntity;
 import net.yuhi.better_progression.entity.custom.ModChestBoatEntity;
@@ -16,6 +18,7 @@ import net.yuhi.better_progression.entity.custom.ModChestBoatEntity;
 import java.util.Map;
 import java.util.stream.Stream;
 
+@OnlyIn(Dist.CLIENT)
 public class ModBoatRenderer extends BoatRenderer {
     private final Map<ModBoatEntity.Type, Pair<ResourceLocation, ListModel<Boat>>> boatResources;
 

@@ -65,23 +65,24 @@ public class BetterProgression
         modEventBus.addListener(ModCreativeModTabs::onBuildContents);
 
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(HeavyItemEventHandler.class);
         MinecraftForge.EVENT_BUS.register(VillagerTradesEventHandler.class);
         MinecraftForge.EVENT_BUS.register(BlockInteractionHandler.class);
         MinecraftForge.EVENT_BUS.register(RemoveRecipes.class);
-        MinecraftForge.EVENT_BUS.register(ModEntityRenders.class);
-        MinecraftForge.EVENT_BUS.register(ArmorChangeEventHandler.class);
+        
         MinecraftForge.EVENT_BUS.register(PlayerTickHandler.class);
         MinecraftForge.EVENT_BUS.register(PlayerSleepHandler.class);
         MinecraftForge.EVENT_BUS.register(AnvilRepairHandler.class);
         MinecraftForge.EVENT_BUS.register(TotemUseHandler.class);
+        
+        MinecraftForge.EVENT_BUS.register(PlayerHealthHandler.class);
+        MinecraftForge.EVENT_BUS.register(ArmorChangeEventHandler.class);
         
         modEventBus.addListener(this::addCreative);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        Mixins.addConfiguration("better_progression.mixins.json");
+        //Mixins.addConfiguration("better_progression.mixins.json");
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {

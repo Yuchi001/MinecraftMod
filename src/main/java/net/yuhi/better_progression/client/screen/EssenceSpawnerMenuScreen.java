@@ -6,10 +6,13 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.block.entity.EssenceSpawnerBlockEntity;
 import net.yuhi.better_progression.menu.custom.EssenceSpawnerMenu;
 
+@OnlyIn(Dist.CLIENT)
 public class EssenceSpawnerMenuScreen extends AbstractContainerScreen<EssenceSpawnerMenu> {
     private final ResourceLocation texture;
 
@@ -25,6 +28,7 @@ public class EssenceSpawnerMenuScreen extends AbstractContainerScreen<EssenceSpa
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         this.renderBackground(pPoseStack);
 
@@ -34,6 +38,7 @@ public class EssenceSpawnerMenuScreen extends AbstractContainerScreen<EssenceSpa
     }
 
     @Override
+    @OnlyIn(Dist.CLIENT)
     protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pX, int pY) {
         RenderSystem.setShaderTexture(0, this.texture);
         

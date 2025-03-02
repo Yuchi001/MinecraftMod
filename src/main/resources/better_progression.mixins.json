@@ -12,7 +12,6 @@
     "EnchantmentTableBlockMixin",
     "HorseArmorItemMixin",
     "HorseMixin",
-    "ItemInHandRendererMixin",
     "ItemStackMixin",
     "LegacySmithingMenuMixin",
     "LlamaMixin",
@@ -44,6 +43,7 @@
     "items.TridentItemMixin"
   ],
   "client": [
+    "ItemInHandRendererMixin",
     "GuiMixin"
   ],
   "server": [],

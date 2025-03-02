@@ -1,17 +1,22 @@
 package net.yuhi.better_progression.item.custom;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.yuhi.better_progression.item.ModTiers;
+import net.yuhi.better_progression.item.enums.EDaggerItemProps;
 import net.yuhi.better_progression.item.interfaces.Lootable;
+import net.yuhi.better_progression.item.utils.ItemsUtilsMethods;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Unique;
 
 import java.io.Console;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class DaggerItem extends ThrowableItem implements Lootable<Animal> {
@@ -25,6 +30,12 @@ public class DaggerItem extends ThrowableItem implements Lootable<Animal> {
             Enchantments.BANE_OF_ARTHROPODS,
             Enchantments.MOB_LOOTING,
             Enchantments.SMITE);
+    
+    private static final List<Class> LEATHER_ANIMALS = List.of(Sheep.class, 
+            Pig.class, 
+            Cow.class, 
+            Panda.class, 
+            PolarBear.class);
 
     private static List<Enchantment> getPossibleEnchantments(boolean book) {
         var enchantments = UNIQUE_ENCHANTMENTS;
@@ -44,6 +55,15 @@ public class DaggerItem extends ThrowableItem implements Lootable<Animal> {
     @Override
     public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
         return lootEnemy(pStack, pTarget, pAttacker, super.hurtEnemy(pStack, pTarget, pAttacker));
+    }
+
+    @Override
+    public ObjectArrayList<ItemStack> modifyDrop(ObjectArrayList<ItemStack> current, LivingEntity target) {
+        if (!LEATHER_ANIMALS.contains(target.getClass())) return current;
+
+        var randomNum = EDaggerItemProps.getDropCount(getTier());
+        if (randomNum > 0) current.add(new ItemStack(Items.LEATHER, randomNum));
+        return current;
     }
 
     @Override

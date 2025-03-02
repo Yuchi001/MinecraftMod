@@ -13,7 +13,7 @@ public class ModTiers {
     public static final ForgeTier COPPER = 
             new ForgeTier(
                     1, 
-                    150,
+                    50,
                     6.5f,
                     3.0f,
                     20,
@@ -23,7 +23,7 @@ public class ModTiers {
     public static final ForgeTier BRONZE =
             new ForgeTier(
                     3,
-                    300,
+                    150,
                     8.5f,
                     4.0f,
                     10,

@@ -1,5 +1,6 @@
 package net.yuhi.better_progression.item.interfaces;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,6 +14,8 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.yuhi.better_progression.item.enums.ELootItemDropProps;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getCount;
 
@@ -44,11 +47,16 @@ public interface Lootable<T extends LivingEntity> {
             drop.setCount(getCount(baseCount, maxCount) + getCount(lootingEnchantmentValue, maxCount));
         }
 
+        drops = modifyDrop(drops, target);
         for (var drop : drops) {
             target.spawnAtLocation(drop);
         }
 
         return true;
+    }
+    
+    default ObjectArrayList<ItemStack> modifyDrop(ObjectArrayList<ItemStack> current, LivingEntity target) {
+        return current;
     }
     
     SwordItem getSwordItem();

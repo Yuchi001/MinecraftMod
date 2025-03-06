@@ -189,7 +189,7 @@ public final class ItemsUtilsMethods {
         for (var i = 0; i <= maxCount; i++) {
             dropList.add(new DropTuple(i, baseWeight));
             weightSum += baseWeight;
-            baseWeight /= 1.5f;
+            baseWeight *= 0.9f;
         }
 
         dropList.sort((o1, o2) -> Float.compare(o1.weight, o2.weight));

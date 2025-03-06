@@ -67,22 +67,22 @@ public class ModItems {
 
     public static void createItems() {
         var woodenSupplier = new TierItemsCreator(ItemTags.PLANKS, EMaterialType.WOOD, Tiers.WOOD);
-        woodenSupplier.createSimpleToolItem(EItemCategory.Club, 3.0F, -3.2F);
+        woodenSupplier.createSimpleToolItem(EItemCategory.Club, 1.5F, -3.2F);
 
         var stoneSupplier = new TierItemsCreator(Tags.Items.COBBLESTONE, EMaterialType.STONE, Tiers.STONE);
-        stoneSupplier.createSimpleToolItem(EItemCategory.Club, 3.5F, -3.2F);
-        stoneSupplier.createSimpleToolItem(EItemCategory.Dagger, 0.5F, -1.4F);
-        stoneSupplier.createSpearItem(4F, -2.9F, 1.5D);
+        stoneSupplier.createSimpleToolItem(EItemCategory.Club, 1.5F, -3.2F);
+        stoneSupplier.createSimpleToolItem(EItemCategory.Dagger, 0.25F, -1.4F);
+        stoneSupplier.createSpearItem(2F, -2.9F, 1.5D);
 
         var diamondSupplier = new TierItemsCreator("diamond", EMaterialType.DIAMOND, ModTiers.BETTER_DIAMOND).SetHasDefaultBasis();
-        diamondSupplier.createSimpleToolItem(EItemCategory.Club, 5.0F, -2.8F);
-        diamondSupplier.createSimpleToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
-        diamondSupplier.createSpearItem(6F, -2.9F, 1.5D);
+        diamondSupplier.createSimpleToolItem(EItemCategory.Club, 1.5F, -3.2F);
+        diamondSupplier.createSimpleToolItem(EItemCategory.Dagger, 0.25F, -1.4F);
+        diamondSupplier.createSpearItem(2F, -2.9F, 1.5D);
 
         var obsidianSupplier = new TierItemsCreator("obsidian", EMaterialType.OBSIDIAN, ModTiers.OBSIDIAN).SetHasDefaultBasis();
-        obsidianSupplier.createSimpleToolItem(EItemCategory.Dagger, 2.0F, -0.8F);
-        obsidianSupplier.createSimpleToolItem(EItemCategory.Club, 4.0F, -3F);
-        obsidianSupplier.createSpearItem(7F, -2.9F, 1.5D);
+        obsidianSupplier.createSimpleToolItem(EItemCategory.Club, 1.5F, -3.2F);
+        obsidianSupplier.createSimpleToolItem(EItemCategory.Dagger, 0.5F, -1.4F);
+        obsidianSupplier.createSpearItem(4F, -2.9F, 2.5D);
 
         var copperSupplier = new TierItemsCreator("copper_ingot", EMaterialType.COPPER, ModTiers.COPPER)
                 .SetHasDefaultBasis()

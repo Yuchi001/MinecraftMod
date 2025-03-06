@@ -23,7 +23,7 @@ public class ArmorMaterialsMixin implements BetterArmorMaterial {
     
     @Inject(method = "<init>", at = @At("RETURN"))
     private void modifyEnumValues(String name, int ordinal, String pName, int pDurabilityMultiplier, EnumMap<ArmorItem.Type, Integer> pProtectionFunctionForType, int pEnchantmentValue, net.minecraft.sounds.SoundEvent pSound, float pToughness, float pKnockbackResistance, java.util.function.Supplier<net.minecraft.world.item.crafting.Ingredient> pRepairIngredient, CallbackInfo ci) {
-        var accessor = (ArmorMaterialsAccessor)(Object)this;
+        var accessor = (ArmorMaterialsAccessor)this;
         
         switch (pName) {
             case "leather" -> {
@@ -39,6 +39,8 @@ public class ArmorMaterialsMixin implements BetterArmorMaterial {
                 pProtectionFunctionForType.put(ArmorItem.Type.CHESTPLATE, 3);
                 pProtectionFunctionForType.put(ArmorItem.Type.LEGGINGS, 3);
                 pProtectionFunctionForType.put(ArmorItem.Type.BOOTS, 2);
+                
+                accessor.setDurabilityMultiplier(10);
 
                 accessor.setRepairIngredient(new LazyLoadedValue<>(() -> Ingredient.of(Items.IRON_INGOT)));
 

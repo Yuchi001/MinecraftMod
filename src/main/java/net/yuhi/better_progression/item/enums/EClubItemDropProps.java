@@ -4,36 +4,39 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.world.item.*;
 import net.yuhi.better_progression.item.ModTiers;
+import net.yuhi.better_progression.item.utils.ItemsUtilsMethods;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
 public enum EClubItemDropProps {
-    WOOD(Tiers.WOOD, 0),
-    STONE(Tiers.STONE, 1),
-    DIAMOND(ModTiers.BETTER_DIAMOND, 3),
-    OBSYDIAN(ModTiers.OBSIDIAN, 6);
+    WOOD(Tiers.WOOD, 1, 0),
+    STONE(Tiers.STONE, 1, 3),
+    DIAMOND(ModTiers.BETTER_DIAMOND, 2, 5),
+    OBSYDIAN(ModTiers.OBSIDIAN, 3, 7);
     
     private final Tier tier;
+    private final int count;
     private final int level;
     
     private static List<ClubDropData> drops = new ArrayList<>(List.of(
             new ClubDropData(Items.FLINT, 0),
-            new ClubDropData(Items.COAL, 0),
-            new ClubDropData(Items.RAW_COPPER, 1),
-            new ClubDropData(getItem(EItemCategory.RawMaterial, EMaterialType.TIN), 1),
-            new ClubDropData(Items.RAW_IRON, 1),
-            new ClubDropData(Items.DIAMOND, 3),
-            new ClubDropData(Items.NETHERITE_SCRAP, 6)
+            new ClubDropData(Items.COAL, 1),
+            new ClubDropData(getItem(EItemCategory.RawMaterial, EMaterialType.TIN), 2),
+            new ClubDropData(Items.RAW_IRON, 3),
+            new ClubDropData(Items.DIAMOND, 5),
+            new ClubDropData(Items.NETHERITE_SCRAP, 7)
     ));
     
-    EClubItemDropProps(Tier tier, int level) {
+    EClubItemDropProps(Tier tier, int count, int level) {
         this.tier = tier;
         this.level = level;
+        this.count = count;
     }
     
     public static List<ItemStack> getDrops(Tier tier) {
@@ -45,26 +48,13 @@ public enum EClubItemDropProps {
     }
     
     private static List<ItemStack> getDrops(EClubItemDropProps clubType) {
-        var possibleDrops = drops.stream().filter(d -> d.level <= clubType.level).sorted(Comparator.comparingInt(a -> a.level)).toList();
-        var currentChance = 100f;
-        var dropsWithChance = new ArrayList<>(List.of(new DropChancePair(ItemStack.EMPTY, currentChance)));
-        var chanceSum = 0f;
-        var dropMultiplier = 2f;
-        var lastDropLevel = 0;
-        for (var drop : possibleDrops) {
-            if (lastDropLevel != drop.level) {
-                currentChance /= dropMultiplier;
-                dropMultiplier += (0.1f * drop.level);
-                lastDropLevel = drop.level;
-            }
-            chanceSum += currentChance;
-            dropsWithChance.add(new DropChancePair(new ItemStack(drop.drop), currentChance));
-        }
-
         var items = new ArrayList<ItemStack>();
-        for (var i = 0; i < clubType.level + 1; i++) {
-            var itemStack = getDrop(dropsWithChance, chanceSum);
-            addOrUpdateItemStack(items, itemStack);
+        for (var i = 0; i < ItemsUtilsMethods.getCount(0, clubType.count); i++) {
+            var level = ItemsUtilsMethods.getCount(0, clubType.level);
+            var possibleDrops = drops.stream().filter(d -> d.level <= clubType.level).sorted(Comparator.comparingInt(a -> level)).toList();
+            var randomIndex = ThreadLocalRandom.current().nextInt(0, possibleDrops.size());
+            var itemStack = possibleDrops.get(randomIndex).drop;
+            addOrUpdateItemStack(items, new ItemStack(itemStack));
         }
 
         return items;
@@ -79,15 +69,6 @@ public enum EClubItemDropProps {
         }
 
         items.add(newStack);
-    }
-    
-    private static ItemStack getDrop(List<DropChancePair> drops, float chanceSum) {
-        var randomNum = UniformFloat.of(0f, chanceSum).sample(RandomSource.create());
-        for(var item : drops) {
-            if(randomNum <= item.weight) return new ItemStack(item.drop.getItem());
-            randomNum -= item.weight;
-        }
-        return ItemStack.EMPTY;
     }
 
     private record ClubDropData(Item drop, int level) {

@@ -28,10 +28,8 @@ import net.yuhi.better_progression.menu.ModMenus;
 import net.yuhi.better_progression.recipe.ModRecipeType;
 import net.yuhi.better_progression.recipe.ModRecipes;
 import net.yuhi.better_progression.recipe.RemoveRecipes;
-import net.yuhi.better_progression.renderer.ModEntityRenders;
 import net.yuhi.better_progression.worldgen.feature.ModFeatures;
 import org.slf4j.Logger;
-import org.spongepowered.asm.mixin.Mixins;
 
 @Mod(BetterProgression.MOD_ID)
 public class BetterProgression
@@ -69,12 +67,11 @@ public class BetterProgression
         MinecraftForge.EVENT_BUS.register(BlockInteractionHandler.class);
         MinecraftForge.EVENT_BUS.register(RemoveRecipes.class);
         
-        MinecraftForge.EVENT_BUS.register(PlayerTickHandler.class);
         MinecraftForge.EVENT_BUS.register(PlayerSleepHandler.class);
         MinecraftForge.EVENT_BUS.register(AnvilRepairHandler.class);
         MinecraftForge.EVENT_BUS.register(TotemUseHandler.class);
         
-        MinecraftForge.EVENT_BUS.register(PlayerHealthHandler.class);
+        MinecraftForge.EVENT_BUS.register(PlayerEventsHandler.class);
         MinecraftForge.EVENT_BUS.register(ArmorChangeEventHandler.class);
         
         modEventBus.addListener(this::addCreative);

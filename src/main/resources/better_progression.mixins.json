@@ -20,6 +20,7 @@
     "RaidMixin",
     "ServerPlayerMixin",
     "SpawnEggItemMixin",
+    "TiersMixin",
     "accessor.ArmorItemAccessor",
     "accessor.ArmorMaterialsAccessor",
     "accessor.BaseSpawnerAccessor",
@@ -30,12 +31,12 @@
     "accessor.LegacySmithingMenuAccessor",
     "accessor.LootPoolAccessor",
     "accessor.SwordItemAccessor",
+    "accessor.TiersAccessor",
     "items.ArmorItemMixin",
     "items.AxeItemMixin",
     "items.DiggerItemMixin",
     "items.HoeItemMixin",
     "items.ItemMixin",
-    "items.LivingEntityMixin",
     "items.MixinFoodStats",
     "items.PickaxeItemMixin",
     "items.ShovelItemMixin",
@@ -43,8 +44,9 @@
     "items.TridentItemMixin"
   ],
   "client": [
-    "ItemInHandRendererMixin",
-    "GuiMixin"
+    "GuiMixin",
+    "items.LivingEntityMixin",
+    "ItemInHandRendererMixin"
   ],
   "server": [],
   "injectors": {

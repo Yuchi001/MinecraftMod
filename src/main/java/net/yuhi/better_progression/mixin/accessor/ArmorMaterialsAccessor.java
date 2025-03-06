@@ -26,4 +26,9 @@ public interface ArmorMaterialsAccessor {
     @Mutable
     @Accessor("repairIngredient")
     void setRepairIngredient(LazyLoadedValue<Ingredient> repairIngredient);
+    
+    @Final
+    @Mutable
+    @Accessor("durabilityMultiplier")
+    void setDurabilityMultiplier(int durabilityMultiplier);
 }

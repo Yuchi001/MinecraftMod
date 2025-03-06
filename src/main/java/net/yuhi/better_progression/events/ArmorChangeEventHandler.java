@@ -45,14 +45,8 @@ public class ArmorChangeEventHandler {
                 if (!(armorItem.getMaterial() instanceof BetterArmorMaterial material)) continue;
                 additionalHealth += material.getLifeMod(armorItem.getType());
             }
-
-            System.out.write(6 + additionalHealth);
-
-            // Aktualizacja maksymalnego zdrowia
-            maxHealth.setBaseValue(6);
-
-            // Ustawienie nowego aktualnego zdrowia (jeśli było większe niż nowy limit)
-            if (player.getHealth() > maxHealth.getBaseValue()) {
+            
+            if (player.getHealth() > 6 + additionalHealth) {
                 player.setHealth((float) maxHealth.getBaseValue());
             }
         }

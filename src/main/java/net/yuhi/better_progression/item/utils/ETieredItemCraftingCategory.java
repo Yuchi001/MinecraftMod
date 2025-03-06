@@ -346,7 +346,7 @@ public enum ETieredItemCraftingCategory {
     }
 
     private static Item GetArmor(EItemCategory itemCategory, EMaterialType materialType) {
-        if(!List.of(EMaterialType.GOLD, EMaterialType.IRON).contains(materialType)) 
+        if(!List.of(EMaterialType.GOLD, EMaterialType.IRON).contains(materialType) || (ItemsUtilsMethods.getChainmailCategories().contains(itemCategory) && materialType == EMaterialType.GOLD)) 
             return ItemsUtilsMethods.getItem(itemCategory, materialType);
 
         return switch (itemCategory) {

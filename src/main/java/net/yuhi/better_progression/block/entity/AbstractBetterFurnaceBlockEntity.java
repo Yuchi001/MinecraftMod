@@ -347,11 +347,11 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
         var ingredients = cookingRecipe.getIngredients();
         var firstIngredient = ingredients.get(0);
 
-        notEmptyInputItemStack.shrink(firstIngredient.test(notEmptyInputItemStack) ?
+        if (!notEmptyInputItemStack.is(Items.NETHER_STAR)) notEmptyInputItemStack.shrink(firstIngredient.test(notEmptyInputItemStack) ?
                 cookingRecipe.getIngredientCount(0) :
                 cookingRecipe.getIngredientCount(1));
 
-        secondInputItemStack.shrink(firstIngredient.test(secondInputItemStack) ?
+        if (!secondInputItemStack.is(Items.NETHER_STAR)) secondInputItemStack.shrink(firstIngredient.test(secondInputItemStack) ?
                 cookingRecipe.getIngredientCount(0) :
                 cookingRecipe.getIngredientCount(1));
 

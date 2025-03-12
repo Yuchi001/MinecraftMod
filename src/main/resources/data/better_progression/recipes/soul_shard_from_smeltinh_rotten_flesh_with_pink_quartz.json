@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 300,
+  "experience": 2,
+  "group": "soul_shard",
+  "ingredient": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "secondIngredient": {
+    "item": "better_progression:polished_pink_quartz"
+  },
+  "result": "better_progression:soul_shard",
+  "ingredientcount": 9
+}

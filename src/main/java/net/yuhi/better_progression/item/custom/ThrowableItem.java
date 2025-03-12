@@ -120,4 +120,9 @@ public abstract class ThrowableItem extends SwordItem implements Vanishable {
 
         return true;
     }
+
+    @Override
+    public boolean canPerformAction(ItemStack stack, net.minecraftforge.common.ToolAction toolAction) {
+        return false;
+    }
 }

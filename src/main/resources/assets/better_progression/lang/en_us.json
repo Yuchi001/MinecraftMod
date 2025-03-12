@@ -49,6 +49,10 @@
   "item.better_progression.stone_dagger": "Stone Dagger",
   "item.better_progression.stone_spear": "Stone Spear",
 
+  "item.better_progression.flint_club": "Flint Club",
+  "item.better_progression.flint_dagger": "Flint Dagger",
+  "item.better_progression.flint_spear": "Flint Spear",
+
   "item.better_progression.obsidian_club": "Obsidian Club",
   "item.better_progression.obsidian_dagger": "Obsidian Dagger",
   "item.better_progression.obsidian_spear": "Obsidian Spear",
@@ -127,16 +131,7 @@
   "item.better_progression.enderite_ingot": "Enderite Ingot",
   "item.better_progression.dragon_remains": "Dragon Remains",
   
-  "item.better_progression.zombie_essence": "Zombie Essence",
-  "item.better_progression.magma_cube_essence": "Magma Cube Essence",
-  "item.better_progression.ghast_essence": "Ghast Essence",
-  "item.better_progression.spider_essence": "Spider Essence",
-  "item.better_progression.skeleton_essence": "Skeleton Essence",
-  "item.better_progression.slime_essence": "Slime Essence",
-  "item.better_progression.enderman_essence": "Enderman Essence",
-  "item.better_progression.creeper_essence": "Creeper Essence",
-  "item.better_progression.blaze_essence": "Blaze Essence",
-  "item.better_progression.phantom_essence": "Phantom Essence",
+  "item.better_progression.soul_shard": "Soul Shard",
   
   "item.better_progression.copper_sword": "Copper Sword",
   "item.better_progression.copper_pickaxe": "Copper Pickaxe",

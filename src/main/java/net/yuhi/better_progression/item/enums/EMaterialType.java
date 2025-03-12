@@ -16,6 +16,7 @@ public enum EMaterialType {
     DIAMOND("diamond", true),
     OBSIDIAN("obsidian", true),
     STONE("stone", true, true),
+    FLINT("flint", true, false),
     WOOD("wooden", true, true);
     private final String name;
     private final boolean is_vanilla;

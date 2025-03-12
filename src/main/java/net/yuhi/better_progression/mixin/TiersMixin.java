@@ -25,6 +25,7 @@ public class TiersMixin {
             }
             case "DIAMOND" -> {
                 accessor.setSpeed(3.0f);
+                accessor.setUses(131);
             }
         }
     }

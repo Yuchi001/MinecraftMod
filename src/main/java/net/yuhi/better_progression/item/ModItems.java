@@ -31,15 +31,7 @@ public class ModItems {
     
     public static final List<TierItemsCreator.ItemInfo> REGISTERED_ITEMS = new ArrayList<>();
 
-    public static final RegistryObject<Item> ZOMBIE_ESSENCE = register("zombie_essence", () -> new MobEssenceItem("zombie", 1, () -> Items.ROTTEN_FLESH, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> MAGMA_CUBE_ESSENCE = register("magma_cube_essence", () -> new MobEssenceItem("magma_cube", 4, () -> Items.MAGMA_CREAM, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> SKELETON_ESSENCE = register("skeleton_essence", () -> new MobEssenceItem("skeleton", 2, () -> Items.BONE, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> SLIME_ESSENCE = register("slime_essence", () -> new MobEssenceItem("slime", 1, () -> Items.SLIME_BALL, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> ENDERMAN_ESSENCE = register("enderman_essence", () -> new MobEssenceItem("enderman", 5, () -> Items.ENDER_EYE, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> BLAZE_ESSENCE = register("blaze_essence", () -> new MobEssenceItem("blaze", 4, () -> Items.BLAZE_ROD, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> CREEPER_ESSENCE = register("creeper_essence", () -> new MobEssenceItem("creeper", 2, () -> Items.GUNPOWDER, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> SPIDER_ESSENCE = register("spider_essence", () -> new MobEssenceItem("spider", 3, () -> Items.SPIDER_EYE, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
-    public static final RegistryObject<Item> PHANTOM_ESSENCE = register("phantom_essence", () -> new MobEssenceItem("phantom", 4, () -> Items.PHANTOM_MEMBRANE, new Item.Properties().stacksTo(16)), ModTags.Items.ESSENCE_ITEM);
+    public static final RegistryObject<Item> SOUL_SHARD = register("soul_shard", () -> new Item(new Item.Properties().stacksTo(16)), ModTags.Items.SOUL_SHARD);
     public static final RegistryObject<Item> END_OAK_BOAT = register("end_oak_boat", () -> new ModBoatItem(false, ModBoatEntity.Type.END_OAK, new Item.Properties()));
     public static final RegistryObject<Item> END_OAK_CHEST_BOAT = register("end_oak_chest_boat", () -> new ModBoatItem(true, ModBoatEntity.Type.END_OAK, new Item.Properties()));
     public static final RegistryObject<Item> TIN_ITEM_INTERFACE = ITEMS.register("tin_item_interface", TinnedItemRecipeInterface::new);
@@ -74,7 +66,12 @@ public class ModItems {
         stoneSupplier.createSimpleToolItem(EItemCategory.Dagger, 0.25F, -1.4F);
         stoneSupplier.createSpearItem(2F, -2.9F, 1.5D);
 
-        var diamondSupplier = new TierItemsCreator("diamond", EMaterialType.DIAMOND, ModTiers.BETTER_DIAMOND).SetHasDefaultBasis();
+        var flintSupplier = new TierItemsCreator("flint", EMaterialType.FLINT, ModTiers.FLINT).SetHasDefaultBasis();
+        flintSupplier.createSimpleToolItem(EItemCategory.Club, 1.5F, -3.2F);
+        flintSupplier.createSimpleToolItem(EItemCategory.Dagger, 0.25F, -1.4F);
+        flintSupplier.createSpearItem(2F, -2.9F, 1.5D);
+
+        var diamondSupplier = new TierItemsCreator("diamond", EMaterialType.DIAMOND, Tiers.DIAMOND).SetHasDefaultBasis();
         diamondSupplier.createSimpleToolItem(EItemCategory.Club, 1.5F, -3.2F);
         diamondSupplier.createSimpleToolItem(EItemCategory.Dagger, 0.25F, -1.4F);
         diamondSupplier.createSpearItem(2F, -2.9F, 1.5D);

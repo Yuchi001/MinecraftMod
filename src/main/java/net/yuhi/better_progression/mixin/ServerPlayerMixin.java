@@ -34,14 +34,17 @@ public class ServerPlayerMixin {
 
     @Inject(method = "startSleepInBed", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;startSleepInBed(Lnet/minecraft/core/BlockPos;)Lcom/mojang/datafixers/util/Either;", shift = At.Shift.BEFORE), cancellable = true)
     private void beforeSuperStartSleepInBed(BlockPos pAt, CallbackInfoReturnable<Either<Player.BedSleepingProblem, Unit>> cir) {
-        if (!betterProgression$IsTotemActive(pAt)) {
+        var totem = betterProgression$IsTotemActive(pAt);
+        if (totem == null) {
             betterProgression$player.displayClientMessage(Component.translatable("block.better_progression.bed_message_no_sleep"), true);
             cir.setReturnValue(Either.left(Player.BedSleepingProblem.OTHER_PROBLEM));
+        } else {
+            totem.useCharge();
         }
     }
     
     @Unique
-    private boolean betterProgression$IsTotemActive(BlockPos pPos){
+    private ChargedSoulSandBlockEntity betterProgression$IsTotemActive(BlockPos pPos){
         BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
         int radius = 100;
         for (int x = -radius; x <= radius; x++) {
@@ -59,10 +62,10 @@ public class ServerPlayerMixin {
 
                     int goldBlocks = chargedSoulSandBlock.countGoldBlocksInRange(betterProgression$player.level, mutablePos, 20);
                     int effectiveRadius = 100 + (goldBlocks * 5);
-                    if (pPos.distSqr(pPos) <= effectiveRadius * effectiveRadius) return true;
+                    if (pPos.distSqr(pPos) <= effectiveRadius * effectiveRadius) return chargedSoulSandEntity;
                 }
             }
         }
-        return false;
+        return null;
     }
 }

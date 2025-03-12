@@ -7,16 +7,10 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.yuhi.better_progression.item.ModTiers;
 import net.yuhi.better_progression.item.enums.EDaggerItemProps;
 import net.yuhi.better_progression.item.interfaces.Lootable;
-import net.yuhi.better_progression.item.utils.ItemsUtilsMethods;
 import org.jetbrains.annotations.NotNull;
-import org.spongepowered.asm.mixin.Unique;
-
-import java.io.Console;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 
 public class DaggerItem extends ThrowableItem implements Lootable<Animal> {

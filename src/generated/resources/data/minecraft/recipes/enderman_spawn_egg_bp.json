@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:ghast_tear"
+    },
+    {
+      "item": "better_progression:soul_shard"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    }
+  ],
+  "result": {
+    "item": "minecraft:enderman_spawn_egg"
+  }
+}

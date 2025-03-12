@@ -50,7 +50,7 @@ public class ClubItem extends AxeItem {
 
     @Override
     public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
-        return toolAction == ToolActions.PICKAXE_DIG || toolAction == ToolActions.AXE_DIG || super.canPerformAction(stack, toolAction);
+        return toolAction == ToolActions.PICKAXE_DIG || toolAction == ToolActions.AXE_DIG;
     }
     
     @Override
@@ -65,4 +65,5 @@ public class ClubItem extends AxeItem {
         
         return super.mineBlock(stack, world, state, pos, entity);
     }
+    
 }

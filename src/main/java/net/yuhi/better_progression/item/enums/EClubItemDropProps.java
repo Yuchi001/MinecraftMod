@@ -1,7 +1,5 @@
 package net.yuhi.better_progression.item.enums;
 
-import net.minecraft.util.RandomSource;
-import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.world.item.*;
 import net.yuhi.better_progression.item.ModTiers;
 import net.yuhi.better_progression.item.utils.ItemsUtilsMethods;
@@ -16,9 +14,10 @@ import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
 public enum EClubItemDropProps {
     WOOD(Tiers.WOOD, 1, 0),
-    STONE(Tiers.STONE, 1, 3),
-    DIAMOND(ModTiers.BETTER_DIAMOND, 2, 5),
-    OBSYDIAN(ModTiers.OBSIDIAN, 3, 7);
+    STONE(Tiers.STONE, 2, 3),
+    FLINT(ModTiers.FLINT, 2, 4),
+    DIAMOND(Tiers.DIAMOND, 3, 6),
+    OBSYDIAN(ModTiers.OBSIDIAN, 4, 10);
     
     private final Tier tier;
     private final int count;
@@ -29,8 +28,10 @@ public enum EClubItemDropProps {
             new ClubDropData(Items.COAL, 1),
             new ClubDropData(getItem(EItemCategory.RawMaterial, EMaterialType.TIN), 2),
             new ClubDropData(Items.RAW_IRON, 3),
-            new ClubDropData(Items.DIAMOND, 5),
-            new ClubDropData(Items.NETHERITE_SCRAP, 7)
+            new ClubDropData(Items.RAW_COPPER, 3),
+            new ClubDropData(Items.RAW_GOLD, 4),
+            new ClubDropData(Items.DIAMOND, 6),
+            new ClubDropData(Items.NETHERITE_SCRAP, 10)
     ));
     
     EClubItemDropProps(Tier tier, int count, int level) {

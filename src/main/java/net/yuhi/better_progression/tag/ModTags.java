@@ -30,7 +30,7 @@ public class ModTags {
         public static TagKey<Item> BRONZE_TOOLS_ARMOR = tag("bronze_tools_armor");
         public static TagKey<Item> NETHERITE_TOOLS_ARMOR = tag("netherite_tools_armor");
         public static TagKey<Item> ENDERITE_TOOLS_ARMOR = tag("enderite_tools_armor");
-        public static TagKey<Item> ESSENCE_ITEM = tag("enderite_tools_armor");
+        public static TagKey<Item> SOUL_SHARD = tag("soul_shard");
         
         public static TagKey<Item> NO_STACKING = tag("no_stacking");
         public static TagKey<Item> STACKS_TO_16 = tag("stacks_to_16");

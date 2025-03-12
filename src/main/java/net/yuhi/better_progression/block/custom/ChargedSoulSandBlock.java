@@ -28,10 +28,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.InteractionResult;
 import net.yuhi.better_progression.block.ModBlockEntities;
 import net.yuhi.better_progression.block.entity.ChargedSoulSandBlockEntity;
-import net.yuhi.better_progression.item.custom.MobEssenceItem;
+import net.yuhi.better_progression.tag.ModTags;
 import org.jetbrains.annotations.Nullable;
-
-import java.net.Inet4Address;
 
 import static net.yuhi.better_progression.block.entity.ChargedSoulSandBlockEntity.createChargedSoulSandBlockTicker;
 
@@ -87,17 +85,15 @@ public class ChargedSoulSandBlock extends SoulSandBlock implements EntityBlock {
         pLevel.scheduleTick(pPos, this, 20);
     }
     
-    public void addCharges(ChargedSoulSandBlockEntity chargedSoulSandBlockEntity, MobEssenceItem essenceItem, ItemStack heldItem, Level pLevel, BlockPos pPos, Player pPlayer) {
+    public void addCharges(ChargedSoulSandBlockEntity chargedSoulSandBlockEntity, ItemStack heldItem, Level pLevel, BlockPos pPos, Player pPlayer) {
         BlockState state = pLevel.getBlockState(pPos);
         int charges = state.getValue(ChargedSoulSandBlock.CHARGES);
-        pLevel.playSound(null, pPos, charges + essenceItem.getStacks() >= ChargedSoulSandBlockEntity.MINIMUM_CHARGES_TO_ACTIVATE ?  SoundEvents.END_PORTAL_SPAWN : SoundEvents.SOUL_SAND_PLACE, SoundSource.BLOCKS, 1.0F, pLevel.getRandom().nextFloat() * 0.1F + 0.9F);
+        pLevel.playSound(null, pPos, charges + 1 == ChargedSoulSandBlockEntity.MINIMUM_CHARGES_TO_ACTIVATE ?  SoundEvents.END_PORTAL_SPAWN : SoundEvents.SOUL_SAND_PLACE, SoundSource.BLOCKS, 1.0F, pLevel.getRandom().nextFloat() * 0.1F + 0.9F);
         
-        var wasCharged = chargedSoulSandBlockEntity.addCharges(essenceItem.getStacks());
+        var wasCharged = chargedSoulSandBlockEntity.addCharges(1);
 
         BlockState currentState = pLevel.getBlockState(pPos);
         pLevel.setBlock(pPos, currentState.setValue(ChargedSoulSandBlock.CHARGES, chargedSoulSandBlockEntity.getCharges()), 3);
-        
-        System.out.println(chargedSoulSandBlockEntity.getCharges());
         
         heldItem.shrink(1);
         if (wasCharged) activateTotem(pLevel, pPos, pPlayer);
@@ -117,18 +113,16 @@ public class ChargedSoulSandBlock extends SoulSandBlock implements EntityBlock {
 
         if (pPlayer.getItemInHand(pHand).is(Items.FLINT_AND_STEEL)) return InteractionResult.PASS;
         
-        System.out.println(pLevel.isClientSide());
-        
         BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
         if (blockEntity instanceof ChargedSoulSandBlockEntity chargedSoulSand) {
-            if (chargedSoulSand.isActive()) return InteractionResult.PASS;
+            if (!chargedSoulSand.canAddStacks()) return InteractionResult.PASS;
             
             ItemStack heldItem = pPlayer.getMainHandItem();
-            if (heldItem.getItem() instanceof MobEssenceItem essenceItem) {
+            if (heldItem.is(ModTags.Items.SOUL_SHARD)) {
                 var isBuildCorrectly = isBuildCorrectly(pLevel, pPos);
                 chargedSoulSand.setCorrectlyBuilt(isBuildCorrectly);
                 if (isBuildCorrectly) {
-                    addCharges(chargedSoulSand, essenceItem, heldItem, pLevel, pPos, pPlayer);
+                    addCharges(chargedSoulSand, heldItem, pLevel, pPos, pPlayer);
                     return InteractionResult.SUCCESS;
                 }
             }

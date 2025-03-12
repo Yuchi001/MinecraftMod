@@ -59,7 +59,7 @@ public class EssenceSpawnerMenu extends AbstractContainerMenu {
                     return ItemStack.EMPTY;
                 }
             } else {
-                if (stackInSlot.is(ModTags.Items.ESSENCE_ITEM)) {
+                if (stackInSlot.is(ModTags.Items.SOUL_SHARD)) {
                     if (!this.moveItemStackTo(stackInSlot, 0, this.container.getContainerSize(), false)) {
                         return ItemStack.EMPTY;
                     }
@@ -94,7 +94,7 @@ public class EssenceSpawnerMenu extends AbstractContainerMenu {
 
         @Override
         public boolean mayPlace(ItemStack stack) {
-            return stack.is(ModTags.Items.ESSENCE_ITEM);
+            return stack.is(ModTags.Items.SOUL_SHARD);
         }
     }
 }

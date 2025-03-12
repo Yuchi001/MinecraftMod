@@ -15,7 +15,8 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 public class ChargedSoulSandBlockEntity extends BlockEntity {
-    public static final int MINIMUM_CHARGES_TO_ACTIVATE = 5;
+    public static final int MINIMUM_CHARGES_TO_ACTIVATE = 1;
+    public static final int MAXIMUM_CHARGES_POSSIBLE = 5;
     
     private static final String CHARGES_KEY = "charges";
     private static final String IS_CORRECTLY_BUILT_KEY = "isCorrectlyBuilt";
@@ -53,16 +54,22 @@ public class ChargedSoulSandBlockEntity extends BlockEntity {
     public boolean isActive() {
         return isCharged && isCorrectlyBuilt;
     }
+    
+    public boolean canAddStacks() {
+        return charges < MAXIMUM_CHARGES_POSSIBLE;
+    }
 
     public boolean addCharges(int charges) {
         this.charges += charges;
-        if (this.charges > MINIMUM_CHARGES_TO_ACTIVATE) this.charges = MINIMUM_CHARGES_TO_ACTIVATE;
-        this.isCharged = this.charges == MINIMUM_CHARGES_TO_ACTIVATE;
+        if (this.charges > MAXIMUM_CHARGES_POSSIBLE) this.charges = MAXIMUM_CHARGES_POSSIBLE;
+        var wasCharged = this.isCharged;
+        this.isCharged = this.charges >= MINIMUM_CHARGES_TO_ACTIVATE;
         setChanged();
-        return this.isCharged;
+        return !wasCharged && this.isCharged;
     }
     
     public void useCharge() {
+        this.charges--;
         isCharged = this.charges >= MINIMUM_CHARGES_TO_ACTIVATE;
     }
 
@@ -87,17 +94,6 @@ public class ChargedSoulSandBlockEntity extends BlockEntity {
         if (isActive && isBuildCorrectly) {
             if (aboveBlockState.isAir())  level.setBlock(abovePos, Blocks.SOUL_FIRE.defaultBlockState(), 3);
         } else if (aboveBlockState.is(Blocks.SOUL_FIRE)) level.removeBlock(abovePos, false);
-        
-        if (!level.isClientSide && blockEntity.isActive()) {
-            long timeOfDay = level.getDayTime() % 24000L;
-
-            if (timeOfDay == 0) {
-                blockEntity.useCharge();
-                if (level.getBlockState(abovePos).is(Blocks.SOUL_FIRE)) {
-                    level.removeBlock(abovePos, false);
-                }
-            }
-        }
     }
 
     @Nullable

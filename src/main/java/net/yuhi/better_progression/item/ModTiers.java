@@ -10,20 +10,30 @@ import net.yuhi.better_progression.item.enums.EMaterialType;
 import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
 public class ModTiers {
+    public static final ForgeTier FLINT =
+            new ForgeTier(
+                    1,
+                    59,
+                    3.0f,
+                    3.0f,
+                    5,
+                    BlockTags.NEEDS_STONE_TOOL, 
+                    () -> Ingredient.of(Items.FLINT));
+    
     public static final ForgeTier COPPER = 
             new ForgeTier(
                     1, 
-                    50,
+                    150,
                     6.5f,
                     3.0f,
                     20,
-            BlockTags.NEEDS_STONE_TOOL, 
-            () -> Ingredient.of(Items.COPPER_INGOT));
+                    BlockTags.NEEDS_STONE_TOOL, 
+                    () -> Ingredient.of(Items.COPPER_INGOT));
 
     public static final ForgeTier BRONZE =
             new ForgeTier(
                     3,
-                    150,
+                    250,
                     8.5f,
                     4.0f,
                     10,
@@ -39,16 +49,6 @@ public class ModTiers {
                     10,
                     BlockTags.NEEDS_DIAMOND_TOOL,
                     () -> Ingredient.of(getItem(EItemCategory.Ingot, EMaterialType.STEEL)));
-
-    public static final ForgeTier BETTER_DIAMOND =
-            new ForgeTier(
-                    3,
-                    500,
-                    8f,
-                    3.5f,
-                    15,
-                    BlockTags.NEEDS_DIAMOND_TOOL,
-                    () -> Ingredient.of(Items.DIAMOND));
 
     public static final ForgeTier OBSIDIAN = 
             new ForgeTier(

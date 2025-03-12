@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.item.ModTiers;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 
@@ -285,15 +286,18 @@ public enum ETieredItemCraftingCategory {
     }
     
     public void SaveRecipes(Consumer<FinishedRecipe> pWriter, TierItemsCreator.ItemInfo itemInfo) {
-        var recipeId = itemInfo.is_upgrade ? itemInfo.material_type.GetName(true) + "_" +
-                itemInfo.sub_material_type.GetName() + "_" +
-                category.getName().toLowerCase()
-                : itemInfo.material_type.GetName(true) + "_" + category.getName().toLowerCase();
+        
         
         try {
+            var recipeId = itemInfo.is_upgrade ? itemInfo.material_type.GetName(true) + "_" +
+                    itemInfo.sub_material_type.GetName() + "_" +
+                    category.getName().toLowerCase()
+                    : itemInfo.material_type.GetName(true) + "_" + category.getName().toLowerCase();
             if (itemInfo.is_upgrade) upgradeRecipeSupplier.apply(itemInfo.sub_material_type).save(pWriter, recipeId);
             else shapedRecipeSupplier.apply(itemInfo.material_type).save(pWriter, recipeId);
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     public void SaveShapedRecipe(Consumer<FinishedRecipe> pWriter, EMaterialType materialType) {
@@ -314,6 +318,7 @@ public enum ETieredItemCraftingCategory {
             case GOLD -> Items.GOLD_INGOT;
             case COPPER -> Items.COPPER_INGOT;
             case OBSIDIAN -> Items.OBSIDIAN;
+            case FLINT -> Items.FLINT;
             case DIAMOND -> Items.DIAMOND;
             case NETHERITE -> Items.NETHERITE_INGOT;
             default -> ItemsUtilsMethods.getItem(EItemCategory.Ingot, materialType);

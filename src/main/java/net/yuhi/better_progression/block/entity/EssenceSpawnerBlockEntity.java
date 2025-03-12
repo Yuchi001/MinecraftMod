@@ -26,7 +26,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.yuhi.better_progression.block.ModBlockEntities;
-import net.yuhi.better_progression.item.custom.MobEssenceItem;
 import net.yuhi.better_progression.menu.custom.EssenceSpawnerMenu;
 import net.yuhi.better_progression.mixin.accessor.BaseSpawnerAccessor;
 import net.yuhi.better_progression.tag.ModTags;
@@ -122,8 +121,8 @@ public class EssenceSpawnerBlockEntity extends BaseContainerBlockEntity implemen
         for (int i = 0; i < this.items.size(); i++) {
             ItemStack stack = this.items.get(i);
 
-            if (!stack.isEmpty() && stack.getItem() instanceof MobEssenceItem essenceItem) {
-                int chargeValue = essenceItem.getStacks();
+            if (!stack.isEmpty() && stack.is(ModTags.Items.SOUL_SHARD)) {
+                int chargeValue = 1;
                 int chargeToAdd = chargeValue * ESSENCE_STACK_VALUE;
 
                 if (this.spawnerCharges + chargeToAdd <= MAX_CHARGES) {
@@ -241,7 +240,7 @@ public class EssenceSpawnerBlockEntity extends BaseContainerBlockEntity implemen
 
     @Override
     public boolean canPlaceItem(int pIndex, ItemStack pStack) {
-        return pStack.is(ModTags.Items.ESSENCE_ITEM);
+        return pStack.is(ModTags.Items.SOUL_SHARD);
     }
 
     @Override

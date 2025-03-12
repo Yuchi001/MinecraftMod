@@ -61,14 +61,15 @@ public class BlockMixin {
             
             var shouldSpawnApple = hoeDropCount(hoe.getTier(), isOak);
             for (var i = 0; i < shouldSpawnApple; i++) drops.add(new ItemStack(Items.APPLE));
+            cir.setReturnValue(drops);
+            cir.cancel();
         }
 
         var isTallGrass = pState.is(Blocks.TALL_GRASS);
         if (pState.is(Blocks.GRASS) || isTallGrass) {
             drops.add(new ItemStack(Items.WHEAT_SEEDS, isTallGrass ? 2 : 1));
+            cir.setReturnValue(drops);
+            cir.cancel();
         }
-        
-        cir.setReturnValue(drops);
-        cir.cancel();
     }
 }

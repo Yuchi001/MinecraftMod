@@ -8,7 +8,8 @@ import net.yuhi.better_progression.item.utils.ItemsUtilsMethods;
 public enum EDaggerItemProps {
     OBSIDIAN(ModTiers.OBSIDIAN, 5),
     DIAMOND(Tiers.DIAMOND, 3),
-    STONE(Tiers.STONE, 1);
+    STONE(Tiers.STONE, 1),
+    FLINT(ModTiers.FLINT, 2);
 
     private final int dropCount;
     private final Tier tier;

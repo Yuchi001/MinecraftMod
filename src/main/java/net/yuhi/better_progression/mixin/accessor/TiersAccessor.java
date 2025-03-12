@@ -13,4 +13,9 @@ public interface TiersAccessor {
     @Mutable
     @Accessor("speed") 
     void setSpeed(float speed);
+
+    @Final
+    @Mutable
+    @Accessor("uses")
+    void setUses(int uses);
 }

@@ -1,17 +1,16 @@
 package net.yuhi.better_progression.datagen;
 
-import com.mojang.datafixers.kinds.Const;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.yuhi.better_progression.block.ModBlocks;
-import net.yuhi.better_progression.item.custom.MobEssenceItem;
+import net.yuhi.better_progression.item.enums.ESpawnEggRecipe;
 import net.yuhi.better_progression.recipe.utils.ESmeltingRecipeType;
 import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.item.enums.EItemCategory;
@@ -71,6 +70,11 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.STRING, 4)
+                .requires(Ingredient.of(ItemTags.WOOL))
+                .unlockedBy("has_wool", has(ItemTags.WOOL))
+                .save(pWriter, "string_from_wool");
+        
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SADDLE)
                 .pattern("sss")
                 .pattern("* *")
@@ -195,6 +199,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(pWriter, "copper_powered_rail");
         
         MetalRecipesCollectionCreator(pWriter);
+
+        ESpawnEggRecipe.SaveRecipes(pWriter);
         
         for (var blockData : ModBlocks.BLOCKS_DATA) {
             blockData.SaveRecipes(pWriter);
@@ -202,7 +208,6 @@ public class ModRecipeProvider extends RecipeProvider {
         
         for (var itemInfo : ModItems.REGISTERED_ITEMS) {
             itemInfo.SaveRecipes(pWriter);
-            if(itemInfo.item.get() instanceof MobEssenceItem item) item.SaveRecipe(pWriter); 
 
             for (var tag : itemInfo.tags) {
                 if (tag == ModTags.Items.COPPER_TOOLS_ARMOR) ESmeltingRecipeType.SMELT_ORE_RARE.SaveRecipes(pWriter, itemInfo.item::get, () -> getItem(EItemCategory.Nugget, EMaterialType.COPPER));

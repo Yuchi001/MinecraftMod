@@ -5,10 +5,10 @@
   "experience": 1.4,
   "group": "steel_ingot",
   "ingredient": {
-    "item": "minecraft:raw_copper"
+    "item": "minecraft:copper_ingot"
   },
   "secondIngredient": {
-    "item": "better_progression:raw_tin"
+    "item": "better_progression:tin_ingot"
   },
   "result": "better_progression:bronze_ingot",
   "ingredientcount": 9

@@ -7,6 +7,7 @@ import net.minecraft.world.item.*;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
 import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.item.ModTiers;
 import net.yuhi.better_progression.item.custom.*;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EItemType;
@@ -250,7 +251,6 @@ public class TierItemsCreator {
         
         public void SaveRecipes(Consumer<FinishedRecipe> pWriter) {
             if (crafting_category == null) return;
-
             crafting_category.SaveRecipes(pWriter, this);
         }
     }

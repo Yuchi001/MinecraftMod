@@ -35,6 +35,7 @@
     "items.ArmorItemMixin",
     "items.AxeItemMixin",
     "items.DiggerItemMixin",
+    "items.FlowerBlockMixin",
     "items.HoeItemMixin",
     "items.ItemMixin",
     "items.MixinFoodStats",
@@ -45,7 +46,6 @@
   ],
   "client": [
     "GuiMixin",
-    "items.LivingEntityMixin",
     "ItemInHandRendererMixin"
   ],
   "server": [],

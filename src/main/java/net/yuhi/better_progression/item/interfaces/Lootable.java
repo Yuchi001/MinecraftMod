@@ -6,16 +6,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.yuhi.better_progression.item.enums.ELootItemDropProps;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getCount;
 
@@ -43,7 +40,8 @@ public interface Lootable<T extends LivingEntity> {
         for (ItemStack drop : drops) {
             int baseCount = drop.getCount();
             int lootingEnchantmentValue = getSwordItem().getEnchantmentLevel(stack, Enchantments.MOB_LOOTING);
-            var maxCount = ELootItemDropProps.getTierDrop(getSwordItem().getTier());
+            var tier = getSwordItem().getTier();
+            var maxCount = baseCount + modifyDropCount(tier);
             drop.setCount(getCount(baseCount, maxCount) + getCount(lootingEnchantmentValue, maxCount));
         }
 
@@ -57,6 +55,10 @@ public interface Lootable<T extends LivingEntity> {
     
     default ObjectArrayList<ItemStack> modifyDrop(ObjectArrayList<ItemStack> current, LivingEntity target) {
         return current;
+    }
+    
+    default int modifyDropCount(Tier tier) {
+        return 0;
     }
     
     SwordItem getSwordItem();

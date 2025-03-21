@@ -10,6 +10,7 @@ import net.yuhi.better_progression.BetterProgression;
 public class ModRecipes {
     public static final BetterSimpleCookingSerializer BLASTING_SERIALIZER = new BetterSimpleCookingSerializer(BetterBlastingRecipe::new, 100);
     public static final LayerRecipe.LayeredItemRecipeSerializer LAYERED_ITEM_RECIPE_SERIALIZER = new LayerRecipe.LayeredItemRecipeSerializer();
+    public static final AlchemyTableRecipe.AlchemyTableRecipeSerializer ALCHEMY_TABLE_RECIPE_SERIALIZER = new AlchemyTableRecipe.AlchemyTableRecipeSerializer();
 
     public static final DeferredRegister<RecipeSerializer<?>> RECIPES = 
             DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, BetterProgression.MOD_ID);
@@ -22,6 +23,9 @@ public class ModRecipes {
     
     public static RegistryObject<RecipeSerializer<LayerRecipe>> LAYERED_ITEM_RECIPE =
             RECIPES.register("layering", () -> LAYERED_ITEM_RECIPE_SERIALIZER);
+
+    public static RegistryObject<RecipeSerializer<AlchemyTableRecipe>> ALCHEMY_RECIPE =
+            RECIPES.register("alchemy", () -> ALCHEMY_TABLE_RECIPE_SERIALIZER);
 
     public static void register(IEventBus bus) {
         RECIPES.register(bus);

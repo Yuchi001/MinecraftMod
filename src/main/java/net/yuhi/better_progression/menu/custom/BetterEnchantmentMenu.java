@@ -242,9 +242,31 @@ public class BetterEnchantmentMenu extends AbstractContainerMenu {
                 EnchantmentHelper.selectEnchantment(this.random, pStack, pLevel, false);
         if (pStack.is(Items.BOOK) && list.size() > 1) {
             list = List.of(list.get(this.random.nextInt(list.size())));
+            return list;
         }
 
+        var enchantmentValue = pStack.getEnchantmentValue() + getGoldCount();
+        if (enchantmentValue >= EnchantmentsValue(list)) return list;
+        
+        var enchantmentIndex = 0;
+        do {
+            var current = list.get(enchantmentIndex);
+            if (current.level > 1) {
+                list.set(enchantmentIndex, new EnchantmentInstance(current.enchantment, current.level - 1));
+            }
+            enchantmentIndex++;
+        }
+        while (enchantmentValue >= EnchantmentsValue(list) && enchantmentIndex < list.size());
+        
         return list;
+    }
+    
+    private int EnchantmentsValue(List<EnchantmentInstance> list) {
+        var sum = 0;
+        for (var l : list) {
+            sum += l.level;
+        }
+        return sum;
     }
 
     public int getGoldCount() {

@@ -20,6 +20,7 @@ public class ClientModHandler {
         event.enqueueWork(() -> {
             MenuScreens.register(ModMenus.BLAST_FURNACE.get(), BetterFurnaceMenuScreen::new);
             MenuScreens.register(ModMenus.ESSENCE_SPAWNER.get(), EssenceSpawnerMenuScreen::new);
+            MenuScreens.register(ModMenus.ALCHEMY_TABLE.get(), AlchemyTableMenuScreen::new);
             MenuScreens.register(ModMenus.ENCHANTMENT.get(), BetterEnchantingScreen::new);
             MenuScreens.register(ModMenus.ANVIL.get(), BetterAnvilScreen::new);
             MinecraftForge.EVENT_BUS.register(ModEntityRenders.class);

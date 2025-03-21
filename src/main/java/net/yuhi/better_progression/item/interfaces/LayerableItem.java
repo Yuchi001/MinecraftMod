@@ -19,14 +19,14 @@ import java.util.List;
 import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 
 public interface LayerableItem {
-    public static final String TIN_COUNT_KEY = "TinCount";
-    public static final String GOLD_COUNT_KEY = "GoldCount";
-    public static final String ENDERITE_COUNT_KEY = "EnderiteCount";
-    public static final String NETHERITE_COUNT_KEY = "NetheriteCount";
-    public static final int ADDITIONAL_DURABILITY_FOR_TIN_INGOT = 10;
-    public static final float ADDITIONAL_ENCHANTABILITY_FOR_GOLD_INGOT = 0.1f;
-    public static final float ADDITIONAL_ATTACK_SPEED_FOR_ENDERITE_INGOT = 0.1f;
-    public static final float ADDITIONAL_ATTACK_DAMAGE_FOR_NETHERITE_INGOT = 0.1f;
+    String TIN_COUNT_KEY = "TinCount";
+    String GOLD_COUNT_KEY = "GoldCount";
+    String ENDERITE_COUNT_KEY = "EnderiteCount";
+    String NETHERITE_COUNT_KEY = "NetheriteCount";
+    int ADDITIONAL_DURABILITY_FOR_TIN_INGOT = 10;
+    float ADDITIONAL_ENCHANTABILITY_FOR_GOLD_INGOT = 0.1f;
+    float ADDITIONAL_ATTACK_SPEED_FOR_ENDERITE_INGOT = 0.1f;
+    float ADDITIONAL_ATTACK_DAMAGE_FOR_NETHERITE_INGOT = 0.1f;
     
     static int getTinCount(ItemStack stack) {
         CompoundTag tag = stack.getTag();

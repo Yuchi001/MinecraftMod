@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "c": {
+      "tag": "minecraft:stone_crafting_materials"
+    },
+    "x": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "pattern": [
+    "   ",
+    " x ",
+    "ccc"
+  ],
+  "result": {
+    "item": "better_progression:overworld_brewing_stand"
+  },
+  "show_notification": true
+}

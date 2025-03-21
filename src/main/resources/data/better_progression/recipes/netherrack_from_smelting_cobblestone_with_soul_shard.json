@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 2,
+  "group": "netherrack",
+  "ingredient": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "secondIngredient": {
+    "item": "minecraft:cobblestone"
+  },
+  "result": "minecraft:netherrack",
+  "ingredientcount": 1
+}

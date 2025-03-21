@@ -6,10 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yuhi.better_progression.BetterProgression;
-import net.yuhi.better_progression.block.entity.BetterBlastFurnaceBlockEntity;
-import net.yuhi.better_progression.block.entity.ChargedSoulSandBlockEntity;
-import net.yuhi.better_progression.block.entity.EssenceSpawnerBlockEntity;
-import net.yuhi.better_progression.block.entity.ModSignBlockEntity;
+import net.yuhi.better_progression.block.entity.*;
 
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = 
@@ -27,6 +24,11 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("essence_spawner", () ->
                     BlockEntityType.Builder.of(EssenceSpawnerBlockEntity::new,
                             ModBlocks.ESSENCE_SPAWNER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<AlchemyTableBlockEntity>> ALCHEMY_TABLE =
+            BLOCK_ENTITIES.register("alchemy_table", () ->
+                    BlockEntityType.Builder.of(AlchemyTableBlockEntity::new,
+                            ModBlocks.ALCHEMY_TABLE.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<ModSignBlockEntity>> MOD_SIGN =
             BLOCK_ENTITIES.register("mod_sign", () ->

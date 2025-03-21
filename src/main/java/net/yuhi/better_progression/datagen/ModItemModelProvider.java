@@ -44,7 +44,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         for (var block : ModBlocks.BLOCKS_DATA) {
             switch (block.textureType) {
-                case CROSS, DOOR, SIGN -> simpleBlockItem(block);
+                case CROSS, DOOR, SIGN, ONLY_ITEM -> simpleBlockItem(block);
                 case BUTTON -> buttonBlockItem(block);
             }
         }

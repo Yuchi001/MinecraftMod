@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "b": {
+      "item": "minecraft:bookshelf"
+    },
+    "l": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "s": {
+      "item": "better_progression:steel_ingot"
+    }
+  },
+  "pattern": [
+    "ss",
+    "lb"
+  ],
+  "result": {
+    "item": "better_progression:alchemy_table"
+  },
+  "show_notification": true
+}

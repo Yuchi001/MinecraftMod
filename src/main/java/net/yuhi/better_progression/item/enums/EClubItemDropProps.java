@@ -15,8 +15,8 @@ import static net.yuhi.better_progression.item.utils.ItemsUtilsMethods.getItem;
 public enum EClubItemDropProps {
     WOOD(Tiers.WOOD, 1, 0),
     STONE(Tiers.STONE, 2, 3),
-    FLINT(ModTiers.FLINT, 2, 4),
-    DIAMOND(Tiers.DIAMOND, 3, 6),
+    FLINT(ModTiers.FLINT, 3, 3),
+    DIAMOND(Tiers.DIAMOND, 3, 4),
     OBSYDIAN(ModTiers.OBSIDIAN, 4, 10);
     
     private final Tier tier;
@@ -30,8 +30,7 @@ public enum EClubItemDropProps {
             new ClubDropData(Items.RAW_IRON, 3),
             new ClubDropData(Items.RAW_COPPER, 3),
             new ClubDropData(Items.RAW_GOLD, 4),
-            new ClubDropData(Items.DIAMOND, 6),
-            new ClubDropData(Items.NETHERITE_SCRAP, 10)
+            new ClubDropData(Items.DIAMOND, 10)
     ));
     
     EClubItemDropProps(Tier tier, int count, int level) {

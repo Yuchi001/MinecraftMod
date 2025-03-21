@@ -5,11 +5,15 @@ import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.yuhi.better_progression.item.ModItems;
 import net.yuhi.better_progression.item.enums.EItemCategory;
 import net.yuhi.better_progression.item.enums.EMaterialType;
 import net.yuhi.better_progression.item.utils.ItemsUtilsMethods;
@@ -37,6 +41,24 @@ public enum EBlockCraftingRecipeType {
                     .define('l', Items.LAPIS_LAZULI)
                     .unlockedBy(getHasName(ItemsUtilsMethods.getItem(EItemCategory.Ingot, EMaterialType.STEEL)), 
                             has(ItemsUtilsMethods.getItem(EItemCategory.Ingot, EMaterialType.STEEL)))),
+
+    ALCHEMY_TABLE_1((Supplier<ItemLike> result, Integer resultCount, List<Supplier<ItemLike>> ingredients) ->
+            ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), Objects.requireNonNullElse(resultCount, 1))
+                    .pattern("ss")
+                    .pattern("lb")
+                    .define('s', ItemsUtilsMethods.getItem(EItemCategory.Ingot, EMaterialType.STEEL))
+                    .define('b', Items.BOOKSHELF)
+                    .define('l', Items.LAPIS_LAZULI)
+                    .unlockedBy(getHasName(ItemsUtilsMethods.getItem(EItemCategory.Ingot, EMaterialType.STEEL)), has(ItemsUtilsMethods.getItem(EItemCategory.Ingot, EMaterialType.STEEL)))),
+
+    BREWING_STAND_1((Supplier<ItemLike> result, Integer resultCount, List<Supplier<ItemLike>> ingredients) ->
+            ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), Objects.requireNonNullElse(resultCount, 1))
+                    .pattern("   ")
+                    .pattern(" x ")
+                    .pattern("ccc")
+                    .define('x', ingredients.get(0).get())
+                    .define('c', Ingredient.of(ItemTags.STONE_CRAFTING_MATERIALS))
+                    .unlockedBy(getHasName(ingredients.get(0).get()), has(ingredients.get(0).get()))),
     
     BLOCK_FROM_4_4((Supplier<ItemLike> result, Integer resultCount, List<Supplier<ItemLike>> ingredients) ->
             ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), Objects.requireNonNullElse(resultCount, 4))

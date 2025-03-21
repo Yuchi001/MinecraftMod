@@ -57,6 +57,22 @@ public class ModBlocks {
             .AddRecipe(EBlockCraftingRecipeType.ESSENCE_SPAWNER_1, List.of(() -> Items.STICK))
             .Register();
     
+    public static final RegistryObject<Block> OVERWORLD_BREWING_STAND_BLOCK = new BlockDataCreator("overworld_brewing_stand",
+            () -> new OverworldBrewingStandBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(0.5F).lightLevel((p_50856_) -> 1)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetTextureType(ETextureType.ONLY_ITEM)
+            .SetTexture(EBlockSide.ITEM, "overworld_brewing_stand")
+            .AddRecipe(EBlockCraftingRecipeType.BREWING_STAND_1, List.of(() -> Items.AMETHYST_SHARD))
+            .Register();
+
+    public static final RegistryObject<Block> END_BREWING_STAND_BLOCK = new BlockDataCreator("end_brewing_stand",
+            () -> new EndBrewingStandBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(0.5F).lightLevel((p_50856_) -> 1)))
+            .SetMineableWith(EMineableWith.PICKAXE)
+            .SetTextureType(ETextureType.ONLY_ITEM)
+            .SetTexture(EBlockSide.ITEM, "end_brewing_stand")
+            .AddRecipe(EBlockCraftingRecipeType.BREWING_STAND_1, List.of(() -> Items.END_ROD))
+            .Register();
+    
     public static final RegistryObject<Block> TIN_BLOCK = new BlockDataCreator("tin_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(4.0F, 6.0F)))
             .SetMineableWith(EMineableWith.PICKAXE)
@@ -82,6 +98,16 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK).strength(50.0F, 1200.0F)))
             .SetMineableWith(EMineableWith.PICKAXE)
             .AddRecipe(EBlockCraftingRecipeType.BLOCK_SHAPELESS_1, List.of(() -> getItem(EItemCategory.Ingot, EMaterialType.ENDERITE)))
+            .Register();
+
+    public static final RegistryObject<Block> ALCHEMY_TABLE = new BlockDataCreator("alchemy_table",
+            () -> new AlchemyTableBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.5F).sound(SoundType.WOOD)))
+            .SetMineableWith(EMineableWith.AXE)
+            .SetTextureType(ETextureType.PILLAR_TOP_BOTTOM)
+            .SetTexture(EBlockSide.BOTTOM, "minecraft", "oak_planks")
+            .SetTexture(EBlockSide.TOP, "alchemy_table_top")
+            .SetTexture(EBlockSide.SIDE, "alchemy_table_side")
+            .AddRecipe(EBlockCraftingRecipeType.ALCHEMY_TABLE_1, List.of(() -> Items.STICK))
             .Register();
 
     public static final RegistryObject<Block> END_STONE_GRASS_BLOCK = new BlockDataCreator("end_stone_grass_block",

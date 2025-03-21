@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "minecraft:block/oak_planks",
+    "side": "better_progression:block/alchemy_table_side",
+    "top": "better_progression:block/alchemy_table_top"
+  }
+}

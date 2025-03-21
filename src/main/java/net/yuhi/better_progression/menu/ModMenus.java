@@ -31,6 +31,10 @@ public class ModMenus {
             MENU_TYPES.register("essence_spawner", () ->
                     IForgeMenuType.create(EssenceSpawnerMenu::new));
 
+    public static final RegistryObject<MenuType<AlchemyTableMenu>> ALCHEMY_TABLE =
+            MENU_TYPES.register("alchemy_table", () ->
+                    IForgeMenuType.create(AlchemyTableMenu::new));
+
 
     public static void register(IEventBus bus) {
         MENU_TYPES.register(bus);

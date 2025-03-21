@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -113,6 +114,8 @@ public class BetterProgression
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.TALL_END_GRASS.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.FOOLS_PEARL_BUSH.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.ESSENCE_SPAWNER.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.END_BREWING_STAND_BLOCK.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.OVERWORLD_BREWING_STAND_BLOCK.get(), RenderType.cutout());
         }
     }
 }

@@ -75,6 +75,12 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_wool", has(ItemTags.WOOL))
                 .save(pWriter, "string_from_wool");
         
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.SOUL_SAND, 1)
+                .requires(Items.SAND)
+                .requires(ModItems.SOUL_SHARD.get())
+                .unlockedBy(getHasName(ModItems.SOUL_SHARD.get()), has(ModItems.SOUL_SHARD.get()))
+                .save(pWriter, "soul_sand_from_soul_shard");
+        
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.SADDLE)
                 .pattern("sss")
                 .pattern("* *")

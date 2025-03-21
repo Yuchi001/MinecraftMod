@@ -1,4 +1,4 @@
-// 1.19.4	2025-03-12T03:13:12.7637961	Item Models: better_progression
+// 1.19.4	2025-03-20T22:45:32.3057391	Item Models: better_progression
 53328232342720c1776597ecaf073913a44860ef assets/better_progression/models/item/bear_meat.json
 adc7bc7dc8792c03d8b69b86f4a70e7c7bda0778 assets/better_progression/models/item/broken_totem_of_undying.json
 070e97230f9570aed29526e5fe4de47f33a09376 assets/better_progression/models/item/bronze_axe.json
@@ -73,6 +73,7 @@ a634799440555f76c5eec694789775657b9757c3 assets/better_progression/models/item/e
 9536e4d13bb4fd7f53347ced83d29487cd3dbf4b assets/better_progression/models/item/ender_steel_shovel.json
 8642d4ee8a37d7a3668263e7fb0a702c47a2a4ce assets/better_progression/models/item/ender_steel_sword.json
 ec46d968393928cb03b294cbc4a848c08a3c37cc assets/better_progression/models/item/end_black_tulip.json
+22eb6123386b04065debc7c1add1119c96ba76f3 assets/better_progression/models/item/end_brewing_stand.json
 e02717dffd242a436b02b5ea0ac802ba565c9a74 assets/better_progression/models/item/end_oak_boat.json
 b5fdb07206fb806be9c9eea82ff40ca1fbb2ba2c assets/better_progression/models/item/end_oak_button.json
 b6e5d01bae32eccf15a48dbfafdf2ccc8795ab85 assets/better_progression/models/item/end_oak_chest_boat.json
@@ -125,6 +126,7 @@ c689d85cd99ab6ac3503ec1b9f4b32048883584d assets/better_progression/models/item/n
 a8bbc1a5b0e3468be1259b11da01ea9710b0570f assets/better_progression/models/item/nether_steel_sword.json
 686ab6a3aabcbadd623a9dc9f3e87dbe78c5e39a assets/better_progression/models/item/obsidian_club.json
 50f7feef5d211963de6d2a00eab3b4e42182c296 assets/better_progression/models/item/obsidian_dagger.json
+e16a5695f7334ec022e8cdc31d0369de7403e305 assets/better_progression/models/item/overworld_brewing_stand.json
 f83cc90fb8ca2d93d887d77f357a8778227a2141 assets/better_progression/models/item/pink_quartz.json
 dfd44173a6804440ca9e86b63c2ff5c7243fd53a assets/better_progression/models/item/polished_pink_quartz.json
 5fa2d6864537e717993a9a733cec14a66daf572e assets/better_progression/models/item/polished_quartz.json

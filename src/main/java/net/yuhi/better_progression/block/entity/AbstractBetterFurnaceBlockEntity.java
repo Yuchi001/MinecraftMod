@@ -38,6 +38,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
+import net.yuhi.better_progression.item.ModItems;
+import net.yuhi.better_progression.item.enums.EItemCategory;
+import net.yuhi.better_progression.item.enums.EMaterialType;
+import net.yuhi.better_progression.item.utils.ItemsUtilsMethods;
 import net.yuhi.better_progression.recipe.AbstractBetterCookingRecipe;
 import org.jetbrains.annotations.NotNull;
 
@@ -177,6 +181,7 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
         add(map, Blocks.AZALEA, 100);
         add(map, Blocks.FLOWERING_AZALEA, 100);
         add(map, Blocks.MANGROVE_ROOTS, 300);
+        add(map, ItemsUtilsMethods.getItem(EItemCategory.Club, EMaterialType.WOOD), 300);
         return map;
     }
 
@@ -486,7 +491,6 @@ public abstract class AbstractBetterFurnaceBlockEntity extends BaseContainerBloc
             ResourceLocation resourcelocation = pRecipe.getId();
             this.recipesUsed.addTo(resourcelocation, 1);
         }
-
     }
 
     @Nullable

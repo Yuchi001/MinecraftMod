@@ -14,13 +14,25 @@ public class ModRecipeType<T extends Recipe<?>> {
         public static final String ID = "blasting";
     }
 
-    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES =
+    public static class AlchemyTableRecipeType  implements RecipeType<AlchemyTableRecipe> {
+        public static final AlchemyTableRecipeType ALCHEMY = new AlchemyTableRecipeType();
+        public static final String ID = "alchemy";
+    }
+
+    public static final DeferredRegister<RecipeType<?>> VANILLA_RECIPE_TYPES =
         DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, "minecraft");
 
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES =
+            DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, BetterProgression.MOD_ID);
+
     public static final RegistryObject<RecipeType<BetterBlastingRecipe>> BETTER_BLASTING =
-            RECIPE_TYPES.register(BetterBlastingRecipeType.ID, BetterBlastingRecipeType::new);
+            VANILLA_RECIPE_TYPES.register(BetterBlastingRecipeType.ID, BetterBlastingRecipeType::new);
+
+    public static final RegistryObject<RecipeType<AlchemyTableRecipe>> ALCHEMY =
+            VANILLA_RECIPE_TYPES.register(AlchemyTableRecipeType.ID, AlchemyTableRecipeType::new);
 
     public static void register(IEventBus bus) {
         RECIPE_TYPES.register(bus);
+        VANILLA_RECIPE_TYPES.register(bus);
     }
 }

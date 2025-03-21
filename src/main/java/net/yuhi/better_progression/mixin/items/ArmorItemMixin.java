@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.yuhi.better_progression.item.interfaces.BetterArmorMaterial;
+import net.yuhi.better_progression.item.interfaces.LayerableItem;
 import net.yuhi.better_progression.mixin.accessor.ArmorItemAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.UUID;
 
 @Mixin(ArmorItem.class)
-public class ArmorItemMixin {
+public class ArmorItemMixin implements LayerableItem {
 
     @Inject(method = "getDefaultAttributeModifiers", at = @At("HEAD"), cancellable = true)
     public void getAttributeModifiers(EquipmentSlot slot, CallbackInfoReturnable<Multimap<Attribute, AttributeModifier>> cir) {

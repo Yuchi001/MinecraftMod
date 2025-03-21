@@ -1,5 +1,6 @@
 package net.yuhi.better_progression.menu.custom.better_furnace_menu;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -11,7 +12,12 @@ import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.yuhi.better_progression.recipe.utils.BlastingRecipeUtils;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
 
 public class AbstractBetterFurnaceMenu extends RecipeBookMenu<Container> {
     public static final int INGREDIENT_SLOT_1 = 0;
@@ -161,7 +167,7 @@ public class AbstractBetterFurnaceMenu extends RecipeBookMenu<Container> {
     }
 
     protected boolean canSmelt(ItemStack pStack) {
-        return this.level.getRecipeManager().getRecipeFor((RecipeType<AbstractCookingRecipe>)this.recipeType, new SimpleContainer(pStack), this.level).isPresent();
+        return BlastingRecipeUtils.CanSmelt(pStack) || this.level.getRecipeManager().getRecipeFor((RecipeType<AbstractCookingRecipe>)this.recipeType, new SimpleContainer(pStack), this.level).isPresent();
     }
 
     protected boolean isFuel(ItemStack pStack) {

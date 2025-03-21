@@ -297,5 +297,13 @@
   "entity.better_progression.mod_chest_boat": "Boat with Chest",
   
   "block.better_progression.bed_message_no_sleep": "You can't sleep without dream catcher totem...",
-  "block.better_progression.totem_message_sleep_well": "Sleep well... This time at least..."
+  "block.better_progression.totem_message_sleep_well": "Sleep well... This time at least...",
+  "block.better_progression.alchemy_table": "Alchemy Table",
+  
+  "block.better_progression.overworld_brewing_stand": "Overworld Brewing Stand",
+  "block.better_progression.end_brewing_stand": "End Brewing Stand",
+  "block.minecraft.brewing_stand": "Nether Brewing Stand",
+  
+  "block.better_progression.": "Alchemy Table",
+  "menu.better_progression.alchemy_table": "Alchemy"
 }

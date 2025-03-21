@@ -1,6 +1,8 @@
 {
   "values": [
     "better_progression:essence_spawner",
+    "better_progression:overworld_brewing_stand",
+    "better_progression:end_brewing_stand",
     "better_progression:tin_block",
     "better_progression:steel_block",
     "better_progression:bronze_block",

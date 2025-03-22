@@ -1,0 +1,20 @@
+﻿{
+  "type": "better_progression:alchemy",
+  "ingredients": [
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "minecraft:glistering_melon_slice"
+    }
+  ],
+  "result": {
+    "item": "minecraft:potion",
+    "nbt": {
+      "Potion": "minecraft:healing"
+    }
+  },
+  "fuel": {
+    "item": "minecraft:blaze_powder"
+  }
+}

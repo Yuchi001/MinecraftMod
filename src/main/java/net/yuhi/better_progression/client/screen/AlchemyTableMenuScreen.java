@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.yuhi.better_progression.BetterProgression;
+import net.yuhi.better_progression.block.entity.AlchemyTableBlockEntity;
 import net.yuhi.better_progression.menu.custom.AlchemyTableMenu;
 
 @OnlyIn(Dist.CLIENT)
@@ -68,20 +69,23 @@ public class AlchemyTableMenuScreen extends AbstractContainerScreen<AlchemyTable
 
         blit(pPoseStack, this.leftPos + 27, this.topPos + 28, fuelStatusX, fuelStatusY, dynamicWidth, 4);
     }
-    
+
     private void renderCookingProgress(PoseStack pPoseStack) {
         var currentFuel = this.menu.getCurrentFuel();
         if (currentFuel == 0) return;
 
         int cookingProgressX = 176;
-        int cookingProgressY = 19;
+        int cookingProgressY = 23;
 
         var cookingProgress = this.menu.getCookingProgress();
 
         int defaultHeight = 54;
-        int dynamicHeight = (int)(defaultHeight * (cookingProgress / 100f));
+        int dynamicHeight = (int) (defaultHeight * ((float)cookingProgress / AlchemyTableBlockEntity.COOKING_TIME));
 
-        blit(pPoseStack, this.leftPos + 27, this.topPos + 28, cookingProgressX, cookingProgressY, 20, dynamicHeight);
+        int renderY = this.topPos + 16 + (defaultHeight - dynamicHeight);
+        int textureY = cookingProgressY + (defaultHeight - dynamicHeight);
+        
+        blit(pPoseStack, this.leftPos + 47, renderY, cookingProgressX, textureY, 20, dynamicHeight);
     }
     
     private void renderFuelSlot(PoseStack pPoseStack){

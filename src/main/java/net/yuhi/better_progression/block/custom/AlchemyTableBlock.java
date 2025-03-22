@@ -61,7 +61,7 @@ public class AlchemyTableBlock extends BaseEntityBlock {
 
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof AlchemyTableBlockEntity entity)
-            entity.setNeighborChanged(level.getBlockState(neighborPos), pos);
+            entity.setNeighborChanged(level.getBlockState(neighborPos), neighborPos);
     }
 
     @Override

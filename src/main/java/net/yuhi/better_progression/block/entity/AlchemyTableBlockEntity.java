@@ -7,12 +7,10 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -21,7 +19,6 @@ import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.StackedContentsCompatible;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
@@ -37,11 +34,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.yuhi.better_progression.block.ModBlockEntities;
 import net.yuhi.better_progression.block.custom.IBrewingStand;
 import net.yuhi.better_progression.menu.custom.AlchemyTableMenu;
-import net.yuhi.better_progression.mixin.BrewingStandBlockMixin;
 import net.yuhi.better_progression.mixin.accessor.BrewingStandBlockEntityAccessor;
-import net.yuhi.better_progression.recipe.AbstractBetterCookingRecipe;
 import net.yuhi.better_progression.recipe.AlchemyTableRecipe;
-import net.yuhi.better_progression.recipe.BetterBlastingRecipe;
 import net.yuhi.better_progression.recipe.ModRecipeType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -51,10 +45,11 @@ import java.util.*;
 public class AlchemyTableBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, StackedContentsCompatible {
     private NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY);
     private final RecipeType<? extends AlchemyTableRecipe> recipeType;
-    private final RecipeManager.CachedCheck<Container, ? extends BetterBlastingRecipe> customRecipeCheck;
+    private final RecipeManager.CachedCheck<Container, ? extends AlchemyTableRecipe> customRecipeCheck;
     private int currentFuelType = 0;
     private int[] fuelPercentage = new int[3];
     private int cookingProgress = 0;
+    public static int COOKING_TIME = 200;
     
     public AlchemyTableBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.ALCHEMY_TABLE.get(), pPos, pBlockState);
@@ -162,11 +157,17 @@ public class AlchemyTableBlockEntity extends BaseContainerBlockEntity implements
                 pStack.setCount(this.getMaxStackSize());
             }
         }
+        this.cookingProgress = 0;
+        this.setChanged();
     }
 
     @Override
     public boolean stillValid(Player pPlayer) {
         return Container.stillValidBlockEntity(this, pPlayer);
+    }
+    
+    public boolean isValidFuel(ItemStack pStack) {
+        return canPlaceItem(0, pStack);
     }
 
     @Override
@@ -216,22 +217,23 @@ public class AlchemyTableBlockEntity extends BaseContainerBlockEntity implements
         pTag.putIntArray("FuelPercentage", this.fuelPercentage);
         pTag.putInt("CookingProgress", this.cookingProgress);
     }
-    
-    public void setNeighborChanged(BlockState blockState, BlockPos pPos) {
+
+    public void setNeighborChanged(BlockState pNeighborBlockState, BlockPos pNeightborPos) {
+        if (!pNeightborPos.equals(this.worldPosition.above())) return;
+
         var fuel = 0;
-        if (blockState.getBlock() instanceof IBrewingStand brewingStand) {
+        if (pNeighborBlockState.getBlock() instanceof IBrewingStand brewingStand) {
             var fuelType = brewingStand.getFuel();
             if (fuelType.is(Items.GUNPOWDER)) fuel = 1;
             if (fuelType.is(Items.BLAZE_POWDER)) fuel = 2;
             if (fuelType.is(Items.DRAGON_BREATH)) fuel = 3;
         }
         dataAccess.set(0, fuel);
-        
+
         if (items.get(0).isEmpty() || this.level == null || canPlaceItem(0, items.get(0))) return;
-        
+
         var item = items.get(0);
-        this.level.addFreshEntity(new ItemEntity(this.level, pPos.getX() + 0.5f, pPos.getY() + 0.5f, pPos.getZ() + 0.5f, item.copy()));
-        item.setCount(0);
+        this.level.addFreshEntity(new ItemEntity(this.level, pNeightborPos.getX() + 0.5f, pNeightborPos.getY() + 0.5f, pNeightborPos.getZ() + 0.5f, item.copy()));
     }
 
     public static void clientTick(Level level, BlockPos pos, BlockState state, AlchemyTableBlockEntity entity) { }
@@ -261,10 +263,12 @@ public class AlchemyTableBlockEntity extends BaseContainerBlockEntity implements
         if (!canUseRecipe) return;
         
         ++entity.cookingProgress;
-        if (entity.cookingProgress >= 100) {
+        if (entity.cookingProgress >= AlchemyTableBlockEntity.COOKING_TIME) {
             entity.cookingProgress = 0;
+            entity.dataAccess.set(1, entity.dataAccess.get(1) - 1);
             cookPotions(entity, level, recipe, entity.level.registryAccess());
             level.playSound(null, pos, SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);
+            entity.setChanged();
         }
     }
     
@@ -297,7 +301,12 @@ public class AlchemyTableBlockEntity extends BaseContainerBlockEntity implements
         
         accessor.setItems(nonNullList);
         
+        var skip = true;
         for (var item : entity.items) {
+            if (skip) {
+                skip = false;
+                continue;
+            }
             item.shrink(1);
         }
 
@@ -339,7 +348,7 @@ public class AlchemyTableBlockEntity extends BaseContainerBlockEntity implements
         var bottles = 0;
         for (var i = 0; i < 3; i++) {
             var item = items.get(i);
-            if (!item.isEmpty()) continue;
+            if (item.isEmpty()) continue;
             if (!item.is(Items.POTION)) continue;
             
             if (PotionUtils.getPotion(item) != Potions.WATER) return false;

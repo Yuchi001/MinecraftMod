@@ -11,6 +11,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.yuhi.better_progression.block.entity.AlchemyTableBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -20,25 +21,24 @@ public class AlchemyTableRecipe implements Recipe<Container> {
     private final ResourceLocation id;
     private final NonNullList<Ingredient> ingredients;
     private final ItemStack result;
-    private final int cookTime;
     private final Ingredient fuel;
 
-    public AlchemyTableRecipe(ResourceLocation id, NonNullList<Ingredient> ingredients, ItemStack result, int cookTime, Ingredient fuel) {
+    public AlchemyTableRecipe(ResourceLocation id, NonNullList<Ingredient> ingredients, ItemStack result, Ingredient fuel) {
         this.id = id;
         this.ingredients = ingredients;
         this.result = result;
-        this.cookTime = cookTime;
         this.fuel = fuel;
     }
 
     @Override
     public boolean matches(Container container, Level level) {
-        if (!fuel.test(container.getItem(0))) {
-            return false;
-        }
+        if (!(container instanceof AlchemyTableBlockEntity entity)) return false;
+
+        if (!entity.isValidFuel(fuel.getItems()[0])) return false;
 
         List<ItemStack> inputItems = new ArrayList<>();
         for (int i = 1; i < 5; i++) {
+            if (container.getItem(i).isEmpty()) continue;
             inputItems.add(container.getItem(i));
         }
 
@@ -81,11 +81,7 @@ public class AlchemyTableRecipe implements Recipe<Container> {
     public RecipeType<?> getType() {
         return ModRecipeType.ALCHEMY.get();
     }
-
-    public int getCookTime() {
-        return cookTime;
-    }
-
+    
     public Ingredient getFuel() {
         return fuel;
     }
@@ -98,10 +94,9 @@ public class AlchemyTableRecipe implements Recipe<Container> {
                 ingredients.add(Ingredient.fromJson(element));
             }
             ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-            int cookTime = GsonHelper.getAsInt(json, "cookTime", 200);
             Ingredient fuel = Ingredient.fromJson(json.get("fuel"));
 
-            return new AlchemyTableRecipe(id, ingredients, result, cookTime, fuel);
+            return new AlchemyTableRecipe(id, ingredients, result, fuel);
         }
 
         @Override
@@ -112,10 +107,9 @@ public class AlchemyTableRecipe implements Recipe<Container> {
                 ingredients.add(Ingredient.fromNetwork(buffer));
             }
             ItemStack result = buffer.readItem();
-            int cookTime = buffer.readVarInt();
             Ingredient fuel = Ingredient.fromNetwork(buffer);
 
-            return new AlchemyTableRecipe(id, ingredients, result, cookTime, fuel);
+            return new AlchemyTableRecipe(id, ingredients, result, fuel);
         }
 
         @Override
@@ -125,7 +119,6 @@ public class AlchemyTableRecipe implements Recipe<Container> {
                 ingredient.toNetwork(buffer);
             }
             buffer.writeItem(recipe.result);
-            buffer.writeVarInt(recipe.cookTime);
             recipe.fuel.toNetwork(buffer);
         }
     }
